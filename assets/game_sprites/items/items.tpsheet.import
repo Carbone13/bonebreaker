@@ -1,0 +1,15 @@
+[remap]
+
+importer="codeandweb.texturepacker_import_spritesheet"
+type="Resource"
+path="res://.import/items.tpsheet-1432e740d8462de3fd5b32c576f25610.res"
+
+[deps]
+
+files=[ "res://assets/game_sprites/items/items.sprites/coin.tres", "res://assets/game_sprites/items/items.sprites/chest.tres", "res://assets/game_sprites/items/items.sprites/bonus2.tres", "res://assets/game_sprites/items/items.sprites/bonus1.tres", "res://assets/game_sprites/items/items.sprites/bonus3.tres", "res://assets/game_sprites/items/items.sprites/caisse.tres", "res://assets/game_sprites/items/items.sprites/caisse_metal.tres" ]
+
+source_file="res://assets/game_sprites/items/items.tpsheet"
+dest_files=[ "res://.import/items.tpsheet-1432e740d8462de3fd5b32c576f25610.res", "res://assets/game_sprites/items/items.sprites/coin.tres", "res://assets/game_sprites/items/items.sprites/chest.tres", "res://assets/game_sprites/items/items.sprites/bonus2.tres", "res://assets/game_sprites/items/items.sprites/bonus1.tres", "res://assets/game_sprites/items/items.sprites/bonus3.tres", "res://assets/game_sprites/items/items.sprites/caisse.tres", "res://assets/game_sprites/items/items.sprites/caisse_metal.tres" ]
+
+[params]
+

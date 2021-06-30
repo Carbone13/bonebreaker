@@ -1,0 +1,20 @@
+<Project Sdk="Godot.NET.Sdk/3.3.0">
+  <PropertyGroup>
+    <LangVersion>8</LangVersion>
+    <TargetFramework>net472</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="scripts\players" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FixedMath.NET" Version="1.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="FixedPointSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>libraries\FixedPointSharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/players/Player.cs" type="Script" id=1]
+[ext_resource path="res://scripts/physics/CollisionBox.cs" type="Script" id=2]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "ccccc"
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Player" type="Node2D" parent="."]
+script = ExtResource( 1 )
+pushbox = NodePath("CollisionBox")
+
+[node name="CollisionBox" type="Node2D" parent="Player"]
+script = ExtResource( 2 )
+PUSHBOX_COLOR = Color( 0.529412, 0.811765, 0.980392, 0.501961 )
+Draw = true
+Settings = Rect2( 0, 0, 20, 40 )
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 68, -100 )
+script = ExtResource( 2 )
+PUSHBOX_COLOR = Color( 0.529412, 0.811765, 0.980392, 0.156863 )
+Draw = true
+Tag = "Jump Through"
+Settings = Rect2( 0, 0, 200, 200 )

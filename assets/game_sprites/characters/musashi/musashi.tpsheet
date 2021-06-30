@@ -1,0 +1,498 @@
+{
+	"textures": [
+		{
+			"image": "musashi.png",
+			"size": {
+				"w": 56,
+				"h": 328
+			},
+			"sprites": [
+				{
+					"filename": "dash_attack/dash_attack_1.png",
+					"region": {
+						"x": 1,
+						"y": 1,
+						"w": 49,
+						"h": 24
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "death_ground/death_ground_1.png",
+					"region": {
+						"x": 1,
+						"y": 27,
+						"w": 31,
+						"h": 7
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "attack2/attack2_1.png",
+					"region": {
+						"x": 34,
+						"y": 27,
+						"w": 21,
+						"h": 21
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "death_ground/death_ground_2.png",
+					"region": {
+						"x": 1,
+						"y": 36,
+						"w": 31,
+						"h": 7
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dash/dash.png",
+					"region": {
+						"x": 1,
+						"y": 45,
+						"w": 28,
+						"h": 18
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "fall/fall_1.png",
+					"region": {
+						"x": 31,
+						"y": 50,
+						"w": 24,
+						"h": 21
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dash_attack/dash_attack_3.png",
+					"region": {
+						"x": 1,
+						"y": 65,
+						"w": 27,
+						"h": 24
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 22,
+						"h": 0
+					}
+				},
+				{
+					"filename": "jump/jump.png",
+					"region": {
+						"x": 30,
+						"y": 73,
+						"w": 25,
+						"h": 21
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "running/running_2.png",
+					"region": {
+						"x": 1,
+						"y": 91,
+						"w": 27,
+						"h": 21
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "running/running_3.png",
+					"region": {
+						"x": 30,
+						"y": 96,
+						"w": 25,
+						"h": 21
+					},
+					"margin": {
+						"x": 2,
+						"y": 0,
+						"w": 2,
+						"h": 0
+					}
+				},
+				{
+					"filename": "running/running_6.png",
+					"region": {
+						"x": 1,
+						"y": 114,
+						"w": 27,
+						"h": 21
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "running/running_7.png",
+					"region": {
+						"x": 30,
+						"y": 119,
+						"w": 25,
+						"h": 21
+					},
+					"margin": {
+						"x": 2,
+						"y": 0,
+						"w": 2,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dash_attack/dash_attack_2.png",
+					"region": {
+						"x": 1,
+						"y": 137,
+						"w": 26,
+						"h": 24
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 23,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dash_stop/dash_stop_1.png",
+					"region": {
+						"x": 29,
+						"y": 142,
+						"w": 26,
+						"h": 18
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dash_stop/dash_stop_2.png",
+					"region": {
+						"x": 29,
+						"y": 162,
+						"w": 26,
+						"h": 18
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dash_stop/dash_stop_3.png",
+					"region": {
+						"x": 1,
+						"y": 163,
+						"w": 26,
+						"h": 18
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dash_stop/dash_stop_4.png",
+					"region": {
+						"x": 29,
+						"y": 182,
+						"w": 26,
+						"h": 18
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "fall/fall_2.png",
+					"region": {
+						"x": 1,
+						"y": 183,
+						"w": 23,
+						"h": 20
+					},
+					"margin": {
+						"x": 1,
+						"y": 1,
+						"w": 1,
+						"h": 1
+					}
+				},
+				{
+					"filename": "running/running_4.png",
+					"region": {
+						"x": 1,
+						"y": 183,
+						"w": 23,
+						"h": 20
+					},
+					"margin": {
+						"x": 4,
+						"y": 1,
+						"w": 4,
+						"h": 1
+					}
+				},
+				{
+					"filename": "running/running_8.png",
+					"region": {
+						"x": 26,
+						"y": 202,
+						"w": 23,
+						"h": 20
+					},
+					"margin": {
+						"x": 4,
+						"y": 1,
+						"w": 4,
+						"h": 1
+					}
+				},
+				{
+					"filename": "running/running_1.png",
+					"region": {
+						"x": 1,
+						"y": 205,
+						"w": 23,
+						"h": 19
+					},
+					"margin": {
+						"x": 0,
+						"y": 2,
+						"w": 4,
+						"h": 2
+					}
+				},
+				{
+					"filename": "running/running_5.png",
+					"region": {
+						"x": 26,
+						"y": 224,
+						"w": 23,
+						"h": 19
+					},
+					"margin": {
+						"x": 0,
+						"y": 2,
+						"w": 4,
+						"h": 2
+					}
+				},
+				{
+					"filename": "attack1/attack1_1.png",
+					"region": {
+						"x": 1,
+						"y": 226,
+						"w": 23,
+						"h": 18
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "attack1/attack1_2.png",
+					"region": {
+						"x": 26,
+						"y": 245,
+						"w": 23,
+						"h": 18
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "damage/hit_1.png",
+					"region": {
+						"x": 1,
+						"y": 246,
+						"w": 22,
+						"h": 19
+					},
+					"margin": {
+						"x": 0,
+						"y": 2,
+						"w": 0,
+						"h": 2
+					}
+				},
+				{
+					"filename": "damage/hit_2.png",
+					"region": {
+						"x": 25,
+						"y": 265,
+						"w": 22,
+						"h": 19
+					},
+					"margin": {
+						"x": 0,
+						"y": 2,
+						"w": 0,
+						"h": 2
+					}
+				},
+				{
+					"filename": "death_hit/death_hit_2.png",
+					"region": {
+						"x": 25,
+						"y": 265,
+						"w": 22,
+						"h": 19
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "death_hit/death_hit_1.png",
+					"region": {
+						"x": 1,
+						"y": 267,
+						"w": 22,
+						"h": 19
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "attack3/attack3_1.png",
+					"region": {
+						"x": 25,
+						"y": 286,
+						"w": 22,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "attack3/attack3_2.png",
+					"region": {
+						"x": 1,
+						"y": 288,
+						"w": 22,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "attack2/attack2_2.png",
+					"region": {
+						"x": 1,
+						"y": 306,
+						"w": 21,
+						"h": 21
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "idle/idle.png",
+					"region": {
+						"x": 24,
+						"y": 306,
+						"w": 19,
+						"h": 21
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:855039cfb07de1f1476694eea7da87c4:a08da7e0f83a0149f8143d7a28ff69dc:b2affc2c5c69413d8a6b03364c8cf372$"
+	}
+}

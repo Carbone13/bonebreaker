@@ -1,0 +1,798 @@
+{
+	"textures": [
+		{
+			"image": "levels.png",
+			"size": {
+				"w": 303,
+				"h": 251
+			},
+			"sprites": [
+				{
+					"filename": "background/tree_tronc6.png",
+					"region": {
+						"x": 1,
+						"y": 1,
+						"w": 78,
+						"h": 164
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_trunk6.png",
+					"region": {
+						"x": 1,
+						"y": 1,
+						"w": 78,
+						"h": 164
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_tronc8.png",
+					"region": {
+						"x": 81,
+						"y": 1,
+						"w": 78,
+						"h": 164
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_trunk8.png",
+					"region": {
+						"x": 81,
+						"y": 1,
+						"w": 78,
+						"h": 164
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_tronc4.png",
+					"region": {
+						"x": 161,
+						"y": 1,
+						"w": 54,
+						"h": 114
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_trunk4.png",
+					"region": {
+						"x": 161,
+						"y": 1,
+						"w": 54,
+						"h": 114
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_tronc5.png",
+					"region": {
+						"x": 217,
+						"y": 1,
+						"w": 28,
+						"h": 114
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_trunk5.png",
+					"region": {
+						"x": 217,
+						"y": 1,
+						"w": 28,
+						"h": 114
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_tronc7.png",
+					"region": {
+						"x": 247,
+						"y": 1,
+						"w": 28,
+						"h": 114
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_trunk7.png",
+					"region": {
+						"x": 247,
+						"y": 1,
+						"w": 28,
+						"h": 114
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "platforms/platform.png",
+					"region": {
+						"x": 1,
+						"y": 167,
+						"w": 130,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_feuilles2.png",
+					"region": {
+						"x": 1,
+						"y": 177,
+						"w": 70,
+						"h": 59
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_leaves2.png",
+					"region": {
+						"x": 1,
+						"y": 177,
+						"w": 70,
+						"h": 59
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "platforms/trunk1.png",
+					"region": {
+						"x": 277,
+						"y": 1,
+						"w": 14,
+						"h": 122
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "platforms/trunk4.png",
+					"region": {
+						"x": 293,
+						"y": 1,
+						"w": 9,
+						"h": 122
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_feuilles3.png",
+					"region": {
+						"x": 161,
+						"y": 117,
+						"w": 70,
+						"h": 59
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_leaves3.png",
+					"region": {
+						"x": 161,
+						"y": 117,
+						"w": 70,
+						"h": 59
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_feuilles5.png",
+					"region": {
+						"x": 73,
+						"y": 177,
+						"w": 70,
+						"h": 45
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_leaves5.png",
+					"region": {
+						"x": 73,
+						"y": 177,
+						"w": 70,
+						"h": 45
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_tronc2.png",
+					"region": {
+						"x": 233,
+						"y": 117,
+						"w": 39,
+						"h": 83
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_trunk2.png",
+					"region": {
+						"x": 233,
+						"y": 117,
+						"w": 39,
+						"h": 83
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_tronc3.png",
+					"region": {
+						"x": 274,
+						"y": 125,
+						"w": 19,
+						"h": 79
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_trunk3.png",
+					"region": {
+						"x": 274,
+						"y": 125,
+						"w": 19,
+						"h": 79
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_feuilles1.png",
+					"region": {
+						"x": 145,
+						"y": 178,
+						"w": 48,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_leaves1.png",
+					"region": {
+						"x": 145,
+						"y": 178,
+						"w": 48,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_tronc1.png",
+					"region": {
+						"x": 195,
+						"y": 178,
+						"w": 14,
+						"h": 58
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_trunk1.png",
+					"region": {
+						"x": 195,
+						"y": 178,
+						"w": 14,
+						"h": 58
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_feuilles4.png",
+					"region": {
+						"x": 211,
+						"y": 202,
+						"w": 48,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/tree_leaves4.png",
+					"region": {
+						"x": 211,
+						"y": 202,
+						"w": 48,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "platforms/trunk3.png",
+					"region": {
+						"x": 261,
+						"y": 202,
+						"w": 9,
+						"h": 41
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "props/liana1.png",
+					"region": {
+						"x": 73,
+						"y": 224,
+						"w": 38,
+						"h": 18
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "props/liane1.png",
+					"region": {
+						"x": 73,
+						"y": 224,
+						"w": 38,
+						"h": 18
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "props/liana2.png",
+					"region": {
+						"x": 295,
+						"y": 125,
+						"w": 7,
+						"h": 19
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "props/liane2.png",
+					"region": {
+						"x": 295,
+						"y": 125,
+						"w": 7,
+						"h": 19
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "platforms/platform_edge.png",
+					"region": {
+						"x": 133,
+						"y": 167,
+						"w": 25,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "props/liana3.png",
+					"region": {
+						"x": 113,
+						"y": 224,
+						"w": 25,
+						"h": 13
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "props/liane3.png",
+					"region": {
+						"x": 113,
+						"y": 224,
+						"w": 25,
+						"h": 13
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "props/liana4.png",
+					"region": {
+						"x": 211,
+						"y": 178,
+						"w": 19,
+						"h": 15
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "props/liane4.png",
+					"region": {
+						"x": 211,
+						"y": 178,
+						"w": 19,
+						"h": 15
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "platforms/trunk2.png",
+					"region": {
+						"x": 272,
+						"y": 206,
+						"w": 9,
+						"h": 25
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "props/flower1.png",
+					"region": {
+						"x": 283,
+						"y": 206,
+						"w": 19,
+						"h": 9
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "props/liana6.png",
+					"region": {
+						"x": 295,
+						"y": 146,
+						"w": 3,
+						"h": 24
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "props/liane6.png",
+					"region": {
+						"x": 295,
+						"y": 146,
+						"w": 3,
+						"h": 24
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "props/grass1.png",
+					"region": {
+						"x": 1,
+						"y": 238,
+						"w": 21,
+						"h": 4
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "props/grass2.png",
+					"region": {
+						"x": 1,
+						"y": 238,
+						"w": 21,
+						"h": 4
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "props/liana5.png",
+					"region": {
+						"x": 283,
+						"y": 217,
+						"w": 9,
+						"h": 13
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "props/liane5.png",
+					"region": {
+						"x": 283,
+						"y": 217,
+						"w": 9,
+						"h": 13
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "props/flower2.png",
+					"region": {
+						"x": 294,
+						"y": 217,
+						"w": 8,
+						"h": 4
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/background.png",
+					"region": {
+						"x": 274,
+						"y": 117,
+						"w": 1,
+						"h": 1
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/background_color.png",
+					"region": {
+						"x": 274,
+						"y": 117,
+						"w": 1,
+						"h": 1
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/fog.png",
+					"region": {
+						"x": 274,
+						"y": 120,
+						"w": 1,
+						"h": 1
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "background/fog_color.png",
+					"region": {
+						"x": 274,
+						"y": 120,
+						"w": 1,
+						"h": 1
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:faa76b045146f2f055e09e18c5353b42:f66f92a54397a5b12038f71ea14a3684:7d02a28cebe258678bdab75787479640$"
+	}
+}

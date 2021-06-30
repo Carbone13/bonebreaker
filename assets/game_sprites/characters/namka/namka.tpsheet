@@ -1,0 +1,753 @@
+{
+	"textures": [
+		{
+			"image": "namka.png",
+			"size": {
+				"w": 325,
+				"h": 127
+			},
+			"sprites": [
+				{
+					"filename": "attack/attack_2.png",
+					"region": {
+						"x": 1,
+						"y": 1,
+						"w": 66,
+						"h": 41
+					},
+					"margin": {
+						"x": 5,
+						"y": 0,
+						"w": 5,
+						"h": 0
+					}
+				},
+				{
+					"filename": "attack/attack_6.png",
+					"region": {
+						"x": 1,
+						"y": 44,
+						"w": 44,
+						"h": 41
+					},
+					"margin": {
+						"x": 25,
+						"y": 0,
+						"w": 27,
+						"h": 0
+					}
+				},
+				{
+					"filename": "attack/attack_5.png",
+					"region": {
+						"x": 69,
+						"y": 1,
+						"w": 43,
+						"h": 41
+					},
+					"margin": {
+						"x": 25,
+						"y": 0,
+						"w": 28,
+						"h": 0
+					}
+				},
+				{
+					"filename": "attack/attack_4.png",
+					"region": {
+						"x": 47,
+						"y": 44,
+						"w": 42,
+						"h": 41
+					},
+					"margin": {
+						"x": 25,
+						"y": 0,
+						"w": 29,
+						"h": 0
+					}
+				},
+				{
+					"filename": "attack/attack_3.png",
+					"region": {
+						"x": 114,
+						"y": 1,
+						"w": 41,
+						"h": 41
+					},
+					"margin": {
+						"x": 25,
+						"y": 0,
+						"w": 30,
+						"h": 0
+					}
+				},
+				{
+					"filename": "attack/attack_7.png",
+					"region": {
+						"x": 1,
+						"y": 87,
+						"w": 44,
+						"h": 27
+					},
+					"margin": {
+						"x": 25,
+						"y": 14,
+						"w": 27,
+						"h": 14
+					}
+				},
+				{
+					"filename": "attack/attack_8.png",
+					"region": {
+						"x": 91,
+						"y": 44,
+						"w": 45,
+						"h": 26
+					},
+					"margin": {
+						"x": 25,
+						"y": 15,
+						"w": 26,
+						"h": 15
+					}
+				},
+				{
+					"filename": "death_ground/death_ground_1.png",
+					"region": {
+						"x": 1,
+						"y": 116,
+						"w": 26,
+						"h": 10
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "attack/attack_9.png",
+					"region": {
+						"x": 157,
+						"y": 1,
+						"w": 36,
+						"h": 26
+					},
+					"margin": {
+						"x": 25,
+						"y": 15,
+						"w": 35,
+						"h": 15
+					}
+				},
+				{
+					"filename": "attack_prepare/attack_prepare_2.png",
+					"region": {
+						"x": 47,
+						"y": 87,
+						"w": 32,
+						"h": 27
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "death_ground/death_ground_2.png",
+					"region": {
+						"x": 29,
+						"y": 116,
+						"w": 26,
+						"h": 10
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "attack_prepare/attack_prepare_3.png",
+					"region": {
+						"x": 195,
+						"y": 1,
+						"w": 32,
+						"h": 27
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "attack_prepare/attack_prepare_4.png",
+					"region": {
+						"x": 229,
+						"y": 1,
+						"w": 32,
+						"h": 27
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "attack_prepare/attack_prepare_5.png",
+					"region": {
+						"x": 263,
+						"y": 1,
+						"w": 32,
+						"h": 27
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "gun_prepare/gun_prepare_1.png",
+					"region": {
+						"x": 297,
+						"y": 1,
+						"w": 27,
+						"h": 25
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "gun_prepare/gun_prepare_2.png",
+					"region": {
+						"x": 297,
+						"y": 28,
+						"w": 27,
+						"h": 25
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "attack/attack_1.png",
+					"region": {
+						"x": 91,
+						"y": 72,
+						"w": 31,
+						"h": 29
+					},
+					"margin": {
+						"x": 0,
+						"y": 12,
+						"w": 40,
+						"h": 12
+					}
+				},
+				{
+					"filename": "running_gun/running_gun_1.png",
+					"region": {
+						"x": 81,
+						"y": 103,
+						"w": 29,
+						"h": 23
+					},
+					"margin": {
+						"x": 0,
+						"y": 1,
+						"w": 0,
+						"h": 1
+					}
+				},
+				{
+					"filename": "running_gun/running_gun_8.png",
+					"region": {
+						"x": 112,
+						"y": 103,
+						"w": 29,
+						"h": 23
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 1
+					}
+				},
+				{
+					"filename": "attack_prepare/attack_prepare_1.png",
+					"region": {
+						"x": 138,
+						"y": 44,
+						"w": 19,
+						"h": 26
+					},
+					"margin": {
+						"x": 13,
+						"y": 0,
+						"w": 13,
+						"h": 1
+					}
+				},
+				{
+					"filename": "gun_prepare/gun_prepare_3.png",
+					"region": {
+						"x": 124,
+						"y": 72,
+						"w": 27,
+						"h": 25
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "gun_shot/gun_shot_1.png",
+					"region": {
+						"x": 159,
+						"y": 29,
+						"w": 28,
+						"h": 24
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "gun_shot/gun_shot_3.png",
+					"region": {
+						"x": 189,
+						"y": 30,
+						"w": 28,
+						"h": 24
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "gun_shot/gun_shot_2.png",
+					"region": {
+						"x": 219,
+						"y": 30,
+						"w": 27,
+						"h": 24
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 1,
+						"h": 0
+					}
+				},
+				{
+					"filename": "running_gun/running_gun_4.png",
+					"region": {
+						"x": 248,
+						"y": 30,
+						"w": 28,
+						"h": 23
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 1,
+						"h": 1
+					}
+				},
+				{
+					"filename": "death_hit/death_hit_1.png",
+					"region": {
+						"x": 278,
+						"y": 30,
+						"w": 17,
+						"h": 23
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "running_gun/running_gun_6.png",
+					"region": {
+						"x": 159,
+						"y": 55,
+						"w": 28,
+						"h": 21
+					},
+					"margin": {
+						"x": 1,
+						"y": 3,
+						"w": 1,
+						"h": 3
+					}
+				},
+				{
+					"filename": "running_gun/running_gun_2.png",
+					"region": {
+						"x": 189,
+						"y": 56,
+						"w": 27,
+						"h": 21
+					},
+					"margin": {
+						"x": 1,
+						"y": 3,
+						"w": 2,
+						"h": 3
+					}
+				},
+				{
+					"filename": "running_gun/running_gun_5.png",
+					"region": {
+						"x": 218,
+						"y": 56,
+						"w": 27,
+						"h": 23
+					},
+					"margin": {
+						"x": 1,
+						"y": 1,
+						"w": 2,
+						"h": 1
+					}
+				},
+				{
+					"filename": "running_gun/running_gun_7.png",
+					"region": {
+						"x": 153,
+						"y": 78,
+						"w": 27,
+						"h": 23
+					},
+					"margin": {
+						"x": 2,
+						"y": 0,
+						"w": 2,
+						"h": 1
+					}
+				},
+				{
+					"filename": "fall/fall_1.png",
+					"region": {
+						"x": 143,
+						"y": 103,
+						"w": 19,
+						"h": 23
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 1
+					}
+				},
+				{
+					"filename": "running/running_4.png",
+					"region": {
+						"x": 143,
+						"y": 103,
+						"w": 19,
+						"h": 23
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 1
+					}
+				},
+				{
+					"filename": "running/running_1.png",
+					"region": {
+						"x": 164,
+						"y": 103,
+						"w": 19,
+						"h": 23
+					},
+					"margin": {
+						"x": 0,
+						"y": 1,
+						"w": 0,
+						"h": 1
+					}
+				},
+				{
+					"filename": "running_gun/running_gun_3.png",
+					"region": {
+						"x": 182,
+						"y": 79,
+						"w": 26,
+						"h": 22
+					},
+					"margin": {
+						"x": 2,
+						"y": 0,
+						"w": 3,
+						"h": 2
+					}
+				},
+				{
+					"filename": "running/running_8.png",
+					"region": {
+						"x": 185,
+						"y": 103,
+						"w": 19,
+						"h": 23
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 1
+					}
+				},
+				{
+					"filename": "fall/fall_2.png",
+					"region": {
+						"x": 206,
+						"y": 103,
+						"w": 18,
+						"h": 23
+					},
+					"margin": {
+						"x": 1,
+						"y": 1,
+						"w": 1,
+						"h": 1
+					}
+				},
+				{
+					"filename": "running/running_5.png",
+					"region": {
+						"x": 206,
+						"y": 103,
+						"w": 18,
+						"h": 23
+					},
+					"margin": {
+						"x": 1,
+						"y": 1,
+						"w": 1,
+						"h": 1
+					}
+				},
+				{
+					"filename": "jump/jump_1.png",
+					"region": {
+						"x": 210,
+						"y": 81,
+						"w": 17,
+						"h": 20
+					},
+					"margin": {
+						"x": 0,
+						"y": 2,
+						"w": 0,
+						"h": 2
+					}
+				},
+				{
+					"filename": "death_hit/death_hit_2.png",
+					"region": {
+						"x": 226,
+						"y": 103,
+						"w": 17,
+						"h": 23
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "damage/damage_1.png",
+					"region": {
+						"x": 247,
+						"y": 56,
+						"w": 16,
+						"h": 23
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "damage/hit_1.png",
+					"region": {
+						"x": 247,
+						"y": 56,
+						"w": 16,
+						"h": 23
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "running/running_7.png",
+					"region": {
+						"x": 265,
+						"y": 55,
+						"w": 17,
+						"h": 23
+					},
+					"margin": {
+						"x": 2,
+						"y": 0,
+						"w": 2,
+						"h": 1
+					}
+				},
+				{
+					"filename": "damage/damage_2.png",
+					"region": {
+						"x": 284,
+						"y": 55,
+						"w": 16,
+						"h": 23
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "damage/hit_2.png",
+					"region": {
+						"x": 284,
+						"y": 55,
+						"w": 16,
+						"h": 23
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "running/running_2.png",
+					"region": {
+						"x": 302,
+						"y": 55,
+						"w": 18,
+						"h": 21
+					},
+					"margin": {
+						"x": 1,
+						"y": 3,
+						"w": 1,
+						"h": 3
+					}
+				},
+				{
+					"filename": "running/running_6.png",
+					"region": {
+						"x": 302,
+						"y": 78,
+						"w": 18,
+						"h": 21
+					},
+					"margin": {
+						"x": 1,
+						"y": 3,
+						"w": 1,
+						"h": 3
+					}
+				},
+				{
+					"filename": "idle/idle.png",
+					"region": {
+						"x": 245,
+						"y": 101,
+						"w": 15,
+						"h": 24
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "running/running_3.png",
+					"region": {
+						"x": 262,
+						"y": 101,
+						"w": 17,
+						"h": 22
+					},
+					"margin": {
+						"x": 2,
+						"y": 0,
+						"w": 2,
+						"h": 2
+					}
+				},
+				{
+					"filename": "jump/jump_2.png",
+					"region": {
+						"x": 281,
+						"y": 101,
+						"w": 17,
+						"h": 21
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 1
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:ecbd5ac4dd1ca41082bbfc59c40312b8:1acf7b92744b945dfe2d5ebf08c18e5a:e7f717c424b63baeec7d4d8739b1fd96$"
+	}
+}
