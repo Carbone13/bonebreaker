@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/snd_hit_explosion.mp3-1fe4f0bf9f1d103c13038d95fc807954.mp3str"
+
+[deps]
+
+source_file="res://assets/sound_effects/snd_hit_explosion.mp3"
+dest_files=[ "res://.import/snd_hit_explosion.mp3-1fe4f0bf9f1d103c13038d95fc807954.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

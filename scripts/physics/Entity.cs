@@ -2,33 +2,35 @@
 
 namespace Bonebreaker.Physics
 {
-    public abstract class Entity : Node2D
+    [Tool]
+    public class Entity : Node2D
     {
-        ///<summary> The Entity real position, with decimal precision </summary>
-        protected FixedVector2 RealPosition
+        private int2 _position;
+        public new int2 Position
         {
-            get
-            {
-                return _realPosition;
-            }
+            get => _position;
             set
             {
-                _realPosition = value;
-                UpdatePosition();
+                int2 old = _position;
+                _position = value;
+                Moved(old);
             }
         }
 
-        private FixedVector2 _realPosition;
-
-
-        /// <summary>
-        /// Update the position of the Entity
-        /// </summary>
-        private void UpdatePosition ()
+        public override void _Ready ()
         {
-            GlobalPosition = new Vector2( (int)_realPosition.X, (int)_realPosition.Y);
+            Position = new int2(GlobalPosition.x, GlobalPosition.y);
         }
 
-        
+        public override void _Process (float delta)
+        {
+            if (Engine.EditorHint)
+                Position = new int2(GlobalPosition.x, GlobalPosition.y);
+        }
+
+        protected virtual void Moved (int2 oldPosition)
+        {
+            GlobalPosition = Position;
+        }
     }
 }

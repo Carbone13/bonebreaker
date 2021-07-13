@@ -1,0 +1,80 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://scripts/physics/boxes/Pushbox.cs" type="Script" id=1]
+[ext_resource path="res://scripts/players/Marston.cs" type="Script" id=2]
+[ext_resource path="res://resources/animations/characters/marston/prefabsmarston_attack_1_right.tres" type="Animation" id=3]
+[ext_resource path="res://resources/animations/characters/marston/marston_idle_right.tres" type="Animation" id=4]
+[ext_resource path="res://resources/animations/characters/marston/marston_ascend_left.tres" type="Animation" id=5]
+[ext_resource path="res://resources/animations/characters/marston/marston_run_left.tres" type="Animation" id=6]
+[ext_resource path="res://resources/animations/characters/marston/marston_jump_prepare_left.tres" type="Animation" id=7]
+[ext_resource path="res://resources/animations/characters/marston/marston_ascend_right.tres" type="Animation" id=8]
+[ext_resource path="res://resources/animations/characters/marston/marston_jump_prepare_right.tres" type="Animation" id=9]
+[ext_resource path="res://resources/animations/characters/marston/marston_run_right.tres" type="Animation" id=10]
+[ext_resource path="res://resources/animations/characters/marston/marston_fall_left.tres" type="Animation" id=11]
+[ext_resource path="res://resources/animations/characters/marston/marston_idle_left.tres" type="Animation" id=12]
+[ext_resource path="res://resources/animations/characters/marston/marston_fall_right.tres" type="Animation" id=13]
+[ext_resource path="res://scripts/physics/boxes/Hurtbox.cs" type="Script" id=14]
+[ext_resource path="res://scripts/physics/boxes/Hitbox.cs" type="Script" id=15]
+[ext_resource path="res://resources/animations/characters/marston/prefabsmarston_attack_1_left.tres" type="Animation" id=16]
+[ext_resource path="res://resources/animations/characters/marston/prefabsmarston_attack_2_left.tres" type="Animation" id=17]
+[ext_resource path="res://resources/animations/characters/marston/prefabsmarston_attack_2_right.tres" type="Animation" id=18]
+[ext_resource path="res://assets/game_sprites/characters/marston/marston.sprites/attack1/attack1_1.tres" type="Texture" id=19]
+[ext_resource path="res://resources/animations/characters/marston/prefabsmarston_attack_3_left.tres" type="Animation" id=20]
+[ext_resource path="res://resources/animations/characters/marston/prefabsmarston_attack_3_right.tres" type="Animation" id=21]
+[ext_resource path="res://assets/sound_effects/snd_hit_punch.mp3" type="AudioStream" id=22]
+
+[node name="Marston" type="Node2D"]
+position = Vector2( 100, 47 )
+script = ExtResource( 2 )
+MOVE_SPEED = 65
+JUMP_HEIGHT = 40
+JUMP_APEX_TIME = 0.33
+Punch_SFX = ExtResource( 22 )
+
+[node name="Pushbox" type="Node2D" parent="."]
+visible = false
+position = Vector2( -6, -20 )
+script = ExtResource( 1 )
+Height = 20
+Width = 12
+IgnoredDirections = [  ]
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+playback_speed = 1.2
+anims/marston_ascend_left = ExtResource( 5 )
+anims/marston_ascend_right = ExtResource( 8 )
+anims/marston_attack_1_left = ExtResource( 16 )
+anims/marston_attack_1_right = ExtResource( 3 )
+anims/marston_attack_2_left = ExtResource( 17 )
+anims/marston_attack_2_right = ExtResource( 18 )
+anims/marston_attack_3_left = ExtResource( 20 )
+anims/marston_attack_3_right = ExtResource( 21 )
+anims/marston_fall_left = ExtResource( 11 )
+anims/marston_fall_right = ExtResource( 13 )
+anims/marston_idle_left = ExtResource( 12 )
+anims/marston_idle_right = ExtResource( 4 )
+anims/marston_jump_prepare_left = ExtResource( 7 )
+anims/marston_jump_prepare_right = ExtResource( 9 )
+anims/marston_run_left = ExtResource( 6 )
+anims/marston_run_right = ExtResource( 10 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -16, -20 )
+texture = ExtResource( 19 )
+centered = false
+flip_h = true
+
+[node name="Hitbox" type="Node2D" parent="."]
+visible = false
+position = Vector2( -17, -13 )
+script = ExtResource( 15 )
+Height = 8
+Width = 12
+
+[node name="Hurtbox" type="Node2D" parent="."]
+visible = false
+position = Vector2( -5, -19 )
+script = ExtResource( 14 )
+Height = 19
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]

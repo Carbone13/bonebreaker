@@ -1,0 +1,342 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://resources/ui_atlas/login_register.tres" type="Texture" id=1]
+[ext_resource path="res://scripts/menus/ConnectionScreen.cs" type="Script" id=2]
+[ext_resource path="res://resources/fonts/monogram_extended.tres" type="DynamicFont" id=3]
+[ext_resource path="res://resources/fonts/dfd_monogram.tres" type="DynamicFontData" id=4]
+[ext_resource path="res://resources/button_theme.tres" type="Theme" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 17
+extra_spacing_bottom = 5
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+extra_spacing_bottom = 5
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 15
+extra_spacing_bottom = 5
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 17
+extra_spacing_bottom = 5
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0, 0, 0.705882 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 30
+extra_spacing_bottom = 5
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 14
+extra_spacing_bottom = -2
+font_data = ExtResource( 4 )
+
+[sub_resource type="Theme" id=8]
+default_font = SubResource( 7 )
+Dialogs/constants/button_margin = 33
+Dialogs/constants/margin = 14
+Label/colors/font_color = Color( 1, 1, 1, 1 )
+Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
+Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+Label/constants/line_spacing = 3
+Label/constants/shadow_as_outline = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/fonts/font = null
+Label/styles/normal = null
+
+[node name="Connection Screen" type="Control" groups=[
+"Scene Root",
+]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Login Panel" type="TextureRect" parent="."]
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 155.0
+margin_bottom = 165.0
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+LoginParent = NodePath("Login")
+RegisterParent = NodePath("Register")
+ConnectingParent = NodePath("../Connecting")
+LoginEmailField = NodePath("Login/Email Field")
+LoginPasswordField = NodePath("Login/Password Field")
+LoginSaveCredentials = NodePath("Login/Credentials Button")
+ErrorDialog = NodePath("../Dialog")
+
+[node name="Login" type="Control" parent="Login Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Login Label" type="Label" parent="Login Panel/Login"]
+margin_left = 3.0
+margin_top = 4.0
+margin_right = 59.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 1 )
+text = "LOGIN"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Register Label" type="Label" parent="Login Panel/Login"]
+margin_left = 64.0
+margin_top = 5.0
+margin_right = 136.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.623529, 0.623529, 0.623529, 1 )
+text = "REGISTER"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Login" type="Button" parent="Login Panel/Login"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -23.5
+margin_top = -26.0
+margin_right = 23.5
+margin_bottom = -8.0
+rect_pivot_offset = Vector2( -176.5, -109 )
+theme = ExtResource( 5 )
+text = "LOGIN"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Email" type="Label" parent="Login Panel/Login"]
+margin_left = 12.0
+margin_top = 33.0
+margin_right = 119.0
+margin_bottom = 51.0
+custom_fonts/font = ExtResource( 3 )
+text = "Enter your e-mail :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Email Field" type="LineEdit" parent="Login Panel/Login"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -58.0
+margin_top = -29.0
+margin_right = 176.0
+margin_bottom = 1.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 2 )
+placeholder_text = "you@example.com"
+placeholder_alpha = 0.322
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Password" type="Label" parent="Login Panel/Login"]
+margin_left = 13.0
+margin_top = 67.0
+margin_right = 120.0
+margin_bottom = 85.0
+custom_fonts/font = ExtResource( 3 )
+text = "Enter your password :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Password Field" type="LineEdit" parent="Login Panel/Login"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -56.5
+margin_top = 4.5
+margin_right = 177.5
+margin_bottom = 34.5
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 2 )
+secret = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Save Credential" type="Label" parent="Login Panel/Login"]
+margin_left = 13.0
+margin_top = 100.0
+margin_right = 132.0
+margin_bottom = 118.0
+custom_fonts/font = ExtResource( 3 )
+text = "Save credentials ?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Credentials Button" type="CheckButton" parent="Login Panel/Login"]
+margin_left = 10.0
+margin_top = 115.0
+margin_right = 86.0
+margin_bottom = 155.0
+rect_scale = Vector2( 0.4, 0.4 )
+pressed = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Register" type="Control" parent="Login Panel"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Login Label" type="Label" parent="Login Panel/Register"]
+margin_left = 3.0
+margin_top = 5.0
+margin_right = 59.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.623529, 0.623529, 0.623529, 1 )
+text = "LOGIN"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Register Label" type="Label" parent="Login Panel/Register"]
+margin_left = 64.0
+margin_top = 5.0
+margin_right = 136.0
+margin_bottom = 25.0
+custom_fonts/font = SubResource( 4 )
+text = "REGISTER"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Register" type="Button" parent="Login Panel/Register"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -28.5
+margin_top = -40.0
+margin_right = 28.5
+margin_bottom = -22.0
+rect_pivot_offset = Vector2( -176.5, -109 )
+theme = ExtResource( 5 )
+text = "REGISTER"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="_login" type="Button" parent="Login Panel"]
+process_priority = 1
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 62.0
+margin_bottom = 21.0
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="_register" type="Button" parent="Login Panel"]
+process_priority = 1
+margin_left = 63.0
+margin_right = 138.0
+margin_bottom = 20.0
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Offline" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Offline"]
+margin_left = 190.0
+margin_top = 78.0
+margin_right = 275.125
+margin_bottom = 102.0
+theme = ExtResource( 5 )
+custom_fonts/font = ExtResource( 3 )
+text = "or go offline"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Connecting" type="Panel" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Connecting"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -73.5
+margin_top = -15.0
+margin_right = 73.5
+margin_bottom = 15.0
+custom_fonts/font = SubResource( 6 )
+text = "Connecting..."
+
+[node name="Dialog" type="AcceptDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -78.5
+margin_top = -34.0
+margin_right = 78.5
+margin_bottom = 34.0
+theme = SubResource( 8 )
+window_title = "Error !"
+resizable = true
+dialog_autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Login Panel/Login/Login" to="Login Panel" method="ConnectPressed"]
+[connection signal="pressed" from="Login Panel/_login" to="Login Panel" method="SwitchToLoginSide"]
+[connection signal="pressed" from="Login Panel/_register" to="Login Panel" method="SwitchToRegisterSide"]
+[connection signal="pressed" from="Offline/Button" to="Login Panel" method="Offline"]
