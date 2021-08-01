@@ -12,7 +12,7 @@
 [ext_resource path="res://resources/fonts/monogram_extended.tres" type="DynamicFont" id=10]
 [ext_resource path="res://assets/game_sprites/items/items.sprites/coin.tres" type="Texture" id=11]
 [ext_resource path="res://resources/animations/coin/coin_idle.tres" type="Animation" id=12]
-[ext_resource path="res://assets/sound_effects/snd_hit_punch_weak.mp3" type="AudioStream" id=13]
+[ext_resource path="res://shader/pixel_art_aa.tres" type="Material" id=14]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.866667, 0.866667, 0.866667, 1 )
@@ -92,10 +92,10 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
-color = Color( 0.501961, 0.501961, 0.501961, 0.278431 )
-Width = 50
 Height = 6
+Width = 50
 IgnoredDirections = [ Vector2( 0, -1 ), Vector2( 1, -1 ), Vector2( -1, -1 ), Vector2( 1, 0 ), Vector2( -1, 0 ) ]
+color = Color( 0.501961, 0.501961, 0.501961, 0.278431 )
 
 [node name="border" type="Line2D" parent="Level/Shape 1"]
 position = Vector2( 0.25, 0.247188 )
@@ -112,10 +112,10 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
-color = Color( 0.501961, 0.501961, 0.501961, 0.278431 )
-Width = 50
 Height = 6
+Width = 50
 IgnoredDirections = [ Vector2( 0, -1 ), Vector2( 1, -1 ), Vector2( -1, -1 ), Vector2( 1, 0 ), Vector2( -1, 0 ) ]
+color = Color( 0.501961, 0.501961, 0.501961, 0.278431 )
 
 [node name="border" type="Line2D" parent="Level/Shape 3"]
 position = Vector2( 0.25, 0.247188 )
@@ -132,10 +132,10 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
-color = Color( 0.501961, 0.501961, 0.501961, 0.278431 )
-Width = 50
 Height = 6
+Width = 50
 IgnoredDirections = [ Vector2( 0, -1 ), Vector2( 1, -1 ), Vector2( -1, -1 ), Vector2( 1, 0 ), Vector2( -1, 0 ) ]
+color = Color( 0.501961, 0.501961, 0.501961, 0.278431 )
 
 [node name="border" type="Line2D" parent="Level/Shape 2"]
 position = Vector2( 0.25, 0.247188 )
@@ -149,10 +149,10 @@ end_cap_mode = 1
 [node name="Ground" type="Node2D" parent="Level"]
 position = Vector2( 0, 140 )
 script = ExtResource( 2 )
-color = Color( 0.0941176, 0.462745, 0.52549, 0 )
-Width = 320
 Height = 50
+Width = 320
 IgnoredDirections = [  ]
+color = Color( 0.0941176, 0.462745, 0.52549, 0 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -163,8 +163,7 @@ smoothing_enabled = true
 [node name="Marston" parent="." instance=ExtResource( 1 )]
 position = Vector2( 95, 120 )
 z_index = 1
-COYOTE_TIME_MS = 8
-Punch_SFX = ExtResource( 13 )
+MOVE_SPEED = 50
 
 [node name="Dummy" type="Node2D" parent="."]
 position = Vector2( 203, 140 )
@@ -175,6 +174,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="Dummy"]
+material = ExtResource( 14 )
 position = Vector2( -32, -47 )
 texture = ExtResource( 5 )
 centered = false
@@ -184,8 +184,8 @@ vframes = 4
 [node name="Hurtbox" type="Node2D" parent="Dummy"]
 position = Vector2( -6, -30 )
 script = ExtResource( 3 )
-Width = 12
 Height = 30
+Width = 12
 
 [node name="Animator" type="AnimationPlayer" parent="Dummy"]
 anims/dummy_hit_left = ExtResource( 8 )
