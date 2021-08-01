@@ -3,6 +3,8 @@
     <LangVersion>8</LangVersion>
     <TargetFramework>net472</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>Bonebreaker</AssemblyName>
+    <RootNamespace>Bonebreaker</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="scripts\physics\directory" />
@@ -17,5 +19,11 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NakamaClient" Version="2.9.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="scripts\networking\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="scripts\networking\**" />
   </ItemGroup>
 </Project>
