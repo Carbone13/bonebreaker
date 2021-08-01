@@ -1,10 +1,9 @@
 [gd_resource type="Theme" load_steps=9 format=2]
 
 [ext_resource path="res://resources/fonts/monogram_extended.tres" type="DynamicFont" id=1]
-[ext_resource path="res://assets/ui_sprites/Button.png" type="Texture" id=2]
+[ext_resource path="res://assets/ui_sprites/button.png" type="Texture" id=2]
 
 [sub_resource type="StreamTexture" id=1]
-load_path = "res://.import/Button.png-8c604942a00844c46a1d0de5fca0298d.stex"
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = SubResource( 1 )
