@@ -11,10 +11,7 @@ namespace Bonebreaker.Player
             string animation = "idle";
             string character = "";
             
-            if (player is Marston) character = "marston_";
-            if (player is Musashi) character = "musashi_";
-            if (player is Namka) character = "namka_";
-            
+
             if (player.IsGrounded)
             {
                 if (player.IsRunning)
