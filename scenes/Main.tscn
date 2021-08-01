@@ -92,9 +92,9 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
-Height = 6
-Width = 50
 IgnoredDirections = [ Vector2( 0, -1 ), Vector2( 1, -1 ), Vector2( -1, -1 ), Vector2( 1, 0 ), Vector2( -1, 0 ) ]
+Width = 50
+Height = 6
 color = Color( 0.501961, 0.501961, 0.501961, 0.278431 )
 
 [node name="border" type="Line2D" parent="Level/Shape 1"]
@@ -112,9 +112,9 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
-Height = 6
-Width = 50
 IgnoredDirections = [ Vector2( 0, -1 ), Vector2( 1, -1 ), Vector2( -1, -1 ), Vector2( 1, 0 ), Vector2( -1, 0 ) ]
+Width = 50
+Height = 6
 color = Color( 0.501961, 0.501961, 0.501961, 0.278431 )
 
 [node name="border" type="Line2D" parent="Level/Shape 3"]
@@ -132,9 +132,9 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
-Height = 6
-Width = 50
 IgnoredDirections = [ Vector2( 0, -1 ), Vector2( 1, -1 ), Vector2( -1, -1 ), Vector2( 1, 0 ), Vector2( -1, 0 ) ]
+Width = 50
+Height = 6
 color = Color( 0.501961, 0.501961, 0.501961, 0.278431 )
 
 [node name="border" type="Line2D" parent="Level/Shape 2"]
@@ -149,9 +149,9 @@ end_cap_mode = 1
 [node name="Ground" type="Node2D" parent="Level"]
 position = Vector2( 0, 140 )
 script = ExtResource( 2 )
-Height = 50
-Width = 320
 IgnoredDirections = [  ]
+Width = 320
+Height = 50
 color = Color( 0.0941176, 0.462745, 0.52549, 0 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -184,8 +184,8 @@ vframes = 4
 [node name="Hurtbox" type="Node2D" parent="Dummy"]
 position = Vector2( -6, -30 )
 script = ExtResource( 3 )
-Height = 30
 Width = 12
+Height = 30
 
 [node name="Animator" type="AnimationPlayer" parent="Dummy"]
 anims/dummy_hit_left = ExtResource( 8 )

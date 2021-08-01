@@ -6,6 +6,7 @@ namespace Bonebreaker.Player
     {
         public void Update (Character player)
         {
+            /*
             AnimationPlayer animator = player.GetNode<AnimationPlayer>("Animator");
             string direction = "_" + (player.FacingDirection == 1 ? "right" : "left");
             string animation = "idle";
@@ -39,6 +40,7 @@ namespace Bonebreaker.Player
             if (character == "") return;
             
             animator.Play(character + animation + direction);
+            */
         }
     }
 }

@@ -72,12 +72,14 @@ namespace Bonebreaker.Player
         /// <param name="state">The State instance you want to enter</param>
         public void EnterState (State state)
         {
+            // Store the previous state
+            State previousState = CurrentState;
             // Exit Current State
             CurrentState?.Exit(state);
             // Set the new state as the Current State
             CurrentState = state;
             // Enter Current State
-            CurrentState.Enter();
+            CurrentState.Enter(previousState);
             
             ResolveCorrectState();
         }
@@ -104,7 +106,7 @@ namespace Bonebreaker.Player
         public void CheckIfGrounded ()
         {
             // Check if we are not going up && if their is something directly below us
-            IsGrounded = Velocity.Y >= sfloat.Zero && 
+            IsGrounded = Velocity.Y >= sfloat.Zero && Remainder.Y >= sfloat.Zero && 
                 Physic.CollideAt(pushbox, pushbox.Position + new int2(0, 1), new int2());
         }
         
@@ -119,7 +121,7 @@ namespace Bonebreaker.Player
         public void Tick (sfloat delta, uint frame, InputState input)
         {
             CurrentState.Tick(delta, frame, input);
-            //Move(new sfloat2(50, 50) * delta, new int2(1, 0), null, null);
+            ProceedMovement(delta);
         }
 
 
@@ -129,6 +131,8 @@ namespace Bonebreaker.Player
         /// <param name="delta">The delta time</param>
         public void ProceedMovement (sfloat delta)
         {
+            if (Velocity.Equals(sfloat2.Zero)) return;
+
             bool hasMoved = Move(Velocity * delta, new int2(Velocity), CollidedX, CollidedY);
 
             // If we moved

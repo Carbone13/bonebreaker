@@ -9,7 +9,8 @@ namespace Bonebreaker.StateMachine
 
         protected override void _Enter (State previousState)
         {
-            // Player idle animation
+            base._Enter(previousState);
+            Owner.Velocity.X = sfloat.Zero;
         }
 
         protected override void _CheckExitConditions (InputState input)

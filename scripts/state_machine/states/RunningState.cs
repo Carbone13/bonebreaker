@@ -13,11 +13,9 @@ namespace Bonebreaker.StateMachine
         protected override void _Tick (sfloat delta, uint frame, InputState input)
         {
             base._Tick(delta, frame, input);
-            
+
             int dir = input.xInput;
             Owner.Velocity.X = (sfloat)dir * (sfloat)Owner.MOVE_SPEED;
-
-            Owner.Move(delta);
         }
 
         protected override void _CheckExitConditions (InputState input)

@@ -11,22 +11,6 @@ namespace Bonebreaker.StateMachine
         protected override void _Enter (State previousState)
         {
             base._Enter(previousState);
-            Owner.CheckIfGrounded();
-            CheckExitConditions(Owner.GetInput());
-        }
-
-        protected override void _Tick (sfloat delta, uint frame, InputState input)
-        {
-            Owner.LastGroundedTime = frame;
-
-            if (input.Jump)
-            {
-                GD.Print("ju");
-                Owner.IsGrounded = false;
-                Owner.Velocity.Y = Owner.JumpForce;
-                Owner.Move(delta);
-                Owner.EnterState(Owner.AscendingState);
-            }
         }
 
         protected override void _CheckExitConditions (InputState input)
@@ -35,6 +19,13 @@ namespace Bonebreaker.StateMachine
             
             if (!Owner.IsGrounded)
                 Owner.EnterState(Owner.FallingState);
+            
+            if (input.Jump)
+            {
+                Owner.IsGrounded = false;
+                Owner.Velocity.Y = -Owner.JumpForce;
+                Owner.EnterState(Owner.AscendingState);
+            }
         }
     }
 }

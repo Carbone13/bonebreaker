@@ -21,10 +21,6 @@ Physics="*res://scripts/physics/Physic.cs"
 GlobalInput="*res://scripts/inputs/Input.cs"
 SceneManager="*res://scripts/scenes/SceneManager.cs"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [display]
 
 window/size/width=320

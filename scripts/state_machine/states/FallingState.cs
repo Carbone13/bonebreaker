@@ -13,7 +13,7 @@ namespace Bonebreaker.StateMachine
         {
             base._CheckExitConditions(input);
             
-            if(Owner.Velocity.Y > sfloat.Zero)
+            if(Owner.Velocity.Y < sfloat.Zero)
                 Owner.EnterState(Owner.AscendingState);
         }
     }

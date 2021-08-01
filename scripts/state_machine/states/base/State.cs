@@ -26,7 +26,8 @@ public class State
 	
 	public void Tick (sfloat delta, uint frame, InputState input)
 	{
-		_CheckExitConditions(input);
+		
+		CheckExitConditions(input);
 		_Tick(delta, frame, input);
 	}
 
