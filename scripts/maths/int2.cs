@@ -19,7 +19,7 @@ public struct int2
         X = (int) x;
         Y = (int) y;
     }
-
+    // TODO proper sign
     public int2 (sfloat2 vector)
     {
         X = vector.X.Sign();

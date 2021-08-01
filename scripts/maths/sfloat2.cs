@@ -194,6 +194,11 @@ public struct sfloat2
 
         return this;
     }
+
+    public sfloat2 Sign ()
+    {
+        return new sfloat2(X.Sign(), Y.Sign());
+    }
     
     #endregion
 
