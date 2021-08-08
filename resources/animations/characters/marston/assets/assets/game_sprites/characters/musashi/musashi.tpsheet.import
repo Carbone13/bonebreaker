@@ -1,0 +1,13 @@
+[remap]
+
+importer="codeandweb.texturepacker_import_spritesheet"
+type="Resource"
+path="res://.import/musashi.tpsheet-6c016929630aad1aa0f64bb7d8c7ba74.res"
+
+[deps]
+
+source_file="res://resources/animations/characters/marston/assets/assets/game_sprites/characters/musashi/musashi.tpsheet"
+dest_files=[ "res://.import/musashi.tpsheet-6c016929630aad1aa0f64bb7d8c7ba74.res" ]
+
+[params]
+

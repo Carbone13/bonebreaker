@@ -7,9 +7,6 @@
     <RootNamespace>Bonebreaker</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="scripts\physics\directory" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="FixedPointSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>libraries\FixedPointSharp.dll</HintPath>
     </Reference>
@@ -18,7 +15,8 @@
     <Content Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="NakamaClient" Version="2.9.3" />
+    <PackageReference Include="LiteNetLib" Version="0.9.5" />
+    <PackageReference Include="Nito.AsyncEx" Version="5.1.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="scripts\networking\**" />

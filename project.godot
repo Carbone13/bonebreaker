@@ -11,15 +11,15 @@ config_version=4
 [application]
 
 config/name="Bonebreaker"
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="res://Node2D.tscn"
 config/icon="res://assets/icon.png"
 config/windows_native_icon="res://assets/icon.ico"
 
 [autoload]
 
-Physics="*res://scripts/physics/Physic.cs"
 GlobalInput="*res://scripts/inputs/Input.cs"
 SceneManager="*res://scripts/scenes/SceneManager.cs"
+Network="*res://scripts/network/Network.cs"
 
 [display]
 
@@ -114,8 +114,6 @@ export/i18n_codesets=0
 
 [physics]
 
-common/physics_fps=64
-common/physics_jitter_fix=0.0
 common/enable_pause_aware_picking=true
 
 [rendering]

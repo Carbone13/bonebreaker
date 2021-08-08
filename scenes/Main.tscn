@@ -1,8 +1,6 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://prefabs/Marston.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scripts/physics/boxes/Pushbox.cs" type="Script" id=2]
-[ext_resource path="res://scripts/physics/boxes/Hurtbox.cs" type="Script" id=3]
 [ext_resource path="res://scripts/training/TrainingGroundBackground.cs" type="Script" id=4]
 [ext_resource path="res://assets/game_sprites/dummy.png" type="Texture" id=5]
 [ext_resource path="res://resources/animations/dummy/dummy_hit_right.tres" type="Animation" id=6]
@@ -19,6 +17,20 @@ bg_color = Color( 0.866667, 0.866667, 0.866667, 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.501961, 0.501961, 0.501961, 0.278431 )
+
+[sub_resource type="CSharpScript" id=3]
+script/source = "using Godot;
+using System;
+using Bonebreaker.Physics;
+
+public class simpleActor : Actor
+{
+    public override void _PhysicsProcess (float delta)
+    {
+        Move(new sfloat2(75, 0) * (sfloat)delta, new int2(1, 0), null, null);
+    }
+}
+"
 
 [node name="Control" type="Node"]
 __meta__ = {
@@ -88,14 +100,9 @@ __meta__ = {
 
 [node name="Shape 1" type="Node2D" parent="Level"]
 position = Vector2( 12, 112 )
-script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
-IgnoredDirections = [ Vector2( 0, -1 ), Vector2( 1, -1 ), Vector2( -1, -1 ), Vector2( 1, 0 ), Vector2( -1, 0 ) ]
-Width = 50
-Height = 6
-color = Color( 0.501961, 0.501961, 0.501961, 0.278431 )
 
 [node name="border" type="Line2D" parent="Level/Shape 1"]
 position = Vector2( 0.25, 0.247188 )
@@ -108,14 +115,9 @@ end_cap_mode = 1
 
 [node name="Shape 3" type="Node2D" parent="Level"]
 position = Vector2( 128, 112 )
-script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
-IgnoredDirections = [ Vector2( 0, -1 ), Vector2( 1, -1 ), Vector2( -1, -1 ), Vector2( 1, 0 ), Vector2( -1, 0 ) ]
-Width = 50
-Height = 6
-color = Color( 0.501961, 0.501961, 0.501961, 0.278431 )
 
 [node name="border" type="Line2D" parent="Level/Shape 3"]
 position = Vector2( 0.25, 0.247188 )
@@ -128,14 +130,9 @@ end_cap_mode = 1
 
 [node name="Shape 2" type="Node2D" parent="Level"]
 position = Vector2( 70, 80 )
-script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
-IgnoredDirections = [ Vector2( 0, -1 ), Vector2( 1, -1 ), Vector2( -1, -1 ), Vector2( 1, 0 ), Vector2( -1, 0 ) ]
-Width = 50
-Height = 6
-color = Color( 0.501961, 0.501961, 0.501961, 0.278431 )
 
 [node name="border" type="Line2D" parent="Level/Shape 2"]
 position = Vector2( 0.25, 0.247188 )
@@ -148,11 +145,6 @@ end_cap_mode = 1
 
 [node name="Ground" type="Node2D" parent="Level"]
 position = Vector2( 0, 140 )
-script = ExtResource( 2 )
-IgnoredDirections = [  ]
-Width = 320
-Height = 50
-color = Color( 0.0941176, 0.462745, 0.52549, 0 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -163,7 +155,7 @@ smoothing_enabled = true
 [node name="Marston" parent="." instance=ExtResource( 1 )]
 position = Vector2( 95, 120 )
 z_index = 1
-MOVE_SPEED = 50
+script = SubResource( 3 )
 
 [node name="Dummy" type="Node2D" parent="."]
 position = Vector2( 203, 140 )
@@ -183,9 +175,6 @@ vframes = 4
 
 [node name="Hurtbox" type="Node2D" parent="Dummy"]
 position = Vector2( -6, -30 )
-script = ExtResource( 3 )
-Width = 12
-Height = 30
 
 [node name="Animator" type="AnimationPlayer" parent="Dummy"]
 anims/dummy_hit_left = ExtResource( 8 )

@@ -1,0 +1,13 @@
+[remap]
+
+importer="codeandweb.texturepacker_import_spritesheet"
+type="Resource"
+path="res://.import/effects.tpsheet-4ddf200941fefbe4390c7fc2bf1ae841.res"
+
+[deps]
+
+source_file="res://resources/animations/characters/marston/scripts/assets/game_sprites/visual_effects/effects.tpsheet"
+dest_files=[ "res://.import/effects.tpsheet-4ddf200941fefbe4390c7fc2bf1ae841.res" ]
+
+[params]
+

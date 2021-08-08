@@ -1,0 +1,13 @@
+[remap]
+
+importer="codeandweb.texturepacker_import_spritesheet"
+type="Resource"
+path="res://.import/levels.tpsheet-e8d787b41e95cd7b30f91ae0d234a4f7.res"
+
+[deps]
+
+source_file="res://resources/animations/characters/marston/scenes/assets/game_sprites/levels/levels.tpsheet"
+dest_files=[ "res://.import/levels.tpsheet-e8d787b41e95cd7b30f91ae0d234a4f7.res" ]
+
+[params]
+
