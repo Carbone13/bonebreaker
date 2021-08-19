@@ -1,8 +1,293 @@
-[gd_scene format=2]
+[gd_scene load_steps=12 format=2]
 
-[node name="Control" type="Control"]
+[ext_resource path="res://resources/themes/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/ui/FocusableButton.cs" type="Script" id=2]
+[ext_resource path="res://resources/themes/connection_panel.tres" type="StyleBox" id=3]
+[ext_resource path="res://assets/fonts/Armin.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/ui/selecter.png" type="Texture" id=5]
+[ext_resource path="res://prefabs/lobby.tscn" type="PackedScene" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.227451, 0.266667, 0.4, 1 )
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.945098, 0.945098, 0.945098, 1 )
+
+[sub_resource type="DynamicFont" id=18]
+size = 32
+extra_spacing_space = -4
+font_data = ExtResource( 4 )
+
+[node name="Matchmaking" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CREATE_GAME" type="Panel" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 12.0
+margin_top = -56.0
+margin_right = 110.0
+margin_bottom = 57.0
+mouse_filter = 2
+custom_styles/panel = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="CREATE_GAME"]
+anchor_right = 1.0
+anchor_bottom = 0.137
+margin_top = -4.0
+margin_bottom = 0.0249977
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+text = "Host"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="underline_1" type="Panel" parent="CREATE_GAME/title"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -5.0
+margin_right = 20.0
+margin_bottom = -4.0
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="name" type="Control" parent="CREATE_GAME"]
+margin_left = 2.0
+margin_top = 34.0
+margin_right = 98.0
+margin_bottom = 59.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="CREATE_GAME/name"]
+margin_left = 3.0
+margin_top = -6.0
+margin_right = 44.0
+margin_bottom = 8.0
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+text = "name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="CREATE_GAME/name/Title"]
+margin_left = -1.0
+margin_top = 12.0
+margin_right = 89.0
+margin_bottom = 13.0
+custom_styles/panel = SubResource( 14 )
+
+[node name="LineEdit" type="LineEdit" parent="CREATE_GAME/name"]
+margin_left = 2.0
+margin_top = 10.0
+margin_right = 92.0
+margin_bottom = 25.0
+context_menu_enabled = false
+placeholder_text = "MySuperGame"
+placeholder_alpha = 0.284
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="remember" type="Control" parent="CREATE_GAME"]
+margin_left = 2.0
+margin_top = 60.0
+margin_right = 98.0
+margin_bottom = 85.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dash_line" type="Panel" parent="CREATE_GAME/remember"]
+margin_left = 2.0
+margin_top = 6.0
+margin_right = 92.0
+margin_bottom = 7.0
+custom_styles/panel = SubResource( 14 )
+
+[node name="Title" type="Label" parent="CREATE_GAME/remember"]
+margin_left = 3.0
+margin_top = 6.0
+margin_right = 69.0
+margin_bottom = 20.0
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+text = "public  ?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox" type="CheckBox" parent="CREATE_GAME/remember"]
+margin_left = 65.0
+margin_top = 7.0
+margin_right = 72.0
+margin_bottom = 21.0
+pressed = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selecter" type="NinePatchRect" parent="CREATE_GAME/remember/CheckBox"]
+visible = false
+modulate = Color( 0.328445, 0.362996, 0.480469, 1 )
+margin_left = -2.0
+margin_top = 1.0
+margin_right = 9.0
+margin_bottom = 13.0
+texture = ExtResource( 5 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CREATE" type="Button" parent="CREATE_GAME"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -23.0
+margin_top = -23.0
+margin_right = 24.0
+margin_bottom = -4.0
+focus_neighbour_right = NodePath("../../Offline")
+focus_neighbour_bottom = NodePath("../title/or_register/register")
+text = "create"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+OriginalButton = true
+
+[node name="bg" type="Panel" parent="CREATE_GAME/CREATE"]
+show_behind_parent = true
+margin_left = 3.0
+margin_top = 1.0
+margin_right = 44.0
+margin_bottom = 16.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selecter" type="NinePatchRect" parent="CREATE_GAME/CREATE"]
+visible = false
+modulate = Color( 0.328445, 0.362996, 0.480469, 1 )
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 49.0
+margin_bottom = 20.0
+texture = ExtResource( 5 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="JOIN_GAME" type="Panel" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 160.0
+margin_top = -78.0
+margin_right = 312.0
+margin_bottom = 65.0
+mouse_filter = 2
+custom_styles/panel = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="JOIN_GAME"]
+anchor_right = 1.0
+anchor_bottom = 0.137
+margin_top = -4.0
+margin_bottom = 4.409
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+text = "Browse"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="underline_1" type="Panel" parent="JOIN_GAME/title"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -33.0
+margin_top = -5.0
+margin_right = 31.0
+margin_bottom = -4.0
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="JOIN_GAME"]
+margin_left = 1.0
+margin_top = 22.0
+margin_right = 151.0
+margin_bottom = 127.0
+rect_min_size = Vector2( 150, 105 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="JOIN_GAME/ScrollContainer"]
+margin_right = 150.0
+margin_bottom = 105.0
+rect_min_size = Vector2( 150, 105 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lobby" parent="JOIN_GAME/ScrollContainer/VBoxContainer" instance=ExtResource( 6 )]
+
+[node name="OR" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -46.0
+margin_top = -14.0
+margin_right = -6.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 18 )
+text = "OR"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

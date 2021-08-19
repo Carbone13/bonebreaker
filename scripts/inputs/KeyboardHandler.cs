@@ -45,6 +45,11 @@ namespace Bonebreaker.Inputs
             InputState state = new InputState();
             state.DeviceID = ID;
 
+            if (Godot.Input.IsKeyPressed((int) KeyList.Enter) ||
+                Godot.Input.IsMouseButtonPressed((int)ButtonList.Left)) ;
+            {
+                state.Click = true;
+            }
             if (Godot.Input.IsKeyPressed((int)KeyList.Space) ||
                 Godot.Input.IsKeyPressed((int)KeyList.W) ||
                 Godot.Input.IsKeyPressed((int)KeyList.Up))
@@ -84,13 +89,18 @@ namespace Bonebreaker.Inputs
                                         Godot.Input.IsKeyPressed((int) KeyList.Left);
             bool rightPressedThisFrame = Godot.Input.IsKeyPressed((int) KeyList.D) ||
                                          Godot.Input.IsKeyPressed((int) KeyList.Right);
+            bool upPressedThisFrame = Godot.Input.IsKeyPressed((int) KeyList.W) ||
+                                        Godot.Input.IsKeyPressed((int) KeyList.Up);
+            bool downPressedThisFrame = Godot.Input.IsKeyPressed((int) KeyList.S) ||
+                                         Godot.Input.IsKeyPressed((int) KeyList.Down);
 
+            state.Joystick.y += upPressedThisFrame ? -1 : 0 + (downPressedThisFrame ? 1 : 0);
             if (socd == 0)
             {
                 if (leftPressedThisFrame)
-                    state.xInput -= 1;
+                    state.Joystick.x -= 1;
                 if (rightPressedThisFrame)
-                    state.xInput += 1;
+                    state.Joystick.x += 1;
             }
             if (socd != 0)
             {
@@ -98,13 +108,13 @@ namespace Bonebreaker.Inputs
                 bool rightJustPressed = !Right && rightPressedThisFrame;
 
                 if (!leftPressedThisFrame && !rightPressedThisFrame)
-                    state.xInput = 0;
+                    state.Joystick.x = 0;
                 else
-                    state.xInput = previousState.xInput;
+                    state.Joystick.x = previousState.Joystick.x;
                 if (leftJustPressed)
-                    state.xInput = -1;
+                    state.Joystick.x = -1;
                 if (rightJustPressed)
-                    state.xInput = 1;
+                    state.Joystick.x = 1;
                 
                 Left = leftPressedThisFrame;
                 Right = rightPressedThisFrame;
@@ -118,7 +128,12 @@ namespace Bonebreaker.Inputs
         {
             InputState state = new InputState();
             state.DeviceID = ID;
-            
+
+            if (Godot.Input.IsKeyPressed((int) KeyList.Enter) ||
+                Godot.Input.IsMouseButtonPressed((int)ButtonList.Left)) ;
+            {
+                state.Click = true;
+            }
             if (Godot.Input.IsKeyPressed((int)KeyList.Space) ||
                 Godot.Input.IsKeyPressed((int)KeyList.Z) ||
                 Godot.Input.IsKeyPressed((int)KeyList.Up))
@@ -156,13 +171,18 @@ namespace Bonebreaker.Inputs
                                         Godot.Input.IsKeyPressed((int) KeyList.Left);
             bool rightPressedThisFrame = Godot.Input.IsKeyPressed((int) KeyList.D) ||
                                          Godot.Input.IsKeyPressed((int) KeyList.Right);
+            bool upPressedThisFrame = Godot.Input.IsKeyPressed((int) KeyList.Z) ||
+                                      Godot.Input.IsKeyPressed((int) KeyList.Up);
+            bool downPressedThisFrame = Godot.Input.IsKeyPressed((int) KeyList.S) ||
+                                        Godot.Input.IsKeyPressed((int) KeyList.Down);
 
+            state.Joystick.y += upPressedThisFrame ? -1 : 0 + (downPressedThisFrame ? 1 : 0);
             if (socd == 0)
             {
                 if (leftPressedThisFrame)
-                    state.xInput -= 1;
+                    state.Joystick.x -= 1;
                 if (rightPressedThisFrame)
-                    state.xInput += 1;
+                    state.Joystick.x += 1;
             }
             if (socd != 0)
             {
@@ -170,13 +190,13 @@ namespace Bonebreaker.Inputs
                 bool rightJustPressed = !Right && rightPressedThisFrame;
 
                 if (!leftPressedThisFrame && !rightPressedThisFrame)
-                    state.xInput = 0;
+                    state.Joystick.x = 0;
                 else
-                    state.xInput = previousState.xInput;
+                    state.Joystick.x = previousState.Joystick.x;
                 if (leftJustPressed)
-                    state.xInput = -1;
+                    state.Joystick.x = -1;
                 if (rightJustPressed)
-                    state.xInput = 1;
+                    state.Joystick.x = 1;
                 
                 Left = leftPressedThisFrame;
                 Right = rightPressedThisFrame;

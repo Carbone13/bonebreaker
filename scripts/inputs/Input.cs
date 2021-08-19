@@ -39,6 +39,11 @@ namespace Bonebreaker.Inputs
             }
         }
 
+        public InputHandler GetPrimaryInputHandler ()
+        {
+            return _primaryHandler;
+        }
+
         public InputState GetStateOfPrimaryDevice ()
         {
             return _primaryHandler.GetState();

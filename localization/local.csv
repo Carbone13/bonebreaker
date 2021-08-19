@@ -1,0 +1,14 @@
+,en,fr
+NO_EMAIL,You must provide an e-mail !,Vous devez fournir un e-mail !
+INVALID_EMAIL,This e-mail is invalid (Incorrect Format),Cet e-mail est invalide (Format Incorrect)
+EMAIL_IN_USE,This e-mail is already in use,Cet e-mail est déjà utilisé
+NO_PASSWORD,You must provide a password !,Vous devez fournir un mot de passe !
+PASSWORD_TOO_SHORT,This password is too short (Minimum 8 characters),Ce mot de passe est trop court (8 caractères minimum)
+INVALID_USERNAME,You must provide an username !,Vous devez fournir un nom d'utilisateur !
+USERNAME_TOO_LONG,This username is too long (Maximum 15 characters),Ce nom d'utilisateur est trop long (15 caractères maximum)
+LOGIN-IN,Login-in...,Connection...
+REGISTERING,Registering account...,Enregistrement du compte...
+SUCESS,Success !,Succès !
+INVALID_CREDENTIALS,Wrong e-mail or password,E-mail ou mot de passe incorrect
+LOBBY_LIST,Available lobbies,Parties disponibles
+REFRESH,Refresh,Rafraîchir

@@ -32,6 +32,7 @@ namespace Bonebreaker.Inputs
             if (Godot.Input.IsJoyButtonPressed(ControllerID, (int) JoystickList.Button0))
             {
                 state.Jump = true;
+                state.Click = true;
                 lastJumpPressed = OS.GetTicksMsec();
             }
             if (!state.Jump && OS.GetTicksMsec() - lastJumpPressed < JUMP_BUFFER_MS)
@@ -59,7 +60,11 @@ namespace Bonebreaker.Inputs
             }
             if (Math.Abs(Godot.Input.GetJoyAxis(ControllerID, (int)JoystickList.Axis0)) > 0.5f)
             {
-                state.xInput = Math.Sign(Godot.Input.GetJoyAxis(ControllerID, (int)JoystickList.Axis0));
+                state.Joystick.x = Math.Sign(Godot.Input.GetJoyAxis(ControllerID, (int)JoystickList.Axis0));
+            }
+            if (Math.Abs(Godot.Input.GetJoyAxis(ControllerID, (int)JoystickList.Axis1)) > 0.5f)
+            {
+                state.Joystick.y = Math.Sign(Godot.Input.GetJoyAxis(ControllerID, (int)JoystickList.Axis0));
             }
 
             return state;

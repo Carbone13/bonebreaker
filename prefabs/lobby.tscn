@@ -1,0 +1,114 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scripts/ui/FocusableButton.cs" type="Script" id=1]
+[ext_resource path="res://assets/icons/play.png" type="Texture" id=2]
+[ext_resource path="res://resources/fonts/Armin.tres" type="DynamicFont" id=3]
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0.0745098, 0.0745098, 0.0745098, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=20]
+
+[sub_resource type="StyleBoxEmpty" id=21]
+
+[sub_resource type="StyleBoxEmpty" id=22]
+
+[sub_resource type="StyleBoxEmpty" id=23]
+
+[sub_resource type="StyleBoxEmpty" id=24]
+
+[sub_resource type="DynamicFont" id=25]
+
+[sub_resource type="StreamTexture" id=26]
+load_path = "res://.import/selecter.png-9b6c85614674989ba2affb58bfaf734f.stex"
+
+[node name="lobby" type="Control"]
+margin_right = 150.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 150, 31 )
+rect_pivot_offset = Vector2( -184, 55 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="info" type="Label" parent="."]
+margin_left = 5.0
+margin_top = 4.0
+margin_right = 116.0
+margin_bottom = 29.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+custom_constants/line_spacing = -3
+text = "A  cool  and  classy  name
+by  Carbone_13"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="count" type="Label" parent="."]
+margin_left = 5.0
+margin_top = 4.0
+margin_right = 116.0
+margin_bottom = 29.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+custom_constants/line_spacing = -3
+text = "4/4"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="separator" type="Panel" parent="."]
+margin_left = 3.0
+margin_top = 30.0
+margin_right = 141.0
+margin_bottom = 31.0
+custom_styles/panel = SubResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="connect" type="Button" parent="."]
+margin_left = 126.0
+margin_top = 10.0
+margin_right = 135.0
+margin_bottom = 19.0
+rect_scale = Vector2( 1.75, 1.75 )
+custom_styles/hover = SubResource( 20 )
+custom_styles/pressed = SubResource( 21 )
+custom_styles/focus = SubResource( 22 )
+custom_styles/disabled = SubResource( 23 )
+custom_styles/normal = SubResource( 24 )
+custom_fonts/font = SubResource( 25 )
+flat = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="graphic" type="TextureRect" parent="connect"]
+modulate = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+margin_right = 8.0
+margin_bottom = 9.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selecter" type="NinePatchRect" parent="connect"]
+visible = false
+modulate = Color( 0.411765, 0.411765, 0.411765, 1 )
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 6.0
+margin_bottom = 10.0
+texture = SubResource( 26 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
