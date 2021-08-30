@@ -35,12 +35,14 @@ func refresh_lobby() -> void:
 						return
 					
 					lobby_info.set("id", m.match_id)
-					lobby_info.get_node("info").text = payload["title"] + "\n" + payload["host"]
+					if(payload["title"] == ""):
+						payload["title"] = "Unnamed Lobby"
+					lobby_info.get_node("info").text = payload["title"] + "\n" + "hosted by "+ payload["host"]
 					lobby_info.get_node("count").text = str(m.size) + "/4"
 					lobby_holder.add_child(lobby_info)
 	
-func _on_OnlineMatch_created(match_id: String):
+func _on_OnlineMatch_created(_match_id: String):
 	SceneManager.call("LoadScene", "res://scenes/menu/Lobby Screen.tscn")
 	
-func _on_OnlineMatch_joined(match_id: String):
+func _on_OnlineMatch_joined(_match_id: String):
 	SceneManager.call("LoadScene", "res://scenes/menu/Lobby Screen.tscn")

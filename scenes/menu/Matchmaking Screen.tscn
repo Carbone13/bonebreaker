@@ -111,6 +111,7 @@ margin_left = 2.0
 margin_top = 10.0
 margin_right = 92.0
 margin_bottom = 25.0
+max_length = 25
 context_menu_enabled = false
 placeholder_text = "MySuperGame"
 placeholder_alpha = 0.284
@@ -133,6 +134,9 @@ margin_top = 6.0
 margin_right = 92.0
 margin_bottom = 7.0
 custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Title" type="Label" parent="CREATE_GAME/public"]
 margin_left = 3.0

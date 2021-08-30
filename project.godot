@@ -113,6 +113,10 @@ SyncManager="*res://addons/network-sync-rollback/SyncManager.gd"
 SyncDebugger="*res://addons/network-sync-rollback/SyncDebugger.gd"
 Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
 
+[debug]
+
+gdscript/warnings/return_value_discarded=false
+
 [display]
 
 window/size/width=320
