@@ -131,7 +131,7 @@ func _set_nakama_socket(_nakama_socket: NakamaSocket) -> void:
 		nakama_socket.connect("received_match_presence", self, "_on_nakama_match_presence")
 		nakama_socket.connect("received_matchmaker_matched", self, "_on_nakama_matchmaker_matched")
 
-func create_match(_nakama_socket: NakamaSocket) -> void:
+func create_match(_nakama_socket: NakamaSocket, private:bool, title:String) -> void:
 	leave()
 	_set_nakama_socket(_nakama_socket)
 	match_mode = MatchMode.CREATE
@@ -141,6 +141,14 @@ func create_match(_nakama_socket: NakamaSocket) -> void:
 		leave()
 		emit_signal("error", "Failed to create match: " + str(data.get_exception().message))
 	else:
+		if(not private):
+			yield(nakama_socket.rpc_async("update_lobby_infos", 
+			JSON.print({
+				matchID = data.match_id,
+				title = title,
+				host = Online.nakama_session.username,
+			})), "completed")
+		
 		_on_nakama_match_created(data)
 
 func join_match(_nakama_socket: NakamaSocket, _match_id: String) -> void:

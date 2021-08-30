@@ -99,6 +99,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Bonebreaker"
+run/main_scene="res://scenes/menu/Connection Screen.tscn"
 config/icon="res://assets/icons/icon.png"
 config/windows_native_icon="res://assets/icons/icon.ico"
 
@@ -106,10 +107,11 @@ config/windows_native_icon="res://assets/icons/icon.ico"
 
 GlobalInput="*res://scripts/inputs/Input.cs"
 SceneManager="*res://scripts/scenes/SceneManager.cs"
-Network="*res://scripts/network/Network.cs"
-Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
 OnlineMatch="*res://addons/nakama-webrtc/OnlineMatch.gd"
 Online="*res://addons/nakama-webrtc/Online.gd"
+SyncManager="*res://addons/network-sync-rollback/SyncManager.gd"
+SyncDebugger="*res://addons/network-sync-rollback/SyncDebugger.gd"
+Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
 
 [display]
 
@@ -229,6 +231,11 @@ gp_fall={
 gp_jump={
 "deadzone": 0.5,
 "events": [  ]
+}
+sync_debug={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":39,"unicode":0,"echo":false,"script":null)
+ ]
 }
 
 [locale]

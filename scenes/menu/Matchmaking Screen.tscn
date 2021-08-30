@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://resources/themes/main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/ui/FocusableButton.cs" type="Script" id=2]
 [ext_resource path="res://resources/themes/connection_panel.tres" type="StyleBox" id=3]
 [ext_resource path="res://assets/fonts/Armin.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/ui/selecter.png" type="Texture" id=5]
-[ext_resource path="res://prefabs/lobby.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scripts/screens/MatchmakingScreen.gd" type="Script" id=7]
+[ext_resource path="res://prefabs/quit.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -15,21 +16,24 @@ font_data = ExtResource( 4 )
 bg_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=14]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.227451, 0.266667, 0.4, 1 )
 
-[sub_resource type="StyleBoxFlat" id=15]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.945098, 0.945098, 0.945098, 1 )
 
-[sub_resource type="DynamicFont" id=18]
+[sub_resource type="DynamicFont" id=5]
 size = 32
 extra_spacing_space = -4
 font_data = ExtResource( 4 )
 
-[node name="Matchmaking" type="Control"]
+[node name="Matchmaking" type="Control" groups=[
+"Scene Root",
+]]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -100,7 +104,7 @@ margin_left = -1.0
 margin_top = 12.0
 margin_right = 89.0
 margin_bottom = 13.0
-custom_styles/panel = SubResource( 14 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="LineEdit" type="LineEdit" parent="CREATE_GAME/name"]
 margin_left = 2.0
@@ -114,7 +118,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="remember" type="Control" parent="CREATE_GAME"]
+[node name="public" type="Control" parent="CREATE_GAME"]
 margin_left = 2.0
 margin_top = 60.0
 margin_right = 98.0
@@ -123,14 +127,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="dash_line" type="Panel" parent="CREATE_GAME/remember"]
+[node name="dash_line" type="Panel" parent="CREATE_GAME/public"]
 margin_left = 2.0
 margin_top = 6.0
 margin_right = 92.0
 margin_bottom = 7.0
-custom_styles/panel = SubResource( 14 )
+custom_styles/panel = SubResource( 3 )
 
-[node name="Title" type="Label" parent="CREATE_GAME/remember"]
+[node name="Title" type="Label" parent="CREATE_GAME/public"]
 margin_left = 3.0
 margin_top = 6.0
 margin_right = 69.0
@@ -141,7 +145,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CheckBox" type="CheckBox" parent="CREATE_GAME/remember"]
+[node name="CheckBox" type="CheckBox" parent="CREATE_GAME/public"]
 margin_left = 65.0
 margin_top = 7.0
 margin_right = 72.0
@@ -152,7 +156,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="selecter" type="NinePatchRect" parent="CREATE_GAME/remember/CheckBox"]
+[node name="selecter" type="NinePatchRect" parent="CREATE_GAME/public/CheckBox"]
 visible = false
 modulate = Color( 0.328445, 0.362996, 0.480469, 1 )
 margin_left = -2.0
@@ -193,7 +197,7 @@ margin_top = 1.0
 margin_right = 44.0
 margin_bottom = 16.0
 mouse_filter = 2
-custom_styles/panel = SubResource( 15 )
+custom_styles/panel = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -273,8 +277,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="lobby" parent="JOIN_GAME/ScrollContainer/VBoxContainer" instance=ExtResource( 6 )]
-
 [node name="OR" type="Label" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -284,10 +286,14 @@ margin_left = -46.0
 margin_top = -14.0
 margin_right = -6.0
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 18 )
+custom_fonts/font = SubResource( 5 )
 text = "OR"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="quit" parent="." instance=ExtResource( 8 )]
+
+[connection signal="pressed" from="CREATE_GAME/CREATE" to="." method="create_lobby"]

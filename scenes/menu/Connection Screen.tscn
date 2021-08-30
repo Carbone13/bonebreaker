@@ -1,13 +1,16 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://scripts/screens/ConnectionScreen.gd" type="Script" id=1]
 [ext_resource path="res://resources/themes/connection_panel.tres" type="StyleBox" id=2]
 [ext_resource path="res://resources/themes/main_theme.tres" type="Theme" id=3]
+[ext_resource path="res://resources/themes/windows_dialog.tres" type="Theme" id=4]
 [ext_resource path="res://resources/fonts/Armin.tres" type="DynamicFont" id=5]
 [ext_resource path="res://assets/fonts/Armin.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://scripts/ui/TextButton.cs" type="Script" id=7]
 [ext_resource path="res://assets/ui/selecter.png" type="Texture" id=8]
 [ext_resource path="res://scripts/ui/FocusableButton.cs" type="Script" id=9]
+[ext_resource path="res://assets/sound_effects/ui_click.mp3" type="AudioStream" id=10]
+[ext_resource path="res://scripts/audio/AudioPlayer.gd" type="Script" id=11]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.945098, 0.945098, 0.945098, 1 )
@@ -75,12 +78,15 @@ anti_aliasing = false
 [node name="Connection Screen" type="Control" groups=[
 "Scene Root",
 ]]
-margin_right = 320.0
-margin_bottom = 180.0
+margin_left = -1.0
+margin_top = 2.0
+margin_right = 319.0
+margin_bottom = 182.0
 theme = ExtResource( 3 )
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [ -140.0 ]
 }
 
 [node name="Offline" type="Button" parent="."]
@@ -88,12 +94,12 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -139.0
-margin_top = -11.5
+margin_left = -144.0
+margin_top = -12.0
 margin_right = -49.0
-margin_bottom = 11.5
+margin_bottom = 12.0
 focus_neighbour_left = NodePath("../LOGIN_PANEL/LOGIN")
-text = "or  continue  offline"
+text = "or continue offline"
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -127,6 +133,10 @@ patch_margin_bottom = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Offline"]
+stream = ExtResource( 10 )
+script = ExtResource( 11 )
 
 [node name="LOGIN_PANEL" type="Panel" parent="."]
 anchor_top = 0.5
@@ -285,6 +295,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LOGIN_PANEL/title/or_register/register"]
+stream = ExtResource( 10 )
+script = ExtResource( 11 )
+
 [node name="email" type="Control" parent="LOGIN_PANEL"]
 margin_left = 2.0
 margin_top = 34.0
@@ -401,6 +415,9 @@ focus_neighbour_right = NodePath("../../../Offline")
 focus_neighbour_bottom = NodePath("../../LOGIN")
 pressed = true
 script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="selecter" type="NinePatchRect" parent="LOGIN_PANEL/remember/CheckBox"]
 visible = false
@@ -417,6 +434,10 @@ patch_margin_bottom = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LOGIN_PANEL/remember/CheckBox"]
+stream = ExtResource( 10 )
+script = ExtResource( 11 )
 
 [node name="LOGIN" type="Button" parent="LOGIN_PANEL"]
 anchor_left = 0.5
@@ -463,6 +484,10 @@ patch_margin_bottom = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LOGIN_PANEL/LOGIN"]
+stream = ExtResource( 10 )
+script = ExtResource( 11 )
 
 [node name="loading" type="Panel" parent="LOGIN_PANEL"]
 visible = false
@@ -633,11 +658,9 @@ __meta__ = {
 }
 
 [node name="selecter" type="NinePatchRect" parent="REGISTER_PANEL/title/or_login/login"]
-visible = false
 modulate = Color( 0.328445, 0.362996, 0.480469, 1 )
-margin_left = -2.0
 margin_top = 2.0
-margin_right = 23.0
+margin_right = 25.0
 margin_bottom = 15.0
 texture = ExtResource( 8 )
 patch_margin_left = 3
@@ -647,6 +670,10 @@ patch_margin_bottom = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="REGISTER_PANEL/title/or_login/login"]
+stream = ExtResource( 10 )
+script = ExtResource( 11 )
 
 [node name="username" type="Control" parent="REGISTER_PANEL"]
 margin_left = 1.0
@@ -817,6 +844,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="REGISTER_PANEL/remember/CheckBox"]
+stream = ExtResource( 10 )
+script = ExtResource( 11 )
+
 [node name="REGISTER" type="Button" parent="REGISTER_PANEL"]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -861,6 +892,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="REGISTER_PANEL/REGISTER"]
+stream = ExtResource( 10 )
+script = ExtResource( 11 )
+
 [node name="loading" type="Panel" parent="REGISTER_PANEL"]
 visible = false
 anchor_left = -0.202
@@ -896,15 +931,29 @@ margin_left = -78.5
 margin_top = -36.0
 margin_right = 78.5
 margin_bottom = 36.0
+theme = ExtResource( 4 )
 window_title = "Error !"
+resizable = true
 dialog_text = "trgrtrgrgg"
 dialog_autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="error_box"]
+stream = ExtResource( 10 )
+script = ExtResource( 11 )
+
+[connection signal="button_down" from="Offline" to="Offline/AudioStreamPlayer" method="_play"]
 [connection signal="pressed" from="Offline" to="." method="go_offline"]
 [connection signal="pressed" from="LOGIN_PANEL/title/or_register/register" to="." method="switch_to_register_side"]
+[connection signal="pressed" from="LOGIN_PANEL/title/or_register/register" to="LOGIN_PANEL/title/or_register/register/AudioStreamPlayer" method="_play"]
+[connection signal="pressed" from="LOGIN_PANEL/remember/CheckBox" to="LOGIN_PANEL/remember/CheckBox/AudioStreamPlayer" method="_play"]
 [connection signal="pressed" from="LOGIN_PANEL/LOGIN" to="." method="login"]
+[connection signal="pressed" from="LOGIN_PANEL/LOGIN" to="LOGIN_PANEL/LOGIN/AudioStreamPlayer" method="_play"]
 [connection signal="pressed" from="REGISTER_PANEL/title/or_login/login" to="." method="switch_to_login_side"]
+[connection signal="pressed" from="REGISTER_PANEL/title/or_login/login" to="REGISTER_PANEL/title/or_login/login/AudioStreamPlayer" method="_play"]
+[connection signal="pressed" from="REGISTER_PANEL/remember/CheckBox" to="REGISTER_PANEL/remember/CheckBox/AudioStreamPlayer" method="_play"]
 [connection signal="pressed" from="REGISTER_PANEL/REGISTER" to="." method="register"]
+[connection signal="pressed" from="REGISTER_PANEL/REGISTER" to="REGISTER_PANEL/REGISTER/AudioStreamPlayer" method="_play"]
+[connection signal="confirmed" from="error_box" to="error_box/AudioStreamPlayer" method="_play"]

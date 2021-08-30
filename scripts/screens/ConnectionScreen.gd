@@ -97,6 +97,7 @@ func login () -> void:
 		if(save):
 			save_credentials()
 		Online.nakama_session = nakama_session
+		Online.connect_nakama_socket()
 		emit_signal("Connected")
 		SceneManager.call("LoadScene", "res://scenes/menu/Title Screen.tscn")
 
@@ -130,6 +131,7 @@ func register () -> void:
 		if(save):
 			save_credentials()
 		Online.nakama_session = nakama_session
+		Online.connect_nakama_socket()
 		emit_signal("Connected")
 		SceneManager.call("LoadScene", "res://scenes/menu/Title Screen.tscn")
 
@@ -149,4 +151,3 @@ func switch_to_register_side () -> void:
 	_register.visible = true
 	offline_button.focus_neighbour_left = $REGISTER_PANEL/REGISTER.get_path()
 	$REGISTER_PANEL/REGISTER.grab_focus()
-	

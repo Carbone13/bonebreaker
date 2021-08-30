@@ -1,12 +1,15 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/menus/background_panels/bg_panel_empty.png" type="Texture" id=1]
 [ext_resource path="res://assets/menus/panel.png" type="Texture" id=2]
 [ext_resource path="res://resources/themes/main_theme.tres" type="Theme" id=3]
 [ext_resource path="res://scripts/screens/TitleScreen.gd" type="Script" id=4]
 [ext_resource path="res://assets/icons/logout.png" type="Texture" id=5]
+[ext_resource path="res://resources/fonts/Armin.tres" type="DynamicFont" id=6]
 [ext_resource path="res://scripts/ui/FocusableButton.cs" type="Script" id=7]
 [ext_resource path="res://assets/ui/selecter.png" type="Texture" id=8]
+[ext_resource path="res://assets/sound_effects/ui_click.mp3" type="AudioStream" id=9]
+[ext_resource path="res://scripts/audio/AudioPlayer.gd" type="Script" id=10]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 2 )
@@ -46,6 +49,10 @@ bg_color = Color( 0.243137, 0.537255, 0.282353, 1 )
 
 [sub_resource type="StyleBoxFlat" id=13]
 bg_color = Color( 0.407843, 0.219608, 0.423529, 1 )
+
+[sub_resource type="StyleBoxFlat" id=14]
+content_margin_left = 4.0
+bg_color = Color( 0.207843, 0.207843, 0.207843, 1 )
 
 [node name="Title" type="Control" groups=[
 "Scene Root",
@@ -114,7 +121,7 @@ margin_top = 13.0
 margin_right = 37.0
 margin_bottom = 29.0
 custom_colors/font_color = Color( 0.643137, 0.643137, 0.643137, 1 )
-text = "lv:  10"
+text = "lv: 10"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -161,6 +168,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="USER_CARET/logout"]
+stream = ExtResource( 9 )
+script = ExtResource( 10 )
+
 [node name="PLAY_MODES" type="VBoxContainer" parent="."]
 margin_left = 18.0
 margin_top = 32.0
@@ -175,6 +186,7 @@ __meta__ = {
 margin_top = 2.0
 margin_right = 73.0
 margin_bottom = 21.0
+rect_pivot_offset = Vector2( -136, 37 )
 focus_neighbour_top = NodePath("../quit")
 focus_neighbour_right = NodePath("../../USER_CARET/logout")
 focus_neighbour_bottom = NodePath("../local")
@@ -213,6 +225,10 @@ patch_margin_bottom = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PLAY_MODES/multiplayer"]
+stream = ExtResource( 9 )
+script = ExtResource( 10 )
 
 [node name="local" type="Button" parent="PLAY_MODES"]
 margin_top = 25.0
@@ -255,6 +271,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PLAY_MODES/local"]
+stream = ExtResource( 9 )
+script = ExtResource( 10 )
+
 [node name="settings" type="Button" parent="PLAY_MODES"]
 margin_top = 48.0
 margin_right = 73.0
@@ -294,6 +314,10 @@ patch_margin_bottom = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PLAY_MODES/settings"]
+stream = ExtResource( 9 )
+script = ExtResource( 10 )
 
 [node name="credits" type="Button" parent="PLAY_MODES"]
 margin_top = 71.0
@@ -335,6 +359,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PLAY_MODES/credits"]
+stream = ExtResource( 9 )
+script = ExtResource( 10 )
+
 [node name="quit" type="Button" parent="PLAY_MODES"]
 margin_top = 94.0
 margin_right = 73.0
@@ -375,7 +403,38 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PLAY_MODES/quit"]
+stream = ExtResource( 9 )
+script = ExtResource( 10 )
+
+[node name="DESCRIPTION" type="Label" parent="."]
+visible = false
+anchor_top = 0.922
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 0.0399933
+custom_styles/normal = SubResource( 14 )
+custom_fonts/font = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="button_down" from="USER_CARET/logout" to="USER_CARET/logout/AudioStreamPlayer" method="_play"]
 [connection signal="pressed" from="USER_CARET/logout" to="." method="logout"]
+[connection signal="LoseFocus" from="PLAY_MODES/multiplayer" to="." method="hover_lose"]
+[connection signal="button_down" from="PLAY_MODES/multiplayer" to="PLAY_MODES/multiplayer/AudioStreamPlayer" method="_play"]
+[connection signal="focus_entered" from="PLAY_MODES/multiplayer" to="." method="multi_hovered"]
+[connection signal="pressed" from="PLAY_MODES/multiplayer" to="." method="multiplayer"]
+[connection signal="LoseFocus" from="PLAY_MODES/local" to="." method="hover_lose"]
+[connection signal="button_down" from="PLAY_MODES/local" to="PLAY_MODES/local/AudioStreamPlayer" method="_play"]
+[connection signal="focus_entered" from="PLAY_MODES/local" to="." method="local_hovered"]
+[connection signal="button_down" from="PLAY_MODES/settings" to="PLAY_MODES/settings/AudioStreamPlayer" method="_play"]
+[connection signal="focus_entered" from="PLAY_MODES/settings" to="." method="settings_hovered"]
 [connection signal="pressed" from="PLAY_MODES/settings" to="." method="settings"]
+[connection signal="LoseFocus" from="PLAY_MODES/credits" to="." method="hover_lose"]
+[connection signal="button_down" from="PLAY_MODES/credits" to="PLAY_MODES/credits/AudioStreamPlayer" method="_play"]
+[connection signal="focus_entered" from="PLAY_MODES/credits" to="." method="credits_hovered"]
 [connection signal="pressed" from="PLAY_MODES/credits" to="." method="credit"]
+[connection signal="button_down" from="PLAY_MODES/quit" to="PLAY_MODES/quit/AudioStreamPlayer" method="_play"]
+[connection signal="focus_entered" from="PLAY_MODES/quit" to="." method="quit_hovered"]
 [connection signal="pressed" from="PLAY_MODES/quit" to="." method="quit"]

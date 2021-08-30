@@ -4,6 +4,9 @@ public class FocusableButton : Button
 {
     [Export] private bool OriginalButton;
 
+    [Signal] public delegate void LoseFocus ();
+    
+    
     private NinePatchRect selecterRect;
     
     public override void _EnterTree ()
@@ -51,6 +54,7 @@ public class FocusableButton : Button
         if (!Visible) return;
         
         selecterRect.Visible = false;
+        EmitSignal(nameof(LoseFocus));
     }
 
     /// <summary>
@@ -71,5 +75,6 @@ public class FocusableButton : Button
         if (!Visible) return;
         
         ReleaseFocus();
+        EmitSignal(nameof(LoseFocus));
     }
 }
