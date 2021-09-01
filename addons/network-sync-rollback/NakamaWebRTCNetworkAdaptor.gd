@@ -7,6 +7,9 @@ const DATA_CHANNEL_ID := 42
 var data_channels := {}
 var message_queue := {}
 
+func _process(delta):
+	poll()
+
 func attach_network_adaptor(sync_manager) -> void:
 	if OnlineMatch:
 		OnlineMatch.connect("webrtc_peer_added", self, '_on_OnlineMatch_webrtc_peer_added')
@@ -59,10 +62,11 @@ func send_input_tick(peer_id: int, msg: PoolByteArray) -> void:
 		message_queue[peer_id].append(msg)
 	else:
 		data_channels[peer_id].put_packet(msg)
-
+		
 func poll() -> void:
 	for peer_id in data_channels:
 		var data_channel: WebRTCDataChannel = data_channels[peer_id]
+
 		if data_channel.get_ready_state() != WebRTCDataChannel.STATE_OPEN:
 			continue
 		
@@ -71,12 +75,22 @@ func poll() -> void:
 		# Get all received messages.
 		while data_channel.get_available_packet_count() > 0:
 			var msg = data_channel.get_packet()
-			emit_signal("received_input_tick", peer_id, msg)
+			var buffer := StreamPeerBuffer.new()
+			buffer.put_data(msg)
+			buffer.seek(0)
+			
+			var id = buffer.get_u8()
+			
+			if(id == 1):
+				emit_signal("received_input_tick", peer_id, buffer.duplicate())
+			if(id == 2):
+				emit_signal("received_lobby_select", peer_id, buffer.duplicate())
 		
 		# Send any queued messages.
 		if message_queue.has(peer_id):
 			var messages_to_send = message_queue[peer_id]
 			if messages_to_send.size() > 0:
 				for msg in messages_to_send:
+					print("send")
 					data_channel.put_packet(msg)
 				messages_to_send.clear()

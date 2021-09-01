@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://assets/menus/background_panels/bg_panel_cyb.png" type="Texture" id=1]
 [ext_resource path="res://scripts/ui/FocusableButton.cs" type="Script" id=2]
@@ -6,45 +6,132 @@
 [ext_resource path="res://assets/ui/buttons/back_button.png" type="Texture" id=4]
 [ext_resource path="res://assets/sound_effects/ui_click.mp3" type="AudioStream" id=5]
 [ext_resource path="res://scripts/audio/AudioPlayer.gd" type="Script" id=6]
-[ext_resource path="res://scripts/ui/QuitButton.gd" type="Script" id=7]
+[ext_resource path="res://scripts/lobby/QuitButton.gd" type="Script" id=7]
 [ext_resource path="res://resources/themes/main_theme.tres" type="Theme" id=8]
 [ext_resource path="res://scripts/screens/LobbyScreen.gd" type="Script" id=9]
-
-[sub_resource type="StyleBoxEmpty" id=7]
-content_margin_left = 4.0
-
-[sub_resource type="StyleBoxEmpty" id=8]
-content_margin_left = 4.0
-
-[sub_resource type="StyleBoxEmpty" id=9]
-content_margin_left = 4.0
+[ext_resource path="res://scripts/ui/CustomClick.gd" type="Script" id=10]
+[ext_resource path="res://assets/game_sprites/characters/marston/marston.sprites/gun_start/gun_start_5.tres" type="Texture" id=15]
+[ext_resource path="res://assets/game_sprites/characters/namka/namka.sprites/idle/idle.tres" type="Texture" id=16]
+[ext_resource path="res://assets/game_sprites/characters/musashi/musashi.sprites/jump/jump.tres" type="Texture" id=17]
 
 [sub_resource type="StyleBoxEmpty" id=1]
+content_margin_left = 4.0
 
 [sub_resource type="StyleBoxEmpty" id=2]
+content_margin_left = 4.0
 
 [sub_resource type="StyleBoxEmpty" id=3]
+content_margin_left = 4.0
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=5]
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="DynamicFont" id=9]
+
+[sub_resource type="StyleBoxFlat" id=31]
+bg_color = Color( 0.298039, 0.298039, 0.298039, 1 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.32549, 0.45098, 0.623529, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.32549, 0.45098, 0.623529, 1 )
+border_width_left = 2
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=12]
+
+[sub_resource type="StyleBoxEmpty" id=13]
+
+[sub_resource type="StyleBoxEmpty" id=14]
+
+[sub_resource type="StyleBoxEmpty" id=15]
+
+[sub_resource type="StyleBoxEmpty" id=16]
+
+[sub_resource type="StyleBoxFlat" id=17]
+bg_color = Color( 0.219608, 0.647059, 0.466667, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0.219608, 0.647059, 0.466667, 1 )
+border_width_left = 2
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=19]
+
+[sub_resource type="StyleBoxEmpty" id=20]
+
+[sub_resource type="StyleBoxEmpty" id=21]
+
+[sub_resource type="StyleBoxEmpty" id=22]
+
+[sub_resource type="StyleBoxEmpty" id=23]
+
+[sub_resource type="StyleBoxFlat" id=24]
+bg_color = Color( 0.596078, 0.403922, 0.639216, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+
+[sub_resource type="StyleBoxFlat" id=25]
+bg_color = Color( 0.596078, 0.403922, 0.639216, 1 )
+border_width_left = 2
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=26]
+
+[sub_resource type="StyleBoxEmpty" id=27]
+
+[sub_resource type="StyleBoxEmpty" id=28]
+
+[sub_resource type="StyleBoxEmpty" id=29]
+
+[sub_resource type="StyleBoxEmpty" id=30]
 
 [node name="Lobby Screen" type="Control" groups=[
 "Scene Root",
 ]]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 theme = ExtResource( 8 )
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+colors = [ Color( 0.466667, 0.207843, 0.207843, 1 ), Color( 0.207843, 0.466667, 0.27451, 1 ), Color( 0.466667, 0.443137, 0.207843, 1 ) ]
 
 [node name="Panel" type="TextureRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 320.0
+margin_bottom = 180.0
 texture = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -65,9 +152,9 @@ margin_left = 39.0
 margin_top = -3.0
 margin_right = 316.0
 margin_bottom = 16.0
-custom_styles/read_only = SubResource( 7 )
-custom_styles/focus = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/read_only = SubResource( 1 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
 custom_colors/selection_color = Color( 0, 0, 0, 0.580392 )
 custom_colors/font_color_selected = Color( 0.639216, 0.639216, 0.639216, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -80,12 +167,12 @@ margin_left = -1.0
 margin_top = -1.0
 margin_right = 27.0
 margin_bottom = 20.0
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
-custom_fonts/font = SubResource( 6 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 6 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 flat = true
 script = ExtResource( 2 )
 __meta__ = {
@@ -117,11 +204,364 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="quit_button_logic" type="Node" parent="quit"]
+[node name="lobby_quit_logic" type="Node" parent="quit"]
 script = ExtResource( 7 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="quit"]
 stream = ExtResource( 5 )
 script = ExtResource( 6 )
 
+[node name="PLAYERS" type="Control" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -75.0
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PLAYERS"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -133.5
+margin_top = -28.5
+margin_right = 133.5
+margin_bottom = 18.5
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="one" type="Control" parent="PLAYERS"]
+margin_right = 316.0
+margin_bottom = 59.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Panel" parent="PLAYERS/one"]
+margin_left = 5.0
+margin_top = 3.0
+margin_right = 121.0
+margin_bottom = 57.0
+custom_styles/panel = SubResource( 31 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="2" type="Panel" parent="PLAYERS/one"]
+margin_left = 200.0
+margin_top = 3.0
+margin_right = 316.0
+margin_bottom = 57.0
+custom_styles/panel = SubResource( 31 )
+
+[node name="two" type="Control" parent="PLAYERS"]
+visible = false
+margin_right = 316.0
+margin_bottom = 59.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Panel" parent="PLAYERS/two"]
+margin_left = -37.0
+margin_top = 5.0
+margin_right = 79.0
+margin_bottom = 59.0
+custom_styles/panel = SubResource( 31 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="2" type="Panel" parent="PLAYERS/two"]
+margin_left = 241.0
+margin_top = 5.0
+margin_right = 357.0
+margin_bottom = 59.0
+custom_styles/panel = SubResource( 31 )
+
+[node name="3" type="Panel" parent="PLAYERS/two"]
+margin_left = 158.0
+margin_top = 6.0
+margin_right = 162.0
+margin_bottom = 60.0
+custom_styles/panel = SubResource( 31 )
+
+[node name="three" type="Control" parent="PLAYERS"]
+visible = false
+margin_right = 316.0
+margin_bottom = 59.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Panel" parent="PLAYERS/three"]
+margin_left = -78.0
+margin_top = 5.0
+margin_right = 38.0
+margin_bottom = 59.0
+custom_styles/panel = SubResource( 31 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="2" type="Panel" parent="PLAYERS/three"]
+margin_left = 283.0
+margin_top = 4.0
+margin_right = 399.0
+margin_bottom = 58.0
+custom_styles/panel = SubResource( 31 )
+
+[node name="3" type="Panel" parent="PLAYERS/three"]
+margin_left = 200.0
+margin_top = 4.0
+margin_right = 204.0
+margin_bottom = 58.0
+custom_styles/panel = SubResource( 31 )
+
+[node name="4" type="Panel" parent="PLAYERS/three"]
+margin_left = 117.0
+margin_top = 2.0
+margin_right = 121.0
+margin_bottom = 56.0
+custom_styles/panel = SubResource( 31 )
+
+[node name="CHARACTERS" type="HBoxContainer" parent="."]
+margin_left = 108.0
+margin_top = 38.0
+margin_right = 297.0
+margin_bottom = 85.0
+mouse_filter = 2
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Marston" type="Panel" parent="CHARACTERS"]
+margin_left = 6.0
+margin_right = 62.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 56, 47 )
+mouse_filter = 2
+theme = ExtResource( 8 )
+custom_styles/panel = SubResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Characters" type="Control" parent="CHARACTERS/Marston"]
+margin_right = 56.0
+margin_bottom = 47.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Marston" type="TextureRect" parent="CHARACTERS/Marston/Characters"]
+margin_left = 10.0
+margin_top = 2.0
+margin_right = 33.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 1, 1 )
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = true
+texture = ExtResource( 15 )
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="name" type="Label" parent="CHARACTERS/Marston"]
+margin_top = 32.0
+margin_right = 56.0
+margin_bottom = 47.0
+text = "MARSTON"
+align = 1
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="dash" type="Panel" parent="CHARACTERS/Marston/name"]
+show_behind_parent = true
+margin_right = 56.0
+margin_bottom = 15.0
+custom_styles/panel = SubResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="select_area" type="Button" parent="CHARACTERS/Marston"]
+margin_right = 56.0
+margin_bottom = 47.0
+mouse_filter = 1
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 13 )
+custom_styles/focus = SubResource( 14 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 16 )
+flat = true
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Musashi" type="Panel" parent="CHARACTERS"]
+margin_left = 66.0
+margin_right = 122.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 56, 47 )
+mouse_filter = 1
+theme = ExtResource( 8 )
+custom_styles/panel = SubResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Characters" type="Control" parent="CHARACTERS/Musashi"]
+margin_right = 55.0
+margin_bottom = 47.0
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Musashi" type="TextureRect" parent="CHARACTERS/Musashi/Characters"]
+margin_left = 6.0
+margin_top = 2.0
+margin_right = 31.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 1, 1 )
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = true
+texture = ExtResource( 17 )
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="name" type="Label" parent="CHARACTERS/Musashi"]
+margin_left = -1.0
+margin_top = 32.0
+margin_right = 59.0
+margin_bottom = 47.0
+mouse_filter = 1
+text = "MUSASHI"
+align = 1
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="dash" type="Panel" parent="CHARACTERS/Musashi/name"]
+show_behind_parent = true
+margin_left = 1.0
+margin_right = 57.0
+margin_bottom = 15.0
+custom_styles/panel = SubResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="select_area" type="Button" parent="CHARACTERS/Musashi"]
+margin_right = 56.0
+margin_bottom = 47.0
+mouse_filter = 1
+custom_styles/hover = SubResource( 19 )
+custom_styles/pressed = SubResource( 20 )
+custom_styles/focus = SubResource( 21 )
+custom_styles/disabled = SubResource( 22 )
+custom_styles/normal = SubResource( 23 )
+flat = true
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Namka" type="Panel" parent="CHARACTERS"]
+margin_left = 126.0
+margin_right = 182.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 56, 47 )
+mouse_filter = 1
+theme = ExtResource( 8 )
+custom_styles/panel = SubResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Characters" type="Control" parent="CHARACTERS/Namka"]
+margin_right = 55.0
+margin_bottom = 47.0
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Namka" type="TextureRect" parent="CHARACTERS/Namka/Characters"]
+margin_left = 13.0
+margin_top = -4.0
+margin_right = 38.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 1, 1 )
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = true
+texture = ExtResource( 16 )
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="name" type="Label" parent="CHARACTERS/Namka"]
+margin_left = -1.0
+margin_top = 32.0
+margin_right = 59.0
+margin_bottom = 47.0
+mouse_filter = 1
+text = "NAMKA"
+align = 1
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="dash" type="Panel" parent="CHARACTERS/Namka/name"]
+show_behind_parent = true
+margin_left = 1.0
+margin_right = 57.0
+margin_bottom = 15.0
+custom_styles/panel = SubResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="select_area" type="Button" parent="CHARACTERS/Namka"]
+margin_right = 56.0
+margin_bottom = 47.0
+mouse_filter = 1
+custom_styles/hover = SubResource( 26 )
+custom_styles/pressed = SubResource( 27 )
+custom_styles/focus = SubResource( 28 )
+custom_styles/disabled = SubResource( 29 )
+custom_styles/normal = SubResource( 30 )
+flat = true
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="button_down" from="quit" to="quit/AudioStreamPlayer" method="_play"]
+[connection signal="pressed" from="quit" to="quit/lobby_quit_logic" method="quit_lobby"]
+[connection signal="clicked" from="CHARACTERS/Marston/select_area" to="." method="marston_click"]
+[connection signal="mouse_entered" from="CHARACTERS/Marston/select_area" to="." method="marston_hover_start"]
+[connection signal="mouse_exited" from="CHARACTERS/Marston/select_area" to="." method="marston_hover_stop"]
+[connection signal="clicked" from="CHARACTERS/Musashi/select_area" to="." method="musashi_click"]
+[connection signal="mouse_entered" from="CHARACTERS/Musashi/select_area" to="." method="musashi_hover_start"]
+[connection signal="mouse_exited" from="CHARACTERS/Musashi/select_area" to="." method="musashi_hover_stop"]
+[connection signal="clicked" from="CHARACTERS/Namka/select_area" to="." method="namka_click"]
+[connection signal="mouse_entered" from="CHARACTERS/Namka/select_area" to="." method="namka_hover_start"]
+[connection signal="mouse_exited" from="CHARACTERS/Namka/select_area" to="." method="namka_hover_stop"]

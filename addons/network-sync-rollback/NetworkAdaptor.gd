@@ -1,6 +1,7 @@
 extends Node
 
 signal received_input_tick (peer_id, msg)
+signal received_lobby_select (peer_id, msg)
 
 func attach_network_adaptor(sync_manager) -> void:
 	pass

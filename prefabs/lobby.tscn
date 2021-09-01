@@ -1,9 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/ui/FocusableButton.cs" type="Script" id=1]
 [ext_resource path="res://assets/icons/play.png" type="Texture" id=2]
 [ext_resource path="res://resources/fonts/Armin.tres" type="DynamicFont" id=3]
 [ext_resource path="res://scripts/lobby/Lobby.gd" type="Script" id=4]
+[ext_resource path="res://scripts/audio/AudioPlayer.gd" type="Script" id=5]
+[ext_resource path="res://assets/sound_effects/ui_click.mp3" type="AudioStream" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0745098, 0.0745098, 0.0745098, 1 )
@@ -41,8 +43,6 @@ margin_bottom = 29.0
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
 custom_constants/line_spacing = -3
-text = "A cool and classy name
-by Carbone_13"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -55,7 +55,6 @@ margin_bottom = 29.0
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
 custom_constants/line_spacing = -3
-text = "4/4"
 align = 2
 valign = 2
 __meta__ = {
@@ -115,4 +114,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="connect"]
+stream = ExtResource( 6 )
+script = ExtResource( 5 )
+
+[connection signal="button_down" from="connect" to="connect/AudioStreamPlayer" method="_play"]
 [connection signal="pressed" from="connect" to="." method="join"]

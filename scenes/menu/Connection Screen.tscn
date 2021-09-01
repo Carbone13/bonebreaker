@@ -86,7 +86,7 @@ theme = ExtResource( 3 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false,
-"_edit_vertical_guides_": [ -140.0 ]
+"_edit_vertical_guides_": [ -140.0, -65.0 ]
 }
 
 [node name="Offline" type="Button" parent="."]
