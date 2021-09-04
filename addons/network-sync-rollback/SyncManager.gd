@@ -2,7 +2,7 @@ extends Node
 
 const SpawnManager = preload("res://addons/network-sync-rollback/SpawnManager.gd")
 const NetworkAdaptor = preload("res://addons/network-sync-rollback/NetworkAdaptor.gd")
-const RPCNetworkAdaptor = preload("res://addons/network-sync-rollback/NakamaWebRTCNetworkAdaptor.gd")
+const RPCNetworkAdaptor = preload("res://addons/network-sync-rollback/RPCNetworkAdaptor.gd")
 
 class Peer extends Reference:
 	var peer_id: int
@@ -109,8 +109,7 @@ class MessageSerializer:
 	func serialize_message(msg: Dictionary) -> PoolByteArray:
 		var buffer := StreamPeerBuffer.new()
 		buffer.resize(DEFAULT_MESSAGE_BUFFER_SIZE)
-		
-		buffer.put_8(1)
+	
 		buffer.put_u32(msg[InputMessageKey.NEXT_TICK_REQUESTED])
 		
 		var input_ticks = msg[InputMessageKey.INPUT]
@@ -125,8 +124,11 @@ class MessageSerializer:
 		buffer.resize(buffer.get_position())
 		return buffer.data_array
 
-	func unserialize_message(buffer) -> Dictionary:
-		var _int = buffer.get_u8()
+	func unserialize_message(serialized) -> Dictionary:
+		var buffer := StreamPeerBuffer.new()
+		buffer.put_data(serialized)
+		buffer.seek(0)
+		
 		var msg := {
 			InputMessageKey.NEXT_TICK_REQUESTED: buffer.get_u32(),
 			InputMessageKey.INPUT: {}
@@ -156,7 +158,7 @@ var max_messages_at_once := 2
 var max_input_buffer_underruns := 300
 var skip_ticks_after_sync_regained := 0
 var interpolation := false
-var rollback_debug_ticks := 0
+var rollback_debug_ticks := 2
 var debug_message_bytes := 700
 var log_state := false
 
@@ -286,6 +288,7 @@ func clear_peers() -> void:
 func _on_ping_timer_timeout() -> void:
 	var system_time = OS.get_system_time_msecs()
 	for peer_id in peers:
+		print(str(peer_id))
 		assert(peer_id != get_tree().get_network_unique_id(), "Cannot ping ourselves")
 		var msg = {
 			local_time = system_time,
@@ -661,6 +664,10 @@ func _physics_process(delta: float) -> void:
 		# Store an initial state before any ticks.
 		_save_current_state()
 	
+	# We do this in _process() too, so hopefully all is good by now, but just in
+	# case, we don't want to miss out on any data.
+	network_adaptor.poll()
+	
 	if rollback_debug_ticks > 0 and current_tick >= rollback_debug_ticks:
 		rollback_ticks = max(rollback_ticks, rollback_debug_ticks)
 	
@@ -782,6 +789,8 @@ func _process(delta: float) -> void:
 		return
 	
 	_time_since_last_tick += delta
+	
+	network_adaptor.poll()
 	
 	if interpolation:
 		var weight: float = _time_since_last_tick / _tick_time

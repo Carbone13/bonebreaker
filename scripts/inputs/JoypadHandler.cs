@@ -32,7 +32,6 @@ namespace Bonebreaker.Inputs
             if (Godot.Input.IsJoyButtonPressed(ControllerID, (int) JoystickList.Button0))
             {
                 state.Jump = true;
-                state.Click = true;
                 lastJumpPressed = OS.GetTicksMsec();
             }
             if (!state.Jump && OS.GetTicksMsec() - lastJumpPressed < JUMP_BUFFER_MS)

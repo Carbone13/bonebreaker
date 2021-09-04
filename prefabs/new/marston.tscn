@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/player/Player.cs" type="Script" id=1]
+[ext_resource path="res://scripts/physics/shapes/AABB.cs" type="Script" id=2]
+[ext_resource path="res://assets/game_sprites/characters/marston/marston.sprites/idle/idle.tres" type="Texture" id=3]
+[ext_resource path="res://resources/marston_stat.tres" type="Resource" id=4]
+
+[node name="Marston" type="Node2D" groups=[
+"network_sync",
+]]
+script = ExtResource( 1 )
+Pushbox = NodePath("BOX/Pushbox")
+Stats = ExtResource( 4 )
+
+[node name="BOX" type="Node2D" parent="."]
+
+[node name="Pushbox" type="Node2D" parent="BOX"]
+position = Vector2( 0, -0.5 )
+script = ExtResource( 2 )
+color = Color( 0.509804, 0.176471, 0.176471, 1 )
+thickness = 1.0
+halfExtents = Vector2( 5, 10.5 )
+
+[node name="Hitbox" type="Node2D" parent="BOX"]
+
+[node name="Hurtbox" type="Node2D" parent="BOX"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )

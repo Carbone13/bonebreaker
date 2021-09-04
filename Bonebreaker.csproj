@@ -13,6 +13,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="scripts\maths\.idea\.idea.maths.dir\.idea\discord.xml" />
+    <Content Include="scripts\maths\.idea\.idea.maths.dir\.idea\encodings.xml" />
+    <Content Include="scripts\maths\.idea\.idea.maths.dir\.idea\indexLayout.xml" />
+    <Content Include="scripts\maths\.idea\.idea.maths.dir\.idea\projectSettingsUpdater.xml" />
+    <Content Include="scripts\maths\.idea\.idea.maths.dir\.idea\workspace.xml" />
+    <Content Include="scripts\maths\libm\LICENSE.txt" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="LiteNetLib" Version="0.9.5" />

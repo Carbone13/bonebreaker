@@ -31,6 +31,8 @@ var _webrtc_peers_connected: Dictionary
 var players: Dictionary
 var _next_peer_id: int
 
+var my_id:int
+
 enum MatchState {
 	LOBBY = 0,
 	MATCHING = 1,
@@ -134,6 +136,7 @@ func _set_nakama_socket(_nakama_socket: NakamaSocket) -> void:
 		nakama_socket.connect("received_match_presence", self, "_on_nakama_match_presence")
 		nakama_socket.connect("received_matchmaker_matched", self, "_on_nakama_matchmaker_matched")
 
+var host:bool = false
 func create_match(_nakama_socket: NakamaSocket, private:bool, title:String) -> void:
 	leave()
 	_set_nakama_socket(_nakama_socket)
@@ -152,6 +155,7 @@ func create_match(_nakama_socket: NakamaSocket, private:bool, title:String) -> v
 				host = Online.nakama_session.username,
 			})), "completed")
 		_on_nakama_match_created(data)
+		host = true
 
 func join_match(_nakama_socket: NakamaSocket, _match_id: String) -> void:
 	leave()
@@ -205,6 +209,7 @@ func start_playing() -> void:
 
 func leave(close_socket: bool = false) -> void:
 	# WebRTC disconnect.
+	host = false
 	if _webrtc_multiplayer:
 		_webrtc_multiplayer.close()
 		get_tree().set_network_peer(null)

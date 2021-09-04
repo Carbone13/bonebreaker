@@ -1,131 +1,132 @@
 extends Node
 
+# TODO use the sync manager and RPCs !!!!!
+
 export var colors = []
 onready var player_card_holder:HBoxContainer = $PLAYERS/HBoxContainer
 onready var match_id:LineEdit = $"lobby id/ID"
 onready var player_card_prefab = load("res://prefabs/player_card.tscn")
 
+var can_start:bool = false
 var offset = 0
 var cards = {}
 var local_card
 var selected_character = -1
 
-func _ready():
-	# spawn our card if we are the host
-	if(Online.nakama_session):
-		var card = player_card_holder.get_child(0)
-		
-		card.call("set_username", Online.nakama_session.username + " (you)")
-		card.call("show_none")
-		card.call("set_color", colors[0])
-		
-		card.connect("unselect_character", self, "unselect_local")
+func _process(delta):
+	if(Input.is_action_just_pressed("lobby_start") && can_start):
+		start_game()
 
-		
-		card.set_as_local()
-		card.visible = true
-		
-		local_card = card
-		cards[-1] = local_card
-		
-		match_id.text = str(OnlineMatch.match_id)
-	
-	OnlineMatch.connect("webrtc_peer_added", self, 'player_joined')
-	OnlineMatch.connect("webrtc_peer_removed", self, 'player_left')
-	SyncManager.network_adaptor.connect("received_lobby_select", self, "received_character_update") 
-
-func _notification(what):
-	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
-		get_tree().quit()
-	if what == MainLoop.NOTIFICATION_CRASH:
-		get_tree().quit()
-
-func received_character_update (peerID, buffer):
-	var _int = buffer.get_u8()
-	var characterID = buffer.get_u8()
-
-	if(characterID == 0):
-		cards[peerID].show_none()
-	if(characterID == 1):
-		cards[peerID].show_marston()
-	if(characterID == 2):
-		cards[peerID].show_musashi()
-	if(characterID == 3):
-		cards[peerID].show_namka()
-
-func player_joined (_webrtc_peer: WebRTCPeerConnection, player: OnlineMatch.Player):
-	# if its us
-	if(player.username == Online.nakama_session.username):
-		print("correcting from red to peer: " + str(player.peer_id))
-		var col_id = 3 % player.peer_id
-		local_card.call("set_color", colors[col_id])
-		cards[player.peer_id] = local_card
+func start_game ():
+	if(cards.has(-1)):
+		cards[1] = local_card
 		cards.erase(-1)
-		return
-	print("adding peer " + str(player.peer_id))
+	Main.game_start(OnlineMatch.get_player_names_by_peer_id())
+	
+func spawn_card(username, color, session_id) -> Node:
 	var _child
 	for child in player_card_holder.get_children():
 		if(!child.visible):
 			_child = child
 			break
+	_child.visible = true
+	_child.call("set_username", username)
+	_child.call("show_none")
+	_child.call("set_color", color)
+	cards[session_id] = _child
 	
-	var card = _child
+	if(session_id == OnlineMatch.get_my_session_id()):
+		local_card = _child
+		local_card.connect("unselect_character", self, "unselect_local")
+	else:
+		_child.get_node("token").visible = false
 	
-	card.remove_child(card.get_node("token"))
-	
-	card.call("set_username", player.username)
-	card.call("show_none")
-	
-	var col_id = 3 % player.peer_id
-	card.call("set_color", colors[col_id])
-	
-	var token_position = local_card.get_node("token").rect_global_position
+	return _child
+
+func add_player(session_id: String, id, username: String) -> void:
+	if (!cards.has(session_id)):
+		spawn_card(username, colors[3 % id], session_id)
 		
-	card.visible = true
-	player_card_holder.queue_sort()
-	local_card.get_node("token").call_deferred("set_pos", token_position)
+func remove_player (session_id:String) -> void:
+	if(cards.has(session_id)):
+		cards[session_id].visible = false
+		cards.erase(session_id)
 
-	cards[player.peer_id] = card
+func _ready():
+	match_id.text = str(OnlineMatch.match_id)
 
-	if(selected_character != -1):
-		var buffer := StreamPeerBuffer.new()
-		buffer.resize(16)
-		buffer.put_8(2)
-		buffer.put_8(selected_character)
-		for peer_id in SyncManager.network_adaptor.data_channels:
-			SyncManager.network_adaptor.call("send_input_tick", peer_id, buffer.data_array)
+	OnlineMatch.connect("player_joined", self, "_on_OnlineMatch_player_joined")
+	OnlineMatch.connect("player_left", self, "_on_OnlineMatch_player_left")
 
-func player_left (_webrtc_peer: WebRTCPeerConnection, player: OnlineMatch.Player):
-	# we need to save our token position just before
-	offset += 1
-	var token_position = local_card.get_node("token").rect_global_position
+	WebRtc.connect("received_lobby_select", self, "received_character_update") 
+
+func received_character_update (peerID, buffer):
+	var _int = buffer.get_u8()
+	var characterID = buffer.get_u8()
+	var sessionid = OnlineMatch.get_player_by_peer_id(peerID).session_id
 	
-	if(cards.has(player.peer_id)):
-		player_card_holder.remove_child(cards[player.peer_id])
-		cards[player.peer_id].queue_free()
-		cards.erase(player.peer_id)
+	if(characterID == 0):
+		cards[sessionid].show_none()
+		hide_start()
+	if(characterID == 1):
+		cards[sessionid].show_marston()
+		cards[sessionid].confirm()
+		try_show_start()
+	if(characterID == 2):
+		cards[sessionid].show_musashi()
+		cards[sessionid].confirm()
+		try_show_start()
+	if(characterID == 3):
+		cards[sessionid].show_namka()
+		cards[sessionid].confirm()
+		try_show_start()
+
+func hide_start ():
+	get_node("Start").visible = false
+	can_start = false
 	
-	player_card_holder.queue_sort()
-	
-	local_card.get_node("token").call_deferred("set_pos", token_position)
+func try_show_start ():
+	if(is_everyone_ready() && OnlineMatch.players.size() > 1):
+		get_node("Start").visible = true
+		if(!OnlineMatch.host):
+			get_node("Start/Label").text = "WAITING FOR THE HOST TO START !"
+		else:
+			can_start = true
+	else:
+		hide_start()
 
 func send_select_packet (id):
+	try_show_start()
 	var buffer := StreamPeerBuffer.new()
 	buffer.resize(16)
 	buffer.put_8(2)
 	buffer.put_8(id)
 	selected_character = id
-	for peer_id in SyncManager.network_adaptor.data_channels:
-		SyncManager.network_adaptor.call("send_input_tick", peer_id, buffer.data_array)
+	for peer_id in WebRtc.data_channels:
+		WebRtc.call("send", peer_id, buffer.data_array)
 
 func unselect_local ():
 	send_select_packet(0)
 
 func is_everyone_ready ():
-	for card in cards:
+	for card in cards.values():
 		if(!card.confirmed):
 			return false
 	return true
+
+func _on_OnlineMatch_player_joined(player) -> void:
+	add_player(player.session_id, player.peer_id, player.username)
+	
+	if(selected_character != -1):
+		var buffer := StreamPeerBuffer.new()
+		buffer.resize(16)
+		buffer.put_8(2)
+		buffer.put_8(selected_character)
+
+		WebRtc.call("send", player.peer_id, buffer.data_array)
+
+func _on_OnlineMatch_player_left(player) -> void:
+	remove_player(player.session_id)
 
 func marston_hover_start ():
 	if(local_card.moving_token()):

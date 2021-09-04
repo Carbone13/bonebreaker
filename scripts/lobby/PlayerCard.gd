@@ -24,6 +24,7 @@ func _ready():
 func unselect ():
 	confirmed = false
 	emit_signal("unselect_character")
+	show_none()
 
 func set_color (color:Color):
 	#left side
@@ -62,6 +63,7 @@ func set_username (username:String):
 	get_node("username").set("text", username)
 
 func show_none ():
+	confirmed = false
 	var tween:Tween = get_node("Tween")
 	if(current_sprite):
 		tween.interpolate_property(current_sprite, "rect_position",

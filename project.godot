@@ -112,6 +112,9 @@ Online="*res://addons/nakama-webrtc/Online.gd"
 SyncManager="*res://addons/network-sync-rollback/SyncManager.gd"
 SyncDebugger="*res://addons/network-sync-rollback/SyncDebugger.gd"
 Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
+Physics="*res://scripts/physics/Physics.cs"
+WebRtc="*res://scripts/network/WebRTC.gd"
+Main="*res://scripts/Main.gd"
 
 [debug]
 
@@ -239,6 +242,12 @@ gp_jump={
 sync_debug={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":39,"unicode":0,"echo":false,"script":null)
+ ]
+}
+lobby_start={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":10,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
 

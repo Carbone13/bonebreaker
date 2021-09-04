@@ -44,12 +44,7 @@ namespace Bonebreaker.Inputs
         {
             InputState state = new InputState();
             state.DeviceID = ID;
-
-            if (Godot.Input.IsKeyPressed((int) KeyList.Enter) ||
-                Godot.Input.IsMouseButtonPressed((int)ButtonList.Left)) ;
-            {
-                state.Click = true;
-            }
+            
             if (Godot.Input.IsKeyPressed((int)KeyList.Space) ||
                 Godot.Input.IsKeyPressed((int)KeyList.W) ||
                 Godot.Input.IsKeyPressed((int)KeyList.Up))
@@ -128,12 +123,7 @@ namespace Bonebreaker.Inputs
         {
             InputState state = new InputState();
             state.DeviceID = ID;
-
-            if (Godot.Input.IsKeyPressed((int) KeyList.Enter) ||
-                Godot.Input.IsMouseButtonPressed((int)ButtonList.Left)) ;
-            {
-                state.Click = true;
-            }
+            
             if (Godot.Input.IsKeyPressed((int)KeyList.Space) ||
                 Godot.Input.IsKeyPressed((int)KeyList.Z) ||
                 Godot.Input.IsKeyPressed((int)KeyList.Up))
