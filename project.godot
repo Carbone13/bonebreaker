@@ -137,7 +137,7 @@ enabled=PoolStringArray( "res://addons/codeandweb.texturepacker/plugin.cfg" )
 
 [gdnative]
 
-singletons=[ "res://webrtc/webrtc.gdnlib", "res://webrtc_debug/webrtc_debug.gdnlib" ]
+singletons=[ "res://webrtc/webrtc.gdnlib" ]
 
 [importer_defaults]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/menus/lobby_card/namka_card.png" type="Texture" id=2]
 [ext_resource path="res://assets/menus/lobby_card/musashi_card.png" type="Texture" id=3]
@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/menus/selection_circle.png" type="Texture" id=7]
 [ext_resource path="res://scripts/lobby/Token.gd" type="Script" id=8]
 
-[sub_resource type="StyleBoxFlat" id=31]
+[sub_resource type="StyleBoxFlat" id=37]
 bg_color = Color( 0.466667, 0.207843, 0.207843, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -16,7 +16,7 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
 
-[sub_resource type="StyleBoxFlat" id=33]
+[sub_resource type="StyleBoxFlat" id=39]
 bg_color = Color( 0.603922, 0.317647, 0.317647, 1 )
 border_width_left = 1
 border_width_top = 2
@@ -24,7 +24,7 @@ border_width_right = 2
 border_width_bottom = 1
 border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
 
-[sub_resource type="StyleBoxFlat" id=41]
+[sub_resource type="StyleBoxFlat" id=40]
 bg_color = Color( 0.603922, 0.317647, 0.317647, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -32,15 +32,23 @@ border_width_right = 1
 border_width_bottom = 2
 border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
 
-[sub_resource type="StyleBoxEmpty" id=35]
+[sub_resource type="StyleBoxEmpty" id=41]
 
-[sub_resource type="StyleBoxEmpty" id=36]
+[sub_resource type="StyleBoxEmpty" id=42]
 
-[sub_resource type="StyleBoxEmpty" id=37]
+[sub_resource type="StyleBoxEmpty" id=43]
 
-[sub_resource type="StyleBoxEmpty" id=38]
+[sub_resource type="StyleBoxEmpty" id=44]
 
-[sub_resource type="StyleBoxEmpty" id=39]
+[sub_resource type="StyleBoxEmpty" id=45]
+
+[sub_resource type="StyleBoxFlat" id=46]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
 
 [node name="player" type="Panel"]
 margin_left = 7.0
@@ -50,7 +58,7 @@ margin_bottom = 48.0
 rect_min_size = Vector2( 79, 47 )
 mouse_filter = 1
 theme = ExtResource( 6 )
-custom_styles/panel = SubResource( 31 )
+custom_styles/panel = SubResource( 37 )
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -74,23 +82,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Marston" type="TextureRect" parent="Characters"]
+[node name="Marston" type="Control" parent="Characters"]
 visible = false
-margin_left = 27.0
+light_mask = 1024
+margin_left = 29.0
 margin_top = 13.0
-margin_right = 50.0
+margin_right = 52.0
 margin_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
 rect_min_size = Vector2( 1, 1 )
 rect_scale = Vector2( 2, 2 )
 rect_clip_content = true
-texture = ExtResource( 4 )
-stretch_mode = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Musashi" type="TextureRect" parent="Characters"]
+[node name="Sprite" type="Sprite" parent="Characters/Marston"]
+light_mask = 1024
+position = Vector2( 12, 9 )
+texture = ExtResource( 4 )
+
+[node name="Musashi" type="Control" parent="Characters"]
 visible = false
+light_mask = 1024
 margin_left = 23.0
 margin_top = 11.0
 margin_right = 48.0
@@ -98,14 +110,15 @@ margin_bottom = 34.0
 rect_min_size = Vector2( 1, 1 )
 rect_scale = Vector2( 2, 2 )
 rect_clip_content = true
-texture = ExtResource( 3 )
-stretch_mode = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Namka" type="TextureRect" parent="Characters"]
+[node name="Sprite" type="Sprite" parent="Characters/Musashi"]
+light_mask = 1024
+position = Vector2( 13, 12 )
+texture = ExtResource( 3 )
+
+[node name="Namka" type="Control" parent="Characters"]
 visible = false
+light_mask = 1024
 margin_left = 27.0
 margin_top = 7.0
 margin_right = 56.0
@@ -113,11 +126,19 @@ margin_bottom = 31.0
 rect_min_size = Vector2( 1, 1 )
 rect_scale = Vector2( 2, 2 )
 rect_clip_content = true
-texture = ExtResource( 2 )
-stretch_mode = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Sprite" type="Sprite" parent="Characters/Namka"]
+light_mask = 1024
+position = Vector2( 12, 10 )
+texture = ExtResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="Characters"]
+position = Vector2( 178.5, 105 )
+mode = 3
+range_item_cull_mask = 1024
 
 [node name="username" type="Label" parent="."]
 margin_left = 18.0
@@ -135,7 +156,7 @@ show_behind_parent = true
 margin_left = -1.0
 margin_right = 61.0
 margin_bottom = 15.0
-custom_styles/panel = SubResource( 33 )
+custom_styles/panel = SubResource( 39 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -144,7 +165,7 @@ __meta__ = {
 margin_right = 18.0
 margin_bottom = 47.0
 mouse_filter = 1
-custom_styles/panel = SubResource( 41 )
+custom_styles/panel = SubResource( 40 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -158,14 +179,22 @@ margin_right = 69.0
 margin_bottom = 56.0
 rect_scale = Vector2( 0.5, 0.5 )
 mouse_filter = 2
-custom_styles/hover = SubResource( 35 )
-custom_styles/pressed = SubResource( 36 )
-custom_styles/focus = SubResource( 37 )
-custom_styles/disabled = SubResource( 38 )
-custom_styles/normal = SubResource( 39 )
+custom_styles/hover = SubResource( 41 )
+custom_styles/pressed = SubResource( 42 )
+custom_styles/focus = SubResource( 43 )
+custom_styles/disabled = SubResource( 44 )
+custom_styles/normal = SubResource( 45 )
 icon = ExtResource( 7 )
 flat = true
 script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="contour" type="Panel" parent="."]
+margin_right = 79.0
+margin_bottom = 47.0
+custom_styles/panel = SubResource( 46 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

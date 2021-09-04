@@ -1,5 +1,7 @@
 extends Control
 
+signal unselect
+
 var local:bool = false
 var selected:bool = false
 
@@ -11,9 +13,15 @@ func _input(event):
 				var rect:Rect2 = Rect2(rect_global_position, rect_size)
 				if(rect.has_point(mousePos)):
 					selected = !selected
+					
+				if(selected):
+					emit_signal("unselect")
 	if(selected):
 		if event is InputEventMouseMotion:
 			rect_global_position = event.position - rect_size / 4
+
+func set_pos (pos):
+	rect_global_position = pos
 
 func _ready():
 	var canvas_rid = get_canvas_item()

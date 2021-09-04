@@ -1,11 +1,29 @@
 extends Panel
 
-onready var marston_sprite:TextureRect = $Characters/Marston
-onready var musashi_sprite:TextureRect = $Characters/Musashi
-onready var namka_sprite:TextureRect = $Characters/Namka
+signal unselect_character
+
+onready var marston_sprite:Control = $Characters/Marston
+onready var musashi_sprite:Control = $Characters/Musashi
+onready var namka_sprite:Control = $Characters/Namka
 
 var current_sprite:Control
 var local:bool = false
+var confirmed:bool = false
+
+func set_depth (depth):
+	var canvas_rid = get_canvas_item()
+
+	VisualServer.canvas_item_set_draw_index(canvas_rid, depth)
+	VisualServer.canvas_item_set_z_index(canvas_rid, depth)
+	
+
+func _ready():
+	if(get_node_or_null("token")):
+		get_node("token").connect("unselect", self, "unselect")
+
+func unselect ():
+	confirmed = false
+	emit_signal("unselect_character")
 
 func set_color (color:Color):
 	#left side
@@ -23,8 +41,16 @@ func set_color (color:Color):
 	get_node("Characters/Show Area").color = color
 	
 func confirm ():
-	pass
+	confirmed = true
+	
+	#var tween:Tween = get_node("Tween")
 
+	#current_sprite.rect_global_position -= Vector2(3, 5)
+	
+	#if(current_sprite):
+	#	tween.interpolate_property(current_sprite, "rect_scale", Vector2(2, 2), Vector2(2.35, 2.35), 0.2, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+	#	tween.interpolate_property(current_sprite, "rect_scale", Vector2(2.35, 2.35), Vector2(2, 2), 0.1, Tween.TRANS_SINE, Tween.EASE_IN)
+	#	tween.start()
 func moving_token ():
 	return get_node("token").get("selected") as bool
 

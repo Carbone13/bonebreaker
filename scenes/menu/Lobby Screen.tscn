@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://assets/menus/background_panels/bg_panel_cyb.png" type="Texture" id=1]
 [ext_resource path="res://scripts/ui/FocusableButton.cs" type="Script" id=2]
@@ -10,9 +10,19 @@
 [ext_resource path="res://resources/themes/main_theme.tres" type="Theme" id=8]
 [ext_resource path="res://scripts/screens/LobbyScreen.gd" type="Script" id=9]
 [ext_resource path="res://scripts/ui/CustomClick.gd" type="Script" id=10]
+[ext_resource path="res://assets/menus/lobby_card/marston_card.png" type="Texture" id=12]
+[ext_resource path="res://assets/menus/lobby_card/musashi_card.png" type="Texture" id=13]
+[ext_resource path="res://scripts/lobby/PlayerCard.gd" type="Script" id=14]
 [ext_resource path="res://assets/game_sprites/characters/marston/marston.sprites/gun_start/gun_start_5.tres" type="Texture" id=15]
 [ext_resource path="res://assets/game_sprites/characters/namka/namka.sprites/idle/idle.tres" type="Texture" id=16]
 [ext_resource path="res://assets/game_sprites/characters/musashi/musashi.sprites/jump/jump.tres" type="Texture" id=17]
+[ext_resource path="res://assets/menus/lobby_card/card_mask.png" type="Texture" id=18]
+[ext_resource path="res://assets/menus/selection_circle.png" type="Texture" id=19]
+[ext_resource path="res://assets/menus/lobby_card/namka_card.png" type="Texture" id=20]
+[ext_resource path="res://scripts/lobby/Token.gd" type="Script" id=21]
+
+[sub_resource type="ViewportTexture" id=36]
+viewport_path = NodePath("Mask Viewport")
 
 [sub_resource type="StyleBoxEmpty" id=1]
 content_margin_left = 4.0
@@ -35,10 +45,52 @@ content_margin_left = 4.0
 
 [sub_resource type="DynamicFont" id=9]
 
-[sub_resource type="StyleBoxFlat" id=31]
-bg_color = Color( 0.298039, 0.298039, 0.298039, 1 )
+[sub_resource type="StyleBoxFlat" id=37]
+bg_color = Color( 0.466667, 0.207843, 0.207843, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="ViewportTexture" id=47]
+viewport_path = NodePath("Mask Viewport")
+
+[sub_resource type="StyleBoxFlat" id=39]
+bg_color = Color( 0.603922, 0.317647, 0.317647, 1 )
+border_width_left = 1
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 1
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+
+[sub_resource type="StyleBoxFlat" id=40]
+bg_color = Color( 0.603922, 0.317647, 0.317647, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=41]
+
+[sub_resource type="StyleBoxEmpty" id=42]
+
+[sub_resource type="StyleBoxEmpty" id=43]
+
+[sub_resource type="StyleBoxEmpty" id=44]
+
+[sub_resource type="StyleBoxEmpty" id=45]
+
+[sub_resource type="StyleBoxFlat" id=46]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+
+[sub_resource type="StyleBoxFlat" id=15]
 bg_color = Color( 0.32549, 0.45098, 0.623529, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -46,7 +98,7 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
 
-[sub_resource type="StyleBoxFlat" id=11]
+[sub_resource type="StyleBoxFlat" id=16]
 bg_color = Color( 0.32549, 0.45098, 0.623529, 1 )
 border_width_left = 2
 border_width_top = 1
@@ -54,31 +106,9 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
 
-[sub_resource type="StyleBoxEmpty" id=12]
+[sub_resource type="StyleBoxEmpty" id=17]
 
-[sub_resource type="StyleBoxEmpty" id=13]
-
-[sub_resource type="StyleBoxEmpty" id=14]
-
-[sub_resource type="StyleBoxEmpty" id=15]
-
-[sub_resource type="StyleBoxEmpty" id=16]
-
-[sub_resource type="StyleBoxFlat" id=17]
-bg_color = Color( 0.219608, 0.647059, 0.466667, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
-
-[sub_resource type="StyleBoxFlat" id=18]
-bg_color = Color( 0.219608, 0.647059, 0.466667, 1 )
-border_width_left = 2
-border_width_top = 1
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+[sub_resource type="StyleBoxEmpty" id=18]
 
 [sub_resource type="StyleBoxEmpty" id=19]
 
@@ -86,25 +116,25 @@ border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=21]
 
-[sub_resource type="StyleBoxEmpty" id=22]
-
-[sub_resource type="StyleBoxEmpty" id=23]
-
-[sub_resource type="StyleBoxFlat" id=24]
-bg_color = Color( 0.596078, 0.403922, 0.639216, 1 )
+[sub_resource type="StyleBoxFlat" id=22]
+bg_color = Color( 0.219608, 0.647059, 0.466667, 1 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
 
-[sub_resource type="StyleBoxFlat" id=25]
-bg_color = Color( 0.596078, 0.403922, 0.639216, 1 )
+[sub_resource type="StyleBoxFlat" id=23]
+bg_color = Color( 0.219608, 0.647059, 0.466667, 1 )
 border_width_left = 2
 border_width_top = 1
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=24]
+
+[sub_resource type="StyleBoxEmpty" id=25]
 
 [sub_resource type="StyleBoxEmpty" id=26]
 
@@ -112,9 +142,31 @@ border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=28]
 
-[sub_resource type="StyleBoxEmpty" id=29]
+[sub_resource type="StyleBoxFlat" id=29]
+bg_color = Color( 0.596078, 0.403922, 0.639216, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
 
-[sub_resource type="StyleBoxEmpty" id=30]
+[sub_resource type="StyleBoxFlat" id=30]
+bg_color = Color( 0.596078, 0.403922, 0.639216, 1 )
+border_width_left = 2
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=31]
+
+[sub_resource type="StyleBoxEmpty" id=32]
+
+[sub_resource type="StyleBoxEmpty" id=33]
+
+[sub_resource type="StyleBoxEmpty" id=34]
+
+[sub_resource type="StyleBoxEmpty" id=35]
 
 [node name="Lobby Screen" type="Control" groups=[
 "Scene Root",
@@ -129,11 +181,30 @@ __meta__ = {
 }
 colors = [ Color( 0.466667, 0.207843, 0.207843, 1 ), Color( 0.207843, 0.466667, 0.27451, 1 ), Color( 0.466667, 0.443137, 0.207843, 1 ) ]
 
+[node name="Mask Viewport" type="Viewport" parent="."]
+size = Vector2( 320, 180 )
+transparent_bg = true
+hdr = false
+usage = 0
+render_target_v_flip = true
+render_target_update_mode = 3
+
+[node name="mask" type="Sprite" parent="Mask Viewport"]
+position = Vector2( 201, 100 )
+scale = Vector2( 1, 1.1 )
+texture = ExtResource( 18 )
+
+[node name="Mask Holder" type="Sprite" parent="."]
+position = Vector2( -111, -41 )
+z_index = -10
+texture = SubResource( 36 )
+
 [node name="Panel" type="TextureRect" parent="."]
 margin_right = 320.0
 margin_bottom = 180.0
 texture = ExtResource( 1 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -144,6 +215,7 @@ margin_right = 238.0
 margin_bottom = 177.0
 text = "lobby ID:"
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -177,6 +249,7 @@ flat = true
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true,
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 OriginalButton = true
@@ -218,6 +291,7 @@ anchor_bottom = 1.0
 margin_top = -75.0
 mouse_filter = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -235,100 +309,464 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="one" type="Control" parent="PLAYERS"]
-margin_right = 316.0
-margin_bottom = 59.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="1" type="Panel" parent="PLAYERS/one"]
-margin_left = 5.0
-margin_top = 3.0
-margin_right = 121.0
-margin_bottom = 57.0
-custom_styles/panel = SubResource( 31 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="2" type="Panel" parent="PLAYERS/one"]
-margin_left = 200.0
-margin_top = 3.0
-margin_right = 316.0
-margin_bottom = 57.0
-custom_styles/panel = SubResource( 31 )
-
-[node name="two" type="Control" parent="PLAYERS"]
+[node name="player" type="Panel" parent="PLAYERS/HBoxContainer"]
 visible = false
-margin_right = 316.0
-margin_bottom = 59.0
+margin_left = 11.0
+margin_right = 90.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 79, 47 )
+mouse_filter = 1
+theme = ExtResource( 8 )
+custom_styles/panel = SubResource( 37 )
+script = ExtResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="1" type="Panel" parent="PLAYERS/two"]
-margin_left = -37.0
-margin_top = 5.0
+[node name="Characters" type="Control" parent="PLAYERS/HBoxContainer/player"]
 margin_right = 79.0
-margin_bottom = 59.0
-custom_styles/panel = SubResource( 31 )
+margin_bottom = 47.0
+mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="2" type="Panel" parent="PLAYERS/two"]
-margin_left = 241.0
-margin_top = 5.0
-margin_right = 357.0
-margin_bottom = 59.0
-custom_styles/panel = SubResource( 31 )
+[node name="Show Area" type="ColorRect" parent="PLAYERS/HBoxContainer/player/Characters"]
+margin_left = 18.0
+margin_top = 15.0
+margin_right = 77.0
+margin_bottom = 45.0
+color = Color( 0.603922, 0.317647, 0.317647, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="3" type="Panel" parent="PLAYERS/two"]
-margin_left = 158.0
-margin_top = 6.0
-margin_right = 162.0
-margin_bottom = 60.0
-custom_styles/panel = SubResource( 31 )
-
-[node name="three" type="Control" parent="PLAYERS"]
+[node name="Marston" type="Control" parent="PLAYERS/HBoxContainer/player/Characters"]
 visible = false
-margin_right = 316.0
-margin_bottom = 59.0
+light_mask = 1024
+margin_left = -8.0
+margin_top = 13.0
+margin_right = 15.0
+margin_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 1, 1 )
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="1" type="Panel" parent="PLAYERS/three"]
-margin_left = -78.0
-margin_top = 5.0
-margin_right = 38.0
-margin_bottom = 59.0
-custom_styles/panel = SubResource( 31 )
+[node name="Sprite" type="Sprite" parent="PLAYERS/HBoxContainer/player/Characters/Marston"]
+light_mask = 1024
+position = Vector2( 12, 9 )
+texture = ExtResource( 12 )
+
+[node name="Musashi" type="Control" parent="PLAYERS/HBoxContainer/player/Characters"]
+visible = false
+light_mask = 1024
+margin_left = 23.0
+margin_top = 11.0
+margin_right = 48.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 1, 1 )
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = true
+
+[node name="Sprite" type="Sprite" parent="PLAYERS/HBoxContainer/player/Characters/Musashi"]
+light_mask = 1024
+position = Vector2( 13, 12 )
+texture = ExtResource( 13 )
+
+[node name="Namka" type="Control" parent="PLAYERS/HBoxContainer/player/Characters"]
+visible = false
+light_mask = 1024
+margin_left = 27.0
+margin_top = 7.0
+margin_right = 56.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 1, 1 )
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="2" type="Panel" parent="PLAYERS/three"]
-margin_left = 283.0
-margin_top = 4.0
-margin_right = 399.0
-margin_bottom = 58.0
-custom_styles/panel = SubResource( 31 )
+[node name="Sprite" type="Sprite" parent="PLAYERS/HBoxContainer/player/Characters/Namka"]
+light_mask = 1024
+position = Vector2( 12, 10 )
+texture = ExtResource( 20 )
 
-[node name="3" type="Panel" parent="PLAYERS/three"]
-margin_left = 200.0
-margin_top = 4.0
-margin_right = 204.0
-margin_bottom = 58.0
-custom_styles/panel = SubResource( 31 )
+[node name="Light2D" type="Light2D" parent="PLAYERS/HBoxContainer/player/Characters"]
+position = Vector2( 7, 19.5 )
+texture = SubResource( 47 )
+mode = 3
+range_item_cull_mask = 1024
 
-[node name="4" type="Panel" parent="PLAYERS/three"]
-margin_left = 117.0
-margin_top = 2.0
-margin_right = 121.0
+[node name="username" type="Label" parent="PLAYERS/HBoxContainer/player"]
+margin_left = 18.0
+margin_right = 79.0
+margin_bottom = 15.0
+mouse_filter = 1
+text = "CARBONE 13"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dash" type="Panel" parent="PLAYERS/HBoxContainer/player/username"]
+show_behind_parent = true
+margin_left = -1.0
+margin_right = 61.0
+margin_bottom = 15.0
+custom_styles/panel = SubResource( 39 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="left_side" type="Panel" parent="PLAYERS/HBoxContainer/player"]
+margin_right = 18.0
+margin_bottom = 47.0
+mouse_filter = 1
+custom_styles/panel = SubResource( 40 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="PLAYERS/HBoxContainer/player"]
+
+[node name="token" type="Button" parent="PLAYERS/HBoxContainer/player"]
+margin_left = 39.0
+margin_top = 21.0
+margin_right = 69.0
 margin_bottom = 56.0
-custom_styles/panel = SubResource( 31 )
+rect_scale = Vector2( 0.5, 0.5 )
+mouse_filter = 2
+custom_styles/hover = SubResource( 41 )
+custom_styles/pressed = SubResource( 42 )
+custom_styles/focus = SubResource( 43 )
+custom_styles/disabled = SubResource( 44 )
+custom_styles/normal = SubResource( 45 )
+icon = ExtResource( 19 )
+flat = true
+script = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="contour" type="Panel" parent="PLAYERS/HBoxContainer/player"]
+margin_right = 79.0
+margin_bottom = 47.0
+custom_styles/panel = SubResource( 46 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="player2" type="Panel" parent="PLAYERS/HBoxContainer"]
+visible = false
+margin_left = 52.0
+margin_right = 131.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 79, 47 )
+mouse_filter = 1
+theme = ExtResource( 8 )
+custom_styles/panel = SubResource( 37 )
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Characters" type="Control" parent="PLAYERS/HBoxContainer/player2"]
+margin_right = 79.0
+margin_bottom = 47.0
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Show Area" type="ColorRect" parent="PLAYERS/HBoxContainer/player2/Characters"]
+margin_left = 18.0
+margin_top = 15.0
+margin_right = 77.0
+margin_bottom = 45.0
+color = Color( 0.603922, 0.317647, 0.317647, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Marston" type="Control" parent="PLAYERS/HBoxContainer/player2/Characters"]
+visible = false
+light_mask = 1024
+margin_left = -8.0
+margin_top = 13.0
+margin_right = 15.0
+margin_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 1, 1 )
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="PLAYERS/HBoxContainer/player2/Characters/Marston"]
+light_mask = 2048
+position = Vector2( 12, 9 )
+texture = ExtResource( 12 )
+
+[node name="Musashi" type="Control" parent="PLAYERS/HBoxContainer/player2/Characters"]
+visible = false
+light_mask = 1024
+margin_left = 23.0
+margin_top = 11.0
+margin_right = 48.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 1, 1 )
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = true
+
+[node name="Sprite" type="Sprite" parent="PLAYERS/HBoxContainer/player2/Characters/Musashi"]
+light_mask = 2048
+position = Vector2( 13, 12 )
+texture = ExtResource( 13 )
+
+[node name="Namka" type="Control" parent="PLAYERS/HBoxContainer/player2/Characters"]
+visible = false
+light_mask = 1024
+margin_left = 27.0
+margin_top = 7.0
+margin_right = 56.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 1, 1 )
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="PLAYERS/HBoxContainer/player2/Characters/Namka"]
+light_mask = 2048
+position = Vector2( 12, 10 )
+texture = ExtResource( 20 )
+
+[node name="Light2D" type="Light2D" parent="PLAYERS/HBoxContainer/player2/Characters"]
+position = Vector2( 7, 19.5 )
+texture = SubResource( 47 )
+mode = 3
+range_item_cull_mask = 2048
+
+[node name="username" type="Label" parent="PLAYERS/HBoxContainer/player2"]
+margin_left = 18.0
+margin_right = 79.0
+margin_bottom = 15.0
+mouse_filter = 1
+text = "CARBONE 13"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dash" type="Panel" parent="PLAYERS/HBoxContainer/player2/username"]
+show_behind_parent = true
+margin_left = -1.0
+margin_right = 61.0
+margin_bottom = 15.0
+custom_styles/panel = SubResource( 39 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="left_side" type="Panel" parent="PLAYERS/HBoxContainer/player2"]
+margin_right = 18.0
+margin_bottom = 47.0
+mouse_filter = 1
+custom_styles/panel = SubResource( 40 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="PLAYERS/HBoxContainer/player2"]
+
+[node name="token" type="Button" parent="PLAYERS/HBoxContainer/player2"]
+margin_left = 39.0
+margin_top = 21.0
+margin_right = 69.0
+margin_bottom = 56.0
+rect_scale = Vector2( 0.5, 0.5 )
+mouse_filter = 2
+custom_styles/hover = SubResource( 41 )
+custom_styles/pressed = SubResource( 42 )
+custom_styles/focus = SubResource( 43 )
+custom_styles/disabled = SubResource( 44 )
+custom_styles/normal = SubResource( 45 )
+icon = ExtResource( 19 )
+flat = true
+script = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="contour" type="Panel" parent="PLAYERS/HBoxContainer/player2"]
+margin_right = 79.0
+margin_bottom = 47.0
+custom_styles/panel = SubResource( 46 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="player3" type="Panel" parent="PLAYERS/HBoxContainer"]
+visible = false
+margin_left = 94.0
+margin_right = 173.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 79, 47 )
+mouse_filter = 1
+theme = ExtResource( 8 )
+custom_styles/panel = SubResource( 37 )
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Characters" type="Control" parent="PLAYERS/HBoxContainer/player3"]
+margin_right = 79.0
+margin_bottom = 47.0
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Show Area" type="ColorRect" parent="PLAYERS/HBoxContainer/player3/Characters"]
+margin_left = 18.0
+margin_top = 15.0
+margin_right = 77.0
+margin_bottom = 45.0
+color = Color( 0.603922, 0.317647, 0.317647, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Marston" type="Control" parent="PLAYERS/HBoxContainer/player3/Characters"]
+visible = false
+light_mask = 1024
+margin_left = -8.0
+margin_top = 13.0
+margin_right = 15.0
+margin_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 1, 1 )
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="PLAYERS/HBoxContainer/player3/Characters/Marston"]
+light_mask = 4096
+position = Vector2( 12, 9 )
+texture = ExtResource( 12 )
+
+[node name="Musashi" type="Control" parent="PLAYERS/HBoxContainer/player3/Characters"]
+visible = false
+light_mask = 1024
+margin_left = 23.0
+margin_top = 11.0
+margin_right = 48.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 1, 1 )
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = true
+
+[node name="Sprite" type="Sprite" parent="PLAYERS/HBoxContainer/player3/Characters/Musashi"]
+light_mask = 4096
+position = Vector2( 13, 12 )
+texture = ExtResource( 13 )
+
+[node name="Namka" type="Control" parent="PLAYERS/HBoxContainer/player3/Characters"]
+visible = false
+light_mask = 1024
+margin_left = 27.0
+margin_top = 7.0
+margin_right = 56.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 1, 1 )
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="PLAYERS/HBoxContainer/player3/Characters/Namka"]
+light_mask = 4096
+position = Vector2( 12, 10 )
+texture = ExtResource( 20 )
+
+[node name="Light2D" type="Light2D" parent="PLAYERS/HBoxContainer/player3/Characters"]
+position = Vector2( 7, 19.5 )
+texture = SubResource( 47 )
+mode = 3
+range_item_cull_mask = 4096
+
+[node name="username" type="Label" parent="PLAYERS/HBoxContainer/player3"]
+margin_left = 18.0
+margin_right = 79.0
+margin_bottom = 15.0
+mouse_filter = 1
+text = "CARBONE 13"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dash" type="Panel" parent="PLAYERS/HBoxContainer/player3/username"]
+show_behind_parent = true
+margin_left = -1.0
+margin_right = 61.0
+margin_bottom = 15.0
+custom_styles/panel = SubResource( 39 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="left_side" type="Panel" parent="PLAYERS/HBoxContainer/player3"]
+margin_right = 18.0
+margin_bottom = 47.0
+mouse_filter = 1
+custom_styles/panel = SubResource( 40 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="PLAYERS/HBoxContainer/player3"]
+
+[node name="token" type="Button" parent="PLAYERS/HBoxContainer/player3"]
+margin_left = 39.0
+margin_top = 21.0
+margin_right = 69.0
+margin_bottom = 56.0
+rect_scale = Vector2( 0.5, 0.5 )
+mouse_filter = 2
+custom_styles/hover = SubResource( 41 )
+custom_styles/pressed = SubResource( 42 )
+custom_styles/focus = SubResource( 43 )
+custom_styles/disabled = SubResource( 44 )
+custom_styles/normal = SubResource( 45 )
+icon = ExtResource( 19 )
+flat = true
+script = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="contour" type="Panel" parent="PLAYERS/HBoxContainer/player3"]
+margin_right = 79.0
+margin_bottom = 47.0
+custom_styles/panel = SubResource( 46 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CHARACTERS" type="HBoxContainer" parent="."]
 margin_left = 108.0
@@ -338,6 +776,7 @@ margin_bottom = 85.0
 mouse_filter = 2
 alignment = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -348,7 +787,7 @@ margin_bottom = 47.0
 rect_min_size = Vector2( 56, 47 )
 mouse_filter = 2
 theme = ExtResource( 8 )
-custom_styles/panel = SubResource( 10 )
+custom_styles/panel = SubResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -390,7 +829,7 @@ __meta__ = {
 show_behind_parent = true
 margin_right = 56.0
 margin_bottom = 15.0
-custom_styles/panel = SubResource( 11 )
+custom_styles/panel = SubResource( 16 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -399,11 +838,11 @@ __meta__ = {
 margin_right = 56.0
 margin_bottom = 47.0
 mouse_filter = 1
-custom_styles/hover = SubResource( 12 )
-custom_styles/pressed = SubResource( 13 )
-custom_styles/focus = SubResource( 14 )
-custom_styles/disabled = SubResource( 15 )
-custom_styles/normal = SubResource( 16 )
+custom_styles/hover = SubResource( 17 )
+custom_styles/pressed = SubResource( 18 )
+custom_styles/focus = SubResource( 19 )
+custom_styles/disabled = SubResource( 20 )
+custom_styles/normal = SubResource( 21 )
 flat = true
 script = ExtResource( 10 )
 __meta__ = {
@@ -417,7 +856,7 @@ margin_bottom = 47.0
 rect_min_size = Vector2( 56, 47 )
 mouse_filter = 1
 theme = ExtResource( 8 )
-custom_styles/panel = SubResource( 17 )
+custom_styles/panel = SubResource( 22 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -462,7 +901,7 @@ show_behind_parent = true
 margin_left = 1.0
 margin_right = 57.0
 margin_bottom = 15.0
-custom_styles/panel = SubResource( 18 )
+custom_styles/panel = SubResource( 23 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -471,11 +910,11 @@ __meta__ = {
 margin_right = 56.0
 margin_bottom = 47.0
 mouse_filter = 1
-custom_styles/hover = SubResource( 19 )
-custom_styles/pressed = SubResource( 20 )
-custom_styles/focus = SubResource( 21 )
-custom_styles/disabled = SubResource( 22 )
-custom_styles/normal = SubResource( 23 )
+custom_styles/hover = SubResource( 24 )
+custom_styles/pressed = SubResource( 25 )
+custom_styles/focus = SubResource( 26 )
+custom_styles/disabled = SubResource( 27 )
+custom_styles/normal = SubResource( 28 )
 flat = true
 script = ExtResource( 10 )
 __meta__ = {
@@ -489,7 +928,7 @@ margin_bottom = 47.0
 rect_min_size = Vector2( 56, 47 )
 mouse_filter = 1
 theme = ExtResource( 8 )
-custom_styles/panel = SubResource( 24 )
+custom_styles/panel = SubResource( 29 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -534,7 +973,7 @@ show_behind_parent = true
 margin_left = 1.0
 margin_right = 57.0
 margin_bottom = 15.0
-custom_styles/panel = SubResource( 25 )
+custom_styles/panel = SubResource( 30 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -543,11 +982,11 @@ __meta__ = {
 margin_right = 56.0
 margin_bottom = 47.0
 mouse_filter = 1
-custom_styles/hover = SubResource( 26 )
-custom_styles/pressed = SubResource( 27 )
-custom_styles/focus = SubResource( 28 )
-custom_styles/disabled = SubResource( 29 )
-custom_styles/normal = SubResource( 30 )
+custom_styles/hover = SubResource( 31 )
+custom_styles/pressed = SubResource( 32 )
+custom_styles/focus = SubResource( 33 )
+custom_styles/disabled = SubResource( 34 )
+custom_styles/normal = SubResource( 35 )
 flat = true
 script = ExtResource( 10 )
 __meta__ = {
