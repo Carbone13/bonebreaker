@@ -58,7 +58,7 @@ func player_joined (_webrtc_peer: WebRTCPeerConnection, player: OnlineMatch.Play
 	if(player.username == Online.nakama_session.username):
 		print("correcting from red to peer: " + str(player.peer_id))
 		var col_id = 3 % player.peer_id
-		local_card.call("set_color", colors[1 if (col_id == 0) else col_id])
+		local_card.call("set_color", colors[col_id])
 		cards[player.peer_id] = local_card
 		cards.erase(-1)
 		return
@@ -77,7 +77,7 @@ func player_joined (_webrtc_peer: WebRTCPeerConnection, player: OnlineMatch.Play
 	card.call("show_none")
 	
 	var col_id = 3 % player.peer_id
-	card.call("set_color", colors[1 if (col_id == 0) else col_id])
+	card.call("set_color", colors[col_id])
 	
 	var token_position = local_card.get_node("token").rect_global_position
 		
