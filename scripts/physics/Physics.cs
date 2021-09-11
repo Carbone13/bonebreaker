@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Godot;
 
 public class Physics : Node
@@ -85,17 +86,18 @@ public class Physics : Node
     /// <param name="position">Center of the AABB</param>
     /// <param name="halfExtents">Half Extents of the AABB</param>
     /// <returns>Return a list of hit boxes</returns>
-    public static List<Hit> CastAABB (sfloat2 position, sfloat2 halfExtents, bool breakOnFirst = false, List<AABB> exclude = null)
+    public static List<Hit> CastAABB (sfloat2 position, sfloat2 halfExtents, bool breakOnFirst = false, List<Predicate<AABB>> conditions = null)
     {
         List<Hit> hits = new List<Hit>();
         AABB castedBox = new AABB(position, halfExtents);
         
         foreach (AABB box in QueryBoxes())
         {
-            if(exclude != null)
-                if (exclude.Contains(box))
-                    continue;
-            
+            if(conditions != null)
+                foreach(Predicate<AABB> condition in conditions)
+                    if (!condition.Invoke(box))
+                        goto next;
+
             Hit hit = box.IntersectAABB(castedBox);
             if (hit != null)
             {
@@ -103,7 +105,9 @@ public class Physics : Node
                 if (breakOnFirst)
                     return hits;
             }
-                
+            
+            next:
+                continue;
         }
 
         return hits;

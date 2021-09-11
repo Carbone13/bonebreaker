@@ -24,7 +24,6 @@ public class GroundedState : State
     {
         if (!Owner.IsGrounded)
         {
-            GD.Print("no longer grounded");
             return Owner._FallingState;
         }
         

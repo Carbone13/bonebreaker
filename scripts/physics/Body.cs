@@ -26,7 +26,7 @@ public class Body : Entity
     protected bool IsGrounded ()
     {
         return Physics.CastAABB(Collider.Position + new sfloat2(0, 0.2f), Collider.HalfExtents - new sfloat2(0.1f, 0.1f),
-            true, new List<AABB> { Collider }).Count > 0;
+            true, new List<Predicate<AABB>> { (box => box != Collider), (aabb => aabb.IntersectAABB(Collider) == null) }).Count > 0;
     }
 
     /// <summary>
