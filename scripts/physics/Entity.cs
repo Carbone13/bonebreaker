@@ -24,9 +24,6 @@ public class Entity : Node2D
 
     public override void _Process (float delta)
     {
-        if(Engine.EditorHint)
-            GetEditorValue();
-        
         Update();
     }
     
@@ -35,7 +32,6 @@ public class Entity : Node2D
         Physics.Register(this);
     }
     
-
     public override void _ExitTree ()
     {
         Physics.Unregister(this);

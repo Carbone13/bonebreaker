@@ -27,8 +27,9 @@ func spawn(name: String, parent: Node, scene: PackedScene, data: Dictionary, ren
 	if rename:
 		name = _rename_node(name)
 	spawned_node.name = name
+	spawned_node.global_position = data["start_transform"]
 	parent.add_child(spawned_node)
-	
+		
 	if spawned_node.has_method('_network_spawn_preprocess'):
 		data = spawned_node._network_spawn_preprocess(data)
 	

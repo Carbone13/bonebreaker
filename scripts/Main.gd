@@ -13,9 +13,13 @@ signal player_dead (player_id)
 signal game_over (player_id)
 
 func _ready() -> void:
+	OnlineMatch.connect("error", self, "_on_OnlineMatch_error")
+	OnlineMatch.connect("disconnected", self, "_on_OnlineMatch_disconnected")
 	OnlineMatch.connect("player_status_changed", self, "_on_OnlineMatch_player_status_changed")
-	SyncManager.connect("scene_spawned", self, "_on_SyncManager_scene_spawned")
-	
+	OnlineMatch.connect("player_left", self, "_on_OnlineMatch_player_left")
+	SyncManager.connect("sync_error", self, "_on_SyncManager_sync_error")
+
+
 func game_start(players: Dictionary, immediate: bool = false) -> void:
 	if not immediate:
 		rpc("_do_game_setup", players)
@@ -40,9 +44,9 @@ remotesync func _do_game_setup(players: Dictionary, immediate: bool = false) -> 
 			peer_id = peer_id,
 			player_index = player_index,
 			player_name = players[peer_id],
-			start_transform = Vector2(150, 90),
+			start_transform = Vector2(70 + (90 * (player_index)), 90),
 		}
-		var other_player = SyncManager.spawn(str(peer_id), get_node("/root/ROOT/Node2D/Players"), Marston, spawn_data, false, "Player")
+		var other_player = SyncManager.spawn(str(peer_id), get_node("/root/Training Grounds/World/Players"), Marston, spawn_data, false, "Player")
 		player_index += 1
 	
 	if not immediate:
@@ -67,14 +71,24 @@ remotesync func _do_game_start() -> void:
 func reload_map() -> void:
 	SceneManager.LoadScene("res://scenes/Main.tscn")
 
+func kill_player(player_id) -> void:
+	var player_node = get_node("/root/Training Grounds/World/Players").get_node("Player " + str(player_id))
+	if player_node:
+		if player_node.has_method("die"):
+			player_node.die()
+		else:
+			# If there is no die method, we do the most important things it
+			# would have done.
+			player_node.queue_free()
+			_on_player_dead(player_id)
 
 func game_stop() -> void:	
 	game_started = false
 	players_setup.clear()
 	players_alive.clear()
 	
-	for child in get_node("/root/ROOT/Node2D/Players").get_children():
-		get_node("/root/ROOT/Node2D/Players").remove_child(child)
+	for child in get_node("/root/Training Grounds/World/Players").get_children():
+		get_node("/root/Training Grounds/World/Players").remove_child(child)
 		child.queue_free()
 
 func _save_state() -> Dictionary:
@@ -104,3 +118,29 @@ func _on_OnlineMatch_player_status_changed(player, status) -> void:
 	if status == OnlineMatch.PlayerStatus.CONNECTED:
 		if player.peer_id != get_tree().get_network_unique_id():
 			SyncManager.add_peer(player.peer_id)
+
+func _on_OnlineMatch_player_left(player) -> void:
+	print(player.username + " has left")
+	
+	kill_player(player.peer_id)
+	
+	SyncManager.remove_peer(player.peer_id)
+	
+	players_alive.erase(player.peer_id)
+
+func _on_OnlineMatch_error(message: String):
+	if message != '':
+		print(message)
+	SyncManager.stop()
+	SyncManager.clear_peers()
+
+func _on_OnlineMatch_disconnected():
+	#_on_OnlineMatch_error("Disconnected from host")
+	_on_OnlineMatch_error('')
+
+func _on_SyncManager_sync_error(msg: String) -> void:
+	print("Fatal sync error: " + msg)
+	var peer = get_tree().network_peer
+	if peer:
+		peer.close_connection()
+	SyncManager.clear_peers()

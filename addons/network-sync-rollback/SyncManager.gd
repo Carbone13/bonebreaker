@@ -157,8 +157,8 @@ var max_input_frames_per_message := 5
 var max_messages_at_once := 2
 var max_input_buffer_underruns := 300
 var skip_ticks_after_sync_regained := 0
-var interpolation := false
-var rollback_debug_ticks := 2
+var interpolation := true
+var rollback_debug_ticks := 0
 var debug_message_bytes := 700
 var log_state := false
 
@@ -288,7 +288,6 @@ func clear_peers() -> void:
 func _on_ping_timer_timeout() -> void:
 	var system_time = OS.get_system_time_msecs()
 	for peer_id in peers:
-		print(str(peer_id))
 		assert(peer_id != get_tree().get_network_unique_id(), "Cannot ping ourselves")
 		var msg = {
 			local_time = system_time,
@@ -399,7 +398,7 @@ func _call_predict_remote_input(previous_input: Dictionary, ticks_since_real_inp
 	
 	return input
 
-func _call_network_process(delta: float, input_frame: InputBufferFrame) -> void:
+func _call_network_process(delta: float, input_frame: InputBufferFrame, current_tick:int) -> void:
 	var nodes: Array = get_tree().get_nodes_in_group('network_sync')
 	var i = nodes.size()
 	while i > 0:
@@ -407,7 +406,7 @@ func _call_network_process(delta: float, input_frame: InputBufferFrame) -> void:
 		var node = nodes[i]
 		if node.has_method('_network_process') and node.is_inside_tree():
 			var player_input = input_frame.get_player_input(node.get_network_master())
-			node._network_process(delta, player_input.get(str(node.get_path()), {}))
+			node._network_process(delta, player_input.get(str(node.get_path()), {}), current_tick)
 
 func _call_save_state() -> Dictionary:
 	var state := {}
@@ -446,7 +445,7 @@ func _save_current_state() -> void:
 	if log_state and not get_tree().is_network_server() and is_player_input_complete(current_tick):
 		rpc_id(1, "_log_saved_state", current_tick, state_data)
 
-func _do_tick(delta: float, is_rollback: bool = false) -> void:
+func _do_tick(delta: float, is_rollback: bool = false, current_tick:int = 0) -> void:
 	var input_frame := get_input_frame(current_tick)
 	var previous_frame := get_input_frame(current_tick - 1)
 	
@@ -463,7 +462,7 @@ func _do_tick(delta: float, is_rollback: bool = false) -> void:
 			_calculate_input_hash(predicted_input)
 			input_frame.players[peer_id] = InputForPlayer.new(predicted_input, true)
 	
-	_call_network_process(delta, input_frame)
+	_call_network_process(delta, input_frame, current_tick)
 	_save_current_state()
 	
 	emit_signal("tick_finished", is_rollback)
@@ -694,7 +693,7 @@ func _physics_process(delta: float) -> void:
 		# Iterate forward until we're at the same spot we left off.
 		while rollback_ticks > 0:
 			current_tick += 1
-			_do_tick(delta, true)
+			_do_tick(delta, true, current_tick)
 			rollback_ticks -= 1
 		assert(current_tick == original_tick, "Rollback didn't return to the original tick")
 	
@@ -769,7 +768,7 @@ func _physics_process(delta: float) -> void:
 	_time_since_last_tick = 0.0
 	
 	if current_tick > 0:
-		_do_tick(delta)
+		_do_tick(delta, false, current_tick)
 		
 		if interpolation:
 			# Capture the state data to interpolate between.

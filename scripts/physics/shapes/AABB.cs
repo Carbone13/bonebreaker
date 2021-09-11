@@ -1,29 +1,105 @@
 ﻿using System.Collections.Generic;
 using static sfloat;
 using Godot;
+using Godot.Collections;
 
+public enum Boxes
+{
+    Pushbox = 0, Hitbox = 1, Hurtbox = 2
+}
 [Tool]
 public class AABB : Entity
 {
-    [Export] private bool ignoreBelow;
-    [Export] private Vector2 halfExtents;
-    [Export] private Color color;
-    [Export] private float thickness;
-
     public sfloat2 HalfExtents;
+    
+    public Vector2 Size;
+    public bool ignoreBelow;
+    private Color Color = Colors.Aqua;
+    
+    private int type;
+    public int Type
+    {
+        get => type;
+        set
+        {
+            type = value;
+            PropertyListChangedNotify();
+        }
+    }
+    
+    private bool _draw;
+    private bool Draw
+    {
+        get => _draw;
+        set
+        {
+            _draw = value;
+            PropertyListChangedNotify();
+        }
+    }
+    
+    public override Array _GetPropertyList ()
+    {
+        var properties = new Array();
+        
+        properties.Add(new Dictionary 
+        { 
+            {"name", nameof(Type)}, 
+            {"type", Variant.Type.Int},
+            {"usage", PropertyUsageFlags.Default},
+            {"hint", PropertyHint.Enum},
+            {"hint_string", "Pushbox,Hitbox,Hurtbox"}
+        });
+        properties.Add(new Dictionary 
+        { 
+            {"name", nameof(Size)}, 
+            {"type", Variant.Type.Vector2},
+            {"usage", PropertyUsageFlags.Default} 
+        });
+        properties.Add(new Dictionary 
+        { 
+            {"name", nameof(Draw)}, 
+            {"type", Variant.Type.Bool},
+            {"usage", PropertyUsageFlags.Default} 
+        });
 
+        if (_draw)
+        {
+            properties.Add(new Dictionary 
+            { 
+                {"name", nameof(Color)}, 
+                {"type", Variant.Type.Color},
+                {"usage", PropertyUsageFlags.Default} 
+            });
+        }
+
+        if (Type == (int)Boxes.Pushbox)
+        {
+            properties.Add(new Dictionary 
+            { 
+                {"name", nameof(ignoreBelow)}, 
+                {"type", Variant.Type.Bool},
+                {"usage", PropertyUsageFlags.Default} 
+            });
+        }
+        
+        return properties;
+    }
+    
     protected override void GetEditorValue ()
     {
         Position = GlobalPosition;
-        HalfExtents = halfExtents;
+        HalfExtents = Size;
+        GD.Print(Name + ": " + Position);
     }
 
     public override void _Draw ()
     {
-        DrawRect(new Rect2(Vector2.Zero - (Vector2)HalfExtents, HalfExtents * (sfloat)2), 
-            color, 
-            false,
-            thickness);
+        if(Draw)
+            DrawRect(new Rect2(Vector2.Zero - (Vector2)HalfExtents, HalfExtents * (sfloat)2), 
+                Color, 
+                false,
+                1);
     }
 
     public AABB () {}
@@ -154,7 +230,7 @@ public class AABB : Entity
         Hit hit = new Hit(this);
         if (px < py)
         {
-            sfloat sx = (sfloat) Sign(dx);
+            sfloat sx = Sign(dx);
             hit.Delta.X = px * sx;
             hit.Normal.X = sx;
             hit.Position.X = Position.X + HalfExtents.X * sx;
@@ -162,7 +238,7 @@ public class AABB : Entity
         }
         else
         {
-            sfloat sy = (sfloat) Sign(dy);
+            sfloat sy = Sign(dy);
             hit.Delta.Y = py * sy;
             hit.Normal.Y = sy;
             hit.Position.X = box.Position.X;
@@ -193,7 +269,7 @@ public class AABB : Entity
         sweep.Hit = IntersectSegment(box.Position, delta, box.HalfExtents.X, box.HalfExtents.Y);
         if (sweep.Hit != null)
         {
-            sweep.Time = Clamp(sweep.Hit.Time - Epsilon, Zero, One);
+            sweep.Time = Clamp(sweep.Hit.Time, Zero, One);
             sweep.Position.X = box.Position.X + delta.X * sweep.Time;
             sweep.Position.Y = box.Position.Y + delta.Y * sweep.Time;
             
@@ -239,6 +315,7 @@ public class AABB : Entity
             }
 
             if (IntersectAABB(collider) != null) continue;
+            
 
             Sweep sweep = collider.IntersectSweepAABB(this, delta);
             if (sweep.Time < nearest.Time)

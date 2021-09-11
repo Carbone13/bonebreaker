@@ -3,14 +3,14 @@ using Godot;
 
 public class AscendingState : InAirState
 {
-    protected override void _Enter (State previous)
+    protected override void _Enter (State previous, int tick)
     {
         Owner.Velocity = new sfloat2(Owner.Velocity.X, -Owner.Stats.JumpVelocity);
     }
 
-    protected override State _ShouldExit (InputState input)
+    protected override State _ShouldExit (InputState input, int tick)
     {
-        State baseOpinion = base._ShouldExit(input);
+        State baseOpinion = base._ShouldExit(input, tick);
 
         if (baseOpinion == null)
         {
@@ -19,6 +19,18 @@ public class AscendingState : InAirState
         }
 
         return baseOpinion;
+    }
+
+    protected override void _Animate ()
+    {
+        if (Owner.Orientation == Orientation.Left)
+        {
+            Owner.Animator.Play("ascending_l");
+        }
+        else
+        {
+            Owner.Animator.Play("ascending_r");
+        }
     }
 
     public override string ToString ()

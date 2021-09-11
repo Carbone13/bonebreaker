@@ -5,9 +5,12 @@ public class PlayerStats : Resource
 {
     [Export] public int Health { get; set; }
     [Export] public int MoveSpeed { get; set; }
+    [Export] public float Acceleration { get; set; }
     [Export] public int JumpHeight { get; set; }
     [Export] public float JumpApexTime { get; set; }
     [Export] public float InAirDamping { get; set; }
+    [Export] public int JabCount { get; set; }
+    [Export] public int JabResetTicks { get; set; }
     public sfloat Gravity { get; private set; }
     public sfloat JumpVelocity { get; private set; }
     

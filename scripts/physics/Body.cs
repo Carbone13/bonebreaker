@@ -73,17 +73,20 @@ public class Body : Entity
                     delta.X = sfloat.Zero;
                 if (sweep.Hit.Normal.Y != sfloat.Zero)
                     delta.Y = sfloat.Zero;
-
+                
                 // Move to the furthest possible position
                 // And re-iterate one more time if we still have movement to consume
-                Position = sweep.Position;
-                Collider.Position = Position;
+                sfloat2 colliderOffset = Collider.Position - Position;
+                Position = sweep.Position - colliderOffset;
+                Collider.Position = sweep.Position;
             }
             // if we hit nothing, move to the target position and exit the loop
             else
             {
-                Position = sweep.Position;
-                Collider.Position = Position;
+                sfloat2 colliderOffset = Collider.Position - Position;
+                Position = sweep.Position - colliderOffset;
+                Collider.Position = sweep.Position;
+
                 break;
             }
         }

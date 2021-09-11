@@ -3,12 +3,24 @@ using Godot;
 
 public class GroundedState : State
 {
-    protected override void _Enter (State previous)
+    protected override void _Enter (State previous, int tick)
     {
         Owner.Velocity = new sfloat2(Owner.Velocity.X, sfloat.Zero);
     }
 
-    protected override State _ShouldExit (InputState input)
+    protected override void _Tick (int frame, sfloat delta, InputState input)
+    {
+        if (input.Joystick.x > 0)
+        {
+            Owner.Orientation = Orientation.Right;
+        }
+        if (input.Joystick.x < 0)
+        {
+            Owner.Orientation = Orientation.Left;
+        }
+    }
+
+    protected override State _ShouldExit (InputState input, int tick)
     {
         if (!Owner.IsGrounded)
         {

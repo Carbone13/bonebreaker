@@ -12,6 +12,8 @@ namespace Bonebreaker.Inputs
         
         public int ID { get; set; }
         public readonly int ControllerID;
+
+        private InputState last;
         
         public JoypadHandler (int id, int controllerId)
         {
@@ -26,6 +28,7 @@ namespace Bonebreaker.Inputs
         
         public InputState Poll ()
         {
+            
             InputState state = new InputState();
             state.DeviceID = ID;
             
@@ -43,6 +46,9 @@ namespace Bonebreaker.Inputs
             {
                 state.Light = true;
                 lastLightPressed = OS.GetTicksMsec();
+
+                if (!last.Light)
+                    state.LightJustPressed = true;
             }
             
             if (!state.Light && (OS.GetTicksMsec() - lastLightPressed) < LIGHT_BUFFER_MS)
@@ -66,6 +72,7 @@ namespace Bonebreaker.Inputs
                 state.Joystick.y = Math.Sign(Godot.Input.GetJoyAxis(ControllerID, (int)JoystickList.Axis0));
             }
 
+            last = state;
             return state;
         }
     }

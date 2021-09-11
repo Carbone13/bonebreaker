@@ -18,8 +18,9 @@ public class Physics : Node
         {
             if (sg != null)
             {
-                if(!sg.boxes.Contains(box))
-                    sg.boxes.Add(box);
+                if(box.Type == (int)Boxes.Pushbox)
+                    if(!sg.boxes.Contains(box))
+                        sg.boxes.Add(box);
             }
         }
     }

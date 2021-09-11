@@ -6,6 +6,9 @@
 script = ExtResource( 1 )
 Health = 100
 MoveSpeed = 75
+Acceleration = 700.0
 JumpHeight = 50
 JumpApexTime = 0.3
 InAirDamping = 0.95
+JabCount = 3
+JabResetTicks = 60

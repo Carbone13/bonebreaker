@@ -100,6 +100,7 @@ _global_script_class_icons={
 
 config/name="Bonebreaker"
 run/main_scene="res://scenes/menu/Connection Screen.tscn"
+boot_splash/bg_color=Color( 0.12549, 0.145098, 0.192157, 1 )
 config/icon="res://assets/icons/icon.png"
 config/windows_native_icon="res://assets/icons/icon.ico"
 
@@ -118,6 +119,8 @@ Main="*res://scripts/Main.gd"
 
 [debug]
 
+gdscript/warnings/unused_variable=false
+gdscript/warnings/unused_argument=false
 gdscript/warnings/return_value_discarded=false
 
 [display]

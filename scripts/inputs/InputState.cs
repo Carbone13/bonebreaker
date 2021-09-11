@@ -9,6 +9,7 @@ namespace Bonebreaker.Inputs
         public int DeviceID;
 
         public bool Light, Special;
+        public bool LightJustPressed;
         public Vector2 Joystick;
         public bool Jump, Fall, Dash;
 
@@ -31,7 +32,8 @@ namespace Bonebreaker.Inputs
 
             state.Joystick = new Vector2(x, y);
             state.Jump = (string)input[1] == "1";
-
+            state.LightJustPressed = (string)input[2] == "1";
+            
             return state;
         }
 
@@ -40,7 +42,8 @@ namespace Bonebreaker.Inputs
             Dictionary dictionary = new Dictionary()
             {
                 { 0, Joystick.x + "|" + Joystick.y },
-                { 1, Jump ? "1" : "0" }
+                { 1, Jump ? "1" : "0" },
+                { 2, LightJustPressed ? "1" : "0"}
             };
 
             return dictionary;

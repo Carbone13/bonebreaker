@@ -81,3 +81,7 @@ func quit_hovered () -> void:
 	description_label.visible = true
 	description_label.text = quit_descr
 
+func offline () -> void:
+	SceneManager.call("LoadScene", "res://scenes/menu/Main.tscn")
+
+

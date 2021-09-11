@@ -2,10 +2,15 @@
 using Godot;
 using Godot.Collections;
 
-public class State
+public class State : Reference
 {
     protected Player Owner;
 
+    public virtual void _Init ()
+    {
+        
+    }
+    
     public void SetOwner (Player owner)
     {
         Owner = owner;
@@ -17,6 +22,7 @@ public class State
     public void Tick (int frame, sfloat delta, InputState input)
     {
         _Tick(frame, delta, input);
+        _Animate();
     }
     
     /// <summary>
@@ -24,12 +30,15 @@ public class State
     /// </summary>
     protected virtual void _Tick (int frame, sfloat delta, InputState input) {}
 
+
+    protected virtual void _Animate () { }
+    
     /// <summary>
     /// For external classes to call the Enter function
     /// </summary>
-    public void Enter (State previous)
+    public void Enter (State previous, int tick)
     {
-        _Enter(previous);
+        _Enter(previous, tick);
         
         if(Owner.Debug)
             GD.Print("Entering State " + this);
@@ -38,7 +47,7 @@ public class State
     /// <summary>
     /// For our inheritor to implement their own Enter logic
     /// </summary>
-    protected virtual void _Enter (State previous) {}
+    protected virtual void _Enter (State previous, int tick) {}
     
     /// <summary>
     /// For external classes to call the Exit function
@@ -47,8 +56,8 @@ public class State
     {
         _Exit(next);
         
-        //if(Owner.Debug)
-            //GD.Print("Exiting State " + this);
+        if(Owner.Debug)
+            GD.Print("Exiting State " + this);
     }
 
     /// <summary>
@@ -60,16 +69,29 @@ public class State
     /// Check if we need to Exit this state
     /// </summary>
     /// <returns>The state we should exit toward</returns>
-    public State ShouldExit (InputState input)
+    public State ShouldExit (InputState input, int tick)
     {
-        return _ShouldExit(input);
+        if (input.LightJustPressed && Owner._CurrentState != Owner._JabAction)
+            return Owner._JabAction;
+        
+        return _ShouldExit(input, tick);
     }
 
     /// <summary>
     /// For our inheritor to implement their own ShouldExit logic
     /// </summary>
-    protected virtual State _ShouldExit (InputState input)
+    protected virtual State _ShouldExit (InputState input, int tick)
     {
         return null;
+    }
+
+    public virtual Dictionary _Serialize ()
+    {
+        return null;
+    }
+
+    public virtual void _Deserialize (Dictionary state)
+    {
+        
     }
 }

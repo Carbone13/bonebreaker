@@ -100,6 +100,5 @@ func poll() -> void:
 			var messages_to_send = message_queue[peer_id]
 			if messages_to_send.size() > 0:
 				for msg in messages_to_send:
-					print("send")
 					data_channel.put_packet(msg)
 				messages_to_send.clear()
