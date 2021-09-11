@@ -2,11 +2,25 @@
 
 public struct sfloat2 
 {
+    public override int GetHashCode ()
+    {
+        return (int)ro_x.RawValue + (int)ro_y.RawValue;
+    }
+
+    public override bool Equals (object obj)
+    {
+        return obj is sfloat2 other && Equals(other);
+    }
+
+
     public bool Equals (sfloat2 other)
     {
         return X.Equals(other.X) && Y.Equals(other.Y);
     }
 
+    private readonly sfloat ro_x => X;
+    private readonly sfloat ro_y => Y;
+    
     public sfloat X { get; set; }
     public sfloat Y { get; set; }
 

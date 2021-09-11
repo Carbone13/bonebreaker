@@ -86,7 +86,7 @@ func hide_start ():
 	can_start = false
 	
 func try_show_start ():
-	if(is_everyone_ready() && OnlineMatch.players.size() > 0):
+	if(is_everyone_ready() && OnlineMatch.players.size() > 1):
 		get_node("Start").visible = true
 		if(!OnlineMatch.host):
 			get_node("Start/Label").text = "WAITING FOR THE HOST TO START !"

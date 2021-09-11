@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://resources/themes/main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/ui/FocusableButton.cs" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://prefabs/quit.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/ui/buttons/refresh.png" type="Texture" id=9]
 [ext_resource path="res://assets/sound_effects/ui_click.mp3" type="AudioStream" id=10]
+[ext_resource path="res://scripts/ui/ColoredButton.gd" type="Script" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -299,9 +300,13 @@ texture_hover = ExtResource( 9 )
 texture_disabled = ExtResource( 9 )
 texture_focused = ExtResource( 9 )
 expand = true
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+normal = Color( 1, 1, 1, 1 )
+hovered = Color( 0.913725, 0.913725, 0.913725, 1 )
+clicked = Color( 0.85098, 0.85098, 0.85098, 1 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="JOIN_GAME/reload"]
 stream = ExtResource( 10 )

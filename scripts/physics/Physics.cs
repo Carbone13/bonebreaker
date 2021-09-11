@@ -85,16 +85,25 @@ public class Physics : Node
     /// <param name="position">Center of the AABB</param>
     /// <param name="halfExtents">Half Extents of the AABB</param>
     /// <returns>Return a list of hit boxes</returns>
-    public static IEnumerable<Hit> CastAABB (sfloat2 position, sfloat2 halfExtents)
+    public static List<Hit> CastAABB (sfloat2 position, sfloat2 halfExtents, bool breakOnFirst = false, List<AABB> exclude = null)
     {
         List<Hit> hits = new List<Hit>();
         AABB castedBox = new AABB(position, halfExtents);
         
         foreach (AABB box in QueryBoxes())
         {
+            if(exclude != null)
+                if (exclude.Contains(box))
+                    continue;
+            
             Hit hit = box.IntersectAABB(castedBox);
-            if(hit != null)
+            if (hit != null)
+            {
                 hits.Add(hit);
+                if (breakOnFirst)
+                    return hits;
+            }
+                
         }
 
         return hits;

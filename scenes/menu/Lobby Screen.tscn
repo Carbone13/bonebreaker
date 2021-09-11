@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://assets/menus/background_panels/bg_panel_cyb.png" type="Texture" id=1]
 [ext_resource path="res://scripts/ui/FocusableButton.cs" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://resources/themes/main_theme.tres" type="Theme" id=8]
 [ext_resource path="res://scripts/screens/LobbyScreen.gd" type="Script" id=9]
 [ext_resource path="res://scripts/ui/CustomClick.gd" type="Script" id=10]
+[ext_resource path="res://assets/menus/token_selected.png" type="Texture" id=11]
 [ext_resource path="res://assets/menus/lobby_card/marston_card.png" type="Texture" id=12]
 [ext_resource path="res://assets/menus/lobby_card/musashi_card.png" type="Texture" id=13]
 [ext_resource path="res://scripts/lobby/PlayerCard.gd" type="Script" id=14]
@@ -438,8 +439,8 @@ __meta__ = {
 [node name="token" type="Button" parent="PLAYERS/HBoxContainer/player"]
 margin_left = 39.0
 margin_top = 21.0
-margin_right = 69.0
-margin_bottom = 56.0
+margin_right = 71.0
+margin_bottom = 53.0
 rect_scale = Vector2( 0.5, 0.5 )
 mouse_filter = 2
 custom_styles/hover = SubResource( 15 )
@@ -453,6 +454,13 @@ script = ExtResource( 21 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="selected" type="TextureRect" parent="PLAYERS/HBoxContainer/player/token"]
+visible = false
+margin_left = -1.0
+margin_right = 31.0
+margin_bottom = 32.0
+texture = ExtResource( 11 )
 
 [node name="contour" type="Panel" parent="PLAYERS/HBoxContainer/player"]
 margin_right = 79.0
@@ -591,8 +599,8 @@ __meta__ = {
 [node name="token" type="Button" parent="PLAYERS/HBoxContainer/player2"]
 margin_left = 39.0
 margin_top = 21.0
-margin_right = 69.0
-margin_bottom = 56.0
+margin_right = 71.0
+margin_bottom = 53.0
 rect_scale = Vector2( 0.5, 0.5 )
 mouse_filter = 2
 custom_styles/hover = SubResource( 15 )
@@ -606,6 +614,13 @@ script = ExtResource( 21 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="selected" type="TextureRect" parent="PLAYERS/HBoxContainer/player2/token"]
+visible = false
+margin_left = -1.0
+margin_right = 31.0
+margin_bottom = 32.0
+texture = ExtResource( 11 )
 
 [node name="contour" type="Panel" parent="PLAYERS/HBoxContainer/player2"]
 margin_right = 79.0
@@ -742,10 +757,11 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="PLAYERS/HBoxContainer/player3"]
 
 [node name="token" type="Button" parent="PLAYERS/HBoxContainer/player3"]
+visible = false
 margin_left = 39.0
 margin_top = 21.0
-margin_right = 69.0
-margin_bottom = 56.0
+margin_right = 71.0
+margin_bottom = 53.0
 rect_scale = Vector2( 0.5, 0.5 )
 mouse_filter = 2
 custom_styles/hover = SubResource( 15 )
@@ -759,6 +775,13 @@ script = ExtResource( 21 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="selected" type="TextureRect" parent="PLAYERS/HBoxContainer/player3/token"]
+visible = false
+margin_left = -1.0
+margin_right = 31.0
+margin_bottom = 32.0
+texture = ExtResource( 11 )
 
 [node name="contour" type="Panel" parent="PLAYERS/HBoxContainer/player3"]
 margin_right = 79.0

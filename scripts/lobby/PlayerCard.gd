@@ -24,7 +24,6 @@ func _ready():
 func unselect ():
 	confirmed = false
 	emit_signal("unselect_character")
-	show_none()
 
 func set_color (color:Color):
 	#left side
@@ -33,7 +32,7 @@ func set_color (color:Color):
 	get_node("left_side").add_stylebox_override("panel", left_style)
 	# token
 	if(get_node_or_null("token")):
-		get_node("token").modulate = color
+		get_node("token").self_modulate = color
 	# username
 	var username_style:StyleBoxFlat = get_node("username/dash").get_stylebox("panel").duplicate()
 	username_style.bg_color = color

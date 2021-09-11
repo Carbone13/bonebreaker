@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 /// <summary>
@@ -7,9 +9,9 @@ using Godot;
 /// </summary>
 public class Body : Entity
 {
-    [Export] private NodePath Pushbox, Hitbox, Hurtbox;
-    
-    public AABB Collider;
+    [Export] public NodePath Pushbox, Hitbox, Hurtbox;
+
+    protected AABB Collider;
 
     public override void _Ready ()
     {
@@ -23,9 +25,8 @@ public class Body : Entity
     /// <returns></returns>
     protected bool IsGrounded ()
     {
-        Sweep sweep = Collider.SweepInto(Physics.QueryBoxes(), new sfloat2(0, 1));
-
-        return sweep.Time <= (sfloat)0.0001f;
+        return Physics.CastAABB(Collider.Position + new sfloat2(0, 0.2f), Collider.HalfExtents - new sfloat2(0.1f, 0.1f),
+            true, new List<AABB> { Collider }).Count > 0;
     }
 
     /// <summary>
@@ -52,7 +53,7 @@ public class Body : Entity
     /// </summary>
     /// <param name="delta">The movement amounts</param>
     /// <param name="collided">Callback called on collision contact</param>
-    public void MoveAndSlide (sfloat2 delta, Action<sfloat2> collided = null)
+    protected void MoveAndSlide (sfloat2 delta, Action<sfloat2> collided = null)
     {
         // While we still have movement to consume
         while (delta != sfloat2.Zero)
@@ -65,8 +66,8 @@ public class Body : Entity
             {
                 collided?.Invoke(sweep.Hit.Normal);
                 // remove the traveled distance from the buffer
-                delta -= sweep.Position - Position;
-                
+                delta -= sweep.Position - Collider.Position;
+
                 // Depending on which axis we did collide, put the buffer to 0
                 // because as we collided we won't be able to move any further
                 if (sweep.Hit.Normal.X != sfloat.Zero)

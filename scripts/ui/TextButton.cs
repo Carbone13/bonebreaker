@@ -3,7 +3,7 @@ using System;
 
 public class TextButton : FocusableButton
 {
-    [Export] private Color Normal, Hovered, Clicked;
+    [Export] public Color Normal, Hovered, Clicked;
     private new Label Text;
 
     public override void _Ready ()

@@ -13,7 +13,8 @@ func _input(event):
 				var rect:Rect2 = Rect2(rect_global_position, rect_size)
 				if(rect.has_point(mousePos)):
 					selected = !selected
-					
+				
+				get_child(0).visible = selected
 				if(selected):
 					emit_signal("unselect")
 	if(selected):

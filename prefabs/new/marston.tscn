@@ -21,7 +21,7 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "jab_1_l"
-length = 0.166667
+length = 0.25
 loop = true
 step = 0.0833333
 tracks/0/type = "value"
@@ -31,7 +31,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.0833333 ),
+"times": PoolRealArray( 0, 0.166667 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ ExtResource( 13 ), ExtResource( 10 ) ]
@@ -139,7 +139,7 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( 0.166667 ),
+"times": PoolRealArray( 0.25 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ "AnimationFinished" ],
@@ -149,7 +149,7 @@ tracks/9/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "jab_1_r"
-length = 0.166667
+length = 0.25
 loop = true
 step = 0.0833333
 tracks/0/type = "value"
@@ -159,7 +159,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.0833333 ),
+"times": PoolRealArray( 0, 0.166667 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ ExtResource( 13 ), ExtResource( 10 ) ]
@@ -267,7 +267,7 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( 0.166667 ),
+"times": PoolRealArray( 0.25 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ "AnimationFinished" ],
@@ -277,7 +277,7 @@ tracks/9/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "jab_2_l"
-length = 0.166667
+length = 0.25
 loop = true
 step = 0.0833333
 tracks/0/type = "value"
@@ -287,7 +287,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.0833333 ),
+"times": PoolRealArray( 0, 0.166667 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ ExtResource( 15 ), ExtResource( 14 ) ]
@@ -395,7 +395,7 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( 0.166667 ),
+"times": PoolRealArray( 0.25 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ "AnimationFinished" ],
@@ -405,7 +405,7 @@ tracks/9/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "jab_2_r"
-length = 0.166667
+length = 0.25
 loop = true
 step = 0.0833333
 tracks/0/type = "value"
@@ -415,7 +415,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.0833333 ),
+"times": PoolRealArray( 0, 0.166667 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ ExtResource( 15 ), ExtResource( 14 ) ]
@@ -523,7 +523,7 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( 0.166667 ),
+"times": PoolRealArray( 0.25 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ "AnimationFinished" ],
@@ -533,7 +533,7 @@ tracks/9/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "jab_3_l"
-length = 0.166667
+length = 0.25
 loop = true
 step = 0.0833333
 tracks/0/type = "value"
@@ -543,7 +543,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.0833333 ),
+"times": PoolRealArray( 0, 0.166667 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ ExtResource( 16 ), ExtResource( 17 ) ]
@@ -651,7 +651,7 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( 0.166667 ),
+"times": PoolRealArray( 0.25 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ "AnimationFinished" ],
@@ -661,7 +661,7 @@ tracks/9/keys = {
 
 [sub_resource type="Animation" id=6]
 resource_name = "jab_3_r"
-length = 0.166667
+length = 0.25
 loop = true
 step = 0.0833333
 tracks/0/type = "value"
@@ -671,7 +671,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.0833333 ),
+"times": PoolRealArray( 0, 0.166667 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ ExtResource( 16 ), ExtResource( 17 ) ]
@@ -779,7 +779,7 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( 0.166667 ),
+"times": PoolRealArray( 0.25 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ "AnimationFinished" ],

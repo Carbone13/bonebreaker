@@ -1,11 +1,9 @@
 using Bonebreaker.Inputs;
-using Godot;
 using Godot.Collections;
 
 public class JabAction : ActionState
 {
     private int jabIndex;
-    private int previousEnteredTick;
     private int lastEnteredTick;
     private bool shouldExit;
 

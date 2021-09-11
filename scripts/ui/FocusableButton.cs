@@ -2,7 +2,7 @@ using Godot;
 
 public class FocusableButton : Button
 {
-    [Export] private bool OriginalButton;
+    [Export] public bool OriginalButton;
 
     [Signal] public delegate void LoseFocus ();
     
