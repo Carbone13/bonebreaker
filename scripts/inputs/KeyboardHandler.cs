@@ -61,9 +61,6 @@ namespace Bonebreaker.Inputs
             {
                 state.Light = true;
                 lastLightPressed = OS.GetTicksMsec();
-
-                if (!previousState.Light)
-                    state.LightJustPressed = true;
             }
             if (!state.Light && (OS.GetTicksMsec() - lastLightPressed) < LIGHT_BUFFER_MS)
             {
@@ -142,9 +139,6 @@ namespace Bonebreaker.Inputs
             {
                 state.Light = true;
                 lastLightPressed = OS.GetTicksMsec();
-                
-                if (!previousState.Light)
-                    state.LightJustPressed = true;
             }
             if (!state.Light && (OS.GetTicksMsec() - lastLightPressed) < LIGHT_BUFFER_MS)
             {

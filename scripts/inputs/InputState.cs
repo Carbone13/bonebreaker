@@ -8,9 +8,8 @@ namespace Bonebreaker.Inputs
     {
         public int DeviceID;
 
-        public bool Light, Special;
-        public bool LightJustPressed;
         public Vector2 Joystick;
+        public bool Light, Special;
         public bool Jump, Fall, Dash;
 
         public override string ToString ()
@@ -26,26 +25,31 @@ namespace Bonebreaker.Inputs
             if (input.ToString() == "{}")
                 return state;
             
-            string joystick = (string)input[0];
-            
-            int x = int.Parse(joystick.Split('|')[0]);
-            int y = int.Parse(joystick.Split('|')[1]);
 
-            state.Joystick = new Vector2(x, y);
-            state.Jump = (string)input[1] == "1";
-            state.Light = (string)input[3] == "1";
+            state.Joystick = new Vector2((float)input[-1], (float)input[0]);
+            byte buttons = (byte) ((int)input[1]);
+            state.Jump = (0b10000000 & buttons) != 0;
+            state.Light = (0b01000000 & buttons) != 0;
+            
             return state;
         }
 
         public Dictionary Serialize ()
         {
+            byte buttons = 0b00000000;
+            
+            if (Jump)
+                buttons |= 0b10000000;
+            if(Light)
+                buttons |= 0b01000000;
+            
             Dictionary dictionary = new Dictionary()
             {
-                { 0, Joystick.x + "|" + Joystick.y },
-                { 1, Jump ? "1" : "0" },
-                { 3, Light ? "1" : "0" }
+                { -1, Joystick.x},
+                { 0, Joystick.y},
+                { 1, buttons }
             };
-
+            
             return dictionary;
         }
     }

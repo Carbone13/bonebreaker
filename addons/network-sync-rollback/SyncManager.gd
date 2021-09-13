@@ -101,29 +101,39 @@ const DEFAULT_MESSAGE_BUFFER_SIZE = 1280
 
 class MessageSerializer:
 	func serialize_input(input: Dictionary) -> PoolByteArray:
-		return var2bytes(input)
-
-	func unserialize_input(serialized: PoolByteArray) -> Dictionary:
-		return bytes2var(serialized)
-	# TODO serialize to real byte, optimize this !!
-	func ser (msg: Dictionary) -> PoolByteArray:
 		var buffer := StreamPeerBuffer.new()
-		buffer.resize(DEFAULT_MESSAGE_BUFFER_SIZE)
-	
-		buffer.put_u32(msg[InputMessageKey.NEXT_TICK_REQUESTED])
-		
-		var input_ticks = msg[InputMessageKey.INPUT]
-		buffer.put_u8(input_ticks.size())
-		
-		for tick in input_ticks:
-			buffer.put_u32(tick)
+		buffer.put_u16(input["$"])
+
+		buffer.put_u8(input.size() - 1)
+		for entry in input.keys():
+			if(entry == "$"):
+				continue
 			
-			var input = input_ticks[tick]
-			buffer.put_u16(input.size())
-			buffer.put_data(input)
+			buffer.put_string(entry)
+			
+			buffer.put_float(input[entry][-1])
+			buffer.put_float(input[entry][0])
+			buffer.put_8(input[entry][1])
 		
 		buffer.resize(buffer.get_position())
 		return buffer.data_array
+
+	func unserialize_input(serialized: PoolByteArray) -> Dictionary:
+		var buffer := StreamPeerBuffer.new()
+		buffer.put_data(serialized)
+		buffer.seek(0)
+		var input = {}
+		
+		input["$"] = buffer.get_u16()
+		
+		for i in range(buffer.get_u8()):
+			var key = buffer.get_string()
+			input[key] = {}
+			input[key][-1] = buffer.get_float()
+			input[key][0] = buffer.get_float()
+			input[key][1] = buffer.get_8()
+
+		return input
 
 	func serialize_message(msg: Dictionary) -> PoolByteArray:
 		var buffer := StreamPeerBuffer.new()
@@ -137,6 +147,7 @@ class MessageSerializer:
 			buffer.put_u32(tick)
 			
 			var input = input_ticks[tick]
+
 			buffer.put_u16(input.size())
 			buffer.put_data(input)
 		
