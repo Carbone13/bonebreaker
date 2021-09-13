@@ -10,6 +10,8 @@ public enum Boxes
 [Tool]
 public class AABB : Entity
 {
+    [Signal] public delegate void Ticked (AABB ticker, int dmg);
+    
     public sfloat2 HalfExtents;
     
     public Vector2 Size;
@@ -85,18 +87,17 @@ public class AABB : Entity
         
         return properties;
     }
-    
+
     protected override void GetEditorValue ()
     {
         Position = GlobalPosition;
         HalfExtents = Size;
-        GD.Print(Name + ": " + Position);
     }
 
     public override void _Draw ()
     {
         if(Draw)
-            DrawRect(new Rect2(Vector2.Zero - (Vector2)HalfExtents, HalfExtents * (sfloat)2), 
+            DrawRect(new Rect2(Vector2.Zero - Size, Size * 2), 
                 Color, 
                 false,
                 1);
@@ -217,8 +218,8 @@ public class AABB : Entity
     /// </summary>
     /// <param name="box">An AABB in the scene</param>
     /// <returns>Return the collision informations or null if their is no collision</returns>
-    public Hit IntersectAABB (AABB box)
-    {
+    public Hit IntersectAABB (AABB box, bool deb = false)
+    {                                                                                                       
         sfloat dx = box.Position.X - Position.X;
         sfloat px = box.HalfExtents.X + HalfExtents.X - Abs(dx);
         sfloat dy = box.Position.Y - Position.Y;
@@ -314,12 +315,13 @@ public class AABB : Entity
                     continue;
             }
 
-            if (IntersectAABB(collider) != null) continue;
-            
-
             Sweep sweep = collider.IntersectSweepAABB(this, delta);
+            
             if (sweep.Time < nearest.Time)
+            {
+                if (IntersectAABB(collider) != null) continue;
                 nearest = sweep;
+            }
         }
 
         return nearest;

@@ -3,6 +3,7 @@ extends Node2D
 var marston = preload("res://prefabs/new/marston.tscn")
 
 var spawned
+var tick = 0
 
 func _ready():
 	if(Online.nakama_session == null):
@@ -13,4 +14,5 @@ func _ready():
 func _physics_process(delta):
 	if(spawned):
 		var inp = spawned._get_local_input()
-		spawned._network_process(delta, inp)
+		spawned._network_process(delta, inp, tick)
+		tick += 1

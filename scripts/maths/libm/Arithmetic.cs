@@ -299,7 +299,6 @@
         {
             y = y + x - sfloat.One;
         }
-        //TODO it was y <= and I changed it to y <
         else if (y <= (sfloat)(-0.5f))
         {
             y = y + x + sfloat.One;

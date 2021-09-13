@@ -105,6 +105,25 @@ class MessageSerializer:
 
 	func unserialize_input(serialized: PoolByteArray) -> Dictionary:
 		return bytes2var(serialized)
+	# TODO serialize to real byte, optimize this !!
+	func ser (msg: Dictionary) -> PoolByteArray:
+		var buffer := StreamPeerBuffer.new()
+		buffer.resize(DEFAULT_MESSAGE_BUFFER_SIZE)
+	
+		buffer.put_u32(msg[InputMessageKey.NEXT_TICK_REQUESTED])
+		
+		var input_ticks = msg[InputMessageKey.INPUT]
+		buffer.put_u8(input_ticks.size())
+		
+		for tick in input_ticks:
+			buffer.put_u32(tick)
+			
+			var input = input_ticks[tick]
+			buffer.put_u16(input.size())
+			buffer.put_data(input)
+		
+		buffer.resize(buffer.get_position())
+		return buffer.data_array
 
 	func serialize_message(msg: Dictionary) -> PoolByteArray:
 		var buffer := StreamPeerBuffer.new()
@@ -150,10 +169,10 @@ var peers := {}
 var input_buffer := []
 var state_buffer := []
 
-var max_buffer_size := 20
+var max_buffer_size := 45
 var ticks_to_calculate_advantage := 60
 var input_delay := 2 setget set_input_delay
-var max_input_frames_per_message := 5
+var max_input_frames_per_message := 6
 var max_messages_at_once := 2
 var max_input_buffer_underruns := 300
 var skip_ticks_after_sync_regained := 0
@@ -642,9 +661,9 @@ func _send_input_messages_to_peer(peer_id: int) -> void:
 		var bytes = message_serializer.serialize_message(msg)
 		
 		# See https://gafferongames.com/post/packet_fragmentation_and_reassembly/
-		if debug_message_bytes:
-			if bytes.size() > debug_message_bytes:
-				push_error("Sending message w/ size %s bytes" % bytes.size())
+		#if debug_message_bytes:
+		#	if bytes.size() > debug_message_bytes:
+		#		push_error("Sending message w/ size %s bytes" % bytes.size())
 		
 		#var ticks = msg[InputMessageKey.INPUT].keys()
 		#print ("[%s] Sending ticks %s - %s" % [current_tick, min(ticks[0], ticks[-1]), max(ticks[0], ticks[-1])])

@@ -71,7 +71,7 @@ public class State : Reference
     /// <returns>The state we should exit toward</returns>
     public State ShouldExit (InputState input, int tick)
     {
-        if (input.LightJustPressed && Owner._CurrentState != Owner._JabAction)
+        if (input.Light && Owner._CurrentState != Owner._JabAction)
             return Owner._JabAction;
         
         return _ShouldExit(input, tick);

@@ -9,14 +9,21 @@ using Godot;
 /// </summary>
 public class Body : Entity
 {
-    [Export] public NodePath Pushbox, Hitbox, Hurtbox;
+    [Export] public NodePath Pushbox_path, Hitbox_path, Hurtbox_path;
 
     protected AABB Collider;
-
+    protected AABB Hurtbox;
+    protected AABB Hitbox;
+    
     public override void _Ready ()
     {
         base._Ready();
-        Collider = GetNode<AABB>(Pushbox);
+        Collider = GetNode<AABB>(Pushbox_path);
+        
+        if (Hurtbox_path != null)
+            Hurtbox = GetNode<AABB>(Hurtbox_path);
+        if (Hitbox_path != null)
+            Hitbox = GetNode<AABB>(Hitbox_path);
     }
 
     /// <summary>
@@ -26,7 +33,7 @@ public class Body : Entity
     protected bool IsGrounded ()
     {
         return Physics.CastAABB(Collider.Position + new sfloat2(0, 0.2f), Collider.HalfExtents - new sfloat2(0.1f, 0.1f),
-            true, new List<Predicate<AABB>> { (box => box != Collider), (aabb => aabb.IntersectAABB(Collider) == null) }).Count > 0;
+            true, new List<Predicate<AABB>> { (box => box != Collider), (aabb => aabb.Type == (int)Boxes.Pushbox), (aabb => aabb.IntersectAABB(Collider) == null) }).Count > 0;
     }
 
     /// <summary>
@@ -43,8 +50,11 @@ public class Body : Entity
             collided?.Invoke(sweep.Hit.Normal);
         }
         
-        Position = sweep.Position;
-        Collider.Position = Position;
+        sfloat2 traveled = sweep.Position - Collider.Position;
+
+        Collider.Position += traveled;
+        Hitbox.Position += traveled;
+        Hurtbox.Position += traveled;
     }
     
     /// <summary>
@@ -53,8 +63,10 @@ public class Body : Entity
     /// </summary>
     /// <param name="delta">The movement amounts</param>
     /// <param name="collided">Callback called on collision contact</param>
-    protected void MoveAndSlide (sfloat2 delta, Action<sfloat2> collided = null)
+    protected sfloat2 MoveAndSlide (sfloat2 delta, Action<sfloat2> collided = null)
     {
+        sfloat2 totalTravel = sfloat2.Zero;
+        
         // While we still have movement to consume
         while (delta != sfloat2.Zero)
         {
@@ -77,20 +89,30 @@ public class Body : Entity
                 
                 // Move to the furthest possible position
                 // And re-iterate one more time if we still have movement to consume
-                sfloat2 colliderOffset = Collider.Position - Position;
-                Position = sweep.Position - colliderOffset;
-                Collider.Position = sweep.Position;
+                sfloat2 traveled = sweep.Position - Collider.Position;
+                totalTravel += traveled;
+                
+                Position += traveled;
+                Collider.Position += traveled;
+                Hitbox.Position += traveled;
+                Hurtbox.Position += traveled;
             }
             // if we hit nothing, move to the target position and exit the loop
             else
             {
-                sfloat2 colliderOffset = Collider.Position - Position;
-                Position = sweep.Position - colliderOffset;
-                Collider.Position = sweep.Position;
+                sfloat2 traveled = sweep.Position - Collider.Position;
+                totalTravel += traveled;
+                
+                Position += traveled;
+                Collider.Position += traveled;
+                Hitbox.Position += traveled;
+                Hurtbox.Position += traveled;
 
                 break;
             }
         }
+
+        return totalTravel;
     }
     
 }

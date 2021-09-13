@@ -2,12 +2,11 @@ using Bonebreaker.Inputs;
 using Godot;
 using Godot.Collections;
 
-public class JabAction : ActionState
+public class HitState : ActionState
 {
-    private int jabIndex;
-    private int lastEnteredTick;
+    private int exitTick;
     private bool shouldExit;
-
+    
     public override void _Init ()
     {
         Owner.Animator.Connect("animation_finished", this, nameof(AnimationFinished));
@@ -15,37 +14,25 @@ public class JabAction : ActionState
 
     protected override void _Enter (State previous, int tick)
     {
-        Owner.Velocity = sfloat2.Zero;
-        
-        if (tick - lastEnteredTick > Owner.Stats.JabResetTicks)
-        {
-            jabIndex = 0;
-        }
-        
-        jabIndex++;
-        if (jabIndex > Owner.Stats.JabCount)
-        {
-            jabIndex = 1;
-        }
-        
-        lastEnteredTick = tick;
-        
+        shouldExit = false;
+        GD.Print("hit");
         if (Owner.Orientation == Orientation.Left)
         {
-            Owner.Animator.Play("jab_" + jabIndex + "_l");
+            Owner.Animator.Play("hit" + "_l");
         }
         else
         {
-            Owner.Animator.Play("jab_" + jabIndex + "_r");
+            Owner.Animator.Play("hit" + "_r");
         }
     }
 
     private void AnimationFinished (string name)
     {
-        if(name.Contains("jab_") && Owner._CurrentState == Owner._JabAction)
+        if(name.Contains("hit_") && Owner._CurrentState == this)
             shouldExit = true;
     }
 
+    // TODO exit may "freeze"
     protected override State _ShouldExit (InputState input, int tick)
     {
         if (shouldExit)
@@ -53,31 +40,20 @@ public class JabAction : ActionState
             shouldExit = false;
             return Owner._IdleState;
         }
-
-        return base._ShouldExit(input, tick);
-
+        
+        return null;
     }
-
     
-    public override string ToString ()
-    {
-        return "Jab Action";
-    }
-
     public override Dictionary _Serialize ()
     {
         return new Dictionary
         {
-            { "jab_index", jabIndex },
-            { "last_entered_tick", lastEnteredTick },
             { "should_exit", shouldExit ? "1" : "0" }
         };
     }
 
     public override void _Deserialize (Dictionary state)
     {
-        jabIndex = (int)state["jab_index"];
-        lastEnteredTick = (int)state["last_entered_tick"];
         shouldExit = (string)state["should_exit"] == "1";
     }
 }

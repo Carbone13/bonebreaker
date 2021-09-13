@@ -111,11 +111,11 @@ SceneManager="*res://scripts/scenes/SceneManager.cs"
 OnlineMatch="*res://addons/nakama-webrtc/OnlineMatch.gd"
 Online="*res://addons/nakama-webrtc/Online.gd"
 SyncManager="*res://addons/network-sync-rollback/SyncManager.gd"
-SyncDebugger="*res://addons/network-sync-rollback/SyncDebugger.gd"
 Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
 Physics="*res://scripts/physics/Physics.cs"
 WebRtc="*res://scripts/network/WebRTC.gd"
 Main="*res://scripts/Main.gd"
+SyncDebugger="*res://addons/network-sync-rollback/SyncDebugger.gd"
 
 [debug]
 

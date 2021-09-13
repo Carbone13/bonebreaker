@@ -155,8 +155,6 @@ Size = Vector2( 160, 5 )
 Draw = false
 ignoreBelow = false
 
-[node name="Players" type="Node2D" parent="World"]
-
 [node name="Dummy" type="Node2D" parent="World"]
 position = Vector2( 203, 140 )
 z_as_relative = false
@@ -179,6 +177,8 @@ position = Vector2( -6, -30 )
 anims/dummy_hit_left = ExtResource( 8 )
 anims/dummy_hit_right = ExtResource( 6 )
 anims/dummy_idle = ExtResource( 7 )
+
+[node name="Players" type="Node2D" parent="World"]
 
 [node name="Coin" type="Node2D" parent="World"]
 visible = false
