@@ -4,7 +4,6 @@ using Godot.Collections;
 
 public class HitState : ActionState
 {
-    private int exitTick;
     private bool shouldExit;
     
     public override void _Init ()
@@ -12,10 +11,29 @@ public class HitState : ActionState
         Owner.Animator.Connect("animation_finished", this, nameof(AnimationFinished));
     }
 
+    protected override void _Exit (State next)
+    {
+        Owner.Velocity = new sfloat2(sfloat.Zero, Owner.Velocity.Y);
+    }
+
+    protected override void _Tick (int frame, sfloat delta, InputState input)
+    {
+        base._Tick(frame, delta, input);
+
+        if (!Owner.IsGrounded)
+        {
+            Owner.Velocity = new sfloat2(Owner.Velocity.X, Owner.Velocity.Y + Owner.Stats.Gravity * delta);
+        }
+        
+        Owner.Velocity = new sfloat2(Owner.Velocity.X * (sfloat)0.95f, Owner.Velocity.Y);
+    }
+
     protected override void _Enter (State previous, int tick)
     {
         shouldExit = false;
-        GD.Print("hit");
+
+        Owner.Velocity = new sfloat2((sfloat)(int)Owner.Orientation * -(sfloat)1 * (sfloat)60, Owner.Velocity.Y - (sfloat)80);
+        
         if (Owner.Orientation == Orientation.Left)
         {
             Owner.Animator.Play("hit" + "_l");
@@ -38,6 +56,7 @@ public class HitState : ActionState
         if (shouldExit)
         {
             shouldExit = false;
+            _Exit(null);
             return Owner._IdleState;
         }
         

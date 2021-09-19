@@ -1,6 +1,6 @@
 extends Node2D
 
-var marston = preload("res://prefabs/new/marston.tscn")
+var marston = preload("res://prefabs/characters/marston.tscn")
 
 var spawned
 var tick = 0

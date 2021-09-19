@@ -1,6 +1,5 @@
 extends Node
 
-var Marston = preload("res://prefabs/new/marston.tscn")
 var GameScene = preload("res://scenes/Main.tscn")
 
 var game_started := false
@@ -20,13 +19,13 @@ func _ready() -> void:
 	SyncManager.connect("sync_error", self, "_on_SyncManager_sync_error")
 
 
-func game_start(players: Dictionary, immediate: bool = false) -> void:
+func game_start(players: Dictionary, selected: Dictionary, immediate: bool = false) -> void:
 	if not immediate:
-		rpc("_do_game_setup", players)
+		rpc("_do_game_setup", players, selected)
 	else:
-		_do_game_setup(players)
+		_do_game_setup(players, selected)
 		
-remotesync func _do_game_setup(players: Dictionary, immediate: bool = false) -> void:
+remotesync func _do_game_setup(players: Dictionary, selected: Dictionary, immediate: bool = false) -> void:
 	get_tree().set_pause(true)
 	
 	if game_started:
@@ -44,9 +43,10 @@ remotesync func _do_game_setup(players: Dictionary, immediate: bool = false) -> 
 			peer_id = peer_id,
 			player_index = player_index,
 			player_name = players[peer_id],
-			start_transform = Vector2(70 + (90 * (player_index)), 90),
+			player_character = selected[peer_id],
+			start_transform = Vector2(50 + (50 * (player_index)), 90),
 		}
-		var other_player = SyncManager.spawn(str(peer_id), get_node("/root/Training Grounds/World/Players"), Marston, spawn_data, false, "Player")
+		var other_player = SyncManager.spawn(str(peer_id), get_node("/root/Training Grounds/World/Players"), load("res://prefabs/spawner_holder.tscn"), spawn_data, false, "Player")
 		player_index += 1
 	
 	if not immediate:
@@ -121,6 +121,8 @@ func _on_OnlineMatch_player_status_changed(player, status) -> void:
 
 func _on_OnlineMatch_player_left(player) -> void:
 	print(player.username + " has left")
+	if(!SyncManager.started):
+		return
 	
 	kill_player(player.peer_id)
 	
@@ -136,6 +138,9 @@ func _on_OnlineMatch_error(message: String):
 
 func _on_OnlineMatch_disconnected():
 	#_on_OnlineMatch_error("Disconnected from host")
+	if(!SyncManager.started):
+		return
+		
 	_on_OnlineMatch_error('')
 
 func _on_SyncManager_sync_error(msg: String) -> void:

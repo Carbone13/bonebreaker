@@ -1,0 +1,113 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://resources/marston_stat.tres" type="Resource" id=1]
+[ext_resource path="res://scripts/physics/shapes/AABB.cs" type="Script" id=2]
+[ext_resource path="res://scripts/player/Player.cs" type="Script" id=3]
+[ext_resource path="res://assets/game_sprites/characters/marston/marston.sprites/damage/hit_2.tres" type="Texture" id=4]
+[ext_resource path="res://resources/animations/characters/marston/jab_2_r.tres" type="Animation" id=5]
+[ext_resource path="res://resources/animations/characters/marston/jab_2_l.tres" type="Animation" id=6]
+[ext_resource path="res://resources/animations/characters/marston/jab_3_l.tres" type="Animation" id=7]
+[ext_resource path="res://resources/animations/characters/marston/jab_1_l.tres" type="Animation" id=8]
+[ext_resource path="res://resources/animations/characters/marston/jab_3_r.tres" type="Animation" id=9]
+[ext_resource path="res://resources/animations/characters/marston/hit_l.tres" type="Animation" id=10]
+[ext_resource path="res://resources/animations/characters/marston/hit_r.tres" type="Animation" id=11]
+[ext_resource path="res://resources/animations/characters/marston/ascending_l.tres" type="Animation" id=12]
+[ext_resource path="res://resources/animations/characters/marston/running_l.tres" type="Animation" id=13]
+[ext_resource path="res://resources/animations/characters/marston/idle_l.tres" type="Animation" id=14]
+[ext_resource path="res://resources/animations/characters/marston/idle_r.tres" type="Animation" id=15]
+[ext_resource path="res://resources/animations/characters/marston/ascending_r.tres" type="Animation" id=16]
+[ext_resource path="res://resources/animations/characters/marston/falling_l.tres" type="Animation" id=17]
+[ext_resource path="res://resources/animations/characters/marston/falling_r.tres" type="Animation" id=18]
+[ext_resource path="res://resources/animations/characters/marston/running_r.tres" type="Animation" id=19]
+[ext_resource path="res://addons/network-sync-rollback/NetworkAnimationPlayer.gd" type="Script" id=20]
+[ext_resource path="res://assets/fonts/Armin.ttf" type="DynamicFontData" id=21]
+[ext_resource path="res://assets/ui/selection_gem.png" type="Texture" id=22]
+[ext_resource path="res://resources/animations/characters/marston/jab_1_r.tres" type="Animation" id=23]
+
+[sub_resource type="DynamicFont" id=1]
+extra_spacing_space = -1
+font_data = ExtResource( 21 )
+
+[node name="Marston" type="Node2D" groups=[
+"network_sync",
+]]
+script = ExtResource( 3 )
+Pushbox_path = NodePath("BOX/Pushbox")
+Hitbox_path = NodePath("BOX/Hitbox")
+Hurtbox_path = NodePath("BOX/Hurtbox")
+Stats = ExtResource( 1 )
+
+[node name="BOX" type="Node2D" parent="."]
+
+[node name="Pushbox" type="Node2D" parent="BOX"]
+position = Vector2( 0, 0.5 )
+script = ExtResource( 2 )
+Tag = "Player"
+Type = 0
+Size = Vector2( 5, 9.5 )
+Draw = false
+ignoreBelow = false
+
+[node name="Hitbox" type="Node2D" parent="BOX"]
+script = ExtResource( 2 )
+Tag = "Player"
+Type = 1
+Size = Vector2( 0, 0 )
+Draw = false
+
+[node name="Hurtbox" type="Node2D" parent="BOX"]
+script = ExtResource( 2 )
+Tag = "Player"
+Type = 2
+Size = Vector2( 6, 10 )
+Draw = true
+Color = Color( 0.168627, 0.8, 0.25098, 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 1 )
+texture = ExtResource( 4 )
+flip_h = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+anims/ascending_l = ExtResource( 12 )
+anims/ascending_r = ExtResource( 16 )
+anims/falling_l = ExtResource( 17 )
+anims/falling_r = ExtResource( 18 )
+anims/hit_l = ExtResource( 10 )
+anims/hit_r = ExtResource( 11 )
+anims/idle_l = ExtResource( 14 )
+anims/idle_r = ExtResource( 15 )
+anims/jab_1_l = ExtResource( 8 )
+anims/jab_1_r = ExtResource( 23 )
+anims/jab_2_l = ExtResource( 6 )
+anims/jab_2_r = ExtResource( 5 )
+anims/jab_3_l = ExtResource( 7 )
+anims/jab_3_r = ExtResource( 9 )
+anims/running_l = ExtResource( 13 )
+anims/running_r = ExtResource( 19 )
+script = ExtResource( 20 )
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+
+[node name="Username" type="Label" parent="."]
+visible = false
+margin_left = -50.0
+margin_top = -28.0
+margin_right = 50.0
+margin_bottom = -14.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
+text = "carbone_13"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Selecter" type="Sprite" parent="."]
+visible = false
+modulate = Color( 0.670588, 0.670588, 0.670588, 1 )
+position = Vector2( 0, -19 )
+texture = ExtResource( 22 )

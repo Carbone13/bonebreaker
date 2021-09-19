@@ -10,8 +10,10 @@ onready var player_card_prefab = load("res://prefabs/player_card.tscn")
 var can_start:bool = false
 var offset = 0
 var cards = {}
-var local_card
+var local_card:Control
 var selected_character = -1
+
+var players_character = {}
 
 func _process(delta):
 	if(Input.is_action_just_pressed("lobby_start") && can_start):
@@ -21,9 +23,15 @@ func start_game ():
 	if(cards.has(-1)):
 		cards[1] = local_card
 		cards.erase(-1)
-	Main.game_start(OnlineMatch.get_player_names_by_peer_id())
+	var usernames = OnlineMatch.get_player_names_by_peer_id()
+	var selected = players_character
+	Main.game_start(usernames, selected)
 	
 func spawn_card(username, color, session_id) -> Node:
+	var token_pos
+	if(local_card):
+		token_pos = local_card.get_node("token").rect_global_position
+	
 	var _child
 	for child in player_card_holder.get_children():
 		if(!child.visible):
@@ -41,6 +49,9 @@ func spawn_card(username, color, session_id) -> Node:
 	else:
 		_child.get_node("token").visible = false
 	
+	if(local_card):
+		local_card.get_node("token").call_deferred("set", "rect_global_position", token_pos)
+	
 	return _child
 
 func add_player(session_id: String, id, username: String) -> void:
@@ -49,8 +60,15 @@ func add_player(session_id: String, id, username: String) -> void:
 		
 func remove_player (session_id:String) -> void:
 	if(cards.has(session_id)):
+		var token_pos
+		if(local_card):
+			token_pos = local_card.get_node("token").rect_global_position
+	
 		cards[session_id].visible = false
 		cards.erase(session_id)
+		
+		if(local_card):
+			local_card.get_node("token").call_deferred("set", "rect_global_position", token_pos)
 
 func _ready():
 	match_id.text = str(OnlineMatch.match_id)
@@ -80,6 +98,8 @@ func received_character_update (peerID, buffer):
 		cards[sessionid].show_namka()
 		cards[sessionid].confirm()
 		try_show_start()
+	
+	players_character[peerID] = characterID
 
 func hide_start ():
 	get_node("Start").visible = false
@@ -117,6 +137,8 @@ func is_everyone_ready ():
 func _on_OnlineMatch_player_joined(player) -> void:
 	add_player(player.session_id, player.peer_id, player.username)
 	
+	try_show_start()
+	
 	if(selected_character != -1):
 		var buffer := StreamPeerBuffer.new()
 		buffer.resize(16)
@@ -127,6 +149,8 @@ func _on_OnlineMatch_player_joined(player) -> void:
 
 func _on_OnlineMatch_player_left(player) -> void:
 	remove_player(player.session_id)
+	
+	try_show_start()
 
 func marston_hover_start ():
 	if(local_card.moving_token()):
@@ -140,6 +164,7 @@ func marston_click ():
 	if(local_card.moving_token()):
 		local_card.confirm()
 		send_select_packet(1)
+		players_character[get_tree().get_network_unique_id()] = 1
 
 func musashi_hover_start ():
 	if(local_card.moving_token()):
@@ -153,6 +178,7 @@ func musashi_click ():
 	if(local_card.moving_token()):
 		local_card.confirm()
 		send_select_packet(2)
+		players_character[get_tree().get_network_unique_id()] = 2
 		
 func namka_hover_start ():
 	if(local_card.moving_token()):
@@ -166,3 +192,4 @@ func namka_click ():
 	if(local_card.moving_token()):
 		local_card.confirm()
 		send_select_packet(3)
+		players_character[get_tree().get_network_unique_id()] = 3

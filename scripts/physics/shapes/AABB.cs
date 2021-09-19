@@ -10,6 +10,7 @@ public enum Boxes
 [Tool]
 public class AABB : Entity
 {
+    [Export] public string Tag = "";
     [Signal] public delegate void Ticked (AABB ticker, int dmg);
     
     public sfloat2 HalfExtents;
@@ -218,7 +219,7 @@ public class AABB : Entity
     /// </summary>
     /// <param name="box">An AABB in the scene</param>
     /// <returns>Return the collision informations or null if their is no collision</returns>
-    public Hit IntersectAABB (AABB box, bool deb = false)
+    public Hit IntersectAABB (AABB box)
     {                                                                                                       
         sfloat dx = box.Position.X - Position.X;
         sfloat px = box.HalfExtents.X + HalfExtents.X - Abs(dx);
@@ -300,7 +301,7 @@ public class AABB : Entity
     /// <param name="colliders">The set of colliders, i.e a broadphase query result</param>
     /// <param name="delta">The distance you want to travel</param>
     /// /// <returns>Return the sweep informations about the nearest collision or null if their is no collision</returns>
-    public Sweep SweepInto (IEnumerable<AABB> colliders, sfloat2 delta)
+    public Sweep SweepInto (IEnumerable<AABB> colliders, sfloat2 delta, string ignoreTag)
     {
         Sweep nearest = new Sweep();
         nearest.Time = One;
@@ -309,6 +310,7 @@ public class AABB : Entity
         foreach (AABB collider in colliders)
         {
             if (collider == this) continue;
+            if (collider.Tag == ignoreTag) continue;
             if (collider.ignoreBelow)
             {
                 if (collider.Position.Y - Position.Y < Zero)

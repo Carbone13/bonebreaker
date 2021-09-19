@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://scripts/ressources/PlayerStats.cs" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+Health = 100
+MoveSpeed = 75
+Acceleration = 700.0
+JumpHeight = 50
+JumpApexTime = 0.3
+InAirDamping = 0.95
+JabCount = 3
+JabResetTicks = 60

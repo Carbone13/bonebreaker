@@ -8,7 +8,13 @@ public class IdleState : GroundedState
         base._Enter(previous, tick);
         Owner.Velocity = new sfloat2(sfloat.Zero, Owner.Velocity.Y);
     }
-    
+
+    protected override void _Tick (int frame, sfloat delta, InputState input)
+    {
+        base._Tick(frame, delta, input);
+        Owner.Velocity = new sfloat2(sfloat.Zero, Owner.Velocity.Y);
+    }
+
     protected override State _ShouldExit (InputState input, int tick)
     {
         State baseOpinion = base._ShouldExit(input, tick);

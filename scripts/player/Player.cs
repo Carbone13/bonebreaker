@@ -41,14 +41,23 @@ public sealed class Player : Body
 
     public void _network_spawn (Dictionary data)
     {
+        GD.Print("We are " + (int)data["player_character"]);
         playerIndex = (int)data["player_index"];
         SetNetworkMaster((int)data["peer_id"]);
         Name = "Player " + (int)data["peer_id"];
 
         if ((int)data["peer_id"] == GetTree().GetNetworkUniqueId())
+        {
             playerControlled = true;
+            GetNode<Node2D>("Selecter").Visible = true;
+        }
+        else
+        {
+            GetNode<Label>("Username").Visible = true;
+            GetNode<Label>("Username").Text = (string)data["player_name"];
+        }
     }
-    
+
     public Dictionary _get_local_input ()
     {
         if (!focused)

@@ -43,7 +43,7 @@ public class Body : Entity
     /// <param name="collided">Callback called on collision contact</param>
     public void MoveAndCollide (sfloat2 delta, Action<sfloat2> collided = null)
     {
-        Sweep sweep = Collider.SweepInto(Physics.QueryBoxes(), delta);
+        Sweep sweep = Collider.SweepInto(Physics.QueryBoxes(), delta, "Player");
 
         if (sweep.Hit != null)
         {
@@ -71,7 +71,7 @@ public class Body : Entity
         while (delta != sfloat2.Zero)
         {
             // Try to move by this movement
-            Sweep sweep = Collider.SweepInto(Physics.QueryBoxes(), delta);
+            Sweep sweep = Collider.SweepInto(Physics.QueryBoxes(), delta, "Player");
 
             // hit something
             if (sweep.Hit != null)

@@ -111,7 +111,7 @@ public class Physics : Node
                     if (!condition.Invoke(box))
                         goto next;
 
-            Hit hit = box.IntersectAABB(castedBox, true);
+            Hit hit = box.IntersectAABB(castedBox);
 
             if (hit != null)
             {
