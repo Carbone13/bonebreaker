@@ -1,7 +1,7 @@
 [gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://scripts/physics/shapes/AABB.cs" type="Script" id=1]
-[ext_resource path="res://scripts/player/Player.cs" type="Script" id=2]
+[ext_resource path="res://scripts/player/musashi/Musashi.cs" type="Script" id=2]
 [ext_resource path="res://resources/musashi_stat.tres" type="Resource" id=3]
 [ext_resource path="res://assets/game_sprites/characters/musashi/musashi.sprites/idle/idle.tres" type="Texture" id=4]
 [ext_resource path="res://assets/game_sprites/characters/musashi/musashi.sprites/running/running_8.tres" type="Texture" id=5]
@@ -478,7 +478,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, -0.5 ) ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=5]
 resource_name = "hit_l"
 length = 0.25
 step = 0.0833333
@@ -591,7 +591,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, -0.5 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=6]
 resource_name = "hit_r"
 length = 0.25
 step = 0.0833333
@@ -704,7 +704,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, -0.5 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=7]
 length = 0.001
 loop = true
 tracks/0/type = "value"
@@ -816,7 +816,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, -0.5 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=8]
 length = 0.001
 loop = true
 tracks/0/type = "value"
@@ -928,7 +928,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, -0.5 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=9]
 resource_name = "jab_1_l"
 length = 0.25
 step = 0.0833333
@@ -1067,7 +1067,7 @@ tracks/10/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=10]
 resource_name = "jab_1_r"
 length = 0.25
 step = 0.0833333
@@ -1206,7 +1206,7 @@ tracks/10/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=11]
 resource_name = "jab_2_l"
 length = 0.25
 step = 0.0833333
@@ -1345,7 +1345,7 @@ tracks/10/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=12]
 resource_name = "jab_2_r"
 length = 0.25
 step = 0.0833333
@@ -1484,7 +1484,7 @@ tracks/10/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=13]
 resource_name = "jab_3_l"
 length = 0.25
 step = 0.0833333
@@ -1623,7 +1623,7 @@ tracks/10/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=14]
 resource_name = "jab_3_r"
 length = 0.25
 step = 0.0833333
@@ -1762,7 +1762,7 @@ tracks/10/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=15]
 length = 0.666667
 loop = true
 step = 0.0833333
@@ -1875,7 +1875,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, -0.5 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=16]
 length = 0.666667
 loop = true
 step = 0.0833333
@@ -1988,7 +1988,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, -0.5 ) ]
 }
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=17]
 extra_spacing_space = -1
 font_data = ExtResource( 23 )
 
@@ -2038,18 +2038,18 @@ anims/ascending_l = SubResource( 1 )
 anims/ascending_r = SubResource( 2 )
 anims/falling_l = SubResource( 3 )
 anims/falling_r = SubResource( 4 )
-anims/hit_l = SubResource( 10 )
-anims/hit_r = SubResource( 11 )
-anims/idle_l = SubResource( 5 )
-anims/idle_r = SubResource( 6 )
-anims/jab_1_l = SubResource( 12 )
-anims/jab_1_r = SubResource( 13 )
-anims/jab_2_l = SubResource( 14 )
-anims/jab_2_r = SubResource( 15 )
-anims/jab_3_l = SubResource( 17 )
-anims/jab_3_r = SubResource( 16 )
-anims/running_l = SubResource( 7 )
-anims/running_r = SubResource( 8 )
+anims/hit_l = SubResource( 5 )
+anims/hit_r = SubResource( 6 )
+anims/idle_l = SubResource( 7 )
+anims/idle_r = SubResource( 8 )
+anims/jab_1_l = SubResource( 9 )
+anims/jab_1_r = SubResource( 10 )
+anims/jab_2_l = SubResource( 11 )
+anims/jab_2_r = SubResource( 12 )
+anims/jab_3_l = SubResource( 13 )
+anims/jab_3_r = SubResource( 14 )
+anims/running_l = SubResource( 15 )
+anims/running_r = SubResource( 16 )
 script = ExtResource( 25 )
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
@@ -2060,7 +2060,7 @@ margin_left = -50.0
 margin_top = -28.0
 margin_right = 50.0
 margin_bottom = -14.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 17 )
 custom_colors/font_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
 text = "carbone_13"
 align = 1

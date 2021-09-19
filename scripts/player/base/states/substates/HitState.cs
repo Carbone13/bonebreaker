@@ -75,4 +75,8 @@ public class HitState : ActionState
     {
         shouldExit = (string)state["should_exit"] == "1";
     }
+
+    public HitState (Character owner) : base(owner)
+    {
+    }
 }

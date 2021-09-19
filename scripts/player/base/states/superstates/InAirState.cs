@@ -29,4 +29,8 @@ public class InAirState : State
 
         return null;
     }
+
+    public InAirState (Character owner) : base(owner)
+    {
+    }
 }

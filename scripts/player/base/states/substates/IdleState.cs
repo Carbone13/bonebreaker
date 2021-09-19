@@ -44,4 +44,8 @@ public class IdleState : GroundedState
     {
         return "Idle";
     }
+
+    public IdleState (Character owner) : base(owner)
+    {
+    }
 }

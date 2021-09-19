@@ -43,4 +43,8 @@ public class GroundedState : State
 
         return null;
     }
+
+    public GroundedState (Character owner) : base(owner)
+    {
+    }
 }

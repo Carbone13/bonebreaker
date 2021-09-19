@@ -80,4 +80,8 @@ public class JabAction : ActionState
         lastEnteredTick = (int)state["last_entered_tick"];
         shouldExit = (string)state["should_exit"] == "1";
     }
+
+    public JabAction (Character owner) : base(owner)
+    {
+    }
 }

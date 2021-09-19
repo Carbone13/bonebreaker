@@ -10,7 +10,7 @@ public enum Orientation
     Left = -1, Right = 1
 }
 
-public sealed class Player : Body
+public abstract class Character : Body
 {
     [Export] public PlayerStats Stats;
     [Export] public bool Debug;
@@ -41,7 +41,6 @@ public sealed class Player : Body
 
     public void _network_spawn (Dictionary data)
     {
-        GD.Print("We are " + (int)data["player_character"]);
         playerIndex = (int)data["player_index"];
         SetNetworkMaster((int)data["peer_id"]);
         Name = "Player " + (int)data["peer_id"];
@@ -141,24 +140,14 @@ public sealed class Player : Body
     /// <summary>
     /// Link this Node states with the wanted ones, you can override it and provide whatever State object you want
     /// </summary>
-    private void SetupStates ()
+    protected virtual void SetupStates ()
     {
-        _IdleState = new IdleState();
-        _RunningState = new RunningState();
-        _AscendingState = new AscendingState();
-        _FallingState = new FallingState();
-        _JabAction = new JabAction();
-        _HitState = new HitState();
-        
-        
-        _IdleState.SetOwner(this);
-        _RunningState.SetOwner(this);
-        _AscendingState.SetOwner(this);
-        _FallingState.SetOwner(this);
-        _JabAction.SetOwner(this);
-        _JabAction._Init();
-        _HitState.SetOwner(this);
-        _HitState._Init();
+        _IdleState = new IdleState(this);
+        _RunningState = new RunningState(this);
+        _AscendingState = new AscendingState(this);
+        _FallingState = new FallingState(this);
+        _JabAction = new JabAction(this);
+        _HitState = new HitState(this);
 
         _CurrentState = _IdleState;
         _CurrentState.Enter(null, 0);

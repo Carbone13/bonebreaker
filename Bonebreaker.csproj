@@ -19,6 +19,7 @@
     <Content Include="scripts\maths\.idea\.idea.maths.dir\.idea\projectSettingsUpdater.xml" />
     <Content Include="scripts\maths\.idea\.idea.maths.dir\.idea\workspace.xml" />
     <Content Include="scripts\maths\libm\LICENSE.txt" />
+    <Content Include="scripts\network\WebRTC.gd" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="LiteNetLib" Version="0.9.5" />

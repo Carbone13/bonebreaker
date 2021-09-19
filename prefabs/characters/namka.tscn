@@ -1,7 +1,7 @@
 [gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://scripts/physics/shapes/AABB.cs" type="Script" id=1]
-[ext_resource path="res://scripts/player/Player.cs" type="Script" id=2]
+[ext_resource path="res://scripts/player/namka/Namka.cs" type="Script" id=2]
 [ext_resource path="res://resources/namka_stat.tres" type="Resource" id=3]
 [ext_resource path="res://assets/game_sprites/characters/namka/namka.sprites/running/running_7.tres" type="Texture" id=4]
 [ext_resource path="res://assets/game_sprites/characters/namka/namka.sprites/fall/fall_1.tres" type="Texture" id=5]
@@ -476,7 +476,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, 0.5 ) ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=5]
 resource_name = "hit_l"
 length = 0.25
 step = 0.0833333
@@ -589,7 +589,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, 0.5 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=6]
 resource_name = "hit_r"
 length = 0.25
 step = 0.0833333
@@ -702,7 +702,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, 0.5 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=7]
 length = 0.001
 loop = true
 step = 0.0833333
@@ -815,7 +815,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, 0.5 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=8]
 length = 0.001
 loop = true
 step = 0.0833333
@@ -928,7 +928,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, 0.5 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=9]
 length = 0.666667
 loop = true
 step = 0.0833333
@@ -1041,7 +1041,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, 0.5 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=10]
 length = 0.666667
 loop = true
 step = 0.0833333
@@ -1154,7 +1154,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, -0.5 ) ]
 }
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=11]
 extra_spacing_space = -1
 font_data = ExtResource( 23 )
 
@@ -1204,12 +1204,12 @@ anims/ascending_l = SubResource( 1 )
 anims/ascending_r = SubResource( 2 )
 anims/falling_l = SubResource( 3 )
 anims/falling_r = SubResource( 4 )
-anims/hit_l = SubResource( 10 )
-anims/hit_r = SubResource( 11 )
-anims/idle_l = SubResource( 5 )
-anims/idle_r = SubResource( 6 )
-anims/running_l = SubResource( 7 )
-anims/running_r = SubResource( 8 )
+anims/hit_l = SubResource( 5 )
+anims/hit_r = SubResource( 6 )
+anims/idle_l = SubResource( 7 )
+anims/idle_r = SubResource( 8 )
+anims/running_l = SubResource( 9 )
+anims/running_r = SubResource( 10 )
 script = ExtResource( 9 )
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
@@ -1220,7 +1220,7 @@ margin_left = -50.0
 margin_top = -28.0
 margin_right = 50.0
 margin_bottom = -14.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 11 )
 custom_colors/font_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
 text = "carbone_13"
 align = 1

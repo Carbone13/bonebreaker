@@ -1,17 +1,24 @@
-﻿using Bonebreaker.Inputs;
+﻿using System;
+using Bonebreaker.Inputs;
 using Godot;
 using Godot.Collections;
 
 public class State : Reference
 {
-    protected Player Owner;
+    protected Character Owner;
 
+    public State (Character owner)
+    {
+        Owner = owner;
+        _Init();
+    }
+    
     public virtual void _Init ()
     {
         
     }
     
-    public void SetOwner (Player owner)
+    public void SetOwner (Character owner)
     {
         Owner = owner;
     }

@@ -1,8 +1,8 @@
 [gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://resources/marston_stat.tres" type="Resource" id=1]
+[ext_resource path="res://scripts/player/marston/Marston.cs" type="Script" id=1]
 [ext_resource path="res://scripts/physics/shapes/AABB.cs" type="Script" id=2]
-[ext_resource path="res://scripts/player/Player.cs" type="Script" id=3]
+[ext_resource path="res://resources/marston_stat.tres" type="Resource" id=3]
 [ext_resource path="res://assets/game_sprites/characters/marston/marston.sprites/damage/hit_2.tres" type="Texture" id=4]
 [ext_resource path="res://resources/animations/characters/marston/jab_2_r.tres" type="Animation" id=5]
 [ext_resource path="res://resources/animations/characters/marston/jab_2_l.tres" type="Animation" id=6]
@@ -31,11 +31,11 @@ font_data = ExtResource( 21 )
 [node name="Marston" type="Node2D" groups=[
 "network_sync",
 ]]
-script = ExtResource( 3 )
+script = ExtResource( 1 )
 Pushbox_path = NodePath("BOX/Pushbox")
 Hitbox_path = NodePath("BOX/Hitbox")
 Hurtbox_path = NodePath("BOX/Hurtbox")
-Stats = ExtResource( 1 )
+Stats = ExtResource( 3 )
 
 [node name="BOX" type="Node2D" parent="."]
 

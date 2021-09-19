@@ -45,4 +45,8 @@ public class RunningState : GroundedState
     {
         return "Running";
     }
+
+    public RunningState (Character owner) : base(owner)
+    {
+    }
 }

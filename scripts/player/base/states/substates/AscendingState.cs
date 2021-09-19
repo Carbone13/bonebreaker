@@ -37,4 +37,8 @@ public class AscendingState : InAirState
     {
         return "Ascending";
     }
+
+    public AscendingState (Character owner) : base(owner)
+    {
+    }
 }

@@ -16,4 +16,8 @@
             Owner.Animator.Play("falling_r");
         }
     }
+
+    public FallingState (Character owner) : base(owner)
+    {
+    }
 }
