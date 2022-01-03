@@ -1,5 +1,4 @@
-﻿using System.Drawing.Printing;
-using Godot;
+﻿using Godot;
 using Godot.Collections;
 
 namespace Bonebreaker.Inputs
@@ -25,11 +24,14 @@ namespace Bonebreaker.Inputs
             if (input.ToString() == "{}")
                 return state;
             
-
             state.Joystick = new Vector2((float)input[-1], (float)input[0]);
-            byte buttons = (byte) ((int)input[1]);
+            byte buttons = (byte) (int)input[1];
+            
             state.Jump = (0b10000000 & buttons) != 0;
             state.Light = (0b01000000 & buttons) != 0;
+            state.Fall = (0b00100000 & buttons) != 0;
+            state.Dash = (0b00010000 & buttons) != 0;
+            state.Special = (0b00001000 & buttons) != 0;
             
             return state;
         }
@@ -42,8 +44,14 @@ namespace Bonebreaker.Inputs
                 buttons |= 0b10000000;
             if(Light)
                 buttons |= 0b01000000;
+            if(Fall)
+                buttons |= 0b00100000;
+            if(Dash)
+                buttons |= 0b00010000;
+            if(Special)
+                buttons |= 0b00001000;
             
-            Dictionary dictionary = new Dictionary()
+            Dictionary dictionary = new Dictionary
             {
                 { -1, Joystick.x},
                 { 0, Joystick.y},
