@@ -10,6 +10,6 @@ Acceleration = 700.0
 JumpHeight = 50
 JumpApexTime = 0.3
 InAirDamping = 0.95
-JabCount = 3
+JabCount = 1
 JabResetTicks = 60
 JabCooldown = 0

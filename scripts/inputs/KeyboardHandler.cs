@@ -64,7 +64,6 @@ namespace Bonebreaker.Inputs
             }
             if (!state.Light && (OS.GetTicksMsec() - lastLightPressed) < LIGHT_BUFFER_MS)
             {
-                GD.Print("Did not pressed light since " + (OS.GetTicksMsec() - lastLightPressed) + " ms, buffering it");
                 state.Light = true;
             }
 

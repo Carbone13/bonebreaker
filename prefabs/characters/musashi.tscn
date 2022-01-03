@@ -2017,7 +2017,8 @@ script = ExtResource( 1 )
 Tag = "Player"
 Type = 1
 Size = Vector2( 6, 10 )
-Draw = false
+Draw = true
+Color = Color( 1, 0, 0, 1 )
 
 [node name="Hurtbox" type="Node2D" parent="BOX"]
 position = Vector2( 0, -0.5 )
@@ -2025,7 +2026,8 @@ script = ExtResource( 1 )
 Tag = "Player"
 Type = 2
 Size = Vector2( 6, 10.5 )
-Draw = false
+Draw = true
+Color = Color( 0, 1, 0.156863, 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 1, 0 )
