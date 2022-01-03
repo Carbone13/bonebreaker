@@ -152,6 +152,7 @@ class MessageSerializer:
 			buffer.put_data(input)
 		
 		buffer.resize(buffer.get_position())
+		
 		return buffer.data_array
 
 	func unserialize_message(serialized) -> Dictionary:
@@ -672,13 +673,12 @@ func _send_input_messages_to_peer(peer_id: int) -> void:
 		var bytes = message_serializer.serialize_message(msg)
 		
 		# See https://gafferongames.com/post/packet_fragmentation_and_reassembly/
-		#if debug_message_bytes:
-		#	if bytes.size() > debug_message_bytes:
-		#		push_error("Sending message w/ size %s bytes" % bytes.size())
+		if debug_message_bytes:
+			if bytes.size() > debug_message_bytes:
+				push_error("Sending message w/ size %s bytes" % bytes.size())
 		
 		#var ticks = msg[InputMessageKey.INPUT].keys()
 		#print ("[%s] Sending ticks %s - %s" % [current_tick, min(ticks[0], ticks[-1]), max(ticks[0], ticks[-1])])
-		
 		network_adaptor.send_input_tick(peer_id, bytes)
 
 func _send_input_messages_to_all_peers() -> void:

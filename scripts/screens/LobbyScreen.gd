@@ -29,7 +29,9 @@ func start_game ():
 	
 func spawn_card(username, color, session_id) -> Node:
 	var token_pos
+	var was_spawned = false
 	if(local_card):
+		was_spawned = true
 		token_pos = local_card.get_node("token").rect_global_position
 	
 	var _child
@@ -49,7 +51,7 @@ func spawn_card(username, color, session_id) -> Node:
 	else:
 		_child.get_node("token").visible = false
 	
-	if(local_card):
+	if(local_card && was_spawned):
 		local_card.get_node("token").call_deferred("set", "rect_global_position", token_pos)
 	
 	return _child

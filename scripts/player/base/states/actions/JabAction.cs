@@ -4,9 +4,11 @@ using Godot.Collections;
 
 public class JabAction : ActionState
 {
-    private int jabIndex;
-    private int lastEnteredTick;
-    private bool shouldExit;
+    protected int jabIndex;
+    protected int lastEnteredTick;
+    protected bool shouldExit;
+
+    public int nextAllowedTick;
 
     public override void _Init ()
     {
@@ -38,12 +40,17 @@ public class JabAction : ActionState
         {
             Owner.Animator.Play("jab_" + jabIndex + "_r");
         }
+
+        if(jabIndex == Owner.Stats.JabCount)
+            nextAllowedTick = tick + Owner.Stats.JabCooldown;
     }
 
     private void AnimationFinished (string name)
     {
-        if(name.Contains("jab_") && Owner._CurrentState == Owner._JabAction)
+        if (name.Contains("jab_") && Owner._CurrentState == Owner._JabAction)
+        {
             shouldExit = true;
+        }
     }
 
     protected override State _ShouldExit (InputState input, int tick)
@@ -70,7 +77,8 @@ public class JabAction : ActionState
         {
             { "jab_index", jabIndex },
             { "last_entered_tick", lastEnteredTick },
-            { "should_exit", shouldExit ? "1" : "0" }
+            { "should_exit", shouldExit ? "1" : "0" },
+            { "next_allowed_tick", nextAllowedTick }
         };
     }
 
@@ -79,6 +87,7 @@ public class JabAction : ActionState
         jabIndex = (int)state["jab_index"];
         lastEnteredTick = (int)state["last_entered_tick"];
         shouldExit = (string)state["should_exit"] == "1";
+        nextAllowedTick = (int)state["next_allowed_tick"];
     }
 
     public JabAction (Character owner) : base(owner)

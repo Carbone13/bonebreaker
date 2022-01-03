@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/game_sprites/characters/marston/marston.sprites/attack1/attack1_2.tres" type="Texture" id=2]
 
 [resource]
-length = 0.25
+length = 0.333333
 step = 0.0833333
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -13,7 +13,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.166667 ),
+"times": PoolRealArray( 0, 0.0833333 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ ExtResource( 1 ), ExtResource( 2 ) ]
@@ -123,7 +123,7 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( 0, 0.166667 ),
+"times": PoolRealArray( 0, 0.333333 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]

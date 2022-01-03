@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/player/marston/Marston.cs" type="Script" id=1]
 [ext_resource path="res://scripts/physics/shapes/AABB.cs" type="Script" id=2]
 [ext_resource path="res://resources/marston_stat.tres" type="Resource" id=3]
-[ext_resource path="res://assets/game_sprites/characters/marston/marston.sprites/damage/hit_2.tres" type="Texture" id=4]
+[ext_resource path="res://assets/game_sprites/characters/marston/marston.sprites/attack2/attack2_1.tres" type="Texture" id=4]
 [ext_resource path="res://resources/animations/characters/marston/jab_2_r.tres" type="Animation" id=5]
 [ext_resource path="res://resources/animations/characters/marston/jab_2_l.tres" type="Animation" id=6]
 [ext_resource path="res://resources/animations/characters/marston/jab_3_l.tres" type="Animation" id=7]
@@ -49,24 +49,24 @@ Draw = false
 ignoreBelow = false
 
 [node name="Hitbox" type="Node2D" parent="BOX"]
+position = Vector2( 9, 0 )
 script = ExtResource( 2 )
 Tag = "Player"
 Type = 1
-Size = Vector2( 0, 0 )
-Draw = false
+Size = Vector2( 6, 10 )
+Draw = true
+Color = Color( 0, 1, 1, 0 )
 
 [node name="Hurtbox" type="Node2D" parent="BOX"]
 script = ExtResource( 2 )
 Tag = "Player"
 Type = 2
 Size = Vector2( 6, 10 )
-Draw = true
-Color = Color( 0.168627, 0.8, 0.25098, 1 )
+Draw = false
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, 1 )
+position = Vector2( 3, -1 )
 texture = ExtResource( 4 )
-flip_h = true
 __meta__ = {
 "_edit_lock_": true
 }

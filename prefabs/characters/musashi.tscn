@@ -2025,8 +2025,7 @@ script = ExtResource( 1 )
 Tag = "Player"
 Type = 2
 Size = Vector2( 6, 10.5 )
-Draw = true
-Color = Color( 0.168627, 0.8, 0.25098, 1 )
+Draw = false
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 1, 0 )

@@ -29,7 +29,7 @@ public abstract class Character : Body
     public int playerIndex;
     public bool playerControlled;
 
-    private bool focused = true;
+    private bool focused;
 
     public override void _Notification (int what)
     {
@@ -48,6 +48,7 @@ public abstract class Character : Body
         if ((int)data["peer_id"] == GetTree().GetNetworkUniqueId())
         {
             playerControlled = true;
+            focused = true;
             GetNode<Node2D>("Selecter").Visible = true;
         }
         else

@@ -11,6 +11,7 @@ public class PlayerStats : Resource
     [Export] public float InAirDamping { get; set; }
     [Export] public int JabCount { get; set; }
     [Export] public int JabResetTicks { get; set; }
+    [Export] public int JabCooldown { get; set; }
     public sfloat Gravity { get; private set; }
     public sfloat JumpVelocity { get; private set; }
     
