@@ -1,14 +1,17 @@
 extends Node2D
 
-var marston = preload("res://prefabs/characters/marston.tscn")
+var marston = preload("res://prefabs/characters/musashi.tscn")
 
 var spawned
 var tick = 0
 
 func _ready():
+	# local game, for testing purposes
 	if(Online.nakama_session == null):
 		spawned = marston.instance()
 		spawned.global_position = Vector2(70, 80)
+		spawned.playerControlled = true
+		spawned.focused = true
 		get_node("World/Players").add_child(spawned)
 		
 func _physics_process(delta):

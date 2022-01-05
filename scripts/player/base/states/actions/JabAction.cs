@@ -5,10 +5,6 @@ using Godot.Collections;
 public class JabAction : ActionState
 {
     protected int jabIndex;
-    protected int lastEnteredTick;
-    protected bool shouldExit;
-
-    public int nextAllowedTick;
 
     public override void _Init ()
     {
@@ -62,7 +58,6 @@ public class JabAction : ActionState
         }
 
         return base._ShouldExit(input, tick);
-
     }
 
     

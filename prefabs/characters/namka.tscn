@@ -937,7 +937,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, 0.5 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=9]
 resource_name = "jab_1_l"
 length = 0.666667
 step = 0.0833333
@@ -1076,7 +1076,7 @@ tracks/10/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=10]
 resource_name = "jab_1_r"
 length = 0.666667
 step = 0.0833333
@@ -1215,7 +1215,7 @@ tracks/10/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=11]
 length = 0.666667
 loop = true
 step = 0.0833333
@@ -1328,7 +1328,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, 0.5 ) ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=12]
 length = 0.666667
 loop = true
 step = 0.0833333
@@ -1441,7 +1441,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, -0.5 ) ]
 }
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=13]
 extra_spacing_space = -1
 font_data = ExtResource( 23 )
 
@@ -1471,8 +1471,7 @@ script = ExtResource( 1 )
 Tag = "Player"
 Type = 1
 Size = Vector2( 20, 15 )
-Draw = true
-Color = Color( 1, 0, 0, 1 )
+Draw = false
 
 [node name="Hurtbox" type="Node2D" parent="BOX"]
 position = Vector2( 0, 0.5 )
@@ -1496,10 +1495,10 @@ anims/hit_l = SubResource( 5 )
 anims/hit_r = SubResource( 6 )
 anims/idle_l = SubResource( 7 )
 anims/idle_r = SubResource( 8 )
-anims/jab_1_l = SubResource( 12 )
-anims/jab_1_r = SubResource( 13 )
-anims/running_l = SubResource( 9 )
-anims/running_r = SubResource( 10 )
+anims/jab_1_l = SubResource( 9 )
+anims/jab_1_r = SubResource( 10 )
+anims/running_l = SubResource( 11 )
+anims/running_r = SubResource( 12 )
 script = ExtResource( 9 )
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
@@ -1510,7 +1509,7 @@ margin_left = -50.0
 margin_top = -28.0
 margin_right = 50.0
 margin_bottom = -14.0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
 text = "carbone_13"
 align = 1

@@ -8,6 +8,9 @@ public class Marston : Character
         _FallingState = new MarstonFalling(this);
         _JabAction = new MarstonJab(this);
         _HitState = new MarstonHit(this);
+        
+        // empty
+        _DashAbility = new ActionState(this);
 
         _CurrentState = _IdleState;
         _CurrentState.Enter(null, 0);

@@ -8,6 +8,9 @@ public class Namka : Character
         _FallingState = new NamkaFalling(this);
         _JabAction = new NamkaJab(this);
         _HitState = new NamkaHit(this);
+        
+        // empty
+        _DashAbility = new ActionState(this);
 
         _CurrentState = _IdleState;
         _CurrentState.Enter(null, 0);

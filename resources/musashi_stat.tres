@@ -13,3 +13,7 @@ InAirDamping = 0.95
 JabCount = 3
 JabResetTicks = 60
 JabCooldown = 20
+CanDash = true
+DashSpeed = 200
+DashDuration = 10
+DashCooldownTicks = 80

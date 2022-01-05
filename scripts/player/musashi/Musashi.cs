@@ -8,6 +8,7 @@ public class Musashi : Character
         _FallingState = new MusashiFalling(this);
         _JabAction = new MusashiJab(this);
         _HitState = new MusashiHit(this);
+        _DashAbility = new MusashiDash(this);
 
         _CurrentState = _IdleState;
         _CurrentState.Enter(null, 0);

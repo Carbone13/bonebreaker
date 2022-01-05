@@ -12,6 +12,10 @@ public class PlayerStats : Resource
     [Export] public int JabCount { get; set; }
     [Export] public int JabResetTicks { get; set; }
     [Export] public int JabCooldown { get; set; }
+    [Export] public bool CanDash { get; set; }
+    [Export] public int DashSpeed { get; set; }
+    [Export] public int DashDuration { get; set; }
+    [Export] public int DashCooldownTicks { get; set; }
     public sfloat Gravity { get; private set; }
     public sfloat JumpVelocity { get; private set; }
     

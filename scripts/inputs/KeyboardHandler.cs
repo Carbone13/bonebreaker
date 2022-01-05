@@ -71,6 +71,11 @@ namespace Bonebreaker.Inputs
             {
                 state.Special = true;
             }
+
+            if (Godot.Input.IsKeyPressed((int)KeyList.Control))
+            {
+                state.Dash = true;
+            }
             
             if (Godot.Input.IsKeyPressed((int)KeyList.Shift) ||
                 Godot.Input.IsKeyPressed((int)KeyList.S) ||
@@ -154,6 +159,11 @@ namespace Bonebreaker.Inputs
                 Godot.Input.IsKeyPressed((int)KeyList.Down))
             {
                 state.Fall = true;
+            }
+            
+            if (Godot.Input.IsKeyPressed((int)KeyList.Control))
+            {
+                state.Dash = true;
             }
 
             bool leftPressedThisFrame = Godot.Input.IsKeyPressed((int) KeyList.Q) ||

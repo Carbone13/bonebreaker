@@ -25,6 +25,7 @@ public abstract class Character : Body
     public State _CurrentState;
     public State _IdleState, _RunningState, _AscendingState, _FallingState, _HitState;
     public JabAction _JabAction;
+    public ActionState _DashAbility;
 
     public int playerIndex;
     public bool playerControlled;
@@ -138,6 +139,7 @@ public abstract class Character : Body
         _CurrentState.Enter(old, _tick);
     }
     
+    
     /// <summary>
     /// Link this Node states with the wanted ones, you can override it and provide whatever State object you want
     /// </summary>
@@ -149,6 +151,7 @@ public abstract class Character : Body
         _FallingState = new FallingState(this);
         _JabAction = new JabAction(this);
         _HitState = new HitState(this);
+        _DashAbility = new ActionState(this);
 
         _CurrentState = _IdleState;
         _CurrentState.Enter(null, 0);
@@ -204,7 +207,8 @@ public abstract class Character : Body
             { "velocity", Velocity.SerializeToString() },
             { "state", _CurrentState.ToString() },
             { "jab_state", _JabAction._Serialize() },
-            { "hit_state", _HitState._Serialize() }
+            { "hit_state", _HitState._Serialize() },
+            { "dash_ability", _DashAbility._Serialize() }
         };
     }
 
@@ -241,9 +245,13 @@ public abstract class Character : Body
             case "Jab Action":
                 _CurrentState = _JabAction;
                 break;
+            case "Dash":
+                _CurrentState = _DashAbility;
+                break;
         }
 
         _JabAction._Deserialize(state["jab_state"] as Dictionary);
         _HitState._Deserialize(state["hit_state"] as Dictionary);
+        _DashAbility._Deserialize(state["dash_ability"] as Dictionary);
     }
 }

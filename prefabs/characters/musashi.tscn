@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://scripts/physics/shapes/AABB.cs" type="Script" id=1]
 [ext_resource path="res://scripts/player/musashi/Musashi.cs" type="Script" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://assets/fonts/Armin.ttf" type="DynamicFontData" id=23]
 [ext_resource path="res://assets/ui/selection_gem.png" type="Texture" id=24]
 [ext_resource path="res://addons/network-sync-rollback/NetworkAnimationPlayer.gd" type="Script" id=25]
+[ext_resource path="res://assets/game_sprites/characters/musashi/musashi.sprites/dash/dash.tres" type="Texture" id=26]
 
 [sub_resource type="Animation" id=1]
 resource_name = "ascending_l"
@@ -253,7 +254,232 @@ tracks/8/keys = {
 }
 
 [sub_resource type="Animation" id=3]
-resource_name = "falling_l"
+resource_name = "dash_l"
+length = 0.001
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 26 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BOX/Pushbox:Size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 5, 10 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BOX/Pushbox:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("BOX/Hitbox:Size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 6, 10 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("BOX/Hitbox:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -9, 0 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("BOX/Hurtbox:Size")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 6, 10.5 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("BOX/Hurtbox:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -0.5 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "dash_r"
+length = 0.001
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 26 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BOX/Pushbox:Size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 5, 10 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BOX/Pushbox:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("BOX/Hitbox:Size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 6, 10 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("BOX/Hitbox:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -9, 0 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("BOX/Hurtbox:Size")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 6, 10.5 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("BOX/Hurtbox:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -0.5 ) ]
+}
+
+[sub_resource type="Animation" id=5]
 length = 0.001
 loop = true
 tracks/0/type = "value"
@@ -365,8 +591,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, -0.5 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "falling_r"
+[sub_resource type="Animation" id=6]
 length = 0.001
 loop = true
 tracks/0/type = "value"
@@ -478,8 +703,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, -0.5 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "hit_l"
+[sub_resource type="Animation" id=7]
 length = 0.25
 step = 0.0833333
 tracks/0/type = "value"
@@ -591,8 +815,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, -0.5 ) ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "hit_r"
+[sub_resource type="Animation" id=8]
 length = 0.25
 step = 0.0833333
 tracks/0/type = "value"
@@ -704,7 +927,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, -0.5 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=9]
 length = 0.001
 loop = true
 tracks/0/type = "value"
@@ -816,7 +1039,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, -0.5 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=10]
 length = 0.001
 loop = true
 tracks/0/type = "value"
@@ -928,8 +1151,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, -0.5 ) ]
 }
 
-[sub_resource type="Animation" id=9]
-resource_name = "jab_1_l"
+[sub_resource type="Animation" id=11]
 length = 0.25
 step = 0.0833333
 tracks/0/type = "value"
@@ -1067,8 +1289,7 @@ tracks/10/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=10]
-resource_name = "jab_1_r"
+[sub_resource type="Animation" id=12]
 length = 0.25
 step = 0.0833333
 tracks/0/type = "value"
@@ -1206,8 +1427,7 @@ tracks/10/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=11]
-resource_name = "jab_2_l"
+[sub_resource type="Animation" id=13]
 length = 0.25
 step = 0.0833333
 tracks/0/type = "value"
@@ -1345,8 +1565,7 @@ tracks/10/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=12]
-resource_name = "jab_2_r"
+[sub_resource type="Animation" id=14]
 length = 0.25
 step = 0.0833333
 tracks/0/type = "value"
@@ -1484,8 +1703,7 @@ tracks/10/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=13]
-resource_name = "jab_3_l"
+[sub_resource type="Animation" id=15]
 length = 0.25
 step = 0.0833333
 tracks/0/type = "value"
@@ -1623,8 +1841,7 @@ tracks/10/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=14]
-resource_name = "jab_3_r"
+[sub_resource type="Animation" id=16]
 length = 0.25
 step = 0.0833333
 tracks/0/type = "value"
@@ -1762,7 +1979,7 @@ tracks/10/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=17]
 length = 0.666667
 loop = true
 step = 0.0833333
@@ -1875,7 +2092,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, -0.5 ) ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=18]
 length = 0.666667
 loop = true
 step = 0.0833333
@@ -1988,7 +2205,7 @@ tracks/8/keys = {
 "values": [ Vector2( 0, -0.5 ) ]
 }
 
-[sub_resource type="DynamicFont" id=17]
+[sub_resource type="DynamicFont" id=19]
 extra_spacing_space = -1
 font_data = ExtResource( 23 )
 
@@ -2017,8 +2234,7 @@ script = ExtResource( 1 )
 Tag = "Player"
 Type = 1
 Size = Vector2( 6, 10 )
-Draw = true
-Color = Color( 1, 0, 0, 1 )
+Draw = false
 
 [node name="Hurtbox" type="Node2D" parent="BOX"]
 position = Vector2( 0, -0.5 )
@@ -2030,27 +2246,29 @@ Draw = true
 Color = Color( 0, 1, 0.156863, 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 1, 0 )
-texture = ExtResource( 16 )
+position = Vector2( 0, 1 )
+texture = ExtResource( 26 )
 flip_h = true
 
 [node name="Animator" type="AnimationPlayer" parent="."]
 anims/ascending_l = SubResource( 1 )
 anims/ascending_r = SubResource( 2 )
-anims/falling_l = SubResource( 3 )
-anims/falling_r = SubResource( 4 )
-anims/hit_l = SubResource( 5 )
-anims/hit_r = SubResource( 6 )
-anims/idle_l = SubResource( 7 )
-anims/idle_r = SubResource( 8 )
-anims/jab_1_l = SubResource( 9 )
-anims/jab_1_r = SubResource( 10 )
-anims/jab_2_l = SubResource( 11 )
-anims/jab_2_r = SubResource( 12 )
-anims/jab_3_l = SubResource( 13 )
-anims/jab_3_r = SubResource( 14 )
-anims/running_l = SubResource( 15 )
-anims/running_r = SubResource( 16 )
+anims/dash_l = SubResource( 3 )
+anims/dash_r = SubResource( 4 )
+anims/falling_l = SubResource( 5 )
+anims/falling_r = SubResource( 6 )
+anims/hit_l = SubResource( 7 )
+anims/hit_r = SubResource( 8 )
+anims/idle_l = SubResource( 9 )
+anims/idle_r = SubResource( 10 )
+anims/jab_1_l = SubResource( 11 )
+anims/jab_1_r = SubResource( 12 )
+anims/jab_2_l = SubResource( 13 )
+anims/jab_2_r = SubResource( 14 )
+anims/jab_3_l = SubResource( 15 )
+anims/jab_3_r = SubResource( 16 )
+anims/running_l = SubResource( 17 )
+anims/running_r = SubResource( 18 )
 script = ExtResource( 25 )
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
@@ -2061,7 +2279,7 @@ margin_left = -50.0
 margin_top = -28.0
 margin_right = 50.0
 margin_bottom = -14.0
-custom_fonts/font = SubResource( 17 )
+custom_fonts/font = SubResource( 19 )
 custom_colors/font_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
 text = "carbone_13"
 align = 1

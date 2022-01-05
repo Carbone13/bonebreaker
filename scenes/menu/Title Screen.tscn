@@ -428,6 +428,7 @@ __meta__ = {
 [connection signal="LoseFocus" from="PLAY_MODES/local" to="." method="hover_lose"]
 [connection signal="button_down" from="PLAY_MODES/local" to="PLAY_MODES/local/AudioStreamPlayer" method="_play"]
 [connection signal="focus_entered" from="PLAY_MODES/local" to="." method="local_hovered"]
+[connection signal="pressed" from="PLAY_MODES/local" to="." method="local"]
 [connection signal="button_down" from="PLAY_MODES/settings" to="PLAY_MODES/settings/AudioStreamPlayer" method="_play"]
 [connection signal="focus_entered" from="PLAY_MODES/settings" to="." method="settings_hovered"]
 [connection signal="pressed" from="PLAY_MODES/settings" to="." method="settings"]

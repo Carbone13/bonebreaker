@@ -54,8 +54,7 @@ script = ExtResource( 2 )
 Tag = "Player"
 Type = 1
 Size = Vector2( 6, 3 )
-Draw = true
-Color = Color( 1, 0, 0, 1 )
+Draw = false
 
 [node name="Hurtbox" type="Node2D" parent="BOX"]
 script = ExtResource( 2 )

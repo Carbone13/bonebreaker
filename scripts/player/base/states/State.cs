@@ -80,6 +80,10 @@ public class State : Reference
     {
         if (input.Light && Owner._CurrentState != Owner._JabAction && tick >= Owner._JabAction.nextAllowedTick)
             return Owner._JabAction;
+
+        if (input.Dash && Owner.Stats.CanDash && Owner._CurrentState != Owner._DashAbility &&
+            tick >= Owner._DashAbility.nextAllowedTick)
+            return Owner._DashAbility;
         
         return _ShouldExit(input, tick);
     }

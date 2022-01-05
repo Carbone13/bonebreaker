@@ -46,6 +46,9 @@ func logout () -> void:
 func multiplayer () -> void:
 	SceneManager.call("LoadScene", "res://scenes/menu/Matchmaking Screen.tscn")
 
+func local () -> void:
+	SceneManager.call("LoadScene", "res://scenes/Main.tscn")
+
 func quit () -> void:
 	get_tree().quit()
 	
