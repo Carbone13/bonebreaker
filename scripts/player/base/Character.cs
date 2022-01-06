@@ -64,6 +64,8 @@ public abstract class Character : Body
             GetNode<Label>("Username").Visible = true;
             GetNode<Label>("Username").Text = (string)data["player_name"];
         }
+        
+        Healthbar.GetNode<Label>("Username").Text = username == "" ? GetCharacterName : username;
     }
 
     public Dictionary _get_local_input ()
@@ -107,7 +109,6 @@ public abstract class Character : Body
 
         Healthbar = _healthbarInstance as ProgressBar;
         Healthbar.Value = 100;
-        Healthbar.GetNode<Label>("Username").Text = username == "" ? GetCharacterName : username;
         Health = 100;
     }
 
