@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://resources/themes/main_theme.tres" type="Theme" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.721569, 0.298039, 0.298039, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+
+[node name="healthbar" type="ProgressBar"]
+margin_right = 120.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 120, 15 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+value = 100.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Username" type="Label" parent="."]
+margin_left = 2.0
+margin_right = 100.0
+margin_bottom = 15.0
+theme = ExtResource( 1 )
+text = "Carbone_13"
+__meta__ = {
+"_edit_use_anchors_": false
+}

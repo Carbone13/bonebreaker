@@ -15,4 +15,6 @@ public class Marston : Character
         _CurrentState = _IdleState;
         _CurrentState.Enter(null, 0);
     }
+    
+    protected override string GetCharacterName => "Marston";
 }

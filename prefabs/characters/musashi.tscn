@@ -2226,6 +2226,7 @@ Tag = "Player"
 Type = 0
 Size = Vector2( 5, 10 )
 Draw = false
+Color = Color( 0, 1, 1, 1 )
 ignoreBelow = false
 
 [node name="Hitbox" type="Node2D" parent="BOX"]
@@ -2235,6 +2236,7 @@ Tag = "Player"
 Type = 1
 Size = Vector2( 6, 10 )
 Draw = false
+Color = Color( 1, 0, 0, 1 )
 
 [node name="Hurtbox" type="Node2D" parent="BOX"]
 position = Vector2( 0, -0.5 )

@@ -62,6 +62,24 @@ __meta__ = {
 [node name="Background" type="Node2D" parent="World/Décor"]
 script = ExtResource( 4 )
 
+[node name="wall_1" type="Node2D" parent="World/Décor/Background"]
+position = Vector2( -1, 90 )
+script = ExtResource( 3 )
+Type = 0
+Size = Vector2( 1, 90 )
+Draw = false
+Color = Color( 0, 1, 1, 1 )
+ignoreBelow = false
+
+[node name="wall_2" type="Node2D" parent="World/Décor/Background"]
+position = Vector2( 321, 90 )
+script = ExtResource( 3 )
+Type = 0
+Size = Vector2( 1, 90 )
+Draw = false
+Color = Color( 0, 1, 1, 1 )
+ignoreBelow = false
+
 [node name="Panel2" type="Panel" parent="World/Décor"]
 margin_top = 140.0
 margin_right = 320.0
@@ -129,6 +147,7 @@ __meta__ = {
 Type = 0
 Size = Vector2( 25, 3 )
 Draw = false
+Color = Color( 0, 1, 1, 1 )
 ignoreBelow = true
 
 [node name="platform2" type="Line2D" parent="World/Level"]
@@ -150,6 +169,7 @@ __meta__ = {
 Type = 0
 Size = Vector2( 25, 3 )
 Draw = false
+Color = Color( 0, 1, 1, 1 )
 ignoreBelow = true
 
 [node name="platform3" type="Line2D" parent="World/Level"]
@@ -171,6 +191,7 @@ __meta__ = {
 Type = 0
 Size = Vector2( 25, 3 )
 Draw = false
+Color = Color( 0, 1, 1, 1 )
 ignoreBelow = true
 
 [node name="Floor" type="Node2D" parent="World/Level"]
@@ -179,6 +200,7 @@ script = ExtResource( 3 )
 Type = 0
 Size = Vector2( 160, 5 )
 Draw = false
+Color = Color( 0, 1, 1, 1 )
 ignoreBelow = false
 
 [node name="Dummy" type="Node2D" parent="World"]
@@ -204,7 +226,7 @@ script = ExtResource( 3 )
 Type = 2
 Size = Vector2( 7.5, 16 )
 Draw = true
-Color = Color( 0, 1, 1, 1 )
+Color = Color( 0.054902, 1, 0, 1 )
 
 [node name="Animator" type="AnimationPlayer" parent="World/Dummy"]
 playback_speed = 1.2
@@ -231,7 +253,9 @@ autoplay = "coin_idle"
 method_call_mode = 1
 anims/coin_idle = ExtResource( 12 )
 
-[node name="HUD" type="Control" parent="."]
+[node name="HUD" type="Control" parent="." groups=[
+"hud_root",
+]]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 320.0
@@ -253,6 +277,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 2 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Healthbars" type="GridContainer" parent="HUD"]
+anchor_left = 0.111
+anchor_right = 1.0
+margin_left = -30.52
+margin_top = 3.0
+margin_right = -5.0
+margin_bottom = 39.0
+custom_constants/vseparation = 5
+custom_constants/hseparation = 60
+columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Bonebreaker.Inputs;
 using Godot;
 using Godot.Collections;
@@ -17,6 +18,8 @@ public abstract class Character : Body
 
     public AnimationPlayer Animator;
     public Orientation Orientation;
+
+    private ProgressBar Healthbar;
     
     public int Health { get; set; }
     public sfloat2 Velocity { get; set; }
@@ -30,7 +33,10 @@ public abstract class Character : Body
     public int playerIndex;
     public bool playerControlled;
 
+    public string username = "";
+    
     private bool focused;
+    
 
     public override void _Notification (int what)
     {
@@ -45,6 +51,7 @@ public abstract class Character : Body
         playerIndex = (int)data["player_index"];
         SetNetworkMaster((int)data["peer_id"]);
         Name = "Player " + (int)data["peer_id"];
+        username = (string)data["player_name"];
 
         if ((int)data["peer_id"] == GetTree().GetNetworkUniqueId())
         {
@@ -83,6 +90,7 @@ public abstract class Character : Body
         GatherReferences();
         SetupStates();
         ResolveCorrectState(new InputState(), 0);
+        SetupHealthbar();
     }
 
     public void GatherReferences ()
@@ -91,7 +99,18 @@ public abstract class Character : Body
         Hurtbox.Connect("Ticked", this, nameof(Ticked));
     }
 
-    // TODO move this to attack actions
+    private void SetupHealthbar ()
+    {
+        var _healthbarInstance = GD.Load<PackedScene>("res://prefabs/healthbar.tscn").Instance();
+        var _hudRoot = GetTree().GetNodesInGroup("hud_root")[0] as Node;
+        _hudRoot.FindNode("Healthbars").AddChild(_healthbarInstance);
+
+        Healthbar = _healthbarInstance as ProgressBar;
+        Healthbar.Value = 100;
+        Healthbar.GetNode<Label>("Username").Text = username == "" ? GetCharacterName : username;
+        Health = 100;
+    }
+
     public void DealDamage (Vector2 offset)
     {
         var hit = Physics.CastAABB(Position + new sfloat2(offset.x, offset.y), Hitbox.Size, false, 
@@ -111,6 +130,14 @@ public abstract class Character : Body
         _CurrentState.Exit(_HitState);
         _CurrentState = _HitState;
         _CurrentState.Enter(null, 0);
+
+        Health -= amount;
+        Healthbar.Value = Mathf.Clamp(Health, 0, 100);
+
+        if (Health < 0)
+        {
+            GD.Print("Dead !");
+        }
     }
     
     /// <summary>
@@ -191,6 +218,8 @@ public abstract class Character : Body
             Velocity = new sfloat2(Velocity.X, sfloat.Zero);
         }
     }
+
+    protected virtual string GetCharacterName => "Unknown";
 
     public Dictionary _save_state ()
     {

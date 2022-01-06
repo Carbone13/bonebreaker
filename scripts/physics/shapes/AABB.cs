@@ -65,16 +65,13 @@ public class AABB : Entity
             {"type", Variant.Type.Bool},
             {"usage", PropertyUsageFlags.Default} 
         });
-
-        if (_draw)
-        {
-            properties.Add(new Dictionary 
-            { 
-                {"name", nameof(Color)}, 
-                {"type", Variant.Type.Color},
-                {"usage", PropertyUsageFlags.Default} 
-            });
-        }
+        
+        properties.Add(new Dictionary 
+        { 
+            {"name", nameof(Color)}, 
+            {"type", Variant.Type.Color},
+            {"usage", PropertyUsageFlags.Default} 
+        });
 
         if (Type == (int)Boxes.Pushbox)
         {
