@@ -122,7 +122,7 @@ public abstract class Character : Body
 
         foreach ((AABB, Hit) box in hit)
         {
-            box.Item1.EmitSignal(nameof(AABB.Ticked), this, 5);
+            box.Item1.EmitSignal(nameof(AABB.Ticked), this, Stats.Damage);
         }
     }
 

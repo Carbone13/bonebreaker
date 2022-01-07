@@ -16,6 +16,8 @@ public class PlayerStats : Resource
     [Export] public int DashSpeed { get; set; }
     [Export] public int DashDuration { get; set; }
     [Export] public int DashCooldownTicks { get; set; }
+    [Export] public int Damage { get; set; }
+    
     public sfloat Gravity { get; private set; }
     public sfloat JumpVelocity { get; private set; }
     

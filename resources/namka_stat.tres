@@ -17,3 +17,4 @@ CanDash = false
 DashSpeed = 0
 DashDuration = 0
 DashCooldownTicks = 0
+Damage = 15

@@ -17,3 +17,4 @@ CanDash = true
 DashSpeed = 200
 DashDuration = 10
 DashCooldownTicks = 80
+Damage = 5
