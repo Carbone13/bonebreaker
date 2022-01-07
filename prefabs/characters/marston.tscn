@@ -36,6 +36,8 @@ Pushbox_path = NodePath("BOX/Pushbox")
 Hitbox_path = NodePath("BOX/Hitbox")
 Hurtbox_path = NodePath("BOX/Hurtbox")
 Stats = ExtResource( 3 )
+DamagedFromLeftPivot = Vector2( -2, -4 )
+DamagedFromRightPivot = Vector2( -2, -4 )
 
 [node name="BOX" type="Node2D" parent="."]
 

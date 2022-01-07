@@ -47,7 +47,9 @@ bg_color = Color( 0.501961, 0.501961, 0.501961, 0.278431 )
 material = SubResource( 2 )
 script = ExtResource( 1 )
 
-[node name="World" type="Node2D" parent="."]
+[node name="World" type="Node2D" parent="." groups=[
+"level_root",
+]]
 
 [node name="Décor" type="Node2D" parent="World"]
 

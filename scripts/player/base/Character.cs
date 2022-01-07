@@ -30,6 +30,9 @@ public abstract class Character : Body
     public JabAction _JabAction;
     public ActionState _DashAbility;
 
+    [Export] private Vector2 DamagedFromLeftPivot;
+    [Export] private Vector2 DamagedFromRightPivot;
+    
     public int playerIndex;
     public bool playerControlled;
 
@@ -139,6 +142,16 @@ public abstract class Character : Body
         {
             GD.Print("Dead !");
         }
+
+        Vector2 popupLocation = Orientation == Orientation.Left ? DamagedFromLeftPivot : DamagedFromRightPivot;
+        popupLocation += GlobalPosition;
+        
+        var _popupInstance = GD.Load<PackedScene>("res://prefabs/damage_popup.tscn").Instance() as Node2D;
+        var _root = GetTree().GetNodesInGroup("level_root")[0] as Node;
+        _root.AddChild(_popupInstance);
+        _popupInstance.Position = popupLocation;
+
+        _popupInstance.GetChild<Label>(0).Text = amount.ToString();
     }
     
     /// <summary>
