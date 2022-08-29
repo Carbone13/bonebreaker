@@ -10,7 +10,7 @@
 # Editor-based HTTP Client requests
 /httpRequests/
 /.idea/
-
+/build/
 .import/
 export.cfg
 export_presets.cfg
