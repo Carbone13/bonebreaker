@@ -1,5 +1,4 @@
 local nk = require("nakama")
-
 local lobbies = {}
 
 local function update_lobby_infos (context, payload)
