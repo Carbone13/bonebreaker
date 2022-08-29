@@ -122,6 +122,11 @@ settings/fps/force_fps=60
 gdscript/warnings/unused_variable=false
 gdscript/warnings/unused_argument=false
 gdscript/warnings/return_value_discarded=false
+multirun/number_of_windows=2
+multirun/window_distance=1270
+multirun/add_custom_args=true
+multirun/other_window_args="--auto-connect"
+multirun/first_window_args="--auto-connect"
 
 [display]
 
@@ -139,7 +144,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/codeandweb.texturepacker/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/codeandweb.texturepacker/plugin.cfg", "res://addons/multirun/plugin.cfg" )
 
 [gdnative]
 

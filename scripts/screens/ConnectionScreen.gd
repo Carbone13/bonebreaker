@@ -30,6 +30,9 @@ signal Connected
 
 func _ready () -> void:
 	try_load_credentials()
+	var args = OS.get_cmdline_args()
+	if("--auto-connect" in args):
+		login()
 
 func log_nakama_error (var errorcode:NakamaException) -> void:
 	dialog.visible = true
