@@ -50,7 +50,7 @@ namespace Bonebreaker.Inputs
                 Godot.Input.IsKeyPressed((int)KeyList.Up))
             {
                 state.Jump = true;
-                lastJumpPressed = OS.GetTicksMsec();
+                lastJumpPressed = (uint)OS.GetTicksMsec();
             }
             if (!state.Jump && lastJumpPressed - OS.GetTicksMsec() < JUMP_BUFFER_MS)
             {
@@ -60,7 +60,7 @@ namespace Bonebreaker.Inputs
             if (Godot.Input.IsKeyPressed((int) KeyList.E))
             {
                 state.Light = true;
-                lastLightPressed = OS.GetTicksMsec();
+                lastLightPressed = (uint)OS.GetTicksMsec();
             }
             if (!state.Light && (OS.GetTicksMsec() - lastLightPressed) < LIGHT_BUFFER_MS)
             {
@@ -142,7 +142,7 @@ namespace Bonebreaker.Inputs
             if (Godot.Input.IsKeyPressed((int) KeyList.E))
             {
                 state.Light = true;
-                lastLightPressed = OS.GetTicksMsec();
+                lastLightPressed = (uint)OS.GetTicksMsec();
             }
             if (!state.Light && (OS.GetTicksMsec() - lastLightPressed) < LIGHT_BUFFER_MS)
             {

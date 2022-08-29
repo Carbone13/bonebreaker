@@ -2,13 +2,11 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/snd_hit_blast2.mp3-b54a545fab5a0fbe614a629dbebb8acf.mp3str"
+valid=false
 
 [deps]
 
 source_file="res://assets/sound_effects/snd_hit_blast2.mp3"
-dest_files=[ "res://.import/snd_hit_blast2.mp3-b54a545fab5a0fbe614a629dbebb8acf.mp3str" ]
-
 [params]
 
 loop=false

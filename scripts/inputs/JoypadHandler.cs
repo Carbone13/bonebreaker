@@ -35,7 +35,7 @@ namespace Bonebreaker.Inputs
             if (Godot.Input.IsJoyButtonPressed(ControllerID, (int) JoystickList.Button0))
             {
                 state.Jump = true;
-                lastJumpPressed = OS.GetTicksMsec();
+                lastJumpPressed = (uint)OS.GetTicksMsec();
             }
             if (!state.Jump && OS.GetTicksMsec() - lastJumpPressed < JUMP_BUFFER_MS)
             {
@@ -45,7 +45,7 @@ namespace Bonebreaker.Inputs
                 Godot.Input.IsJoyButtonPressed(ControllerID, (int) JoystickList.Button2))
             {
                 state.Light = true;
-                lastLightPressed = OS.GetTicksMsec();
+                lastLightPressed = (uint)OS.GetTicksMsec();
             }
             
             if (!state.Light && (OS.GetTicksMsec() - lastLightPressed) < LIGHT_BUFFER_MS)

@@ -27,14 +27,16 @@ anti_aliasing = false
 bg_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
 anti_aliasing = false
 
+[sub_resource type="DynamicFont" id=6]
+font_data = ExtResource( 6 )
+
 [sub_resource type="StyleBoxEmpty" id=5]
 content_margin_left = 0.0
 content_margin_right = 0.0
 content_margin_top = 0.0
 content_margin_bottom = 0.0
 
-[sub_resource type="DynamicFont" id=6]
-font_data = ExtResource( 6 )
+[sub_resource type="BitmapFont" id=12]
 
 [sub_resource type="StyleBoxEmpty" id=7]
 
@@ -45,8 +47,6 @@ font_data = ExtResource( 6 )
 [sub_resource type="StyleBoxEmpty" id=10]
 
 [sub_resource type="StyleBoxEmpty" id=11]
-
-[sub_resource type="BitmapFont" id=12]
 
 [sub_resource type="StyleBoxFlat" id=13]
 bg_color = Color( 0.227451, 0.266667, 0.4, 1 )
@@ -75,9 +75,7 @@ anti_aliasing = false
 bg_color = Color( 0.227451, 0.266667, 0.4, 1 )
 anti_aliasing = false
 
-[node name="Connection Screen" type="Control" groups=[
-"Scene Root",
-]]
+[node name="Connection Screen" type="Control" groups=["Scene Root"]]
 margin_left = -1.0
 margin_top = 2.0
 margin_right = 319.0
@@ -85,8 +83,7 @@ margin_bottom = 182.0
 theme = ExtResource( 3 )
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_use_anchors_": false,
-"_edit_vertical_guides_": [ -140.0, -65.0, -167.0 ]
+"_edit_use_anchors_": false
 }
 
 [node name="Offline" type="Button" parent="."]
@@ -156,8 +153,8 @@ anchor_right = 1.0
 anchor_bottom = 0.137
 margin_top = -4.0
 margin_bottom = 0.0249977
-custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Login"
 align = 1
 valign = 1
@@ -209,9 +206,9 @@ anchor_bottom = 1.0
 margin_top = -8.0
 margin_right = 10.0
 margin_bottom = 6.0
-custom_styles/normal = SubResource( 5 )
-custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0.227451, 0.266667, 0.4, 1 )
+custom_fonts/font = SubResource( 6 )
+custom_styles/normal = SubResource( 5 )
 text = "or"
 align = 2
 valign = 1
@@ -228,13 +225,13 @@ margin_top = -8.0
 margin_right = 49.0
 margin_bottom = 6.0
 focus_neighbour_top = NodePath("../../../LOGIN")
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 12 )
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/focus = SubResource( 9 )
 custom_styles/disabled = SubResource( 10 )
 custom_styles/normal = SubResource( 11 )
-custom_fonts/font = SubResource( 12 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 flat = true
 script = ExtResource( 7 )
 __meta__ = {
@@ -247,8 +244,8 @@ Clicked = Color( 0.180392, 0.211765, 0.313726, 1 )
 [node name="text" type="Label" parent="LOGIN_PANEL/title/or_register/register"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 5 )
 custom_colors/font_color = Color( 0.227451, 0.266667, 0.4, 1 )
+custom_fonts/font = ExtResource( 5 )
 text = "register"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -533,8 +530,8 @@ anchor_right = 1.0
 anchor_bottom = 0.137
 margin_top = -4.0
 margin_bottom = 0.0249977
-custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Register"
 align = 1
 valign = 1
@@ -586,9 +583,9 @@ anchor_bottom = 1.0
 margin_top = -8.0
 margin_right = 10.0
 margin_bottom = 6.0
-custom_styles/normal = SubResource( 5 )
-custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0.227451, 0.266667, 0.4, 1 )
+custom_fonts/font = SubResource( 6 )
+custom_styles/normal = SubResource( 5 )
 text = "or"
 align = 2
 valign = 1
@@ -605,13 +602,13 @@ margin_top = -8.0
 margin_right = 32.0
 margin_bottom = 6.0
 focus_neighbour_top = NodePath("../../../REGISTER")
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 12 )
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/focus = SubResource( 9 )
 custom_styles/disabled = SubResource( 10 )
 custom_styles/normal = SubResource( 11 )
-custom_fonts/font = SubResource( 12 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 flat = true
 script = ExtResource( 7 )
 __meta__ = {
@@ -624,8 +621,8 @@ Clicked = Color( 0.180392, 0.211765, 0.313726, 1 )
 [node name="text" type="Label" parent="REGISTER_PANEL/title/or_login/login"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 5 )
 custom_colors/font_color = Color( 0.227451, 0.266667, 0.4, 1 )
+custom_fonts/font = ExtResource( 5 )
 text = " login"
 __meta__ = {
 "_edit_use_anchors_": false

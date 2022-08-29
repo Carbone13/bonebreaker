@@ -28,11 +28,12 @@ func refresh_lobby() -> void:
 				var lobby_info = load(lobby_control_prefab).instance()
 			
 				var info = yield(Online.nakama_socket.rpc_async("get_lobby_infos", m.match_id), "completed")
+				print(info)
 				var json_result = JSON.parse(info.payload)
 				if(json_result.error == OK):
 					var payload = json_result.result
-					if(payload["result"] == 0):
-						return
+					#if(payload["result"] == 0):
+					#	return
 					
 					lobby_info.set("id", m.match_id)
 					if(payload["title"] == ""):
