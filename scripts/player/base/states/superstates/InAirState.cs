@@ -5,7 +5,8 @@ public class InAirState : State
 {
     protected override void _Tick (int frame, sfloat delta, InputState input)
     {
-        Owner.Velocity = new sfloat2((sfloat)Owner.Stats.MoveSpeed * (sfloat)input.Joystick.x * (sfloat)Owner.Stats.InAirDamping, Owner.Velocity.Y + Owner.Stats.Gravity * delta);
+        Owner.Velocity = new sfloat2((sfloat)Owner.Stats.MoveSpeed * (sfloat)input.Joystick.x * (sfloat)Owner.Stats.InAirDamping,
+            Owner.Velocity.Y + Owner.Stats.Gravity * delta);
         
         if (input.Joystick.x > 0)
         {

@@ -28,9 +28,7 @@
 extra_spacing_space = -1
 font_data = ExtResource( 21 )
 
-[node name="Marston" type="Node2D" groups=[
-"network_sync",
-]]
+[node name="Marston" type="Node2D" groups=["network_sync"]]
 script = ExtResource( 1 )
 Pushbox_path = NodePath("BOX/Pushbox")
 Hitbox_path = NodePath("BOX/Hitbox")
@@ -103,8 +101,8 @@ margin_left = -50.0
 margin_top = -28.0
 margin_right = 50.0
 margin_bottom = -14.0
-custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
+custom_fonts/font = SubResource( 1 )
 text = "carbone_13"
 align = 1
 __meta__ = {

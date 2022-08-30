@@ -9,6 +9,7 @@ public class PlayerStats : Resource
     [Export] public int JumpHeight { get; set; }
     [Export] public float JumpApexTime { get; set; }
     [Export] public float InAirDamping { get; set; }
+    [Export] public float FastFallingMultiplier { get; set; }
     [Export] public int JabCount { get; set; }
     [Export] public int JabResetTicks { get; set; }
     [Export] public int JabCooldown { get; set; }
