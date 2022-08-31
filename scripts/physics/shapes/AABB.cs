@@ -318,7 +318,10 @@ public class AABB : Entity
             
             if (sweep.Time < nearest.Time)
             {
-                if (IntersectAABB(collider) != null) continue;
+                if (IntersectAABB(collider) != null)
+                {
+                    continue;
+                }
                 nearest = sweep;
             }
         }

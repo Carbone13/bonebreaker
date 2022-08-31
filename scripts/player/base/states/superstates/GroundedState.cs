@@ -1,5 +1,4 @@
 ﻿using Bonebreaker.Inputs;
-using Godot;
 
 public class GroundedState : State
 {
@@ -8,8 +7,15 @@ public class GroundedState : State
         Owner.Velocity = new sfloat2(Owner.Velocity.X, sfloat.Zero);
     }
 
+    // TODO on peut passer à travers le sol /!\
     protected override void _Tick (int frame, sfloat delta, InputState input)
     {
+        if (input.Fall)
+        {
+            Owner.IsGrounded = false;
+            Owner.AddToPosition(new sfloat2(sfloat.Zero, sfloat.One));
+        }
+
         if (input.Joystick.x > 0)
         {
             Owner.Orientation = Orientation.Right;
@@ -40,6 +46,8 @@ public class GroundedState : State
             Owner.IsGrounded = false;
             return Owner._AscendingState;
         }
+        
+
 
         return null;
     }

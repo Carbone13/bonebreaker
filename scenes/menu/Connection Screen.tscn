@@ -301,9 +301,6 @@ margin_left = 2.0
 margin_top = 34.0
 margin_right = 98.0
 margin_bottom = 59.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Title" type="Label" parent="LOGIN_PANEL/email"]
 margin_left = 3.0

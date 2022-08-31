@@ -72,7 +72,7 @@ public class Body : Entity
         {
             // Try to move by this movement
             Sweep sweep = Collider.SweepInto(Physics.QueryBoxes(), delta, "Player");
-
+            
             // hit something
             if (sweep.Hit != null)
             {
@@ -92,10 +92,7 @@ public class Body : Entity
                 sfloat2 traveled = sweep.Position - Collider.Position;
                 totalTravel += traveled;
                 
-                Position += traveled;
-                Collider.Position += traveled;
-                Hitbox.Position += traveled;
-                Hurtbox.Position += traveled;
+                AddToPosition(traveled); 
             }
             // if we hit nothing, move to the target position and exit the loop
             else
@@ -103,10 +100,7 @@ public class Body : Entity
                 sfloat2 traveled = sweep.Position - Collider.Position;
                 totalTravel += traveled;
                 
-                Position += traveled;
-                Collider.Position += traveled;
-                Hitbox.Position += traveled;
-                Hurtbox.Position += traveled;
+                AddToPosition(traveled);
 
                 break;
             }
@@ -114,5 +108,12 @@ public class Body : Entity
 
         return totalTravel;
     }
-    
+
+    public void AddToPosition (sfloat2 a)
+    {
+        Position += a;
+        Collider.Position += a;
+        Hitbox.Position += a;
+        Hurtbox.Position += a;
+    }
 }

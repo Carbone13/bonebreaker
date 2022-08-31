@@ -1,4 +1,5 @@
 ﻿using Bonebreaker.Inputs;
+using Godot;
 
 public class FallingState : InAirState
 {
@@ -11,7 +12,7 @@ public class FallingState : InAirState
     {
         Owner.Velocity = new sfloat2((sfloat)Owner.Stats.MoveSpeed * (sfloat)input.Joystick.x * (sfloat)Owner.Stats.InAirDamping,
             Owner.Velocity.Y + Owner.Stats.Gravity * delta * (input.Fall ? (sfloat)Owner.Stats.FastFallingMultiplier : sfloat.One));
-        
+       
         if (input.Joystick.x > 0)
         {
             Owner.Orientation = Orientation.Right;
