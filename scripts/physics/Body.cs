@@ -14,6 +14,8 @@ public class Body : Entity
     protected AABB Collider;
     protected AABB Hurtbox;
     protected AABB Hitbox;
+
+    public string GroundTag;
     
     public override void _Ready ()
     {
@@ -32,8 +34,22 @@ public class Body : Entity
     /// <returns></returns>
     protected bool IsGrounded ()
     {
-        return Physics.CastAABB(Collider.Position + new sfloat2(0, 0.2f), Collider.HalfExtents - new sfloat2(0.1f, 0.1f),
-            true, new List<Predicate<AABB>> { (box => box != Collider), (aabb => aabb.Type == (int)Boxes.Pushbox), (aabb => aabb.IntersectAABB(Collider) == null) }).Count > 0;
+        AABB ground = new AABB(Collider.Position + new sfloat2(sfloat.Zero, Collider.HalfExtents.Y + (sfloat)0.2f), new sfloat2(Collider.HalfExtents.X, (sfloat)0.1f));
+
+        foreach (AABB box in Physics.QueryBoxes())
+        {
+            if (box != Collider)
+            {
+                if (box.IntersectAABB(ground) != null)
+                {
+                   GD.Print("grounded");
+                   GroundTag = box.Tag;
+                   return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /// <summary>
