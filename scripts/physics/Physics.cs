@@ -99,12 +99,12 @@ public class Physics : Node
     /// <param name="position">Center of the AABB</param>
     /// <param name="halfExtents">Half Extents of the AABB</param>
     /// <returns>Return a list of hit boxes</returns>
-    public static List<(AABB, Hit)> CastAABB (sfloat2 position, sfloat2 halfExtents, bool breakOnFirst = false, List<Predicate<AABB>> conditions = null)
+    public static List<(AABB, Hit)> CastAABB (sfloat2 position, sfloat2 halfExtents, IEnumerable<AABB> targets, bool breakOnFirst = false, List<Predicate<AABB>> conditions = null)
     {
         List<(AABB, Hit)> hits = new List<(AABB, Hit)>();
         AABB castedBox = new AABB(position, halfExtents);
-        
-        foreach (AABB box in QueryBoxes().Concat(QueryHurtboxes()))
+
+        foreach (AABB box in targets)
         {
             if(conditions != null)
                 foreach(Predicate<AABB> condition in conditions)
@@ -120,8 +120,7 @@ public class Physics : Node
                     return hits;
             }
             
-            next:
-                continue;
+            next:;
         }
 
         return hits;
