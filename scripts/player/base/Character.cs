@@ -117,8 +117,8 @@ public abstract class Character : Body
 
     public void DealDamage (Vector2 offset)
     {
-        var hit = Physics.CastAABB(Position + new sfloat2(offset.x, offset.y), Hitbox.Size, false, 
-            new List<Predicate<AABB>> { (aabb => aabb.Type == (int)Boxes.Hurtbox), (aabb => aabb != Hurtbox) });
+        var hit = Physics.CastAABB(Position + new sfloat2(offset.x, offset.y), Hitbox.Size, Physics.QueryHurtboxes(),false, 
+            new List<Predicate<AABB>> { (aabb => aabb != Hurtbox) });
 
         foreach ((AABB, Hit) box in hit)
         {
