@@ -42,7 +42,6 @@ public class Body : Entity
             {
                 if (box.IntersectAABB(ground) != null)
                 {
-                   GD.Print("grounded");
                    GroundTag = box.Tag;
                    return true;
                 }
