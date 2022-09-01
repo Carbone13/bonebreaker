@@ -97,8 +97,7 @@ public class AABB : Entity
         if(Draw)
             DrawRect(new Rect2(Vector2.Zero - Size, Size * 2), 
                 Color, 
-                false,
-                1);
+                false);
     }
 
     public AABB () {}
@@ -125,7 +124,7 @@ public class AABB : Entity
         if (px <= Zero|| py <= Zero)
             return null;
 
-        Hit hit = new Hit(this);
+        Hit hit = new Hit();
 
         if (px < py)
         {
@@ -180,7 +179,7 @@ public class AABB : Entity
         if (nearTime >= One || farTime <= Zero)
             return null;
 
-        Hit hit = new Hit(this);
+        Hit hit = new Hit();
         hit.Time = Clamp(nearTime, Zero, One);
 
         if (nearTimeX > nearTimeY)
@@ -226,7 +225,7 @@ public class AABB : Entity
         if (px <= Zero|| py <= Zero)
             return null;
 
-        Hit hit = new Hit(this);
+        Hit hit = new Hit();
         if (px < py)
         {
             sfloat sx = Sign(dx);
@@ -297,6 +296,7 @@ public class AABB : Entity
     /// </summary>
     /// <param name="colliders">The set of colliders, i.e a broadphase query result</param>
     /// <param name="delta">The distance you want to travel</param>
+    /// <param name="ignoreTag">Allow to ignore colliders with a specific tag</param>
     /// /// <returns>Return the sweep informations about the nearest collision or null if their is no collision</returns>
     public Sweep SweepInto (IEnumerable<AABB> colliders, sfloat2 delta, string ignoreTag)
     {

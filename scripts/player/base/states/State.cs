@@ -1,5 +1,4 @@
-﻿using System;
-using Bonebreaker.Inputs;
+﻿using Bonebreaker.Inputs;
 using Godot;
 using Godot.Collections;
 
@@ -7,21 +6,14 @@ public class State : Reference
 {
     protected Character Owner;
 
-    public State (Character owner)
+    protected State (Character owner)
     {
         Owner = owner;
+        // ReSharper disable once VirtualMemberCallInConstructor
         _Init();
     }
-    
-    public virtual void _Init ()
-    {
-        
-    }
-    
-    public void SetOwner (Character owner)
-    {
-        Owner = owner;
-    }
+
+    protected virtual void _Init () {}
 
     /// <summary>
     /// For external classes to call the Tick functions

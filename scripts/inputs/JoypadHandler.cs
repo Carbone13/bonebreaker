@@ -10,11 +10,9 @@ namespace Bonebreaker.Inputs
 
         private uint lastJumpPressed, lastLightPressed;
         
-        public int ID { get; set; }
+        public int ID { get; }
         public readonly int ControllerID;
 
-        private InputState last;
-        
         public JoypadHandler (int id, int controllerId)
         {
             ID = id;
@@ -69,7 +67,6 @@ namespace Bonebreaker.Inputs
                 state.Joystick.y = Math.Sign(Godot.Input.GetJoyAxis(ControllerID, (int)JoystickList.Axis0));
             }
 
-            last = state;
             return state;
         }
     }

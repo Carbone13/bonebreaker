@@ -122,6 +122,7 @@
                 sfloat t1 = sfloat.FromRaw(0x3f000000); /* t1=2^126 */
                 b *= t1;
                 a *= t1;
+                // ReSharper disable once IntVariableOverflowInUncheckedContext
                 k -= 126;
             }
             else

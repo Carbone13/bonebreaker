@@ -2,7 +2,7 @@ extends "res://addons/network-sync-rollback/NetworkAdaptor.gd"
 
 #onready var OnlineMatch = get_node('/root/OnlineMatch')
 signal received_lobby_select
-const DATA_CHANNEL_ID := 42
+const DATA_CHANNEL_ID:int = 42
 
 var data_channels := {}
 var message_queue := {}

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using Bonebreaker.Inputs;
 using Godot;
 using Godot.Collections;
@@ -198,6 +197,8 @@ public abstract class Character : Body
         _CurrentState.Enter(null, 0);
     }
 
+    // ReSharper disable once UnusedMember.Local
+    // CALLED FROM GDSCRIPT
     private void _network_process (float delta, Dictionary input, int tick)
     {
         InputState inp = InputState.Deserialize(input);

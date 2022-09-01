@@ -24,6 +24,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 
 // Internal representation is identical to IEEE binary32 floating point numbers
@@ -76,12 +77,9 @@ public struct sfloat : IEquatable<sfloat>, IComparable<sfloat>, IComparable, IFo
 
     private const uint SignMask = 0x80000000;
     private const int MantissaBits = 23;
-    private const int ExponentBits = 8;
     private const int ExponentBias = 127;
     
 
-
-    private const uint RawZero = 0;
     private const uint RawPi = 1078530011;
     private const uint RawNaN = 0xFFC00000; // Same as float.NaN
     private const uint RawPositiveInfinity = 0x7F800000;
@@ -91,7 +89,6 @@ public struct sfloat : IEquatable<sfloat>, IComparable<sfloat>, IComparable, IFo
     private const uint RawMaxValue = 0x7F7FFFFF;
     private const uint RawMinValue = 0x7F7FFFFF ^ SignMask;
     private const uint RawEpsilon = 0x00000001;
-    private const uint RawLog2OfE = 0;
 
 
     public static sfloat Zero => new sfloat(0);
@@ -105,7 +102,7 @@ public struct sfloat : IEquatable<sfloat>, IComparable<sfloat>, IComparable, IFo
     public static sfloat MinValue => new sfloat(RawMinValue);
     public static sfloat Epsilon => new sfloat(RawEpsilon);
 
-    public override string ToString() => ((float)this).ToString();
+    public override string ToString() => ((float)this).ToString(CultureInfo.InvariantCulture);
 
     /// <summary>
     /// Creates an sfloat number from its parts: sign, exponent, mantissa
@@ -502,7 +499,7 @@ public struct sfloat : IEquatable<sfloat>, IComparable<sfloat>, IComparable, IFo
             }
         }
 
-        long longMan = (long)man1 * (long)man2;
+        long longMan = (long)man1 * man2;
         int man = (int)(longMan >> MantissaBits);
         //Debug.Assert(man != 0);
         uint absMan = (uint)Math.Abs(man);
@@ -682,7 +679,7 @@ public struct sfloat : IEquatable<sfloat>, IComparable<sfloat>, IComparable, IFo
             }
         }
 
-        long longMan = ((long)man1 << MantissaBits) / (long)man2;
+        long longMan = ((long)man1 << MantissaBits) / man2;
         int man = (int)longMan;
         //Debug.Assert(man != 0);
         uint absMan = (uint)Math.Abs(man);
@@ -860,7 +857,7 @@ public struct sfloat : IEquatable<sfloat>, IComparable<sfloat>, IComparable, IFo
     public string ToString(string format, IFormatProvider formatProvider) => ((float)this).ToString(format, formatProvider);
     public string ToString(string format) => ((float)this).ToString(format);
     public string ToString(IFormatProvider provider) => ((float)this).ToString(provider);
-    public string ToStringInv() => ((float)this).ToString(System.Globalization.CultureInfo.InvariantCulture);
+    public string ToStringInv() => ((float)this).ToString(CultureInfo.InvariantCulture);
 
     public static sfloat Deg2Rad (sfloat i)
     {

@@ -1,12 +1,11 @@
 using Bonebreaker.Inputs;
-using Godot;
 using Godot.Collections;
 
 public class HitState : ActionState
 {
-    private bool shouldExit;
-    
-    public override void _Init ()
+    private new bool shouldExit;
+
+    protected override void _Init ()
     {
         Owner.Animator.Connect("animation_finished", this, nameof(AnimationFinished));
     }

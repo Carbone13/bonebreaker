@@ -1,12 +1,11 @@
 using Bonebreaker.Inputs;
-using Godot;
 using Godot.Collections;
 
 public class JabAction : ActionState
 {
     protected int jabIndex;
 
-    public override void _Init ()
+    protected override void _Init ()
     {
         Owner.Animator.Connect("animation_finished", this, nameof(AnimationFinished));
     }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Godot;
 
 public class Physics : Node
@@ -92,12 +91,15 @@ public class Physics : Node
 
         return hits;
     }
-    
+
     /// <summary>
     /// Cast an AABB and return every colliders overlapping it
     /// </summary>
     /// <param name="position">Center of the AABB</param>
     /// <param name="halfExtents">Half Extents of the AABB</param>
+    /// <param name="targets">List of AABBs to cast against</param>
+    /// <param name="breakOnFirst">Should we stop on the first hit ?</param>
+    /// <param name="conditions">A list of condition that a hit must respect to be valid</param>
     /// <returns>Return a list of hit boxes</returns>
     public static List<(AABB, Hit)> CastAABB (sfloat2 position, sfloat2 halfExtents, IEnumerable<AABB> targets, bool breakOnFirst = false, List<Predicate<AABB>> conditions = null)
     {
