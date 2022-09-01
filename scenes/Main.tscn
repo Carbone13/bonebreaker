@@ -144,6 +144,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
+Tag = "Jump-Through"
 Type = 0
 Size = Vector2( 25, 3 )
 Draw = false
@@ -166,6 +167,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
+Tag = "Jump-Through"
 Type = 0
 Size = Vector2( 25, 3 )
 Draw = false
@@ -188,6 +190,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
+Tag = "Jump-Through"
 Type = 0
 Size = Vector2( 25, 3 )
 Draw = false
