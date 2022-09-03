@@ -15,6 +15,15 @@ var selected_character = -1
 
 var players_character = {}
 
+func _ready():
+	match_id.text = str(OnlineMatch.match_id)
+
+	OnlineMatch.connect("player_joined", self, "_on_OnlineMatch_player_joined")
+	OnlineMatch.connect("player_left", self, "_on_OnlineMatch_player_left")
+
+	WebRtc.connect("received_lobby_select", self, "received_character_update") 
+
+
 func _process(delta):
 	if(Input.is_action_just_pressed("lobby_start") && can_start):
 		start_game()
@@ -71,14 +80,6 @@ func remove_player (session_id:String) -> void:
 		
 		if(local_card):
 			local_card.get_node("token").call_deferred("set", "rect_global_position", token_pos)
-
-func _ready():
-	match_id.text = str(OnlineMatch.match_id)
-
-	OnlineMatch.connect("player_joined", self, "_on_OnlineMatch_player_joined")
-	OnlineMatch.connect("player_left", self, "_on_OnlineMatch_player_left")
-
-	WebRtc.connect("received_lobby_select", self, "received_character_update") 
 
 func received_character_update (peerID, buffer):
 	var _int = buffer.get_u8()

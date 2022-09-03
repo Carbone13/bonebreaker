@@ -12,12 +12,15 @@ signal player_dead (player_id)
 signal game_over (player_id)
 
 func _ready() -> void:
+	get_tree().connect("network_peer_connected", self, "tt")
 	OnlineMatch.connect("error", self, "_on_OnlineMatch_error")
 	OnlineMatch.connect("disconnected", self, "_on_OnlineMatch_disconnected")
 	OnlineMatch.connect("player_status_changed", self, "_on_OnlineMatch_player_status_changed")
 	OnlineMatch.connect("player_left", self, "_on_OnlineMatch_player_left")
 	SyncManager.connect("sync_error", self, "_on_SyncManager_sync_error")
 
+func tt (va):
+	print("np")
 
 func game_start(players: Dictionary, selected: Dictionary, immediate: bool = false) -> void:
 	if not immediate:

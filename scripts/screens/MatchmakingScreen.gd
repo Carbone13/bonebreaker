@@ -18,9 +18,10 @@ func refresh_lobby() -> void:
 		lobby_holder.remove_child(n)
 		n.queue_free()
 	
-	var data:NakamaAPI.ApiMatchList = yield(Online.get_nakama_client().list_matches_async(Online.nakama_session, 0, 4, 20, false), "completed")
+	var data:NakamaAPI.ApiMatchList = yield(Online.get_nakama_client().list_matches_async(Online.nakama_session, 0, 4, 20, false, null, null), "completed")
 	if data.is_exception():
-		emit_signal("error", "Could not fetch available lobbies")
+		print(data.exception)
+		print("Could not fetch available lobbies")
 		return null
 	else:
 		if(data):
