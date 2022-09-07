@@ -53,7 +53,7 @@ func quit () -> void:
 	get_tree().quit()
 	
 func credit () -> void:
-	ui_layer.show_screen("Credit Screen")
+	ui_layer.show_screen("Credits Screen")
 	
 func settings () -> void:
 	ui_layer.show_screen("Settings Screen")
@@ -78,7 +78,3 @@ func credits_hovered () -> void:
 
 func quit_hovered () -> void:
 	ui_layer.show_message(quit_descr)
-
-func offline () -> void:
-	SceneManager.call("LoadScene", "res://scenes/menu/Main.tscn")
-

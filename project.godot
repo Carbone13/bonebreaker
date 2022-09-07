@@ -136,7 +136,6 @@ config/windows_native_icon="res://assets/icons/icon.ico"
 [autoload]
 
 GlobalInput="*res://scripts/inputs/Input.cs"
-SceneManager="*res://scripts/scenes/SceneManager.cs"
 OnlineMatch="*res://addons/nakama-webrtc/OnlineMatch.gd"
 Online="*res://addons/nakama-webrtc/Online.gd"
 SyncManager="*res://addons/godot-rollback-netcode/SyncManager.gd"
