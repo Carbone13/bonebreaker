@@ -1,0 +1,104 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://resources/fonts/Armin.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scripts/ui/FocusableButton.cs" type="Script" id=2]
+[ext_resource path="res://scripts/audio/AudioPlayer.gd" type="Script" id=3]
+[ext_resource path="res://scripts/screens/3_matching/LobbyInstance.gd" type="Script" id=4]
+[ext_resource path="res://assets/icons/play.png" type="Texture" id=5]
+[ext_resource path="res://assets/sound_effects/ui_click.mp3" type="AudioStream" id=6]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0745098, 0.0745098, 0.0745098, 1 )
+
+[sub_resource type="DynamicFont" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StreamTexture" id=8]
+load_path = "res://.import/selecter.png-9b6c85614674989ba2affb58bfaf734f.stex"
+
+[node name="Node" type="Control"]
+script = ExtResource( 4 )
+
+[node name="info" type="Label" parent="."]
+margin_left = 5.0
+margin_top = 4.0
+margin_right = 116.0
+margin_bottom = 29.0
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+custom_constants/line_spacing = -3
+custom_fonts/font = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="count" type="Label" parent="."]
+margin_right = 150.0
+margin_bottom = 31.0
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+custom_constants/line_spacing = -3
+custom_fonts/font = ExtResource( 1 )
+align = 2
+valign = 2
+
+[node name="separator" type="Panel" parent="."]
+margin_left = 3.0
+margin_top = 30.0
+margin_right = 141.0
+margin_bottom = 31.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="connect" type="Button" parent="."]
+margin_left = 126.0
+margin_top = 10.0
+margin_right = 135.0
+margin_bottom = 19.0
+rect_scale = Vector2( 1.75, 1.75 )
+custom_fonts/font = SubResource( 7 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+flat = true
+script = ExtResource( 2 )
+
+[node name="graphic" type="TextureRect" parent="connect"]
+modulate = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+margin_right = 8.0
+margin_bottom = 9.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selecter" type="NinePatchRect" parent="connect"]
+visible = false
+modulate = Color( 0.411765, 0.411765, 0.411765, 1 )
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 6.0
+margin_bottom = 10.0
+texture = SubResource( 8 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="connect"]
+stream = ExtResource( 6 )
+script = ExtResource( 3 )
+
+[connection signal="button_down" from="connect" to="connect/AudioStreamPlayer" method="_play"]
+[connection signal="pressed" from="connect" to="." method="join"]

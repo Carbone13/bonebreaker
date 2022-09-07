@@ -2,7 +2,8 @@
 
 [ext_resource path="res://resources/themes/main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/fonts/Armin.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://prefabs/quit.tscn" type="PackedScene" id=3]
+[ext_resource path="res://prefabs/Back.tscn" type="PackedScene" id=3]
+
 
 [sub_resource type="DynamicFont" id=1]
 size = 48

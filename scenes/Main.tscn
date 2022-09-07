@@ -1,294 +1,2181 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=101 format=2]
 
-[ext_resource path="res://scenes/MainScene.gd" type="Script" id=1]
-[ext_resource path="res://assets/post_processing/vignette.png" type="Texture" id=2]
-[ext_resource path="res://scripts/physics/shapes/AABB.cs" type="Script" id=3]
-[ext_resource path="res://scripts/training/TrainingGroundBackground.cs" type="Script" id=4]
-[ext_resource path="res://assets/game_sprites/dummy.png" type="Texture" id=5]
-[ext_resource path="res://resources/animations/dummy/dummy_hit_right.tres" type="Animation" id=6]
-[ext_resource path="res://resources/animations/dummy/dummy_idle.tres" type="Animation" id=7]
-[ext_resource path="res://resources/animations/dummy/dummy_hit_left.tres" type="Animation" id=8]
-[ext_resource path="res://scripts/training/Dummy.cs" type="Script" id=9]
-[ext_resource path="res://resources/fonts/monogram_extended.tres" type="DynamicFont" id=10]
-[ext_resource path="res://assets/game_sprites/items/items.sprites/coin.tres" type="Texture" id=11]
-[ext_resource path="res://resources/animations/coin/coin_idle.tres" type="Animation" id=12]
-[ext_resource path="res://assets/post_processing/lineardodge.png" type="Texture" id=13]
-[ext_resource path="res://shader/pixel_art_aa.tres" type="Material" id=14]
-[ext_resource path="res://addons/network-sync-rollback/NetworkAnimationPlayer.gd" type="Script" id=15]
+[ext_resource path="res://resources/themes/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://assets/ui/selecter.png" type="Texture" id=2]
+[ext_resource path="res://assets/sound_effects/ui_click.mp3" type="AudioStream" id=3]
+[ext_resource path="res://scripts/ui/UILayer.gd" type="Script" id=4]
+[ext_resource path="res://prefabs/screens/lobby/player_lobby_status.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/fonts/Armin.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://resources/fonts/Armin.tres" type="DynamicFont" id=7]
+[ext_resource path="res://resources/themes/connection_panel.tres" type="StyleBox" id=8]
+[ext_resource path="res://scripts/ui/TextButton.cs" type="Script" id=9]
+[ext_resource path="res://scripts/ui/FocusableButton.cs" type="Script" id=10]
+[ext_resource path="res://scripts/audio/AudioPlayer.gd" type="Script" id=11]
+[ext_resource path="res://scripts/screens/1_connection/ConnectionScreen.gd" type="Script" id=12]
+[ext_resource path="res://assets/ui/buttons/back_button.png" type="Texture" id=13]
+[ext_resource path="res://resources/themes/windows_dialog.tres" type="Theme" id=14]
+[ext_resource path="res://assets/icons/logout.png" type="Texture" id=15]
+[ext_resource path="res://assets/screens/background_panels/bg_panel_empty.png" type="Texture" id=16]
+[ext_resource path="res://assets/screens/panel.png" type="Texture" id=17]
+[ext_resource path="res://scripts/screens/2_title/TitleScreen.gd" type="Script" id=18]
+[ext_resource path="res://assets/ui/buttons/refresh.png" type="Texture" id=19]
+[ext_resource path="res://scripts/ui/ColoredButton.gd" type="Script" id=20]
+[ext_resource path="res://scripts/screens/3_matching/MatchingScreen.gd" type="Script" id=21]
+[ext_resource path="res://scripts/screens/4_lobby/PlayerStatusSelecter.gd" type="Script" id=22]
+[ext_resource path="res://assets/screens/lobby/token.png" type="Texture" id=23]
+[ext_resource path="res://scripts/ui/CustomClick.gd" type="Script" id=24]
+[ext_resource path="res://scripts/screens/4_lobby/LobbyScreen.gd" type="Script" id=25]
+[ext_resource path="res://assets/screens/lobby/token_selected.png" type="Texture" id=26]
+[ext_resource path="res://assets/screens/background_panels/bg_panel_cyb.png" type="Texture" id=32]
+[ext_resource path="res://assets/game_sprites/characters/marston/marston.sprites/gun_start/gun_start_5.tres" type="Texture" id=34]
+[ext_resource path="res://assets/game_sprites/characters/musashi/musashi.sprites/jump/jump.tres" type="Texture" id=35]
+[ext_resource path="res://assets/game_sprites/characters/namka/namka.sprites/idle/idle.tres" type="Texture" id=36]
 
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.945098, 0.945098, 0.945098, 1 )
 
-uniform sampler2D mask;
-
-vec4 linear_dodge(vec4 base, vec4 blend)
-{
-	return base + blend;
-}
-
-void fragment() 
-{
-	vec4 screen_col = texture(SCREEN_TEXTURE, SCREEN_UV);
-	vec4 texture_col = texture(mask, UV);
-	COLOR = linear_dodge(screen_col, texture_col);
-}"
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
-shader_param/mask = ExtResource( 13 )
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 6 )
 
 [sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.866667, 0.866667, 0.866667, 1 )
+bg_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.501961, 0.501961, 0.501961, 0.278431 )
+bg_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+anti_aliasing = false
 
-[node name="Training Grounds" type="Node2D"]
-material = SubResource( 2 )
-script = ExtResource( 1 )
+[sub_resource type="DynamicFont" id=6]
+font_data = ExtResource( 6 )
 
-[node name="World" type="Node2D" parent="." groups=["level_root"]]
+[sub_resource type="StyleBoxEmpty" id=5]
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 0.0
+content_margin_bottom = 0.0
 
-[node name="Décor" type="Node2D" parent="World"]
+[sub_resource type="BitmapFont" id=12]
 
-[node name="Panel" type="Panel" parent="World/Décor"]
-margin_right = 320.0
-margin_bottom = 180.0
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.227451, 0.266667, 0.4, 1 )
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.227451, 0.266667, 0.4, 1 )
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.227451, 0.266667, 0.4, 1 )
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0.227451, 0.266667, 0.4, 1 )
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0.227451, 0.266667, 0.4, 1 )
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=16]
+bg_color = Color( 0.0588235, 0.0588235, 0.0588235, 0.960784 )
+
+[sub_resource type="DynamicFont" id=17]
+size = 32
+extra_spacing_space = -4
+font_data = ExtResource( 6 )
+
+[sub_resource type="StyleBoxTexture" id=27]
+texture = ExtResource( 17 )
+region_rect = Rect2( 0, 0, 56, 32 )
+margin_left = 2.0
+margin_right = 2.0
+margin_top = 2.0
+margin_bottom = 2.0
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id=28]
+bg_color = Color( 0.231373, 0.231373, 0.231373, 1 )
+
+[sub_resource type="DynamicFont" id=29]
+
+[sub_resource type="StyleBoxEmpty" id=30]
+
+[sub_resource type="StyleBoxEmpty" id=31]
+
+[sub_resource type="StyleBoxEmpty" id=32]
+
+[sub_resource type="StyleBoxEmpty" id=33]
+
+[sub_resource type="StyleBoxEmpty" id=34]
+
+[sub_resource type="StyleBoxFlat" id=35]
+bg_color = Color( 1, 0, 0.266667, 1 )
+
+[sub_resource type="StyleBoxFlat" id=36]
+bg_color = Color( 0, 0.584314, 0.913725, 1 )
+
+[sub_resource type="StyleBoxFlat" id=37]
+bg_color = Color( 0.996078, 0.905882, 0.380392, 1 )
+
+[sub_resource type="StyleBoxFlat" id=38]
+bg_color = Color( 0.243137, 0.537255, 0.282353, 1 )
+
+[sub_resource type="StyleBoxFlat" id=39]
+bg_color = Color( 0.407843, 0.219608, 0.423529, 1 )
+
+[sub_resource type="DynamicFont" id=40]
+size = 32
+font_data = ExtResource( 6 )
+
+[sub_resource type="StyleBoxFlat" id=41]
+bg_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=42]
+bg_color = Color( 0.227451, 0.266667, 0.4, 1 )
+
+[sub_resource type="StyleBoxFlat" id=43]
+bg_color = Color( 0.945098, 0.945098, 0.945098, 1 )
+
+[sub_resource type="DynamicFont" id=44]
+size = 32
+extra_spacing_space = -4
+font_data = ExtResource( 6 )
+
+[sub_resource type="StyleBoxEmpty" id=105]
+
+[sub_resource type="StyleBoxEmpty" id=106]
+
+[sub_resource type="StyleBoxEmpty" id=107]
+
+[sub_resource type="StyleBoxEmpty" id=108]
+
+[sub_resource type="StyleBoxEmpty" id=109]
+
+[sub_resource type="StyleBoxFlat" id=91]
+bg_color = Color( 0.32549, 0.45098, 0.623529, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+
+[sub_resource type="StyleBoxFlat" id=92]
+bg_color = Color( 0.32549, 0.45098, 0.623529, 1 )
+border_width_left = 2
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=93]
+
+[sub_resource type="StyleBoxEmpty" id=94]
+
+[sub_resource type="StyleBoxEmpty" id=95]
+
+[sub_resource type="StyleBoxEmpty" id=96]
+
+[sub_resource type="StyleBoxEmpty" id=97]
+
+[sub_resource type="StyleBoxFlat" id=98]
+bg_color = Color( 0.219608, 0.647059, 0.466667, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+
+[sub_resource type="StyleBoxFlat" id=99]
+bg_color = Color( 0.219608, 0.647059, 0.466667, 1 )
+border_width_left = 2
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=100]
+
+[sub_resource type="StyleBoxEmpty" id=101]
+
+[sub_resource type="StyleBoxEmpty" id=102]
+
+[sub_resource type="StyleBoxEmpty" id=103]
+
+[sub_resource type="StyleBoxEmpty" id=104]
+
+[sub_resource type="StyleBoxFlat" id=45]
+bg_color = Color( 0.596078, 0.403922, 0.639216, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+
+[sub_resource type="StyleBoxFlat" id=46]
+bg_color = Color( 0.596078, 0.403922, 0.639216, 1 )
+border_width_left = 2
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=47]
+
+[sub_resource type="StyleBoxEmpty" id=48]
+
+[sub_resource type="StyleBoxEmpty" id=49]
+
+[sub_resource type="StyleBoxEmpty" id=50]
+
+[sub_resource type="StyleBoxEmpty" id=51]
+
+[sub_resource type="StyleBoxFlat" id=80]
+content_margin_left = 4.0
+bg_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+
+[sub_resource type="DynamicFont" id=21]
+
+[sub_resource type="StyleBoxEmpty" id=81]
+
+[sub_resource type="StyleBoxEmpty" id=82]
+
+[sub_resource type="StyleBoxEmpty" id=83]
+
+[sub_resource type="StyleBoxEmpty" id=84]
+
+[sub_resource type="StyleBoxEmpty" id=85]
+
+[node name="Main" type="Node"]
+
+[node name="Game" type="Node2D" parent="."]
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+pause_mode = 2
+script = ExtResource( 4 )
+
+[node name="Screens" type="Control" parent="UILayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Connection Screen" type="Control" parent="UILayer/Screens"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+theme = ExtResource( 1 )
+script = ExtResource( 12 )
+
+[node name="Offline" type="Button" parent="UILayer/Screens/Connection Screen"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -144.0
+margin_top = -12.0
+margin_right = -49.0
+margin_bottom = 12.0
+focus_neighbour_left = NodePath("../LOGIN_PANEL/LOGIN")
+text = "or continue offline"
+script = ExtResource( 10 )
+
+[node name="bg" type="Panel" parent="UILayer/Screens/Connection Screen/Offline"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 1.0
+margin_right = -3.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selecter" type="NinePatchRect" parent="UILayer/Screens/Connection Screen/Offline"]
+visible = false
+modulate = Color( 0.328445, 0.362996, 0.480469, 1 )
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 92.0
+margin_bottom = 25.0
+texture = ExtResource( 2 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer/Screens/Connection Screen/Offline"]
+stream = ExtResource( 3 )
+script = ExtResource( 11 )
+
+[node name="LOGIN_PANEL" type="Panel" parent="UILayer/Screens/Connection Screen"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 22.0
+margin_top = -67.5
+margin_right = 120.0
+margin_bottom = 67.5
+mouse_filter = 1
+custom_styles/panel = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL"]
+anchor_right = 1.0
+anchor_bottom = 0.137
+margin_top = -4.0
+margin_bottom = 0.0249977
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Login"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="underline_1" type="Panel" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/title"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -25.0
+margin_top = -5.0
+margin_right = -3.0
+margin_bottom = -4.0
 custom_styles/panel = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="Node2D" parent="World/Décor"]
-script = ExtResource( 4 )
-
-[node name="wall_1" type="Node2D" parent="World/Décor/Background"]
-position = Vector2( -1, 90 )
-script = ExtResource( 3 )
-Type = 0
-Size = Vector2( 1, 90 )
-Draw = false
-Color = Color( 0, 1, 1, 1 )
-ignoreBelow = false
-
-[node name="wall_2" type="Node2D" parent="World/Décor/Background"]
-position = Vector2( 321, 90 )
-script = ExtResource( 3 )
-Type = 0
-Size = Vector2( 1, 90 )
-Draw = false
-Color = Color( 0, 1, 1, 1 )
-ignoreBelow = false
-
-[node name="Panel2" type="Panel" parent="World/Décor"]
-margin_top = 140.0
-margin_right = 320.0
-margin_bottom = 190.0
+[node name="underline_2" type="Panel" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/title"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 9.0
+margin_top = -5.0
+margin_right = 23.0
+margin_bottom = -4.0
 custom_styles/panel = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="World/Décor"]
-margin_left = 164.0
-margin_top = 27.0
-margin_right = 171.0
-margin_bottom = 47.0
-custom_colors/font_color = Color( 0.317647, 0.482353, 0.772549, 1 )
-custom_fonts/font = ExtResource( 10 )
-text = "6"
+[node name="or_register" type="Control" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/title"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -5.0
+margin_top = 31.0
+margin_right = -5.0
+margin_bottom = 31.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label3" type="Label" parent="World/Décor"]
-margin_left = 284.0
-margin_top = 127.0
-margin_right = 291.0
-margin_bottom = 147.0
-custom_colors/font_color = Color( 0.317647, 0.482353, 0.772549, 1 )
-custom_fonts/font = ExtResource( 10 )
-text = "6"
+[node name="or" type="Label" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/title/or_register"]
+anchor_bottom = 1.0
+margin_top = -8.0
+margin_right = 10.0
+margin_bottom = 6.0
+custom_colors/font_color = Color( 0.227451, 0.266667, 0.4, 1 )
+custom_fonts/font = SubResource( 6 )
+custom_styles/normal = SubResource( 5 )
+text = "or"
+align = 2
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="World/Décor"]
-margin_left = 164.0
-margin_top = 127.0
-margin_right = 171.0
-margin_bottom = 147.0
-rect_pivot_offset = Vector2( 0, 10 )
-custom_colors/font_color = Color( 0.772549, 0.317647, 0.317647, 1 )
-custom_fonts/font = ExtResource( 10 )
-text = "0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Level" type="Node2D" parent="World"]
-
-[node name="platform1" type="Line2D" parent="World/Level"]
-position = Vector2( 12.25, 112.247 )
-scale = Vector2( 0.99, 0.92 )
-points = PoolVector2Array( 0, 0, 50, 0, 50, 6, 0, 6, 0, 0 )
-width = 0.5
-default_color = Color( 0.423529, 0.423529, 0.423529, 1 )
-begin_cap_mode = 1
-end_cap_mode = 1
-
-[node name="Shape 1" type="Node2D" parent="World/Level/platform1"]
-position = Vector2( 24.9999, 2.99221 )
-scale = Vector2( 1.0101, 1.08696 )
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_group_": true
-}
-Tag = "Jump-Through"
-Type = 0
-Size = Vector2( 25, 3 )
-Draw = false
-Color = Color( 0, 1, 1, 1 )
-ignoreBelow = true
-
-[node name="platform2" type="Line2D" parent="World/Level"]
-position = Vector2( 85.25, 112.247 )
-scale = Vector2( 0.99, 0.92 )
-points = PoolVector2Array( 0, 0, 50, 0, 50, 6, 0, 6, 0, 0 )
-width = 0.5
-default_color = Color( 0.423529, 0.423529, 0.423529, 1 )
-begin_cap_mode = 1
-end_cap_mode = 1
-
-[node name="Shape 1" type="Node2D" parent="World/Level/platform2"]
-position = Vector2( 24.9997, 2.99221 )
-scale = Vector2( 1.0101, 1.08696 )
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_group_": true
-}
-Tag = "Jump-Through"
-Type = 0
-Size = Vector2( 25, 3 )
-Draw = false
-Color = Color( 0, 1, 1, 1 )
-ignoreBelow = true
-
-[node name="platform3" type="Line2D" parent="World/Level"]
-position = Vector2( 49.25, 89.2472 )
-scale = Vector2( 0.99, 0.92 )
-points = PoolVector2Array( 0, 0, 50, 0, 50, 6, 0, 6, 0, 0 )
-width = 0.5
-default_color = Color( 0.423529, 0.423529, 0.423529, 1 )
-begin_cap_mode = 1
-end_cap_mode = 1
-
-[node name="Shape 1" type="Node2D" parent="World/Level/platform3"]
-position = Vector2( 24.9999, 2.9922 )
-scale = Vector2( 1.0101, 1.08696 )
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_group_": true
-}
-Tag = "Jump-Through"
-Type = 0
-Size = Vector2( 25, 3 )
-Draw = false
-Color = Color( 0, 1, 1, 1 )
-ignoreBelow = true
-
-[node name="Floor" type="Node2D" parent="World/Level"]
-position = Vector2( 160, 145 )
-script = ExtResource( 3 )
-Type = 0
-Size = Vector2( 160, 5 )
-Draw = false
-Color = Color( 0, 1, 1, 1 )
-ignoreBelow = false
-
-[node name="Dummy" type="Node2D" parent="World"]
-position = Vector2( 203, 140 )
-z_as_relative = false
+[node name="register" type="Button" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/title/or_register"]
+anchor_left = 0.144
+anchor_right = 1.0
+anchor_bottom = 1.25
+margin_left = 12.0
+margin_top = -8.0
+margin_right = 49.0
+margin_bottom = 6.0
+focus_neighbour_top = NodePath("../../../LOGIN")
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 12 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 11 )
+flat = true
 script = ExtResource( 9 )
 __meta__ = {
-"_edit_group_": true
+"_edit_use_anchors_": false
 }
+Normal = Color( 0.227451, 0.266667, 0.4, 1 )
+Hovered = Color( 0.356863, 0.396078, 0.537255, 1 )
+Clicked = Color( 0.180392, 0.211765, 0.313726, 1 )
 
-[node name="Sprite" type="Sprite" parent="World/Dummy"]
-material = ExtResource( 14 )
-position = Vector2( -32, -47 )
-texture = ExtResource( 5 )
-centered = false
-hframes = 5
-vframes = 4
-frame = 14
-
-[node name="Hurtbox" type="Node2D" parent="World/Dummy"]
-position = Vector2( 0, -16 )
-script = ExtResource( 3 )
-Type = 2
-Size = Vector2( 7.5, 16 )
-Draw = true
-Color = Color( 0.054902, 1, 0, 1 )
-
-[node name="Animator" type="AnimationPlayer" parent="World/Dummy"]
-playback_speed = 1.2
-anims/dummy_hit_left = ExtResource( 8 )
-anims/dummy_hit_right = ExtResource( 6 )
-anims/dummy_idle = ExtResource( 7 )
-script = ExtResource( 15 )
-
-[node name="Players" type="Node2D" parent="World"]
-
-[node name="Coin" type="Node2D" parent="World"]
-visible = false
-position = Vector2( 46, 111 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="sprite" type="Sprite" parent="World/Coin"]
-position = Vector2( 4, -3 )
-texture = ExtResource( 11 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="World/Coin"]
-autoplay = "coin_idle"
-method_call_mode = 1
-anims/coin_idle = ExtResource( 12 )
-
-[node name="HUD" type="Control" parent="." groups=["hud_root"]]
+[node name="text" type="Label" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/title/or_register/register"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.227451, 0.266667, 0.4, 1 )
+custom_fonts/font = ExtResource( 7 )
+text = "register"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="underline_1" type="Panel" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/title/or_register/register/text"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -19.5
+margin_top = 5.0
+margin_right = -9.5
+margin_bottom = 6.0
+custom_styles/panel = SubResource( 13 )
+
+[node name="underline_2" type="Panel" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/title/or_register/register/text"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -2.5
+margin_top = -2.0
+margin_right = 18.5
+margin_bottom = -1.0
+custom_styles/panel = SubResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selecter" type="NinePatchRect" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/title/or_register/register"]
+visible = false
+modulate = Color( 0.376471, 0.388235, 0.423529, 1 )
+margin_left = -3.0
+margin_top = 3.0
+margin_right = 40.0
+margin_bottom = 15.0
+texture = ExtResource( 2 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/title/or_register/register"]
+stream = ExtResource( 3 )
+script = ExtResource( 11 )
+
+[node name="email" type="Control" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL"]
+margin_left = 2.0
+margin_top = 34.0
+margin_right = 98.0
+margin_bottom = 59.0
+
+[node name="Title" type="Label" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/email"]
+margin_left = 3.0
+margin_top = -6.0
+margin_right = 44.0
+margin_bottom = 8.0
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+text = "email"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/email/Title"]
+margin_left = -1.0
+margin_top = 12.0
+margin_right = 89.0
+margin_bottom = 13.0
+custom_styles/panel = SubResource( 15 )
+
+[node name="LineEdit" type="LineEdit" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/email"]
+margin_left = 2.0
+margin_top = 10.0
+margin_right = 92.0
+margin_bottom = 25.0
+context_menu_enabled = false
+placeholder_text = "you@example.com"
+placeholder_alpha = 0.284
+caret_blink = true
+caret_blink_speed = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="password" type="Control" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL"]
+margin_left = 2.0
+margin_top = 66.0
+margin_right = 98.0
+margin_bottom = 91.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/password"]
+margin_left = 3.0
+margin_top = -6.0
+margin_right = 44.0
+margin_bottom = 8.0
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+text = "password"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/password/Title"]
+margin_left = -1.0
+margin_top = 12.0
+margin_right = 89.0
+margin_bottom = 13.0
+custom_styles/panel = SubResource( 15 )
+
+[node name="LineEdit" type="LineEdit" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/password"]
+margin_left = 2.0
+margin_top = 10.0
+margin_right = 92.0
+margin_bottom = 25.0
+secret = true
+context_menu_enabled = false
+placeholder_text = "password"
+placeholder_alpha = 0.284
+caret_blink = true
+caret_blink_speed = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="remember" type="Control" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL"]
+margin_left = 2.0
+margin_top = 91.0
+margin_right = 98.0
+margin_bottom = 116.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dash_line" type="Panel" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/remember"]
+margin_left = 2.0
+margin_top = 6.0
+margin_right = 92.0
+margin_bottom = 7.0
+custom_styles/panel = SubResource( 15 )
+
+[node name="Title" type="Label" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/remember"]
+margin_left = 3.0
+margin_top = 6.0
+margin_right = 69.0
+margin_bottom = 20.0
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+text = "remember ?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox" type="CheckBox" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/remember"]
+margin_left = 67.0
+margin_top = 10.0
+margin_right = 83.0
+margin_bottom = 26.0
+focus_neighbour_right = NodePath("../../../Offline")
+focus_neighbour_bottom = NodePath("../../LOGIN")
+pressed = true
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selecter" type="NinePatchRect" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/remember/CheckBox"]
+visible = false
+modulate = Color( 0.328445, 0.362996, 0.480469, 1 )
+margin_left = -2.0
+margin_top = 1.0
+margin_right = 9.0
+margin_bottom = 13.0
+texture = ExtResource( 2 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/remember/CheckBox"]
+stream = ExtResource( 3 )
+script = ExtResource( 11 )
+
+[node name="LOGIN" type="Button" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -23.0
+margin_top = -23.0
+margin_right = 24.0
+margin_bottom = -4.0
+focus_neighbour_right = NodePath("../../Offline")
+focus_neighbour_bottom = NodePath("../title/or_register/register")
+text = "login"
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+OriginalButton = true
+
+[node name="bg" type="Panel" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/LOGIN"]
+show_behind_parent = true
+margin_left = 3.0
+margin_top = 1.0
+margin_right = 44.0
+margin_bottom = 16.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selecter" type="NinePatchRect" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/LOGIN"]
+visible = false
+modulate = Color( 0.328445, 0.362996, 0.480469, 1 )
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 49.0
+margin_bottom = 20.0
+texture = ExtResource( 2 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer/Screens/Connection Screen/LOGIN_PANEL/LOGIN"]
+stream = ExtResource( 3 )
+script = ExtResource( 11 )
+
+[node name="REGISTER_PANEL" type="Panel" parent="UILayer/Screens/Connection Screen"]
+visible = false
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 22.0
+margin_top = -86.0
+margin_right = 120.0
+margin_bottom = 75.0
+mouse_filter = 1
+custom_styles/panel = ExtResource( 8 )
+
+[node name="title" type="Label" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL"]
+anchor_right = 1.0
+anchor_bottom = 0.137
+margin_top = -4.0
+margin_bottom = 0.0249977
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Register"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="underline_1" type="Panel" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/title"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -39.0
+margin_top = -5.0
+margin_right = -17.0
+margin_bottom = -4.0
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="underline_2" type="Panel" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/title"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -5.0
+margin_top = -5.0
+margin_right = 37.0
+margin_bottom = -4.0
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="or_login" type="Control" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/title"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 1.0
+margin_top = 31.0
+margin_right = 1.0
+margin_bottom = 31.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="or" type="Label" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/title/or_login"]
+anchor_bottom = 1.0
+margin_top = -8.0
+margin_right = 10.0
+margin_bottom = 6.0
+custom_colors/font_color = Color( 0.227451, 0.266667, 0.4, 1 )
+custom_fonts/font = SubResource( 6 )
+custom_styles/normal = SubResource( 5 )
+text = "or"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="login" type="Button" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/title/or_login"]
+anchor_left = 0.144
+anchor_right = 1.0
+anchor_bottom = 1.25
+margin_left = 11.0
+margin_top = -8.0
+margin_right = 32.0
+margin_bottom = 6.0
+focus_neighbour_top = NodePath("../../../REGISTER")
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 12 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 11 )
+flat = true
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+Normal = Color( 0.227451, 0.266667, 0.4, 1 )
+Hovered = Color( 0.356863, 0.396078, 0.537255, 1 )
+Clicked = Color( 0.180392, 0.211765, 0.313726, 1 )
+
+[node name="text" type="Label" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/title/or_login/login"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.227451, 0.266667, 0.4, 1 )
+custom_fonts/font = ExtResource( 7 )
+text = " login"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="underline_1" type="Panel" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/title/or_login/login/text"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -10.5
+margin_top = 5.0
+margin_right = -3.5
+margin_bottom = 6.0
+custom_styles/panel = SubResource( 18 )
+
+[node name="underline_2" type="Panel" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/title/or_login/login/text"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 3.5
+margin_top = -2.0
+margin_right = 10.5
+margin_bottom = -1.0
+custom_styles/panel = SubResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selecter" type="NinePatchRect" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/title/or_login/login"]
+modulate = Color( 0.328445, 0.362996, 0.480469, 1 )
+margin_top = 2.0
+margin_right = 25.0
+margin_bottom = 15.0
+texture = ExtResource( 2 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/title/or_login/login"]
+stream = ExtResource( 3 )
+script = ExtResource( 11 )
+
+[node name="username" type="Control" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL"]
+margin_left = 1.0
+margin_top = 34.0
+margin_right = 97.0
+margin_bottom = 59.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/username"]
+margin_left = 3.0
+margin_top = -6.0
+margin_right = 44.0
+margin_bottom = 8.0
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+text = "username"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/username/Title"]
+margin_left = -1.0
+margin_top = 12.0
+margin_right = 89.0
+margin_bottom = 13.0
+custom_styles/panel = SubResource( 15 )
+
+[node name="LineEdit" type="LineEdit" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/username"]
+margin_left = 2.0
+margin_top = 10.0
+margin_right = 92.0
+margin_bottom = 25.0
+context_menu_enabled = false
+placeholder_text = "Kevin123"
+placeholder_alpha = 0.284
+caret_blink = true
+caret_blink_speed = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="email" type="Control" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL"]
+margin_left = 2.0
+margin_top = 66.0
+margin_right = 98.0
+margin_bottom = 91.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/email"]
+margin_left = 3.0
+margin_top = -6.0
+margin_right = 44.0
+margin_bottom = 8.0
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+text = "email"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/email/Title"]
+margin_left = -1.0
+margin_top = 12.0
+margin_right = 89.0
+margin_bottom = 13.0
+custom_styles/panel = SubResource( 15 )
+
+[node name="LineEdit" type="LineEdit" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/email"]
+margin_left = 2.0
+margin_top = 10.0
+margin_right = 92.0
+margin_bottom = 25.0
+context_menu_enabled = false
+placeholder_text = "you@example.com"
+placeholder_alpha = 0.284
+caret_blink = true
+caret_blink_speed = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="password" type="Control" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL"]
+margin_left = 2.0
+margin_top = 98.0
+margin_right = 98.0
+margin_bottom = 123.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/password"]
+margin_left = 3.0
+margin_top = -6.0
+margin_right = 44.0
+margin_bottom = 8.0
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+text = "password"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/password/Title"]
+margin_left = -1.0
+margin_top = 12.0
+margin_right = 89.0
+margin_bottom = 13.0
+custom_styles/panel = SubResource( 15 )
+
+[node name="LineEdit" type="LineEdit" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/password"]
+margin_left = 2.0
+margin_top = 10.0
+margin_right = 92.0
+margin_bottom = 25.0
+secret = true
+context_menu_enabled = false
+placeholder_text = "password"
+placeholder_alpha = 0.284
+caret_blink = true
+caret_blink_speed = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="remember" type="Control" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL"]
+margin_left = 2.0
+margin_top = 123.0
+margin_right = 98.0
+margin_bottom = 148.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dash_line" type="Panel" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/remember"]
+margin_left = 2.0
+margin_top = 6.0
+margin_right = 92.0
+margin_bottom = 7.0
+custom_styles/panel = SubResource( 15 )
+
+[node name="Title" type="Label" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/remember"]
+margin_left = 3.0
+margin_top = 6.0
+margin_right = 69.0
+margin_bottom = 20.0
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+text = "remember ?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox" type="CheckBox" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/remember"]
+margin_left = 68.0
+margin_top = 10.0
+margin_right = 84.0
+margin_bottom = 26.0
+pressed = true
+script = ExtResource( 10 )
+
+[node name="selecter" type="NinePatchRect" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/remember/CheckBox"]
+visible = false
+modulate = Color( 0.328445, 0.362996, 0.480469, 1 )
+margin_left = -2.0
+margin_top = 1.0
+margin_right = 9.0
+margin_bottom = 13.0
+texture = ExtResource( 2 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/remember/CheckBox"]
+stream = ExtResource( 3 )
+script = ExtResource( 11 )
+
+[node name="REGISTER" type="Button" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -23.0
+margin_top = -20.0
+margin_right = 24.0
+margin_bottom = -1.0
+focus_neighbour_bottom = NodePath("../title/or_login/login")
+text = "register"
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bg" type="Panel" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/REGISTER"]
+show_behind_parent = true
+margin_left = 3.0
+margin_top = 1.0
+margin_right = 44.0
+margin_bottom = 16.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selecter" type="NinePatchRect" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/REGISTER"]
+visible = false
+modulate = Color( 0.328445, 0.362996, 0.480469, 1 )
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 49.0
+margin_bottom = 20.0
+texture = ExtResource( 2 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/REGISTER"]
+stream = ExtResource( 3 )
+script = ExtResource( 11 )
+
+[node name="loading" type="Panel" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL"]
+visible = false
+anchor_left = -0.202
+anchor_top = -0.217
+anchor_right = 3.114
+anchor_bottom = 1.213
+margin_bottom = 10.245
+custom_styles/panel = SubResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="text" type="Label" parent="UILayer/Screens/Connection Screen/REGISTER_PANEL/loading"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -57.0
+margin_top = -14.0
+margin_right = 57.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 17 )
+text = "Registering...."
+align = 1
+valign = 1
+
+[node name="Title Screen" type="Control" parent="UILayer/Screens"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 18 )
+disabled_button_color = Color( 0.439216, 0.439216, 0.439216, 0.803922 )
+
+[node name="Panel" type="TextureRect" parent="UILayer/Screens/Title Screen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -160.0
+margin_top = -90.0
+margin_right = 160.0
+margin_bottom = 90.0
+texture = ExtResource( 16 )
+flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="USER_CARET" type="Panel" parent="UILayer/Screens/Title Screen"]
+margin_left = 230.0
+margin_top = 5.0
+margin_right = 315.0
+margin_bottom = 33.0
+custom_styles/panel = SubResource( 27 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background" type="Panel" parent="UILayer/Screens/Title Screen/USER_CARET"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = -1.0
+margin_bottom = -1.0
+custom_styles/panel = SubResource( 28 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="username" type="Label" parent="UILayer/Screens/Title Screen/USER_CARET"]
+margin_left = 3.0
+margin_right = 83.0
+margin_bottom = 16.0
+text = "Carbone_13"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="level" type="Label" parent="UILayer/Screens/Title Screen/USER_CARET"]
+margin_left = 4.0
+margin_top = 13.0
+margin_right = 37.0
+margin_bottom = 29.0
+custom_colors/font_color = Color( 0.643137, 0.643137, 0.643137, 1 )
+text = "lv: 10"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="logout" type="Button" parent="UILayer/Screens/Title Screen/USER_CARET"]
+margin_left = 73.0
+margin_top = 16.0
+margin_right = 82.0
+margin_bottom = 25.0
+custom_fonts/font = SubResource( 29 )
+custom_styles/hover = SubResource( 30 )
+custom_styles/pressed = SubResource( 31 )
+custom_styles/focus = SubResource( 32 )
+custom_styles/disabled = SubResource( 33 )
+custom_styles/normal = SubResource( 34 )
+flat = true
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="graphic" type="TextureRect" parent="UILayer/Screens/Title Screen/USER_CARET/logout"]
+margin_right = 9.0
+margin_bottom = 9.0
+texture = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selecter" type="NinePatchRect" parent="UILayer/Screens/Title Screen/USER_CARET/logout"]
+visible = false
+margin_left = -1.0
+margin_top = -2.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 2 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer/Screens/Title Screen/USER_CARET/logout"]
+stream = ExtResource( 3 )
+script = ExtResource( 11 )
+
+[node name="PLAY_MODES" type="VBoxContainer" parent="UILayer/Screens/Title Screen"]
+margin_left = 18.0
+margin_top = 32.0
+margin_right = 91.0
+margin_bottom = 147.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="multiplayer" type="Button" parent="UILayer/Screens/Title Screen/PLAY_MODES"]
+margin_top = 2.0
+margin_right = 73.0
+margin_bottom = 21.0
+rect_pivot_offset = Vector2( -136, 37 )
+focus_neighbour_top = NodePath("../quit")
+focus_neighbour_right = NodePath("../../USER_CARET/logout")
+focus_neighbour_bottom = NodePath("../local")
+custom_colors/font_color_disabled = Color( 0.227451, 0.227451, 0.227451, 0.831373 )
+text = "multiplayer"
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+OriginalButton = true
+
+[node name="bg" type="Panel" parent="UILayer/Screens/Title Screen/PLAY_MODES/multiplayer"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 1.0
+margin_right = -3.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 35 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selecter" type="NinePatchRect" parent="UILayer/Screens/Title Screen/PLAY_MODES/multiplayer"]
+visible = false
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 76.0
+margin_bottom = 20.0
+texture = ExtResource( 2 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer/Screens/Title Screen/PLAY_MODES/multiplayer"]
+stream = ExtResource( 3 )
+script = ExtResource( 11 )
+
+[node name="local" type="Button" parent="UILayer/Screens/Title Screen/PLAY_MODES"]
+margin_top = 25.0
+margin_right = 73.0
+margin_bottom = 44.0
+focus_neighbour_top = NodePath("../multiplayer")
+focus_neighbour_bottom = NodePath("../settings")
+text = "local"
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+OriginalButton = true
+
+[node name="bg" type="Panel" parent="UILayer/Screens/Title Screen/PLAY_MODES/local"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 1.0
+margin_right = -3.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 36 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selecter" type="NinePatchRect" parent="UILayer/Screens/Title Screen/PLAY_MODES/local"]
+visible = false
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 76.0
+margin_bottom = 20.0
+texture = ExtResource( 2 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer/Screens/Title Screen/PLAY_MODES/local"]
+stream = ExtResource( 3 )
+script = ExtResource( 11 )
+
+[node name="settings" type="Button" parent="UILayer/Screens/Title Screen/PLAY_MODES"]
+margin_top = 48.0
+margin_right = 73.0
+margin_bottom = 67.0
+focus_neighbour_top = NodePath("../local")
+focus_neighbour_bottom = NodePath("../credits")
+text = "settings"
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bg" type="Panel" parent="UILayer/Screens/Title Screen/PLAY_MODES/settings"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 1.0
+margin_right = -3.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 37 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selecter" type="NinePatchRect" parent="UILayer/Screens/Title Screen/PLAY_MODES/settings"]
+visible = false
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 76.0
+margin_bottom = 20.0
+texture = ExtResource( 2 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer/Screens/Title Screen/PLAY_MODES/settings"]
+stream = ExtResource( 3 )
+script = ExtResource( 11 )
+
+[node name="credits" type="Button" parent="UILayer/Screens/Title Screen/PLAY_MODES"]
+margin_top = 71.0
+margin_right = 73.0
+margin_bottom = 90.0
+focus_neighbour_top = NodePath("../settings")
+focus_neighbour_bottom = NodePath("../quit")
+text = "credits"
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bg" type="Panel" parent="UILayer/Screens/Title Screen/PLAY_MODES/credits"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 1.0
+margin_right = -3.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 38 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selecter" type="NinePatchRect" parent="UILayer/Screens/Title Screen/PLAY_MODES/credits"]
+visible = false
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 76.0
+margin_bottom = 20.0
+texture = ExtResource( 2 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer/Screens/Title Screen/PLAY_MODES/credits"]
+stream = ExtResource( 3 )
+script = ExtResource( 11 )
+
+[node name="quit" type="Button" parent="UILayer/Screens/Title Screen/PLAY_MODES"]
+margin_top = 94.0
+margin_right = 73.0
+margin_bottom = 113.0
+focus_neighbour_top = NodePath("../credits")
+focus_neighbour_bottom = NodePath("../multiplayer")
+text = "quit"
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bg" type="Panel" parent="UILayer/Screens/Title Screen/PLAY_MODES/quit"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 1.0
+margin_right = -3.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 39 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selecter" type="NinePatchRect" parent="UILayer/Screens/Title Screen/PLAY_MODES/quit"]
+visible = false
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 76.0
+margin_bottom = 20.0
+texture = ExtResource( 2 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer/Screens/Title Screen/PLAY_MODES/quit"]
+stream = ExtResource( 3 )
+script = ExtResource( 11 )
+
+[node name="Matching Screen" type="Control" parent="UILayer/Screens"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 21 )
+
+[node name="CREATE_GAME" type="Panel" parent="UILayer/Screens/Matching Screen"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 12.0
+margin_top = -56.0
+margin_right = 110.0
+margin_bottom = 57.0
+mouse_filter = 2
+custom_styles/panel = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="UILayer/Screens/Matching Screen/CREATE_GAME"]
+anchor_right = 1.0
+anchor_bottom = 0.137
+margin_top = -4.0
+margin_bottom = 0.0249977
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+custom_fonts/font = SubResource( 40 )
+text = "Host"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="underline_1" type="Panel" parent="UILayer/Screens/Matching Screen/CREATE_GAME/title"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -5.0
+margin_right = 20.0
+margin_bottom = -4.0
+custom_styles/panel = SubResource( 41 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="name" type="Control" parent="UILayer/Screens/Matching Screen/CREATE_GAME"]
+margin_left = 2.0
+margin_top = 34.0
+margin_right = 98.0
+margin_bottom = 59.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="UILayer/Screens/Matching Screen/CREATE_GAME/name"]
+margin_left = 3.0
+margin_top = -6.0
+margin_right = 44.0
+margin_bottom = 8.0
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+text = "name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="UILayer/Screens/Matching Screen/CREATE_GAME/name/Title"]
+margin_left = -1.0
+margin_top = 12.0
+margin_right = 89.0
+margin_bottom = 13.0
+custom_styles/panel = SubResource( 42 )
+
+[node name="LineEdit" type="LineEdit" parent="UILayer/Screens/Matching Screen/CREATE_GAME/name"]
+margin_left = 2.0
+margin_top = 10.0
+margin_right = 92.0
+margin_bottom = 25.0
+max_length = 25
+context_menu_enabled = false
+placeholder_text = "MySuperGame"
+placeholder_alpha = 0.284
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="public" type="Control" parent="UILayer/Screens/Matching Screen/CREATE_GAME"]
+margin_left = 2.0
+margin_top = 60.0
+margin_right = 98.0
+margin_bottom = 85.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dash_line" type="Panel" parent="UILayer/Screens/Matching Screen/CREATE_GAME/public"]
+margin_left = 2.0
+margin_top = 6.0
+margin_right = 92.0
+margin_bottom = 7.0
+custom_styles/panel = SubResource( 42 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="UILayer/Screens/Matching Screen/CREATE_GAME/public"]
+margin_left = 3.0
+margin_top = 6.0
+margin_right = 69.0
+margin_bottom = 20.0
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+text = "public  ?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox" type="CheckBox" parent="UILayer/Screens/Matching Screen/CREATE_GAME/public"]
+margin_left = 65.0
+margin_top = 10.0
+margin_right = 81.0
+margin_bottom = 26.0
+pressed = true
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selecter" type="NinePatchRect" parent="UILayer/Screens/Matching Screen/CREATE_GAME/public/CheckBox"]
+visible = false
+modulate = Color( 0.328445, 0.362996, 0.480469, 1 )
+margin_left = -2.0
+margin_top = 1.0
+margin_right = 9.0
+margin_bottom = 13.0
+texture = ExtResource( 2 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CREATE" type="Button" parent="UILayer/Screens/Matching Screen/CREATE_GAME"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -23.0
+margin_top = -23.0
+margin_right = 24.0
+margin_bottom = -4.0
+focus_neighbour_right = NodePath("../../Offline")
+focus_neighbour_bottom = NodePath("../title/or_register/register")
+text = "create"
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+OriginalButton = true
+
+[node name="bg" type="Panel" parent="UILayer/Screens/Matching Screen/CREATE_GAME/CREATE"]
+show_behind_parent = true
+margin_left = 3.0
+margin_top = 1.0
+margin_right = 44.0
+margin_bottom = 16.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 43 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selecter" type="NinePatchRect" parent="UILayer/Screens/Matching Screen/CREATE_GAME/CREATE"]
+visible = false
+modulate = Color( 0.328445, 0.362996, 0.480469, 1 )
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 49.0
+margin_bottom = 20.0
+texture = ExtResource( 2 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer/Screens/Matching Screen/CREATE_GAME/CREATE"]
+stream = ExtResource( 3 )
+script = ExtResource( 11 )
+
+[node name="JOIN_GAME" type="Panel" parent="UILayer/Screens/Matching Screen"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 160.0
+margin_top = -78.0
+margin_right = 312.0
+margin_bottom = 65.0
+mouse_filter = 2
+custom_styles/panel = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="UILayer/Screens/Matching Screen/JOIN_GAME"]
+anchor_right = 1.0
+anchor_bottom = 0.137
+margin_top = -4.0
+margin_bottom = 4.409
+custom_colors/font_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+custom_fonts/font = SubResource( 40 )
+text = "Browse"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="underline_1" type="Panel" parent="UILayer/Screens/Matching Screen/JOIN_GAME/title"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -33.0
+margin_top = -5.0
+margin_right = 31.0
+margin_bottom = -4.0
+custom_styles/panel = SubResource( 41 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UILayer/Screens/Matching Screen/JOIN_GAME"]
+margin_left = 1.0
+margin_top = 22.0
+margin_right = 151.0
+margin_bottom = 127.0
+rect_min_size = Vector2( 150, 105 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/Screens/Matching Screen/JOIN_GAME/ScrollContainer"]
+margin_right = 150.0
+margin_bottom = 105.0
+rect_min_size = Vector2( 150, 105 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="reload" type="TextureButton" parent="UILayer/Screens/Matching Screen/JOIN_GAME"]
+margin_left = 132.0
+margin_top = 4.0
+margin_right = 147.0
+margin_bottom = 19.0
+texture_normal = ExtResource( 19 )
+texture_pressed = ExtResource( 19 )
+texture_hover = ExtResource( 19 )
+texture_disabled = ExtResource( 19 )
+texture_focused = ExtResource( 19 )
+expand = true
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+normal = Color( 1, 1, 1, 1 )
+hovered = Color( 0.913725, 0.913725, 0.913725, 1 )
+clicked = Color( 0.85098, 0.85098, 0.85098, 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer/Screens/Matching Screen/JOIN_GAME/reload"]
+stream = ExtResource( 3 )
+script = ExtResource( 11 )
+
+[node name="OR" type="Label" parent="UILayer/Screens/Matching Screen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -46.0
+margin_top = -14.0
+margin_right = -6.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 44 )
+text = "OR"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lobby Screen" type="Control" parent="UILayer/Screens"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+theme = ExtResource( 1 )
+script = ExtResource( 25 )
+colors = [ Color( 0.603922, 0.317647, 0.317647, 1 ), Color( 0.203922, 0.466667, 0.270588, 1 ), Color( 0.466667, 0.443137, 0.203922, 1 ) ]
+
+[node name="Background" type="TextureRect" parent="UILayer/Screens/Lobby Screen"]
 margin_right = 320.0
 margin_bottom = 180.0
+texture = ExtResource( 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Post Processing" type="Control" parent="HUD"]
+[node name="PLAYERS" type="Control" parent="UILayer/Screens/Lobby Screen"]
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = -75.0
+mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Vignette" type="TextureRect" parent="HUD/Post Processing"]
-modulate = Color( 1, 1, 1, 0.231373 )
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/Screens/Lobby Screen/PLAYERS"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -133.5
+margin_top = -28.5
+margin_right = 133.5
+margin_bottom = 18.5
+alignment = 1
+
+[node name="player" parent="UILayer/Screens/Lobby Screen/PLAYERS/HBoxContainer" instance=ExtResource( 5 )]
+visible = false
+margin_left = 94.0
+margin_right = 173.0
+
+[node name="player2" parent="UILayer/Screens/Lobby Screen/PLAYERS/HBoxContainer" instance=ExtResource( 5 )]
+visible = false
+margin_left = 52.0
+margin_right = 131.0
+
+[node name="player3" parent="UILayer/Screens/Lobby Screen/PLAYERS/HBoxContainer" instance=ExtResource( 5 )]
+visible = false
+margin_left = 94.0
+margin_right = 173.0
+
+[node name="selecter" type="Button" parent="UILayer/Screens/Lobby Screen/PLAYERS"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -8.0
+margin_top = -47.5
+margin_right = 24.0
+margin_bottom = -15.5
+rect_scale = Vector2( 0.5, 0.5 )
+mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_styles/hover = SubResource( 105 )
+custom_styles/pressed = SubResource( 106 )
+custom_styles/focus = SubResource( 107 )
+custom_styles/disabled = SubResource( 108 )
+custom_styles/normal = SubResource( 109 )
+icon = ExtResource( 23 )
+flat = true
+script = ExtResource( 22 )
+
+[node name="selected" type="TextureRect" parent="UILayer/Screens/Lobby Screen/PLAYERS/selecter"]
+margin_left = -1.0
+margin_right = 31.0
+margin_bottom = 32.0
+texture = ExtResource( 26 )
+
+[node name="CHARACTERS" type="HBoxContainer" parent="UILayer/Screens/Lobby Screen"]
+margin_left = 108.0
+margin_top = 38.0
+margin_right = 297.0
+margin_bottom = 85.0
+mouse_filter = 2
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Marston" type="Panel" parent="UILayer/Screens/Lobby Screen/CHARACTERS"]
+margin_left = 6.0
+margin_right = 62.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 56, 47 )
+mouse_filter = 2
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 91 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Characters" type="Control" parent="UILayer/Screens/Lobby Screen/CHARACTERS/Marston"]
+margin_right = 56.0
+margin_bottom = 47.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Marston" type="TextureRect" parent="UILayer/Screens/Lobby Screen/CHARACTERS/Marston/Characters"]
+margin_left = 10.0
+margin_top = 2.0
+margin_right = 33.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 1, 1 )
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = true
+texture = ExtResource( 34 )
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="name" type="Label" parent="UILayer/Screens/Lobby Screen/CHARACTERS/Marston"]
+margin_top = 32.0
+margin_right = 56.0
+margin_bottom = 47.0
+text = "MARSTON"
+align = 1
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="dash" type="Panel" parent="UILayer/Screens/Lobby Screen/CHARACTERS/Marston/name"]
+show_behind_parent = true
+margin_right = 56.0
+margin_bottom = 15.0
+custom_styles/panel = SubResource( 92 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="select_area" type="Button" parent="UILayer/Screens/Lobby Screen/CHARACTERS/Marston"]
+margin_right = 56.0
+margin_bottom = 47.0
+mouse_filter = 1
+custom_styles/hover = SubResource( 93 )
+custom_styles/pressed = SubResource( 94 )
+custom_styles/focus = SubResource( 95 )
+custom_styles/disabled = SubResource( 96 )
+custom_styles/normal = SubResource( 97 )
+flat = true
+script = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Musashi" type="Panel" parent="UILayer/Screens/Lobby Screen/CHARACTERS"]
+margin_left = 66.0
+margin_right = 122.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 56, 47 )
+mouse_filter = 1
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 98 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Characters" type="Control" parent="UILayer/Screens/Lobby Screen/CHARACTERS/Musashi"]
+margin_right = 55.0
+margin_bottom = 47.0
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Musashi" type="TextureRect" parent="UILayer/Screens/Lobby Screen/CHARACTERS/Musashi/Characters"]
+margin_left = 6.0
+margin_top = 2.0
+margin_right = 31.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 1, 1 )
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = true
+texture = ExtResource( 35 )
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="name" type="Label" parent="UILayer/Screens/Lobby Screen/CHARACTERS/Musashi"]
+margin_left = -1.0
+margin_top = 32.0
+margin_right = 59.0
+margin_bottom = 47.0
+mouse_filter = 1
+text = "MUSASHI"
+align = 1
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="dash" type="Panel" parent="UILayer/Screens/Lobby Screen/CHARACTERS/Musashi/name"]
+show_behind_parent = true
+margin_left = 1.0
+margin_right = 57.0
+margin_bottom = 15.0
+custom_styles/panel = SubResource( 99 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="select_area" type="Button" parent="UILayer/Screens/Lobby Screen/CHARACTERS/Musashi"]
+margin_right = 56.0
+margin_bottom = 47.0
+mouse_filter = 1
+custom_styles/hover = SubResource( 100 )
+custom_styles/pressed = SubResource( 101 )
+custom_styles/focus = SubResource( 102 )
+custom_styles/disabled = SubResource( 103 )
+custom_styles/normal = SubResource( 104 )
+flat = true
+script = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Namka" type="Panel" parent="UILayer/Screens/Lobby Screen/CHARACTERS"]
+margin_left = 126.0
+margin_right = 182.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 56, 47 )
+mouse_filter = 1
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 45 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Characters" type="Control" parent="UILayer/Screens/Lobby Screen/CHARACTERS/Namka"]
+margin_right = 55.0
+margin_bottom = 47.0
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Namka" type="TextureRect" parent="UILayer/Screens/Lobby Screen/CHARACTERS/Namka/Characters"]
+margin_left = 13.0
+margin_top = -4.0
+margin_right = 38.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 1, 1 )
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = true
+texture = ExtResource( 36 )
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="name" type="Label" parent="UILayer/Screens/Lobby Screen/CHARACTERS/Namka"]
+margin_left = -1.0
+margin_top = 32.0
+margin_right = 59.0
+margin_bottom = 47.0
+mouse_filter = 1
+text = "NAMKA"
+align = 1
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="dash" type="Panel" parent="UILayer/Screens/Lobby Screen/CHARACTERS/Namka/name"]
+show_behind_parent = true
+margin_left = 1.0
+margin_right = 57.0
+margin_bottom = 15.0
+custom_styles/panel = SubResource( 46 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="select_area" type="Button" parent="UILayer/Screens/Lobby Screen/CHARACTERS/Namka"]
+margin_right = 56.0
+margin_bottom = 47.0
+mouse_filter = 1
+custom_styles/hover = SubResource( 47 )
+custom_styles/pressed = SubResource( 48 )
+custom_styles/focus = SubResource( 49 )
+custom_styles/disabled = SubResource( 50 )
+custom_styles/normal = SubResource( 51 )
+flat = true
+script = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="ColorRect" parent="UILayer/Screens/Lobby Screen"]
+visible = false
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_bottom = 14.0
+color = Color( 0.65098, 0.286275, 0.286275, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UILayer/Screens/Lobby Screen/Start"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = -1.0
+text = "PRESS START OR ENTER TO PLAY !"
+align = 1
+
+[node name="Overlay" type="Control" parent="UILayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Message" type="Label" parent="UILayer/Overlay"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -14.0
+custom_fonts/font = ExtResource( 7 )
+custom_styles/normal = SubResource( 80 )
+
+[node name="BackButton" type="Button" parent="UILayer/Overlay"]
+visible = false
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 27.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 21 )
+custom_styles/hover = SubResource( 81 )
+custom_styles/pressed = SubResource( 82 )
+custom_styles/focus = SubResource( 83 )
+custom_styles/disabled = SubResource( 84 )
+custom_styles/normal = SubResource( 85 )
+flat = true
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_group_": true
+}
+OriginalButton = true
+
+[node name="graphic" type="TextureRect" parent="UILayer/Overlay/BackButton"]
+margin_right = 9.0
+margin_bottom = 9.0
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selecter" type="NinePatchRect" parent="UILayer/Overlay/BackButton"]
+visible = false
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 30.0
+margin_bottom = 23.0
 texture = ExtResource( 2 )
-expand = true
-
-[node name="Healthbars" type="GridContainer" parent="HUD"]
-anchor_left = 0.111
-anchor_right = 1.0
-margin_left = -30.52
-margin_top = 3.0
-margin_right = -5.0
-margin_bottom = 39.0
-custom_constants/vseparation = 5
-custom_constants/hseparation = 60
-columns = 2
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer/Overlay/BackButton"]
+stream = ExtResource( 3 )
+script = ExtResource( 11 )
+
+[node name="Alert" type="AcceptDialog" parent="UILayer/Overlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -78.5
+margin_top = -36.0
+margin_right = 78.5
+margin_bottom = 36.0
+theme = ExtResource( 14 )
+window_title = "Error !"
+resizable = true
+dialog_text = "trgrtrgrgg"
+dialog_autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer/Overlay/Alert"]
+stream = ExtResource( 3 )
+script = ExtResource( 11 )
+
+[connection signal="button_down" from="UILayer/Screens/Connection Screen/Offline" to="UILayer/Screens/Connection Screen/Offline/AudioStreamPlayer" method="_play"]
+[connection signal="pressed" from="UILayer/Screens/Connection Screen/Offline" to="UILayer/Screens/Connection Screen" method="go_offline"]
+[connection signal="pressed" from="UILayer/Screens/Connection Screen/LOGIN_PANEL/title/or_register/register" to="UILayer/Screens/Connection Screen" method="switch_to_register_side"]
+[connection signal="pressed" from="UILayer/Screens/Connection Screen/LOGIN_PANEL/title/or_register/register" to="UILayer/Screens/Connection Screen/LOGIN_PANEL/title/or_register/register/AudioStreamPlayer" method="_play"]
+[connection signal="pressed" from="UILayer/Screens/Connection Screen/LOGIN_PANEL/remember/CheckBox" to="UILayer/Screens/Connection Screen/LOGIN_PANEL/remember/CheckBox/AudioStreamPlayer" method="_play"]
+[connection signal="pressed" from="UILayer/Screens/Connection Screen/LOGIN_PANEL/LOGIN" to="UILayer/Screens/Connection Screen" method="login"]
+[connection signal="pressed" from="UILayer/Screens/Connection Screen/LOGIN_PANEL/LOGIN" to="UILayer/Screens/Connection Screen/LOGIN_PANEL/LOGIN/AudioStreamPlayer" method="_play"]
+[connection signal="pressed" from="UILayer/Screens/Connection Screen/REGISTER_PANEL/title/or_login/login" to="UILayer/Screens/Connection Screen" method="switch_to_login_side"]
+[connection signal="pressed" from="UILayer/Screens/Connection Screen/REGISTER_PANEL/title/or_login/login" to="UILayer/Screens/Connection Screen/REGISTER_PANEL/title/or_login/login/AudioStreamPlayer" method="_play"]
+[connection signal="pressed" from="UILayer/Screens/Connection Screen/REGISTER_PANEL/remember/CheckBox" to="UILayer/Screens/Connection Screen/REGISTER_PANEL/remember/CheckBox/AudioStreamPlayer" method="_play"]
+[connection signal="pressed" from="UILayer/Screens/Connection Screen/REGISTER_PANEL/REGISTER" to="UILayer/Screens/Connection Screen" method="register"]
+[connection signal="pressed" from="UILayer/Screens/Connection Screen/REGISTER_PANEL/REGISTER" to="UILayer/Screens/Connection Screen/REGISTER_PANEL/REGISTER/AudioStreamPlayer" method="_play"]
+[connection signal="button_down" from="UILayer/Screens/Title Screen/USER_CARET/logout" to="UILayer/Screens/Title Screen/USER_CARET/logout/AudioStreamPlayer" method="_play"]
+[connection signal="pressed" from="UILayer/Screens/Title Screen/USER_CARET/logout" to="UILayer/Screens/Title Screen" method="logout"]
+[connection signal="LoseFocus" from="UILayer/Screens/Title Screen/PLAY_MODES/multiplayer" to="UILayer/Screens/Title Screen" method="hover_lose"]
+[connection signal="button_down" from="UILayer/Screens/Title Screen/PLAY_MODES/multiplayer" to="UILayer/Screens/Title Screen/PLAY_MODES/multiplayer/AudioStreamPlayer" method="_play"]
+[connection signal="focus_entered" from="UILayer/Screens/Title Screen/PLAY_MODES/multiplayer" to="UILayer/Screens/Title Screen" method="multi_hovered"]
+[connection signal="pressed" from="UILayer/Screens/Title Screen/PLAY_MODES/multiplayer" to="UILayer/Screens/Title Screen" method="multiplayer"]
+[connection signal="LoseFocus" from="UILayer/Screens/Title Screen/PLAY_MODES/local" to="UILayer/Screens/Title Screen" method="hover_lose"]
+[connection signal="button_down" from="UILayer/Screens/Title Screen/PLAY_MODES/local" to="UILayer/Screens/Title Screen/PLAY_MODES/local/AudioStreamPlayer" method="_play"]
+[connection signal="focus_entered" from="UILayer/Screens/Title Screen/PLAY_MODES/local" to="UILayer/Screens/Title Screen" method="local_hovered"]
+[connection signal="pressed" from="UILayer/Screens/Title Screen/PLAY_MODES/local" to="UILayer/Screens/Title Screen" method="local"]
+[connection signal="LoseFocus" from="UILayer/Screens/Title Screen/PLAY_MODES/settings" to="UILayer/Screens/Title Screen" method="hover_lose"]
+[connection signal="button_down" from="UILayer/Screens/Title Screen/PLAY_MODES/settings" to="UILayer/Screens/Title Screen/PLAY_MODES/settings/AudioStreamPlayer" method="_play"]
+[connection signal="focus_entered" from="UILayer/Screens/Title Screen/PLAY_MODES/settings" to="UILayer/Screens/Title Screen" method="settings_hovered"]
+[connection signal="pressed" from="UILayer/Screens/Title Screen/PLAY_MODES/settings" to="UILayer/Screens/Title Screen" method="settings"]
+[connection signal="LoseFocus" from="UILayer/Screens/Title Screen/PLAY_MODES/credits" to="UILayer/Screens/Title Screen" method="hover_lose"]
+[connection signal="button_down" from="UILayer/Screens/Title Screen/PLAY_MODES/credits" to="UILayer/Screens/Title Screen/PLAY_MODES/credits/AudioStreamPlayer" method="_play"]
+[connection signal="focus_entered" from="UILayer/Screens/Title Screen/PLAY_MODES/credits" to="UILayer/Screens/Title Screen" method="credits_hovered"]
+[connection signal="pressed" from="UILayer/Screens/Title Screen/PLAY_MODES/credits" to="UILayer/Screens/Title Screen" method="credit"]
+[connection signal="button_down" from="UILayer/Screens/Title Screen/PLAY_MODES/quit" to="UILayer/Screens/Title Screen/PLAY_MODES/quit/AudioStreamPlayer" method="_play"]
+[connection signal="focus_entered" from="UILayer/Screens/Title Screen/PLAY_MODES/quit" to="UILayer/Screens/Title Screen" method="quit_hovered"]
+[connection signal="pressed" from="UILayer/Screens/Title Screen/PLAY_MODES/quit" to="UILayer/Screens/Title Screen" method="quit"]
+[connection signal="button_down" from="UILayer/Screens/Matching Screen/CREATE_GAME/CREATE" to="UILayer/Screens/Matching Screen/CREATE_GAME/CREATE/AudioStreamPlayer" method="_play"]
+[connection signal="pressed" from="UILayer/Screens/Matching Screen/CREATE_GAME/CREATE" to="UILayer/Screens/Matching Screen" method="create_lobby"]
+[connection signal="button_down" from="UILayer/Screens/Matching Screen/JOIN_GAME/reload" to="UILayer/Screens/Matching Screen/JOIN_GAME/reload/AudioStreamPlayer" method="_play"]
+[connection signal="pressed" from="UILayer/Screens/Matching Screen/JOIN_GAME/reload" to="UILayer/Screens/Matching Screen" method="refresh_lobby"]
+[connection signal="clicked" from="UILayer/Screens/Lobby Screen/CHARACTERS/Marston/select_area" to="UILayer/Screens/Lobby Screen" method="marston_click"]
+[connection signal="mouse_entered" from="UILayer/Screens/Lobby Screen/CHARACTERS/Marston/select_area" to="UILayer/Screens/Lobby Screen" method="marston_hover_start"]
+[connection signal="mouse_exited" from="UILayer/Screens/Lobby Screen/CHARACTERS/Marston/select_area" to="UILayer/Screens/Lobby Screen" method="marston_hover_stop"]
+[connection signal="clicked" from="UILayer/Screens/Lobby Screen/CHARACTERS/Musashi/select_area" to="UILayer/Screens/Lobby Screen" method="musashi_click"]
+[connection signal="mouse_entered" from="UILayer/Screens/Lobby Screen/CHARACTERS/Musashi/select_area" to="UILayer/Screens/Lobby Screen" method="musashi_hover_start"]
+[connection signal="mouse_exited" from="UILayer/Screens/Lobby Screen/CHARACTERS/Musashi/select_area" to="UILayer/Screens/Lobby Screen" method="musashi_hover_stop"]
+[connection signal="clicked" from="UILayer/Screens/Lobby Screen/CHARACTERS/Namka/select_area" to="UILayer/Screens/Lobby Screen" method="namka_click"]
+[connection signal="mouse_entered" from="UILayer/Screens/Lobby Screen/CHARACTERS/Namka/select_area" to="UILayer/Screens/Lobby Screen" method="namka_hover_start"]
+[connection signal="mouse_exited" from="UILayer/Screens/Lobby Screen/CHARACTERS/Namka/select_area" to="UILayer/Screens/Lobby Screen" method="namka_hover_stop"]
+[connection signal="button_down" from="UILayer/Overlay/BackButton" to="UILayer/Overlay/BackButton/AudioStreamPlayer" method="_play"]
+[connection signal="pressed" from="UILayer/Overlay/BackButton" to="UILayer" method="_on_BackButton_pressed"]
+[connection signal="confirmed" from="UILayer/Overlay/Alert" to="UILayer/Overlay/Alert/AudioStreamPlayer" method="_play"]

@@ -83,6 +83,26 @@ _global_script_classes=[ {
 "class": "NakamaWriteStorageObject",
 "language": "GDScript",
 "path": "res://addons/com.heroiclabs.nakama/api/NakamaWriteStorageObject.gd"
+}, {
+"base": "AnimationPlayer",
+"class": "NetworkAnimationPlayer",
+"language": "GDScript",
+"path": "res://addons/godot-rollback-netcode/NetworkAnimationPlayer.gd"
+}, {
+"base": "Node",
+"class": "NetworkRandomNumberGenerator",
+"language": "GDScript",
+"path": "res://addons/godot-rollback-netcode/NetworkRandomNumberGenerator.gd"
+}, {
+"base": "Node",
+"class": "NetworkTimer",
+"language": "GDScript",
+"path": "res://addons/godot-rollback-netcode/NetworkTimer.gd"
+}, {
+"base": "CanvasLayer",
+"class": "UILayer",
+"language": "GDScript",
+"path": "res://scripts/ui/UILayer.gd"
 } ]
 _global_script_class_icons={
 "NakamaAPI": "",
@@ -99,13 +119,17 @@ _global_script_class_icons={
 "NakamaSocket": "",
 "NakamaSocketAdapter": "",
 "NakamaStorageObjectId": "",
-"NakamaWriteStorageObject": ""
+"NakamaWriteStorageObject": "",
+"NetworkAnimationPlayer": "",
+"NetworkRandomNumberGenerator": "",
+"NetworkTimer": "",
+"UILayer": ""
 }
 
 [application]
 
 config/name="Bonebreaker"
-run/main_scene="res://scenes/menu/Connection Screen.tscn"
+run/main_scene="res://scenes/Main.tscn"
 config/icon="res://assets/icons/icon.png"
 config/windows_native_icon="res://assets/icons/icon.ico"
 
@@ -115,12 +139,10 @@ GlobalInput="*res://scripts/inputs/Input.cs"
 SceneManager="*res://scripts/scenes/SceneManager.cs"
 OnlineMatch="*res://addons/nakama-webrtc/OnlineMatch.gd"
 Online="*res://addons/nakama-webrtc/Online.gd"
-SyncManager="*res://addons/network-sync-rollback/SyncManager.gd"
+SyncManager="*res://addons/godot-rollback-netcode/SyncManager.gd"
 Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
 Physics="*res://scripts/physics/Physics.cs"
-WebRtc="*res://scripts/network/WebRTC.gd"
 Main="*res://scripts/Main.gd"
-SyncDebugger="*res://addons/network-sync-rollback/SyncDebugger.gd"
 
 [debug]
 
@@ -150,7 +172,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/codeandweb.texturepacker/plugin.cfg", "res://addons/multirun/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/codeandweb.texturepacker/plugin.cfg", "res://addons/godot-rollback-netcode/plugin.cfg", "res://addons/multirun/plugin.cfg" )
 
 [gdnative]
 
@@ -274,6 +296,13 @@ translations=PoolStringArray( "res://localization/local.en.translation", "res://
 
 export/export_assemblies_inside_pck=false
 export/i18n_codesets=0
+
+[network]
+
+rollback/debug/rollback_ticks=5
+rollback/debug/random_rollback_ticks=2
+rollback/debug/check_message_serializer_roundtrip=true
+rollback/debug/check_local_state_consistency=true
 
 [physics]
 

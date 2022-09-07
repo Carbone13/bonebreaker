@@ -1,0 +1,99 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scripts/screens/4_lobby/PlayerLobbyStatus.gd" type="Script" id=1]
+[ext_resource path="res://resources/themes/main_theme.tres" type="Theme" id=2]
+[ext_resource path="res://assets/screens/lobby/namka_card.png" type="Texture" id=4]
+[ext_resource path="res://assets/screens/lobby/marston_card.png" type="Texture" id=5]
+[ext_resource path="res://assets/screens/lobby/musashi_card.png" type="Texture" id=7]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.603922, 0.317647, 0.317647, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 1, 1, 0 )
+border_width_left = 1
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 1
+border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+
+[node name="player" type="Panel"]
+margin_right = 79.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 79, 47 )
+mouse_filter = 1
+theme = ExtResource( 2 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 1 )
+
+[node name="Characters" type="Control" parent="."]
+margin_left = 2.0
+margin_top = 15.0
+margin_right = 77.0
+margin_bottom = 45.0
+rect_clip_content = true
+mouse_filter = 1
+
+[node name="Marston" type="TextureRect" parent="Characters"]
+visible = false
+light_mask = 1024
+margin_left = 32.0
+margin_top = 7.0
+margin_right = 55.0
+margin_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 1, 1 )
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 13, 9 )
+rect_clip_content = true
+texture = ExtResource( 5 )
+
+[node name="Musashi" type="TextureRect" parent="Characters"]
+visible = false
+light_mask = 1024
+margin_left = 14.0
+margin_top = -4.0
+margin_right = 39.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 1, 1 )
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = true
+texture = ExtResource( 7 )
+
+[node name="Namka" type="TextureRect" parent="Characters"]
+visible = false
+light_mask = 1024
+margin_left = 20.0
+margin_top = -8.0
+margin_right = 49.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 1, 1 )
+rect_scale = Vector2( 2, 2 )
+rect_clip_content = true
+texture = ExtResource( 4 )
+
+[node name="username" type="Label" parent="."]
+anchor_right = 1.0
+margin_left = 1.0
+margin_bottom = 15.0
+mouse_filter = 1
+text = "XXXXXXXXXXXX"
+align = 1
+max_lines_visible = 1
+
+[node name="dash" type="Panel" parent="username"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]

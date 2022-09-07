@@ -19,10 +19,11 @@
 [ext_resource path="res://resources/animations/characters/marston/falling_l.tres" type="Animation" id=17]
 [ext_resource path="res://resources/animations/characters/marston/falling_r.tres" type="Animation" id=18]
 [ext_resource path="res://resources/animations/characters/marston/running_r.tres" type="Animation" id=19]
-[ext_resource path="res://addons/network-sync-rollback/NetworkAnimationPlayer.gd" type="Script" id=20]
+[ext_resource path="res://addons/godot-rollback-netcode/NetworkAnimationPlayer.gd" type="Script" id=20]
 [ext_resource path="res://assets/fonts/Armin.ttf" type="DynamicFontData" id=21]
 [ext_resource path="res://assets/ui/selection_gem.png" type="Texture" id=22]
 [ext_resource path="res://resources/animations/characters/marston/jab_1_r.tres" type="Animation" id=23]
+
 
 [sub_resource type="DynamicFont" id=1]
 extra_spacing_space = -1

@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/game_sprites/characters/namka/namka.sprites/jump/jump_2.tres" type="Texture" id=6]
 [ext_resource path="res://assets/game_sprites/characters/namka/namka.sprites/damage/damage_1.tres" type="Texture" id=7]
 [ext_resource path="res://assets/game_sprites/characters/namka/namka.sprites/damage/damage_2.tres" type="Texture" id=8]
-[ext_resource path="res://addons/network-sync-rollback/NetworkAnimationPlayer.gd" type="Script" id=9]
+[ext_resource path="res://addons/godot-rollback-netcode/NetworkAnimationPlayer.gd" type="Script" id=9]
 [ext_resource path="res://assets/game_sprites/characters/namka/namka.sprites/attack/attack_5.tres" type="Texture" id=10]
 [ext_resource path="res://assets/game_sprites/characters/namka/namka.sprites/attack/attack_1.tres" type="Texture" id=11]
 [ext_resource path="res://assets/game_sprites/characters/namka/namka.sprites/attack/attack_2.tres" type="Texture" id=12]
@@ -1445,9 +1445,7 @@ tracks/8/keys = {
 extra_spacing_space = -1
 font_data = ExtResource( 23 )
 
-[node name="Namka" type="Node2D" groups=[
-"network_sync",
-]]
+[node name="Namka" type="Node2D" groups=["network_sync"]]
 script = ExtResource( 2 )
 Pushbox_path = NodePath("BOX/Pushbox")
 Hitbox_path = NodePath("BOX/Hitbox")
@@ -1469,11 +1467,11 @@ Color = Color( 0, 1, 1, 1 )
 ignoreBelow = false
 
 [node name="Hitbox" type="Node2D" parent="BOX"]
-position = Vector2( 26, -5 )
+position = Vector2( -9, 0 )
 script = ExtResource( 1 )
 Tag = "Player"
 Type = 1
-Size = Vector2( 20, 15 )
+Size = Vector2( 6, 10 )
 Draw = false
 Color = Color( 1, 0, 0, 1 )
 
@@ -1487,8 +1485,9 @@ Draw = true
 Color = Color( 0, 1, 0.156863, 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 13, -7 )
-texture = ExtResource( 12 )
+position = Vector2( 3, 1 )
+texture = ExtResource( 6 )
+flip_h = true
 
 [node name="Animator" type="AnimationPlayer" parent="."]
 anims/ascending_l = SubResource( 1 )
@@ -1513,8 +1512,8 @@ margin_left = -50.0
 margin_top = -28.0
 margin_right = 50.0
 margin_bottom = -14.0
-custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
+custom_fonts/font = SubResource( 13 )
 text = "carbone_13"
 align = 1
 __meta__ = {

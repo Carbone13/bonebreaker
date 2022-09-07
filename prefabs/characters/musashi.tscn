@@ -24,7 +24,7 @@
 [ext_resource path="res://assets/game_sprites/characters/musashi/musashi.sprites/attack3/attack3_2.tres" type="Texture" id=22]
 [ext_resource path="res://assets/fonts/Armin.ttf" type="DynamicFontData" id=23]
 [ext_resource path="res://assets/ui/selection_gem.png" type="Texture" id=24]
-[ext_resource path="res://addons/network-sync-rollback/NetworkAnimationPlayer.gd" type="Script" id=25]
+[ext_resource path="res://addons/godot-rollback-netcode/NetworkAnimationPlayer.gd" type="Script" id=25]
 [ext_resource path="res://assets/game_sprites/characters/musashi/musashi.sprites/dash/dash.tres" type="Texture" id=26]
 
 [sub_resource type="Animation" id=1]
@@ -2209,9 +2209,7 @@ tracks/8/keys = {
 extra_spacing_space = -1
 font_data = ExtResource( 23 )
 
-[node name="Musashi" type="Node2D" groups=[
-"network_sync",
-]]
+[node name="Musashi" type="Node2D" groups=["network_sync"]]
 script = ExtResource( 2 )
 Pushbox_path = NodePath("BOX/Pushbox")
 Hitbox_path = NodePath("BOX/Hitbox")
@@ -2250,8 +2248,8 @@ Draw = true
 Color = Color( 0, 1, 0.156863, 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, 1 )
-texture = ExtResource( 26 )
+position = Vector2( -1, 1 )
+texture = ExtResource( 14 )
 flip_h = true
 
 [node name="Animator" type="AnimationPlayer" parent="."]
@@ -2283,8 +2281,8 @@ margin_left = -50.0
 margin_top = -28.0
 margin_right = 50.0
 margin_bottom = -14.0
-custom_fonts/font = SubResource( 19 )
 custom_colors/font_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
+custom_fonts/font = SubResource( 19 )
 text = "carbone_13"
 align = 1
 __meta__ = {

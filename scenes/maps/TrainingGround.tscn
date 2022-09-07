@@ -1,0 +1,294 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://addons/godot-rollback-netcode/NetworkAnimationPlayer.gd" type="Script" id=1]
+[ext_resource path="res://scenes/maps/TrainingGround.gd" type="Script" id=2]
+[ext_resource path="res://scripts/training/Dummy.cs" type="Script" id=3]
+[ext_resource path="res://scripts/physics/shapes/AABB.cs" type="Script" id=4]
+[ext_resource path="res://scripts/training/TrainingGroundBackground.cs" type="Script" id=5]
+[ext_resource path="res://resources/animations/coin/coin_idle.tres" type="Animation" id=6]
+[ext_resource path="res://resources/animations/dummy/dummy_hit_right.tres" type="Animation" id=7]
+[ext_resource path="res://resources/animations/dummy/dummy_hit_left.tres" type="Animation" id=8]
+[ext_resource path="res://resources/animations/dummy/dummy_idle.tres" type="Animation" id=9]
+[ext_resource path="res://resources/fonts/monogram_extended.tres" type="DynamicFont" id=10]
+[ext_resource path="res://assets/game_sprites/items/items.sprites/coin.tres" type="Texture" id=11]
+[ext_resource path="res://assets/post_processing/lineardodge.png" type="Texture" id=12]
+[ext_resource path="res://shader/pixel_art_aa.tres" type="Material" id=13]
+[ext_resource path="res://assets/game_sprites/dummy.png" type="Texture" id=14]
+[ext_resource path="res://assets/post_processing/vignette.png" type="Texture" id=15]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform sampler2D mask;
+
+vec4 linear_dodge(vec4 base, vec4 blend)
+{
+	return base + blend;
+}
+
+void fragment() 
+{
+	vec4 screen_col = texture(SCREEN_TEXTURE, SCREEN_UV);
+	vec4 texture_col = texture(mask, UV);
+	COLOR = linear_dodge(screen_col, texture_col);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/mask = ExtResource( 12 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.866667, 0.866667, 0.866667, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.501961, 0.501961, 0.501961, 0.278431 )
+
+[node name="Training Grounds" type="Node2D"]
+material = SubResource( 2 )
+script = ExtResource( 2 )
+
+[node name="World" type="Node2D" parent="." groups=["level_root"]]
+
+[node name="Décor" type="Node2D" parent="World"]
+
+[node name="Panel" type="Panel" parent="World/Décor"]
+margin_right = 320.0
+margin_bottom = 180.0
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Node2D" parent="World/Décor"]
+script = ExtResource( 5 )
+
+[node name="wall_1" type="Node2D" parent="World/Décor/Background"]
+position = Vector2( -1, 90 )
+script = ExtResource( 4 )
+Type = 0
+Size = Vector2( 1, 90 )
+Draw = false
+Color = Color( 0, 1, 1, 1 )
+ignoreBelow = false
+
+[node name="wall_2" type="Node2D" parent="World/Décor/Background"]
+position = Vector2( 321, 90 )
+script = ExtResource( 4 )
+Type = 0
+Size = Vector2( 1, 90 )
+Draw = false
+Color = Color( 0, 1, 1, 1 )
+ignoreBelow = false
+
+[node name="Panel2" type="Panel" parent="World/Décor"]
+margin_top = 140.0
+margin_right = 320.0
+margin_bottom = 190.0
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="World/Décor"]
+margin_left = 164.0
+margin_top = 27.0
+margin_right = 171.0
+margin_bottom = 47.0
+custom_colors/font_color = Color( 0.317647, 0.482353, 0.772549, 1 )
+custom_fonts/font = ExtResource( 10 )
+text = "6"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="World/Décor"]
+margin_left = 284.0
+margin_top = 127.0
+margin_right = 291.0
+margin_bottom = 147.0
+custom_colors/font_color = Color( 0.317647, 0.482353, 0.772549, 1 )
+custom_fonts/font = ExtResource( 10 )
+text = "6"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="World/Décor"]
+margin_left = 164.0
+margin_top = 127.0
+margin_right = 171.0
+margin_bottom = 147.0
+rect_pivot_offset = Vector2( 0, 10 )
+custom_colors/font_color = Color( 0.772549, 0.317647, 0.317647, 1 )
+custom_fonts/font = ExtResource( 10 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Node2D" parent="World"]
+
+[node name="platform1" type="Line2D" parent="World/Level"]
+position = Vector2( 12.25, 112.247 )
+scale = Vector2( 0.99, 0.92 )
+points = PoolVector2Array( 0, 0, 50, 0, 50, 6, 0, 6, 0, 0 )
+width = 0.5
+default_color = Color( 0.423529, 0.423529, 0.423529, 1 )
+begin_cap_mode = 1
+end_cap_mode = 1
+
+[node name="Shape 1" type="Node2D" parent="World/Level/platform1"]
+position = Vector2( 24.9999, 2.99221 )
+scale = Vector2( 1.0101, 1.08696 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+Tag = "Jump-Through"
+Type = 0
+Size = Vector2( 25, 3 )
+Draw = false
+Color = Color( 0, 1, 1, 1 )
+ignoreBelow = true
+
+[node name="platform2" type="Line2D" parent="World/Level"]
+position = Vector2( 85.25, 112.247 )
+scale = Vector2( 0.99, 0.92 )
+points = PoolVector2Array( 0, 0, 50, 0, 50, 6, 0, 6, 0, 0 )
+width = 0.5
+default_color = Color( 0.423529, 0.423529, 0.423529, 1 )
+begin_cap_mode = 1
+end_cap_mode = 1
+
+[node name="Shape 1" type="Node2D" parent="World/Level/platform2"]
+position = Vector2( 24.9997, 2.99221 )
+scale = Vector2( 1.0101, 1.08696 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+Tag = "Jump-Through"
+Type = 0
+Size = Vector2( 25, 3 )
+Draw = false
+Color = Color( 0, 1, 1, 1 )
+ignoreBelow = true
+
+[node name="platform3" type="Line2D" parent="World/Level"]
+position = Vector2( 49.25, 89.2472 )
+scale = Vector2( 0.99, 0.92 )
+points = PoolVector2Array( 0, 0, 50, 0, 50, 6, 0, 6, 0, 0 )
+width = 0.5
+default_color = Color( 0.423529, 0.423529, 0.423529, 1 )
+begin_cap_mode = 1
+end_cap_mode = 1
+
+[node name="Shape 1" type="Node2D" parent="World/Level/platform3"]
+position = Vector2( 24.9999, 2.9922 )
+scale = Vector2( 1.0101, 1.08696 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+Tag = "Jump-Through"
+Type = 0
+Size = Vector2( 25, 3 )
+Draw = false
+Color = Color( 0, 1, 1, 1 )
+ignoreBelow = true
+
+[node name="Floor" type="Node2D" parent="World/Level"]
+position = Vector2( 160, 145 )
+script = ExtResource( 4 )
+Type = 0
+Size = Vector2( 160, 5 )
+Draw = false
+Color = Color( 0, 1, 1, 1 )
+ignoreBelow = false
+
+[node name="Dummy" type="Node2D" parent="World"]
+position = Vector2( 203, 140 )
+z_as_relative = false
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="World/Dummy"]
+material = ExtResource( 13 )
+position = Vector2( -32, -47 )
+texture = ExtResource( 14 )
+centered = false
+hframes = 5
+vframes = 4
+frame = 14
+
+[node name="Hurtbox" type="Node2D" parent="World/Dummy"]
+position = Vector2( 0, -16 )
+script = ExtResource( 4 )
+Type = 2
+Size = Vector2( 7.5, 16 )
+Draw = true
+Color = Color( 0.054902, 1, 0, 1 )
+
+[node name="Animator" type="AnimationPlayer" parent="World/Dummy"]
+playback_speed = 1.2
+anims/dummy_hit_left = ExtResource( 8 )
+anims/dummy_hit_right = ExtResource( 7 )
+anims/dummy_idle = ExtResource( 9 )
+script = ExtResource( 1 )
+
+[node name="Players" type="Node2D" parent="World"]
+
+[node name="Coin" type="Node2D" parent="World"]
+visible = false
+position = Vector2( 46, 111 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="sprite" type="Sprite" parent="World/Coin"]
+position = Vector2( 4, -3 )
+texture = ExtResource( 11 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="World/Coin"]
+autoplay = "coin_idle"
+method_call_mode = 1
+anims/coin_idle = ExtResource( 6 )
+
+[node name="HUD" type="Control" parent="." groups=["hud_root"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 320.0
+margin_bottom = 180.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Post Processing" type="Control" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Vignette" type="TextureRect" parent="HUD/Post Processing"]
+modulate = Color( 1, 1, 1, 0.231373 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 15 )
+expand = true
+
+[node name="Healthbars" type="GridContainer" parent="HUD"]
+anchor_left = 0.111
+anchor_right = 1.0
+margin_left = -30.52
+margin_top = 3.0
+margin_right = -5.0
+margin_bottom = 39.0
+custom_constants/vseparation = 5
+custom_constants/hseparation = 60
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

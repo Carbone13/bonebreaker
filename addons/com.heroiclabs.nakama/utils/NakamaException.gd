@@ -17,4 +17,6 @@ func _init(p_message : String = "", p_status_code : int = -1, p_grpc_status_code
 	message = p_message
 
 func _to_string() -> String:
-	return "NakamaException(StatusCode={%s}, Message='{%s}', GrpcStatusCode={%s})" % [status_code, message, grpc_status_code]
+	if status_code == 8:
+		return "Could not connect to the server..."
+	return str(status_code)
