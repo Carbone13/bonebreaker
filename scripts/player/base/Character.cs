@@ -288,6 +288,9 @@ public abstract class Character : Body
             case "Dash":
                 _CurrentState = _DashAbility;
                 break;
+            case "Hit":
+                _CurrentState = _HitState;
+                break;
         }
 
         _JabAction._Deserialize(state["jab_state"] as Dictionary);

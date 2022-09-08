@@ -74,6 +74,11 @@ public class HitState : ActionState
     {
         shouldExit = (string)state["should_exit"] == "1";
     }
+    
+    public override string ToString ()
+    {
+        return "Hit";
+    }
 
     public HitState (Character owner) : base(owner)
     {

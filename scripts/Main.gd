@@ -1,3 +1,7 @@
+# TOOD deconnection
+# TODO handle player leave
+# TODO handle host lobby leave
+
 extends Node
 
 const LOG_FILE_DIRECTORY = 'user://detailed_logs'
