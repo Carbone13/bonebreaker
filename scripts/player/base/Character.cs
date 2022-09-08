@@ -31,9 +31,6 @@ public abstract class Character : Body
 
     [Export] private Vector2 DamagedFromLeftPivot;
     [Export] private Vector2 DamagedFromRightPivot;
-    
-    public int playerIndex;
-    public bool playerControlled;
 
     public string username = "";
     
@@ -50,14 +47,12 @@ public abstract class Character : Body
 
     public void _network_spawn (Dictionary data)
     {
-        playerIndex = (int)data["player_index"];
         SetNetworkMaster((int)data["peer_id"]);
         Name = "Player " + (int)data["peer_id"];
         username = (string)data["player_name"];
 
         if ((int)data["peer_id"] == GetTree().GetNetworkUniqueId())
         {
-            playerControlled = true;
             focused = true;
             GetNode<Node2D>("Selecter").Visible = true;
         }
@@ -218,7 +213,8 @@ public abstract class Character : Body
         string pos1 = (string)old["position"];
         string pos2 = (string)_new["position"];
 
-        Position = sfloat2.Lerp(sfloat2.FromString(pos1), sfloat2.FromString(pos2), (sfloat)weight);
+        sfloat2 newPos = sfloat2.Lerp(sfloat2.FromString(pos1), sfloat2.FromString(pos2), (sfloat)weight);
+        AddToPosition(newPos - Position);
     }
 
     private void Collided (sfloat2 normal)
@@ -247,7 +243,7 @@ public abstract class Character : Body
             { "hurtbox_size", Hurtbox.HalfExtents.SerializeToString() },
             { "hitbox_position", Hitbox.Position.SerializeToString() },
             { "hitbox_size", Hitbox.HalfExtents.SerializeToString() },
-            { "is_grounded", IsGrounded },
+            { "is_grounded", IsGrounded ? "1" : "0" },
             { "velocity", Velocity.SerializeToString() },
             { "state", _CurrentState.ToString() },
             { "jab_state", _JabAction._Serialize() },
@@ -270,7 +266,7 @@ public abstract class Character : Body
         Hitbox.Size = sfloat2.FromString((string)state["hitbox_size"]);
         
         Velocity = sfloat2.FromString((string)state["velocity"]);
-        IsGrounded = (bool)state["is_grounded"];
+        IsGrounded = (string)state["is_grounded"] == "1";
 
         switch ((string)state["state"])
         {

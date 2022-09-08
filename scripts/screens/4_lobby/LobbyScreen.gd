@@ -6,11 +6,12 @@ var selecter_default_position = Vector2(152, -10)
 
 onready var status_container = $PLAYERS/HBoxContainer
 onready var selecter = $PLAYERS/selecter
+onready var start = $Start
 
 var local_status
 var selected_char:int
 
-var ready:bool
+var players_selection = {}
 
 func _ready() -> void:
 	clear_players()
@@ -19,11 +20,11 @@ func _ready() -> void:
 	OnlineMatch.connect("player_left", self, "_on_OnlineMatch_player_left")
 	OnlineMatch.connect("player_status_changed", self, "_on_new_connection")
 	
+	selecter.connect("picked", self, "unselected_char")	
 	Main.connect("player_lobby_status_updated", self, "_on_player_status_updated")
 
 func _show_screen(info: Dictionary = {}) -> void:
 	ui_layer.show_back_button()
-	ready = false
 	selected_char = 0
 	
 	var players: Dictionary = info.get("players", {})
@@ -37,6 +38,9 @@ func _show_screen(info: Dictionary = {}) -> void:
 	
 	if match_id:
 		ui_layer.show_message("Match ID: " + match_id)
+	
+	if not get_tree().is_network_server():
+		start.get_node("Label").text = "WAITING FOR START"
 
 func _setup_screen (ui_layer:UILayer) -> void:
 	._setup_screen(ui_layer)
@@ -52,14 +56,12 @@ func go_back () -> void:
 func clear_players() -> void:
 	if local_status:
 		local_status.selecter = null
-		local_status.disconnect("character_unselected", self, "unselected_char")
 		local_status = null
 		
 	for child in status_container.get_children():
 		child.show_none(true)
 		child.name = child.name + " EMPTY"
 		child.visible = false
-
 
 func get_next_card () -> Node:
 	for child in status_container.get_children():
@@ -74,7 +76,6 @@ func add_player(session_id: String, username: String) -> void:
 		if(session_id == OnlineMatch.my_session_id):
 			local_status = status
 			local_status.selecter = selecter
-			local_status.connect("character_unselected", self, "unselected_char")
 
 		status.visible = true
 		status.name = session_id
@@ -93,9 +94,19 @@ func get_player_count () -> int:
 			c += 1
 	return c
 
-func is_everyone_ready () -> bool:
-	return false
+func is_everyone_ready () -> void:
+	for v in players_selection.values():
+		if v == 0:
+			start.visible = false
+			return
 
+	start.visible = true
+
+func _process(_delta) -> void:
+	if get_tree().is_network_server() and Input.is_action_just_pressed("start_game"):
+		ui_layer.show_message("Starting...")
+		Main.start_game(players_selection)
+	
 # Callbacks
 func _on_OnlineMatch_player_joined(player) -> void:
 	yield(get_tree(), "idle_frame")
@@ -120,6 +131,10 @@ func _on_player_status_updated (session_id, selected) -> void:
 			status.show_musashi()
 		if selected == 3:
 			status.show_namka()
+		
+		players_selection[session_id] = selected
+	
+	is_everyone_ready()
 
 func local_token_moving () -> bool:
 	return (local_status and local_status.selecter.is_currently_moving())
@@ -164,6 +179,6 @@ func namka_click ():
 		selected_char = 3
 		Main.update_my_lobby_status(3)
 
-func unselected_char ():	
+func unselected_char ():
 	selected_char = 0
 	Main.update_my_lobby_status(0)

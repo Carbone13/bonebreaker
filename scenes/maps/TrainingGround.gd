@@ -1,11 +1,10 @@
-extends Node2D
-
-var marston = preload("res://prefabs/characters/musashi.tscn")
+extends "res://scripts/map/Map.gd"
 
 var spawned
 var tick = 0
 
 func _ready():
+	players_holder = get_node("World/Players")
 	# local game, for testing purposes
 	if(Online.nakama_session == null):
 		spawned = marston.instance()

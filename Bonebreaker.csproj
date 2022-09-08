@@ -31,7 +31,4 @@
   <ItemGroup>
     <EmbeddedResource Remove="scripts\networking\**" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="scripts\player\base\states\abilities" />
-  </ItemGroup>
 </Project>

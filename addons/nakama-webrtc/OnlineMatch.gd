@@ -300,6 +300,9 @@ func get_match_mode() -> int:
 func get_match_state() -> int:
 	return match_state
 
+func get_peer_id_by_session (session_id:String) -> int:
+	return players[session_id]['peer_id']
+
 func get_session_id(peer_id: int):
 	for session_id in players:
 		if players[session_id]['peer_id'] == peer_id:
