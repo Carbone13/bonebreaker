@@ -124,7 +124,7 @@ public abstract class Character : Body
     {
         int dir = (int)sfloat.Sign(dealer.Position.X - Position.X);
         Orientation = (Orientation)dir;
-        
+
         _CurrentState.Exit(_HitState);
         _CurrentState = _HitState;
         _CurrentState.Enter(null, 0);
@@ -194,8 +194,11 @@ public abstract class Character : Body
 
     // ReSharper disable once UnusedMember.Local
     // CALLED FROM GDSCRIPT
-    private void _network_process (float delta, Dictionary input, int tick)
+    private void _network_process (Dictionary input)
     {
+        sfloat delta = (sfloat)(float)GetTree().Root.GetNode("SyncManager").Get("tick_time");
+        int tick = (int)GetTree().Root.GetNode("SyncManager").Get("current_tick");
+        
         InputState inp = InputState.Deserialize(input);
         
         ResolveCorrectState(inp, tick);
@@ -207,6 +210,7 @@ public abstract class Character : Body
         if(traveled != sfloat2.Zero)
             IsGrounded = IsGrounded();
     }
+    
     
     public void _interpolate_state (Dictionary old, Dictionary _new, float weight)
     {
@@ -238,6 +242,8 @@ public abstract class Character : Body
         {
             { "health", Health },
             { "position", Position.SerializeToString() },
+            { "orientation", Orientation == Orientation.Left ? "l": "r" },
+            { "ground_tag", GroundTag },
             { "collider_position", Collider.Position.SerializeToString() },
             { "hurtbox_position", Hurtbox.Position.SerializeToString() },
             { "hurtbox_size", Hurtbox.HalfExtents.SerializeToString() },
@@ -255,43 +261,31 @@ public abstract class Character : Body
     public void _load_state (Dictionary state)
     {
         Health = (int)state["health"];
-        
+        GroundTag = (string)state["ground_tag"];
         Position = sfloat2.FromString((string)state["position"]);
         Collider.Position = sfloat2.FromString((string)state["collider_position"]);
-        
+        Orientation = (string)state["orientation"] == "r" ? Orientation.Right : Orientation.Left;
+
         Hurtbox.Position = sfloat2.FromString((string)state["hurtbox_position"]);
         Hurtbox.HalfExtents = sfloat2.FromString((string)state["hurtbox_size"]);
         
         Hitbox.Position = sfloat2.FromString((string)state["hitbox_position"]);
-        Hitbox.Size = sfloat2.FromString((string)state["hitbox_size"]);
+        Hitbox.HalfExtents = sfloat2.FromString((string)state["hitbox_size"]);
         
         Velocity = sfloat2.FromString((string)state["velocity"]);
         IsGrounded = (string)state["is_grounded"] == "1";
 
-        switch ((string)state["state"])
+        _CurrentState = (string)state["state"] switch
         {
-            case "Idle":
-                _CurrentState = _IdleState;
-                break;
-            case "Running":
-                _CurrentState = _RunningState;
-                break;
-            case "Ascending":
-                _CurrentState = _AscendingState;
-                break;
-            case "Falling":
-                _CurrentState = _FallingState;
-                break;
-            case "Jab Action":
-                _CurrentState = _JabAction;
-                break;
-            case "Dash":
-                _CurrentState = _DashAbility;
-                break;
-            case "Hit":
-                _CurrentState = _HitState;
-                break;
-        }
+            "Idle" => _IdleState,
+            "Running" => _RunningState,
+            "Ascending" => _AscendingState,
+            "Falling" => _FallingState,
+            "Jab Action" => _JabAction,
+            "Dash" => _DashAbility,
+            "Hit" => _HitState,
+            _ => _CurrentState
+        };
 
         _JabAction._Deserialize(state["jab_state"] as Dictionary);
         _HitState._Deserialize(state["hit_state"] as Dictionary);

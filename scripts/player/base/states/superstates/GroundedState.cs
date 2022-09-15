@@ -7,7 +7,6 @@ public class GroundedState : State
         Owner.Velocity = new sfloat2(Owner.Velocity.X, sfloat.Zero);
     }
 
-    // TODO on peut passer à travers le sol /!\
     protected override void _Tick (int frame, sfloat delta, InputState input)
     {
         if (input.Fall && Owner.GroundTag == "Jump-Through")

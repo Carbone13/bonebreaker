@@ -24,7 +24,7 @@ public class HitState : ActionState
             Owner.Velocity = new sfloat2(Owner.Velocity.X, Owner.Velocity.Y + Owner.Stats.Gravity * delta);
         }
         
-        Owner.Velocity = new sfloat2(Owner.Velocity.X * (sfloat)0.95f, Owner.Velocity.Y);
+        Owner.Velocity = new sfloat2(Owner.Velocity.X * (sfloat)0.95f * delta, Owner.Velocity.Y);
     }
 
     protected override void _Enter (State previous, int tick)
@@ -45,34 +45,37 @@ public class HitState : ActionState
 
     private void AnimationFinished (string name)
     {
-        if(name.Contains("hit_") && Owner._CurrentState == this)
+        if(name.Contains("hit_") && Owner._CurrentState == Owner._HitState)
             shouldExit = true;
     }
 
-    // TODO exit may "freeze"
     protected override State _ShouldExit (InputState input, int tick)
     {
         if (shouldExit)
         {
             shouldExit = false;
-            _Exit(null);
+            //_Exit(null);
             return Owner._IdleState;
         }
         
-        return null;
+        return base._ShouldExit(input, tick);
     }
     
     public override Dictionary _Serialize ()
     {
         return new Dictionary
         {
-            { "should_exit", shouldExit ? "1" : "0" }
+            { "last_entered_tick", lastEnteredTick },
+            { "should_exit", shouldExit ? "1" : "0" },
+            { "next_allowed_tick", nextAllowedTick }
         };
     }
 
     public override void _Deserialize (Dictionary state)
     {
+        lastEnteredTick = (int)state["last_entered_tick"];
         shouldExit = (string)state["should_exit"] == "1";
+        nextAllowedTick = (int)state["next_allowed_tick"];
     }
     
     public override string ToString ()

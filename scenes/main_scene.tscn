@@ -1094,7 +1094,6 @@ align = 1
 valign = 1
 
 [node name="Title Screen" type="Control" parent="UILayer/Screens"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
@@ -1112,9 +1111,6 @@ margin_right = 160.0
 margin_bottom = 90.0
 texture = ExtResource( 5 )
 flip_h = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="USER_CARET" type="Panel" parent="UILayer/Screens/Title Screen"]
 margin_left = 230.0

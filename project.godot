@@ -142,6 +142,7 @@ SyncManager="*res://addons/godot-rollback-netcode/SyncManager.gd"
 Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
 Physics="*res://scripts/physics/Physics.cs"
 Main="*res://scripts/Main.gd"
+SyncDebugger="*res://addons/godot-rollback-netcode/SyncDebugger.gd"
 
 [debug]
 
@@ -277,6 +278,7 @@ gp_jump={
 sync_debug={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":39,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777254,"unicode":0,"echo":false,"script":null)
  ]
 }
 lobby_start={
@@ -296,25 +298,27 @@ start_game={
 locale_filter=[ 1, [ "en", "fr" ] ]
 translations=PoolStringArray( "res://localization/local.en.translation", "res://localization/local.fr.translation" )
 
-[mono]
-
-export/export_assemblies_inside_pck=false
-export/i18n_codesets=0
-
 [network]
 
-rollback/max_buffer_size=60
-rollback/limits/max_state_mismatch_count=1
 rollback/classes/network_adaptor="res://addons/godot-rollback-netcode/NakamaWebRTCNetworkAdaptor.gd"
+
+[node]
+
+name_num_separator=1
 
 [physics]
 
-common/enable_pause_aware_picking=true
+common/physics_fps=30
 
 [rendering]
 
+quality/driver/fallback_to_gles2=true
+quality/intended_usage/framebuffer_allocation=0
+quality/intended_usage/framebuffer_allocation.mobile=0
 2d/snapping/use_gpu_pixel_snap=true
+misc/lossless_compression/force_png=true
 quality/filters/anisotropic_filter_level=1
+batching/options/use_batching=false
 quality/subsurface_scattering/quality=0
 quality/subsurface_scattering/weight_samples=false
 quality/depth/hdr=false

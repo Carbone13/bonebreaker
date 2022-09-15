@@ -111,8 +111,7 @@ public class Body : Entity
             else
             {
                 sfloat2 traveled = sweep.Position - Collider.Position;
-                totalTravel += traveled;
-                
+                totalTravel += traveled; 
                 AddToPosition(traveled);
 
                 break;
@@ -126,7 +125,9 @@ public class Body : Entity
     {
         Position += a;
         Collider.Position += a;
-        Hitbox.Position += a;
-        Hurtbox.Position += a;
+        if (Hitbox != null)
+            Hitbox.Position += a;
+        if (Hurtbox != null)
+            Hurtbox.Position += a;
     }
 }

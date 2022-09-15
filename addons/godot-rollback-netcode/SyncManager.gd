@@ -2,7 +2,7 @@ extends Node
 
 const SpawnManager = preload("res://addons/godot-rollback-netcode/SpawnManager.gd")
 const SoundManager = preload("res://addons/godot-rollback-netcode/SoundManager.gd")
-const NetworkAdaptor = preload("res://addons/godot-rollback-netcode/NakamaWebRTCNetworkAdaptor.gd")
+const NetworkAdaptor = preload("res://addons/godot-rollback-netcode/NetworkAdaptor.gd")
 const MessageSerializer = preload("res://addons/godot-rollback-netcode/MessageSerializer.gd")
 const HashSerializer = preload("res://addons/godot-rollback-netcode/HashSerializer.gd")
 const Logger = preload("res://addons/godot-rollback-netcode/Logger.gd")
@@ -557,7 +557,7 @@ func _call_network_process(input_frame: InputBufferFrame) -> void:
 	for node in process_nodes:
 		if node.is_inside_tree() and not node.is_queued_for_deletion():
 			var player_input = input_frame.get_player_input(node.get_network_master())
-			Utils.try_call_interop_method(node, '_network_process', [tick_time, player_input.get(str(node.get_path()), {}), current_tick])
+			Utils.try_call_interop_method(node, '_network_process', [player_input.get(str(node.get_path()), {})])
 		
 	# Call _network_postprocess().
 	for node in postprocess_nodes:

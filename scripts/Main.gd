@@ -104,3 +104,7 @@ func _on_SyncManager_sync_stopped() -> void:
 
 func _on_SyncManager_sync_error(msg: String) -> void:
 	SyncManager.clear_peers()
+
+func _on_SyncManager_sync_lost () -> void:
+	if logging_enabled:
+		SyncManager.stop_logging()

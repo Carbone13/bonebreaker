@@ -3,7 +3,7 @@ extends Node
 const marston = preload("res://prefabs/characters/marston.tscn")
 const musashi = preload("res://prefabs/characters/musashi.tscn")
 const namka = preload("res://prefabs/characters/namka.tscn")
-
+const debug_player = preload("res://prefabs/characters/debug_player.tscn")
 var players_holder
 
 func spawn_players(players:Dictionary) -> void:
