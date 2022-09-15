@@ -10,6 +10,7 @@ public enum Orientation
     Left = -1, Right = 1
 }
 
+// TODO big cleanup !
 public abstract class Character : Body
 {
     [Export] public PlayerStats Stats;

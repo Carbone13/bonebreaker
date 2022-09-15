@@ -1210,7 +1210,7 @@ func _physics_process(_delta: float) -> void:
 	_ticks_since_last_interpolation_frame += 1
 	
 	var total_time_msecs = float(OS.get_ticks_usec() - start_time) / 1000.0
-	if debug_physics_process_msecs > 0 and total_time_msecs > debug_physics_process_msecs:
+	if debug_physics_process_msecs > 0 and total_time_msecs > debug_physics_process_msecs and current_tick > 1:
 		push_error("[%s] SyncManager._physics_process() took %.02fms" % [current_tick, total_time_msecs])
 	
 	if _logger:

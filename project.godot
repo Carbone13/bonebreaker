@@ -142,7 +142,6 @@ SyncManager="*res://addons/godot-rollback-netcode/SyncManager.gd"
 Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
 Physics="*res://scripts/physics/Physics.cs"
 Main="*res://scripts/Main.gd"
-SyncDebugger="*res://addons/godot-rollback-netcode/SyncDebugger.gd"
 
 [debug]
 
@@ -300,7 +299,11 @@ translations=PoolStringArray( "res://localization/local.en.translation", "res://
 
 [network]
 
+rollback/interpolation=true
+rollback/limits/max_input_frames_per_message=15
+rollback/limits/max_messages_at_once=3
 rollback/classes/network_adaptor="res://addons/godot-rollback-netcode/NakamaWebRTCNetworkAdaptor.gd"
+rollback/classes/message_serializer="res://scripts/network/BBMessageSerializer.gd"
 
 [node]
 
