@@ -45,8 +45,6 @@ public class GroundedState : State
             Owner.IsGrounded = false;
             return Owner._AscendingState;
         }
-        
-
 
         return null;
     }

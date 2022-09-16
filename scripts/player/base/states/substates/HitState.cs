@@ -31,7 +31,8 @@ public class HitState : ActionState
     {
         shouldExit = false;
 
-        Owner.Velocity = new sfloat2((sfloat)(int)Owner.Orientation * -(sfloat)1 * (sfloat)60, Owner.Velocity.Y - (sfloat)80);
+        // TODO check
+        Owner.Velocity = new sfloat2((sfloat)(int)Owner.Orientation * -(sfloat)1 * (sfloat)60, -(sfloat)80);
         
         if (Owner.Orientation == Orientation.Left)
         {
@@ -65,17 +66,13 @@ public class HitState : ActionState
     {
         return new Dictionary
         {
-            { "last_entered_tick", lastEnteredTick },
             { "should_exit", shouldExit ? "1" : "0" },
-            { "next_allowed_tick", nextAllowedTick }
         };
     }
 
     public override void _Deserialize (Dictionary state)
     {
-        lastEnteredTick = (int)state["last_entered_tick"];
         shouldExit = (string)state["should_exit"] == "1";
-        nextAllowedTick = (int)state["next_allowed_tick"];
     }
     
     public override string ToString ()
