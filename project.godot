@@ -142,6 +142,7 @@ SyncManager="*res://addons/godot-rollback-netcode/SyncManager.gd"
 Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
 Physics="*res://scripts/physics/Physics.cs"
 Main="*res://scripts/Main.gd"
+SyncManagerWrapper="*res://scripts/network/SyncManagerWrapper.cs"
 
 [debug]
 

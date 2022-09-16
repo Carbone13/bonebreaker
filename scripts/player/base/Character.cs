@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Bonebreaker.Inputs;
+using Bonebreaker.Network;
 using Godot;
 using Godot.Collections;
 using Input = Bonebreaker.Inputs.Input;
@@ -46,7 +47,9 @@ public abstract class Character : Body
             focused = false;
     }
 
-    public void _network_spawn (Dictionary data)
+    // Called from GDSCRIPT
+    // ReSharper disable once UnusedMember.Global
+    public void _NetworkSpawn (Dictionary data)
     {
         SetNetworkMaster((int)data["peer_id"]);
         Name = "Player " + (int)data["peer_id"];
@@ -66,21 +69,6 @@ public abstract class Character : Body
         Healthbar.GetNode<Label>("Username").Text = username == "" ? GetCharacterName : username;
     }
 
-    public Dictionary _get_local_input ()
-    {
-        if (!focused)
-            return new InputState().Serialize();
-        return Input.singleton.GetStateOfPrimaryDevice().Serialize();
-    }
-    
-    public Dictionary _predict_network_input (Dictionary previous, int tickSinceLastConfirmed)
-    {
-        if (tickSinceLastConfirmed > 5)
-            previous["joystick"] = "0|0";
-        
-        return previous;
-    }
-    
     public override void _Ready ()
     {
         base._Ready();
@@ -110,6 +98,8 @@ public abstract class Character : Body
         Health = 100;
     }
 
+    // Called from Animator
+    // ReSharper disable once UnusedMember.Global
     public void DealDamage (Vector2 offset)
     {
         var hit = Physics.CastAABB(Position + new sfloat2(offset.x, offset.y), Hitbox.Size, Physics.QueryHurtboxes(),false, 
@@ -174,8 +164,8 @@ public abstract class Character : Body
         old.Exit(_CurrentState);
         _CurrentState.Enter(old, _tick);
     }
-    
-    
+
+
     /// <summary>
     /// Link this Node states with the wanted ones, you can override it and provide whatever State object you want
     /// </summary>
@@ -193,35 +183,6 @@ public abstract class Character : Body
         _CurrentState.Enter(null, 0);
     }
 
-    // ReSharper disable once UnusedMember.Local
-    // CALLED FROM GDSCRIPT
-    private void _network_process (Dictionary input)
-    {
-        sfloat delta = (sfloat)(float)GetTree().Root.GetNode("SyncManager").Get("tick_time");
-        int tick = (int)GetTree().Root.GetNode("SyncManager").Get("current_tick");
-        
-        InputState inp = InputState.Deserialize(input);
-        
-        ResolveCorrectState(inp, tick);
-        
-        _CurrentState.Tick(tick, (sfloat)delta, inp);
-        
-        sfloat2 traveled = MoveAndSlide(Velocity * (sfloat)delta, Collided);
-        
-        if(traveled != sfloat2.Zero)
-            IsGrounded = IsGrounded();
-    }
-    
-    
-    public void _interpolate_state (Dictionary old, Dictionary _new, float weight)
-    {
-        string pos1 = (string)old["position"];
-        string pos2 = (string)_new["position"];
-
-        sfloat2 newPos = sfloat2.Lerp(sfloat2.FromString(pos1), sfloat2.FromString(pos2), (sfloat)weight);
-        AddToPosition(newPos - Position);
-    }
-
     private void Collided (sfloat2 normal)
     {
         if (normal.X != sfloat.Zero)
@@ -236,14 +197,64 @@ public abstract class Character : Body
     }
 
     protected virtual string GetCharacterName => "Unknown";
+    
+    // CALLED FROM GDSCRIPT  
+    // ReSharper disable once UnusedMember.Global
+    public Dictionary _GetLocalInput ()
+    {
+        return !focused ? new InputState().Serialize() : Input.singleton.GetStateOfPrimaryDevice().Serialize();
+    }
+    
+    // CALLED FROM GDSCRIPT  
+    // ReSharper disable once UnusedMember.Global
+    public Dictionary _PredictNetworkInput (Dictionary previous, int tickSinceLastConfirmed)
+    {
+        if (tickSinceLastConfirmed > 5)
+            previous["joystick"] = "0|0";
+        
+        return previous;
+    } 
+    
+    // CALLED FROM GDSCRIPT 
+    // ReSharper disable once UnusedMember.Local
+    private void _NetworkProcess (Dictionary input)
+    {
+        sfloat delta = SyncManagerWrapper.GetDeltaTime();
+        int tick = SyncManagerWrapper.GetCurrentTick();
+        
+        InputState inp = InputState.Deserialize(input);
+        
+        ResolveCorrectState(inp, tick);
+        
+        _CurrentState.Tick(tick, delta, inp);
+        
+        sfloat2 traveled = MoveAndSlide(Velocity * delta, Collided);
+        
+        if(traveled != sfloat2.Zero)
+            IsGrounded = IsGrounded();
+    } 
 
-    public Dictionary _save_state ()
+    // CALLED FROM GDSCRIPT
+    // ReSharper disable once UnusedMember.Global
+    public void _InterpolateState (Dictionary old, Dictionary _new, float weight)
+    {
+        string pos1 = (string)old["position"];
+        string pos2 = (string)_new["position"];
+
+        Position = sfloat2.Lerp(sfloat2.FromString(pos1), sfloat2.FromString(pos2), (sfloat)weight);
+    } 
+
+    // CALLED FROM GDSCRIPT
+    // ReSharper disable once UnusedMember.Global
+    public Dictionary _SaveState ()
     {
         return new Dictionary
         {
+            // common
             { "health", Health },
             { "position", Position.SerializeToString() },
             { "orientation", Orientation == Orientation.Left ? "l": "r" },
+            // physics
             { "ground_tag", GroundTag },
             { "collider_position", Collider.Position.SerializeToString() },
             { "hurtbox_position", Hurtbox.Position.SerializeToString() },
@@ -252,6 +263,7 @@ public abstract class Character : Body
             { "hitbox_size", Hitbox.HalfExtents.SerializeToString() },
             { "is_grounded", IsGrounded ? "1" : "0" },
             { "velocity", Velocity.SerializeToString() },
+            // states
             { "state", _CurrentState.ToString() },
             { "jab_state", _JabAction._Serialize() },
             { "hit_state", _HitState._Serialize() },
@@ -259,23 +271,27 @@ public abstract class Character : Body
         };
     }
 
-    public void _load_state (Dictionary state)
+    // CALLED FROM GDSCRIPT
+    // ReSharper disable once UnusedMember.Global
+    public void _LoadState (Dictionary state)
     {
+        // common
         Health = (int)state["health"];
-        GroundTag = (string)state["ground_tag"];
         Position = sfloat2.FromString((string)state["position"]);
-        Collider.Position = sfloat2.FromString((string)state["collider_position"]);
         Orientation = (string)state["orientation"] == "r" ? Orientation.Right : Orientation.Left;
-
+        
+        // physics
+        GroundTag = (string)state["ground_tag"];
+        Collider.Position = sfloat2.FromString((string)state["collider_position"]);
         Hurtbox.Position = sfloat2.FromString((string)state["hurtbox_position"]);
         Hurtbox.HalfExtents = sfloat2.FromString((string)state["hurtbox_size"]);
-        
         Hitbox.Position = sfloat2.FromString((string)state["hitbox_position"]);
         Hitbox.HalfExtents = sfloat2.FromString((string)state["hitbox_size"]);
         
         Velocity = sfloat2.FromString((string)state["velocity"]);
         IsGrounded = (string)state["is_grounded"] == "1";
 
+        // states
         _CurrentState = (string)state["state"] switch
         {
             "Idle" => _IdleState,
