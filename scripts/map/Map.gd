@@ -3,6 +3,7 @@ extends Node
 const marston = preload("res://prefabs/characters/marston.tscn")
 const musashi = preload("res://prefabs/characters/musashi.tscn")
 const namka = preload("res://prefabs/characters/namka.tscn")
+const Utils = preload("res://addons/godot-rollback-netcode/Utils.gd")
 
 var players_holder
 
@@ -33,4 +34,4 @@ func spawn_player(data:Dictionary) -> void:
 	
 	player.global_position = data["start_transform"]
 	players_holder.add_child(player)
-	player._network_spawn(data)
+	Utils.try_call_interop_method(player, "_network_spawn", [data])
