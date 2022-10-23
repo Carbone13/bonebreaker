@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/levels.png-4db15667e7646d7cb86f0b6e8f402b73.stex"
+path="res://.import/bg_2.png-9903b53ed86fee5f819e5340fb3e95ce.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/game_sprites/levels/levels.png"
-dest_files=[ "res://.import/levels.png-4db15667e7646d7cb86f0b6e8f402b73.stex" ]
+source_file="res://assets/background/bg_2.png"
+dest_files=[ "res://.import/bg_2.png-9903b53ed86fee5f819e5340fb3e95ce.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
+flags/repeat=0
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false

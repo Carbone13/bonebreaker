@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/physics/shapes/AABB.cs" type="Script" id=1]
+[ext_resource path="res://scripts/map/Platform.cs" type="Script" id=2]
+[ext_resource path="res://assets/game_sprites/levels/levels.sprites/platforms/platform.png" type="Texture" id=3]
+[ext_resource path="res://assets/game_sprites/levels/levels.sprites/platforms/platform_edge.png" type="Texture" id=4]
+
+[node name="Platform" type="Node2D"]
+script = ExtResource( 2 )
+rightPart = true
+leftPart = true
+width = 300
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="edge_a" type="Sprite" parent="Visual"]
+position = Vector2( -137, 0 )
+texture = ExtResource( 4 )
+
+[node name="edge_b" type="Sprite" parent="Visual"]
+position = Vector2( 137, 0 )
+texture = ExtResource( 4 )
+flip_h = true
+
+[node name="middle_part" type="Sprite" parent="Visual"]
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 248, 10 )
+
+[node name="Hitbox" type="Node2D" parent="."]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+Tag = "Jump-Through"
+Type = 0
+Size = Vector2( 150, 5 )
+Draw = false
+Color = Color( 0, 1, 1, 1 )
+ignoreBelow = true

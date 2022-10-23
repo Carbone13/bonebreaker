@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=2]
+[gd_scene load_steps=105 format=2]
 
 [ext_resource path="res://resources/themes/main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/sound_effects/ui_click.mp3" type="AudioStream" id=2]
@@ -31,6 +31,7 @@
 [ext_resource path="res://assets/game_sprites/characters/namka/namka.sprites/idle/idle.tres" type="Texture" id=29]
 [ext_resource path="res://assets/game_sprites/characters/marston/marston.sprites/gun_start/gun_start_5.tres" type="Texture" id=30]
 [ext_resource path="res://assets/fonts/Armin.ttf" type="DynamicFontData" id=31]
+[ext_resource path="res://assets/background/bg_3.png" type="Texture" id=32]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.945098, 0.945098, 0.945098, 1 )
@@ -252,7 +253,7 @@ border_color = Color( 0.207843, 0.207843, 0.207843, 1 )
 
 [sub_resource type="StyleBoxFlat" id=80]
 content_margin_left = 4.0
-bg_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+bg_color = Color( 0.127441, 0.127441, 0.127441, 1 )
 
 [sub_resource type="DynamicFont" id=21]
 
@@ -285,6 +286,10 @@ anchor_bottom = 1.0
 mouse_filter = 1
 theme = ExtResource( 1 )
 script = ExtResource( 16 )
+
+[node name="Bg3" type="Sprite" parent="UILayer/Screens/Connection Screen"]
+position = Vector2( 160, 90 )
+texture = ExtResource( 32 )
 
 [node name="Offline" type="Button" parent="UILayer/Screens/Connection Screen"]
 anchor_left = 1.0
@@ -1100,6 +1105,10 @@ theme = ExtResource( 1 )
 script = ExtResource( 17 )
 disabled_button_color = Color( 0.439216, 0.439216, 0.439216, 0.803922 )
 
+[node name="Bg3" type="Sprite" parent="UILayer/Screens/Title Screen"]
+position = Vector2( 160, 90 )
+texture = ExtResource( 32 )
+
 [node name="Panel" type="TextureRect" parent="UILayer/Screens/Title Screen"]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1446,6 +1455,10 @@ rect_pivot_offset = Vector2( -259, -84 )
 theme = ExtResource( 1 )
 script = ExtResource( 18 )
 
+[node name="Bg3" type="Sprite" parent="UILayer/Screens/Credits Screen"]
+position = Vector2( 160, 90 )
+texture = ExtResource( 32 )
+
 [node name="Label" type="Label" parent="UILayer/Screens/Credits Screen"]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -1484,6 +1497,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 15 )
+
+[node name="Bg3" type="Sprite" parent="UILayer/Screens/Matching Screen"]
+position = Vector2( 160, 90 )
+texture = ExtResource( 32 )
 
 [node name="CREATE_GAME" type="Panel" parent="UILayer/Screens/Matching Screen"]
 anchor_top = 0.5
@@ -1780,6 +1797,10 @@ mouse_filter = 1
 theme = ExtResource( 1 )
 script = ExtResource( 12 )
 colors = [ Color( 0.603922, 0.317647, 0.317647, 1 ), Color( 0.203922, 0.466667, 0.270588, 1 ), Color( 0.466667, 0.443137, 0.203922, 1 ) ]
+
+[node name="Bg3" type="Sprite" parent="UILayer/Screens/Lobby Screen"]
+position = Vector2( 160, 90 )
+texture = ExtResource( 32 )
 
 [node name="Background" type="TextureRect" parent="UILayer/Screens/Lobby Screen"]
 margin_right = 320.0
