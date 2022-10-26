@@ -8,12 +8,18 @@ onready var status_container = $PLAYERS/HBoxContainer
 onready var selecter = $PLAYERS/selecter
 onready var start = $Start
 
+var auto_start:bool
+
 var local_status
 var selected_char:int
 
 var players_selection = {}
 
 func _ready() -> void:
+	var args = OS.get_cmdline_args()
+	if("--auto-start-game" in args):
+		auto_start = true
+		
 	clear_players()
 	
 	OnlineMatch.connect("player_joined", self, "_on_OnlineMatch_player_joined")
@@ -101,12 +107,17 @@ func is_everyone_ready () -> void:
 			return
 
 	start.visible = true
+	if(auto_start and get_player_count() > 1):
+		start_game()
 
 func _process(_delta) -> void:
-	if get_tree().is_network_server() and Input.is_action_just_pressed("start_game"):
+	if Input.is_action_just_pressed("start_game"):
+		start_game()
+
+func start_game() -> void:
+	if get_tree().is_network_server():
 		ui_layer.show_message("Starting...")
 		Main.start_game(players_selection)
-	
 # Callbacks
 func _on_OnlineMatch_player_joined(player) -> void:
 	yield(get_tree(), "idle_frame")

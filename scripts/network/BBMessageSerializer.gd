@@ -2,9 +2,9 @@ extends "res://addons/godot-rollback-netcode/MessageSerializer.gd"
 
 const input_path_mapping := {
 	'$': 0,
-	'/root/Main Scene/Game/Training Grounds/World/Players/Player 1': 1,
-	'/root/Main Scene/Game/Training Grounds/World/Players/Player 2': 2,
-	'/root/Main Scene/Game/Training Grounds/World/Players/Player 3': 3,
+	'/root/Main Scene/Game/MAP/World/Players/Player 1': 1,
+	'/root/Main Scene/Game/MAP/World/Players/Player 2': 2,
+	'/root/Main Scene/Game/MAP/World/Players/Player 3': 3,
 }
 
 func serialize_input(all_input: Dictionary) -> PoolByteArray:
@@ -46,7 +46,7 @@ func unserialize_input(serialized: PoolByteArray) -> Dictionary:
 		input["y"] = buffer.get_float()
 		input["b"] = buffer.get_u8()
 		
-		var path = '/root/Main Scene/Game/Training Grounds/World/Players/Player ' + str(mapped_path)
+		var path = '/root/Main Scene/Game/MAP/World/Players/Player ' + str(mapped_path)
 		all_input[path] = input
 	
 	return all_input

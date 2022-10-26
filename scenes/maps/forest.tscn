@@ -10,7 +10,6 @@
 
 [node name="Forest" type="Node2D"]
 script = ExtResource( 1 )
-spawn_points = [ NodePath("World/Spawn Points/1"), NodePath("World/Spawn Points/2"), NodePath("World/Spawn Points/3") ]
 
 [node name="World" type="Node2D" parent="." groups=["level_root"]]
 
@@ -84,6 +83,7 @@ __meta__ = {
 [node name="Players" type="Node2D" parent="World"]
 
 [node name="HUD" type="Control" parent="." groups=["hud_root"]]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 320.0

@@ -16,6 +16,7 @@ public class Platform : Node
         get => _rightPart;
         set
         {
+            if (!Engine.EditorHint) return;
             _rightPart = value;
             UpdateWidth();
         }
@@ -27,6 +28,7 @@ public class Platform : Node
         get => _leftPart;
         set
         {
+            if (!Engine.EditorHint) return;
             _leftPart = value;
             UpdateWidth();
         }
@@ -37,6 +39,7 @@ public class Platform : Node
         get => _width;
         set
         {
+            if (!Engine.EditorHint) return;
             _width = value;
             UpdateWidth();
         }

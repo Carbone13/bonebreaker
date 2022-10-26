@@ -22,14 +22,17 @@ var username:String = ''
 var loginSide:bool = true
 var _next_screen
 
+var once:bool
+
 func _ready () -> void:
 	try_load_credentials()
 
 func _show_screen(info: Dictionary = {}) -> void:
 	_next_screen = info.get('next_screen', 'Title Screen')
 	var args = OS.get_cmdline_args()
-	if("--auto-connect" in args):
+	if("--auto-connect" in args and not once):
 		login()
+		once = true
 		
 func try_load_credentials() -> void:
 	var file = File.new()

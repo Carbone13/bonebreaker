@@ -8,6 +8,8 @@ const Utils = preload("res://addons/godot-rollback-netcode/Utils.gd")
 var players_holder
 
 func spawn_players(players:Dictionary) -> void:
+	players_holder = get_node("World/Players")
+	
 	for session_id in players.keys():
 		var id = OnlineMatch.get_peer_id_by_session(session_id)
 		

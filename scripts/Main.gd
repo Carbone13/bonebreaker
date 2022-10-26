@@ -5,7 +5,7 @@
 extends Node
 
 const LOG_FILE_DIRECTORY = 'user://detailed_logs'
-const DEFAULT_MAP = preload("res://scenes/maps/TrainingGround.tscn")
+const DEFAULT_MAP = preload("res://scenes/maps/forest.tscn")
 
 onready var map_holder = get_node("/root/Main Scene/Game")
 onready var ui_layer = get_node("/root/Main Scene/UILayer")
@@ -54,6 +54,7 @@ func load_map () -> void:
 	clear_map()
 	
 	var _map = DEFAULT_MAP.instance()
+	_map.name = "MAP"
 	map_holder.add_child(_map)
 	map = _map	
 

@@ -8,6 +8,8 @@ var lobby_instance_prefab = preload("res://prefabs/screens/lobby/lobby_instance.
 
 var awaiting_operation:bool = false
 
+var once:bool
+
 func _ready(): 
 	OnlineMatch.connect("match_created", self, "_on_OnlineMatch_created")
 	OnlineMatch.connect("match_joined", self, "_on_OnlineMatch_joined")
@@ -20,7 +22,12 @@ func _setup_screen (_ui_layer: UILayer):
 func _show_screen (_info:Dictionary = {}):
 	refresh_lobby()
 	ui_layer.show_back_button()
-	
+	var args = OS.get_cmdline_args()
+	if("--create-lobby" in args and not once):
+		yield(get_tree().create_timer(0.1), "timeout")
+		create_lobby()
+		once = true
+
 func go_back ():
 	if visible:
 		if not awaiting_operation:

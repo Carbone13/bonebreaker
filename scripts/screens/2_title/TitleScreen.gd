@@ -19,9 +19,15 @@ onready var but_credits:Button = $PLAY_MODES/credits
 onready var but_quit:Button = $PLAY_MODES/quit
 
 
+var once:bool
+
 func _show_screen(_info:Dictionary = {}):
 	setup_user_caret()
 	setup_buttons()
+	var args = OS.get_cmdline_args()
+	if(("--matchmaking-screen" in args or "--create-lobby" in args) and not once):
+		multiplayer()
+		once = true
 
 func setup_user_caret () -> void:
 	if(Online.nakama_session):
